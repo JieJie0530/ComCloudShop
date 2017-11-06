@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+<!doctyrepe html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/login.css">
+    <title>后台登录</title>
+</head>
+<body style="background-color: #f4f7f9">
+    <div class="login">
+        <p class="pl"></p>
+        <div class="l"></div>
+        <div class="c">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="to">
+                    <span class="tol"><a class="v" href="javascript:void(0)" target="_blank"></a></span>
+                    <span class="tor"></span>
+                </div>
+                <div class="in">
+                    <dl>
+                        <dt>用户名</dt>
+                        <dd>
+                            <input style="width: 200px" type="text" name="username"></dd>
+                        <dd class="e"></dd>
+                    </dl>
+                    <dl>
+                        <dt>密　码</dt>
+                        <dd>
+                            <input style="width: 200px" type="password" name="pwd"></dd>
+                        <dd class="e"></dd>
+                    </dl>
+                </div>
+                <div class="su">
+                    <span>
+                        <input class="go" value="" type="submit"></span>
+                </div>
+            }
+        </div>
+        <div class="r"></div>
+        <p class="pr"></p>
+    </div>
+    <script>
+    console.log("@Url.Content("~")")
+    </script>
+</body>
+</html>

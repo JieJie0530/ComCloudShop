@@ -1,0 +1,200 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>方广微商城后台管理系统</title>
+
+    <link href="~/public//admin/css/base/all.css" rel="stylesheet" />
+    <link href="~/public//admin/css/common.css" rel="stylesheet" />
+    <link href="~/public//admin/css/main.css" rel="stylesheet" />
+    <link href="~/public//admin/css/jquery.datetimepicker.css" rel="stylesheet" />
+    @RenderSection("HeadCss", required: false)
+    <script type="text/javascript" src="~/public/admin/js/common/jquery.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/common/jquery-ui-1.11.4.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/common/jquery-ui-1.11.4.min.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/common/jquery.datetimepicker.full.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/konckout/knockout-3.3.0.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/konckout/knockout-3.3.0.debug.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/from2js/form2js.js"></script>
+    <script type="text/javascript" src="~/public/admin/js/from2js/jquery.toObject.js"></script>
+    @RenderSection("HeadScript", required: false)
+</head>
+<body>
+    <div class="topbar-wrap white">
+        <div class="topbar-inner clearfix">
+            <div class="topbar-logo-wrap clearfix">
+                <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
+                <ul class="navbar-list clearfix">
+                    <li><a class="on" href="~/">首页</a></li>
+                    @*<li><a href="~/" target="_blank">网站首页</a></li>*@
+                </ul>
+            </div>
+            <div class="top-info-wrap">
+                <ul class="top-info-list clearfix">
+                    <li><a href="javascript:void(0);">修改密码</a></li>
+                    <li><a href="javascript:void(0);" id="out">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container clearfix">
+        <div class="sidebar-wrap">
+            <div class="sidebar-title">
+                <h1>菜单</h1>
+            </div>
+            <div class="sidebar-content">
+                <ul class="sidebar-list">
+                    <li>
+                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>首页管理</a>
+                        <ul class="sub-menu" style="display:block">
+                            <li><a href="~/System/"><i class="icon-font">&#xe005;</i>最新活动</a></li>
+                            <li><a href="~/Sale/"><i class="icon-font">&#xe005;</i>最新推荐</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>商品管理</a>
+                        <ul class="sub-menu" style="display:block">
+                            <li><a href="~/Product/"><i class="icon-font">&#xe005;</i>产品信息</a></li>
+                            <li><a href="~/Product/ERP/"><i class="icon-font">&#xe005;</i>ERP商品信息</a></li>
+                            <li><a href="~/Category/index?status=1"><i class="icon-font">&#xe005;</i>品种信息</a></li>
+                            <li><a href="~/Rule/"><i class="icon-font">&#xe005;</i>满减信息</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>订单管理</a>
+                        <ul class="sub-menu" style="display:block">
+                            <li><a href="~/Order/"><i class="icon-font">&#xe005;</i>订单信息</a></li>
+                            <li><a href="~/Order/ErpOrder/"><i class="icon-font">&#xe005;</i>未发送ERP订单</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>用户管理</a>
+                        <ul class="sub-menu" style="display:block">
+                            <li><a href="~/User/"><i class="icon-font">&#xe005;</i>用户信息</a></li>
+                            <li><a href="~/Coupon/"><i class="icon-font">&#xe005;</i>优惠券信息</a></li>
+                            <li><a href="~/Address/"><i class="icon-font">&#xe005;</i>地址信息</a></li>
+                            <li><a href="~/SetSup/"><i class="icon-font">&#xe005;</i>积分信息</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="lntitle "><i class="icon-font">&#xe018;</i>系统管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="#"><i class="icon-font">&#xe017;</i>系统设置</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    <script type="text/javascript">
+    $(function () {
+        $("#out").on("click", function () {
+            $.ajax({
+                type: "post",
+                url: "@Url.Content("~/ZZAdmin/AccountOut/")",
+                success: function (data) {
+                    location = "@Url.Content("~/Account/AdminLogin/")";
+                    }
+                })
+            })
+
+
+            $(document).ready(function () {
+                $(".lntitle").toggle(function () {
+                    $(this).next("ul").animate({ height: 'toggle', opacity: 'toggle' }, "normal");
+                }, function () {
+                    $(this).next("ul").animate({ height: 'toggle', opacity: 'toggle' }, "normal");
+                });
+            });
+
+            var url ='@Request.Url.AbsolutePath';
+            var nav = $('.sub-menu a');
+            //var oh = false;
+            $.each(nav, function (i, item) {
+                var href = $('.sub-menu a').eq(i).attr("href");
+                var tclass = 'active0' + (i);
+                    //if (url.indexOf(href) > -1)
+                if (url == href) {
+                    $('.sub-menu a').eq(i).addClass('active');
+                    $('.sub-menu a').eq(i).parent().addClass('active');
+                    $('.sub-menu a').eq(i).parent().parent().css('display', 'block');
+                    //oh = true;
+                    return false;
+                }
+            });
+
+        });
+
+        //function getLocalTime(time) {
+        //    try{
+        //        time = time.substr(6, 13)
+        //        var date = new Date(parseInt(time));
+        //        var year = date.getFullYear();
+        //        var month = date.getMonth() + 1;
+        //        var date = date.getDate();
+        //        return year + "-" + (month < 10 ? "0" : "") + month + "-" + (date < 10 ? "0" : "") + date;
+        //    }catch(err){
+        //        return "";
+        //    }
+        //}
+
+        function getLocalTime(val) {
+            try {
+                var re = /-?\d+/;
+                var m = re.exec(val);
+                var d = new Date(parseInt(m[0]));
+                // 按【2012-02-13 09:09:09】的格式返回日期
+                return d.format("yyyy-MM-dd");
+            } catch (err) {
+                return "";
+            }
+        }
+
+        function getLocalTimeLong(val) {
+            try {
+                var re = /-?\d+/;
+                var m = re.exec(val);
+                var d = new Date(parseInt(m[0]));
+                // 按【2012-02-13 09:09:09】的格式返回日期
+                return d.format("yyyy-MM-dd hh:mm:ss");
+            } catch (err) {
+                return "";
+            }
+        }
+
+        function getLocalTimestamp(time) {
+            try {
+                var newDate = new Date();
+                newDate.setTime(time * 1000);
+                return newDate.format('yyyy-MM-dd hh:mm:ss');
+            } catch (err) {
+                return "";
+            }
+        }
+
+        Date.prototype.format = function (format) {
+            var date = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S+": this.getMilliseconds()
+            };
+            if (/(y+)/i.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+            }
+            for (var k in date) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                           ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                }
+            }
+            return format;
+        }
+
+    </script>
+</body>
+</html>

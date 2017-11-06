@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ComCloudShop.WeixinOauth.WeixinOauthUserInfo
+<div class="con">
+  <div class="header">
+    <div class="nav-weixin space-down clearfix">
+      <img class="fl weixin-avator" src="@Model.headimgurl">
+      <div class="weixin-name">微信账号<span>@Model.nickname</span></div>
+      <div class="weixin-tips">请完善方广账号 ，获得更好服务</div>
+      <a class="icon icon-left"></a>
+    </div>
+    <div class="nav nav-member space-down">
+      <ul class="clearfix">
+        <li class="fl"><a href="javascript:;"><i class="icon icon-order"></i>全部订单</a></li>
+        <li class="fl"><a href="javascript:;"><i class="icon icon-pay"></i>待付款</a></li>
+        <li class="fl"><a href="javascript:;"><i class="icon icon-express"></i>配送中</a></li>
+        <li class="fl"><a href="javascript:;"><i class="icon icon-done"></i>已完成</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="body">
+    <ul class="member-tools">
+      <li><a href="">我的优惠券<i class="icon icon-left"></i></a></li>
+      <li><a href="/address/list">收货地址管理<i class="icon icon-left"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer">
+    <div class="nav nav-site">
+      <ul class="clearfix">
+        <li class="fl"><a href="/home/index"><i class="icon icon-home"></i>首&nbsp;页</a></li>
+        <li class="fl"><a href="/product/index"><i class="icon icon-menu"></i>食&nbsp;谱</a></li>
+        <li class="fl"><a href="/cart/index"><i class="icon icon-cart"></i>购物车</a></li>
+        <li class="fl cur"><a href="/home/user"><i class="icon icon-member"></i>个人中心</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+

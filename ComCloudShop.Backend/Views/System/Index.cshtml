@@ -1,0 +1,439 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+@section HeadCss{
+    <style type="text/css">
+        form {
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 400px;
+            background: #EEE;
+        }
+
+        input, select, textarea {
+            max-width: none;
+        }
+
+        img {
+            max-width: 800px;
+        }
+    </style>
+}
+@section HeadScript{
+    <script src="~/public/admin/js/common/jquery.form.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $("#btn_show").bind("click", function () {
+
+                $("#form_upload").show();
+                var options = {
+                    success: function (responseText, statusText, xhr, $form) {
+                        var picPath = responseText.pic;
+                        if (picPath == "") {
+                            alert(responseText.error);
+                        }
+                        else {
+                            $("#form_upload").hide();
+                            $("input[name='image']").val(picPath);
+                            $("#result").attr("src", "/" + picPath).show();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                };
+
+                $("#form_upload").ajaxForm(options)
+            });
+
+        });
+
+    </script>
+}
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">@(Convert.ToString(ViewBag.type)=="index"?"广告位":"轮播图")</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <td style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:function(event){OpenDialog(0)}" value=" 添  加 " />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>图片</th>
+                        <th>活动地址</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array, as:'item'}">
+                    <tr>
+                        <td><img data-bind="attr:{src:'@Url.Content("~/")'+item.Image}" width="250" height="80" /></td>
+                        <td data-bind="text:item.Link"></td>
+                        <td data-bind="text:item.Sort"></td>
+                        <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}" class="btnsearch">修改</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.Delete(data)}" class="btnsearch">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                共<span data-bind="text:total"></span>条
+                <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+                <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+                <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div style="display: none" id="dialog">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th><i class="require-red"></i>图片：</th>
+                <td>
+                    <input type="hidden" name="PicId" data-bind="value:PicId" />
+
+                    <input type="button" id="btn_show" value="上传图片" />
+                    @*<span style="color:red;">*</span>*@
+                    <br />
+                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="result" src="" />
+                    <input type="hidden" id="image" name="image" data-bind="value:Image" />
+                </td>
+            </tr>
+            <tr style="display:none;">
+                <th><i class="require-red"></i>用于：</th>
+                <td>
+                    <input class="common-text required" size="40" name="Useful" data-bind="value:Useful" type="text" placeholder="请输入用于" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>排序：</th>
+                <td>
+                    <input class="common-text required" size="40" name="Sort" data-bind="value:Sort" type="text"  />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>活动地址：</th>
+                <td>
+                    <input class="common-text required" size="40" name="Link" data-bind="value:Link" type="text" placeholder="请输活动地址" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:btnUpdate" value="  提 交  " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var types = '@ViewBag.type';
+    $(function () {
+
+        //select model
+        var select_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+
+        var model = function () {
+
+            var m = this;
+            m.size = 10;
+
+            //分页
+            m.array = ko.observable();
+            m.total = ko.observable(0);
+            m.page_current = ko.observable(0);
+            m.page_total = ko.observable(0);
+
+            //search
+
+            //详情
+            m.PicId = ko.observable("");
+            m.Image = ko.observable("");
+            m.Useful = ko.observable("");
+            m.Link = ko.observable("");
+            m.Sort = ko.observable("");
+            //btn查询
+            m.btnSearch = function () {
+                m.loadData(1);
+            };
+
+            //上一页
+            m.page_pre = function () {
+                var page = (m.page_current() - 1);
+                if (page > 0) {
+                    m.loadData(page);
+                }
+            };
+
+            //下一页
+            m.page_next = function () {
+                var page = (m.page_current() + 1);
+                var total_page = m.page_total();
+                if (page <= total_page) {
+                    m.loadData(page);
+                }
+            };
+
+            //查看
+            m.OpenDialog = function (type, data) {
+                if (type > 0) {
+                    m.PicId(data.PicId);
+                    m.Sort(data.Sort);
+                    m.Image(data.Image);
+                    $("input[name='image']").val(data.Image);
+                    $("#result").attr("src", '@Url.Content("~/")' + data.Image).show();
+
+                    m.Useful(types);
+                    m.Link(data.Link);
+                } else {
+                    m.PicId("");
+                    m.Image("");
+                    m.Image("1");
+                    m.Useful(types);
+                    m.Link("");
+                    $("#result").hide();
+                }
+                $("#dialog").dialog({ width: "900px" });
+            };
+
+            //关闭
+            m.CloseDialog = function () {
+                $("#dialog").dialog('close');
+            };
+
+            //添加修改
+            m.btnUpdate = function () {
+
+                m.Image($('input[name="image"]').val());
+                var parm = {
+                    //单条model信息
+                    PicId: m.PicId(),
+                    Image: m.Image(),
+                    Link: m.Link(),
+                    Useful: m.Useful(),
+                    Sort: m.Sort()
+                }
+                console.log(parm);
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/System/AddOrUpdate")',
+                    data: parm,
+                    success: function (data) {
+                        if (data) {
+                            alert('OK');
+                            m.CloseDialog();
+                            m.loadData(1);
+                        } else {
+                            alert('Error');
+                        }
+                    }
+                })
+            }
+
+            m.Delete = function (data) {
+               if( confirm('确定删除吗？')){
+                   $.ajax({
+                       type: 'post',
+                       url:'@Url.Content("~/System/DeleteNew")',
+                       data: 'PicId=' + data.PicId +'&Image='+data.Image,
+                       success: function (data) {
+                           if (data.error == 100) {
+                               alert('删除成功！');
+                               m.loadData(1);
+                           } else {
+                               alert('删除失败！')
+                           }
+                       }
+                   })
+                }
+            }
+
+            //加载表单数据
+            m.loadData = function (page) {
+                var url = "@Url.Content("~/system/list?page=")" + page + "&type=" + types;
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total(data.total);
+                        m.page_total(Math.ceil(data.total / m.size));
+                        m.page_current(page);
+                        m.array(data.result);
+                    } else {
+                        alert("Get Data Error");
+                    }
+
+                });
+            };
+        };
+
+        //初始化数据
+        var obj = new model();
+        obj.loadData(1);
+        ko.applyBindings(obj);
+
+    });
+
+</script>
+
+
+
+
+@*<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+             <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>首页图片管理</span>
+        </div>
+        <div style="padding-left: 2px"><input type="button" id="btnRecord" value="上传图片"></div>
+        <div id="example" class="k-content" style="padding: 2px;">
+            <div id="grid">
+                <script type="text/javascript">
+
+                    $(document).ready(function() {
+
+                        $("#editmenu").kendoWindow({
+                            width: "600px",
+                            height: "auto",
+                            title: "图片上传",
+                            actions: [
+                                "Minimize",
+                                "Maximize",
+                                "Close"
+                            ],
+                            modal: true,
+                            visible: false
+                        });
+
+                        var dialog = $("#editmenu").data("kendoWindow");
+
+
+                        $("#grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: "/system/list/"
+                                },
+                                schema: {
+                                    model: {
+                                        fields: {
+                                            Id: { type: "int" },
+                                            Image: { type: "string" },
+                                            Useful: {type: "string"},
+                                            Link: {type: "string"}
+                                        }
+                                    }
+                                },
+                                pageSize: 3
+                            },
+                            // height: 600,
+                            filterable: true,
+                            sortable: true,
+                            resizable: true,
+                            pageable:true,
+                            columns: [{
+                                field: "Id",
+                                filterable: false,
+                                hidden:true
+                            },
+                                {
+                                    field: "Image",
+                                    filterable: false,
+                                    title: "图片"
+                                },
+                                {
+                                    field: "Useful",
+                                    filterable: false,
+                                    title: "用于"
+                                },
+                                {
+                                    field: "Link",
+                                    filterable: false,
+                                    title: "活动地址"
+                                },
+                                {command: [{name: "删除", click: function(e) {
+                                    var tr = $(e.target).closest("tr");
+                                    var data = this.dataItem(tr);
+
+                                    $.post("@Url.Content("~/system/delete/")", { sysno: data.Id, path: data.Image }, function (data1) {
+                                        location.reload();
+                                    });
+                                }}
+                                ]}
+                            ]
+                        });
+
+
+                        $("#btnRecord").kendoButton().click(function(){
+                            dialog.center().open();
+                        });
+                    });
+
+
+                </script>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="display: none" id="editmenu">
+    <form enctype="multipart/form-data" method="post" action="~/system/edit/">
+        <input type="hidden"  name="picid" value="0" id="picid"/>
+        <ul>
+            <li style="padding: 10px;">
+                图片： <input type="file" name="file" accept="image/*" />
+            </li>
+            <li style="padding: 10px;">
+                用于： <input type="text" name="useful" value="首页" disabled />
+            </li>
+            <li style="padding: 10px;">
+                活动地址： <input type="text" name="link"  value="暂不需要" disabled/>
+            </li>
+        </ul>
+        <div style="padding-left: 47px;">
+            <input type="submit" value="保存" id="btnSubmit">
+        </div>
+    </form>
+</div>*@
+
+
+

@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+@model ComCloudShop.ViewModel.SetSupViewModel
+
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">积分比例设置</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <th width="15%" height="50">积分比例设置：</th>
+                            <td width="35%">
+                                <input type="text" class="common-text required" size="20" value="@Model.SetBL" name="amount" id="amount">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="50" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" id="btnSubmit" value="保 存" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content">
+        </div>
+
+    </div>
+</div>
+
+@*<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>积分比例设置</span>
+        </div>
+        <style>
+            body {
+                font-size: 14px;
+            }
+        </style>
+
+        <span style="padding: 2px;">积分比例设置</span>
+        <div id="example" class="k-content" style="padding: 2px;">
+            <div>
+                <input type="hidden" name="ruleid" value="0" id="ruleid">
+                <ul>
+                    <li style="padding: 2px;">
+                        <span>比例：</span>
+                    </li>
+                </ul>
+                <div style="padding-left: 47px;">
+                    <input type="button" id="btnSubmit" value="保存">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<script type="text/javascript">
+    $("#btnSubmit").click(function () {
+        var bl = $("#amount").val();
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: '@Url.Content("/SetSup/Edit/?id=")' + bl,
+            dataType: 'text',
+            success: function (data) {
+                if (data == "ok") {
+                    alert("保存成功！")
+                }
+                else {
+                    alert("保存失败！")
+                }
+            }
+        });
+    })
+</script>
+
+
+
+@*<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>积分比例设置</span>
+        </div>
+        <style>
+            body {
+                font-size: 14px;
+            }
+        </style>
+        
+        <span style="padding: 2px;">积分比例设置</span>
+        <div id="example" class="k-content" style="padding: 2px;">
+            <div>
+                <input type="hidden" name="ruleid" value="0" id="ruleid">
+                <ul>
+                    <li style="padding: 2px;">
+                        <span>比例：</span><input type="text" value="@Model.SetBL" name="amount" id="amount">
+                    </li>
+                </ul>
+                <div style="padding-left: 47px;">
+                    <input type="button" id="btnSubmit" value="保存">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#btnSubmit").click(function () {
+        var bl = $("#amount").val();
+        
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/SetSup/Edit/?id=" + bl,
+            dataType: 'text',
+            success: function (data) {
+                if (data == "ok") {
+                    alert("保存成功！")
+                }
+                else {
+                    alert("保存失败！")
+                }
+            }
+        });
+    })
+</script>*@

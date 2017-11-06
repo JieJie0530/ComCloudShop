@@ -1,0 +1,246 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ComCloudShop.ViewModel
+@using System.Web.Configuration
+@model HomeViewModel
+@section HeadCss{
+    <style type="text/css">
+        body {
+            background: #fff;
+        }
+
+        .swiper-container .swiper-slide > img {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .row_category li {
+            overflow: hidden;
+            text-align: center;
+            width: 25%;
+            margin: 0.6rem 0;
+            float: left;
+        }
+
+            .row_category li a {
+                display: block;
+                overflow: hidden;
+            }
+
+            .row_category li p {
+                color: #333;
+                font-size: 0.8rem;
+            }
+
+        .row_category .CarouselImg {
+            border-radius: 50%;
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        .row_category li a img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .pinpai {
+            width: 95%;
+            margin-left: 2.5%;
+        }
+
+            .pinpai a {
+                border: 1px #ddd solid;
+                background: #fff;
+                overflow: hidden;
+                padding: 0 1%;
+                width: 20.85%;
+                float: left;
+                text-align: center;
+                height: 50px;
+                line-height: 50px;
+                margin: 2.5px 5px 2.5px 0;
+            }
+
+                .pinpai a img {
+                    width: 100%;
+                    height: 100%;
+                }
+                .prodic a img{width:95%;}
+        .prodic a {
+            width: 45%;
+            display: block;
+            float: left;    margin:5px 8px; height:210px;
+    border: 1px solid #ececec;
+        }
+            .prodic a p {
+              text-align:center; font-size:12px;color:#4d4d4d; padding:5px 0;
+            }
+    </style>
+    <script type="text/javascript" src="/public/js/swiper.min.js"></script>
+    <link rel="stylesheet" href="~/public/css/swiper.min.css">
+}
+
+<div class="wrapper mb60">
+
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+
+            @foreach (var d in Model.batch)
+            {
+                if (d.Useful == "lunbo")
+                {
+                    <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                }
+
+            }
+
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="headsearch">
+        <input type="search" value="" placeholder="搜一搜，惊喜无限！">
+        <i class="search"></i>
+    </div>
+    <div class="region row row_category">
+        <ul class="flex flex-f-row">
+            <li class="flex_in">
+                <a href="~/Product/Index" title="全部商品">
+                    <div class="CarouselImg"><img src="~/public/images/1443584338752549142.png"></div>
+                </a>
+                <p> 全部商品 </p>
+            </li>
+
+            <li class="flex_in">
+                <a href="~/User/Index" title="个人中心">
+                    <div class="CarouselImg"><img src="~/public/images/1443584373727011961.png"></div>
+                </a>
+                <p> 分享中心 </p>
+            </li>
+
+            <li class="flex_in">
+                <a href="http://mp.weixin.qq.com/s?__biz=MzIzNDU5Njk4OA==&amp;mid=100000006&amp;idx=1&amp;sn=fce37bfb393314768935f1d2e6508114&amp;chksm=68f2be155f8537032264dce3c9e45bf1557c0ef20be4a64b304d74f0129b33aecbf1def06960&amp;scene=18#wechat_redirect" title="联系我们">
+                    <div class="CarouselImg"><img src="~/public/images/1443586300343329180.png"></div>
+                </a>
+                <p> 联系我们 </p>
+            </li>
+
+            <li class="flex_in">
+                <a href="~/Cart/Index" title="购物车">
+                    <div class="CarouselImg"><img src="~/public/images/1443584408064043342.png"></div>
+                </a>
+                <p> 购物车 </p>
+            </li>
+
+        </ul>
+    </div>
+    <div style="clear:both;">
+
+    </div>
+    <div class="region row row_category" style="    overflow: scroll;">
+        <ul class="flex flex-f-row" style="width: 1000%;height:40px;">
+
+            @{
+                foreach (ComCloudShop.Service.MangerCate item in ViewBag.CateList as List<ComCloudShop.Service.MangerCate>)
+                {
+                    <li class="flex_in" style="width:93px;">
+                        <a href="~/Home/ShopList?title=@item.Brand" title="@item.Brand">
+                            <div class="CarouselImg"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)"></div>
+                        </a>
+                        <p>@item.Brand</p>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="region row row_category">
+        <ul class="flex flex-f-row">
+            <li class="flex_in" style="width:45%;height:100px; margin:0 2.5%;">
+                <a href="~/Product/Index1" style="height:100%;" title="全部商品">
+                    <div class="CarouselImg" style="width:100%; height:100%;border-radius:0"><img src="~/public/images/yushou.png" style="border-radius:0;height:100%"></div>
+                </a>
+            </li>
+            <li class="flex_in" style="width:45%;height:100px; margin:0 2.5%;">
+                <a href="http://mm.hofaf.com/Product/Index/?type=46" style="height:100%;" title="全部商品">
+                    <div class="CarouselImg" style="width:100%;height:100%;border-radius:0"><img src="~/public/images/tejia.png" style="border-radius:0;height:100%"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="new" style="margin-top:20px; margin-bottom:20px; text-align:center;">
+        <a href="http://mm.hofaf.com/Product/Index/?type=45"><img src="~/public/images/zhida.png" style="width:95%; margin:0 2.5%;" alt=""></a>
+    </div>
+
+    <div style="clear:both;"></div>
+    
+   
+    <div class="new">
+        @foreach (var d in Model.batch)
+        {
+            if (d.Useful == "index")
+            {
+                <a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a>
+                if (d.list.Count > 0)
+                {
+                    <div class="prodic">
+                        @{
+                            foreach (ComCloudShop.ViewModel.ProductListViewModel item in d.list)
+                            {
+                                <a href="~/Product/Detail?pid=@(item.ProductId)">
+                                    <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.Pic)" alt="">
+                                    <p>@item.SPMC<span style="float:right; color:red;">￥@item.Sale</span></p>
+                                </a>
+                            }
+                        }
+                    </div>
+                                    }
+                                }
+
+                            }
+        @*<a href=""><img src="~/public/images/img-06.jpg" alt=""></a>*@
+    </div>
+    <div class="new">
+        <h1>品牌推荐</h1>
+        <div class="pinpai">
+
+            @{
+                ResultViewModel<IEnumerable<BrandViewModel>> model = ViewBag.BrandList as ResultViewModel<IEnumerable<BrandViewModel>>;
+                if (model.error == 100)
+                {
+                    foreach (BrandViewModel item in model.result as List<BrandViewModel>)
+                    {
+                        <a href="/Product/Index?brand=@item.ID"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
+                    }
+                }
+            }
+
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.headsearch .search').click(function () {
+            location.href = '@Url.Content("~/Product/index?search=")' + encodeURI($('.headsearch input').val());
+        })
+
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 5000,
+            loop: true,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+        });
+
+    })
+</script>

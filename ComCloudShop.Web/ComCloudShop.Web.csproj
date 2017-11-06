@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0829708-6535-460D-B8C0-6448EC20C24F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComCloudShop.Web</RootNamespace>
+    <AssemblyName>ComCloudShop.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin, Version=4.11.9.36181, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.4.11.9\lib\net45\Senparc.Weixin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Senparc.Weixin.MP, Version=14.3.142.36182, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Senparc.Weixin.MP.14.3.142\lib\net45\Senparc.Weixin.MP.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\common.css" />
+    <Content Include="Content\fonts\icomoon.svg" />
+    <Content Include="Content\icon.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\banner-01.jpg" />
+    <Content Include="Images\border-01.jpg" />
+    <Content Include="Images\border-02.png" />
+    <Content Include="Images\fg_logo.png" />
+    <Content Include="Images\group_1.png" />
+    <Content Include="Images\group_2.png" />
+    <Content Include="Images\group_3.png" />
+    <Content Include="Images\group_4.png" />
+    <Content Include="Images\group_5.png" />
+    <Content Include="Images\group_6.png" />
+    <Content Include="Images\group_7.png" />
+    <Content Include="Images\group_8.png" />
+    <Content Include="Images\group_bg.png" />
+    <Content Include="Images\group_night.png" />
+    <Content Include="Images\icon_group.png" />
+    <Content Include="Images\img-01.png" />
+    <Content Include="Images\img-02.png" />
+    <Content Include="Images\img-03.png" />
+    <Content Include="Images\img-04.png" />
+    <Content Include="Images\img-05.png" />
+    <Content Include="Images\img-06.jpg" />
+    <Content Include="Images\img-07.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\product_img.png" />
+    <Content Include="public\css\global.css" />
+    <Content Include="public\css\main - 复制.css" />
+    <Content Include="public\css\main.css" />
+    <Content Include="public\css\main1.css" />
+    <Content Include="public\css\style.css" />
+    <Content Include="public\css\style2.css" />
+    <Content Include="public\css\swiper.min.css" />
+    <Content Include="public\css\user.css" />
+    <Content Include="public\images\1443584338752549142.png" />
+    <Content Include="public\images\1443584373727011961.png" />
+    <Content Include="public\images\1443584408064043342.png" />
+    <Content Include="public\images\1443586300343329180.png" />
+    <Content Include="public\images\1484767870288376974.jpg" />
+    <Content Include="public\images\1492970951046876629.jpg" />
+    <Content Include="public\images\1492971005343359306.jpg" />
+    <Content Include="public\images\26.png" />
+    <Content Include="public\images\29.png" />
+    <Content Include="public\images\30.png" />
+    <Content Include="public\images\accountnav01.png" />
+    <Content Include="public\images\accountnav02.png" />
+    <Content Include="public\images\accountnav03.png" />
+    <Content Include="public\images\accountnav04.png" />
+    <Content Include="public\images\accountsave.png" />
+    <Content Include="public\images\addAddress.png" />
+    <Content Include="public\images\address.png" />
+    <Content Include="public\images\border-01.png" />
+    <Content Include="public\images\cancel-off.png" />
+    <Content Include="public\images\cancel-on.png" />
+    <Content Include="public\images\cart-none.png" />
+    <Content Include="public\images\chi.png" />
+    <Content Include="public\images\chose.png" />
+    <Content Include="public\images\chuan.png" />
+    <Content Include="public\images\delete.png" />
+    <Content Include="public\images\discount.png" />
+    <Content Include="public\images\edit.png" />
+    <Content Include="public\images\enter.png" />
+    <Content Include="public\images\filter.png" />
+    <Content Include="public\images\guan.png" />
+    <Content Include="public\images\head-banner.jpg" />
+    <Content Include="public\images\img-01.png" />
+    <Content Include="public\images\img-02.png" />
+    <Content Include="public\images\img-03.png" />
+    <Content Include="public\images\img-04.png" />
+    <Content Include="public\images\img-05.png" />
+    <Content Include="public\images\img-06.jpg" />
+    <Content Include="public\images\img-07.png" />
+    <Content Include="public\images\img-08.png" />
+    <Content Include="public\images\load.gif" />
+    <Content Include="public\images\logo.png" />
+    <Content Include="public\images\logo2.png" />
+    <Content Include="public\images\logos.png" />
+    <Content Include="public\images\m2bg.png" />
+    <Content Include="public\images\m4bg.png" />
+    <Content Include="public\images\mainnav.png" />
+    <Content Include="public\images\mark.png" />
+    <Content Include="public\images\nav01.png" />
+    <Content Include="public\images\nav02.png" />
+    <Content Include="public\images\nav03.png" />
+    <Content Include="public\images\nav04.png" />
+    <Content Include="public\images\no0rder.png" />
+    <Content Include="public\images\noCoupons.png" />
+    <Content Include="public\images\number.png" />
+    <Content Include="public\images\radio.png" />
+    <Content Include="public\images\regs.jpg" />
+    <Content Include="public\images\sarn.png" />
+    <Content Include="public\images\search.png" />
+    <Content Include="public\images\search_01.png" />
+    <Content Include="public\images\star-half.png" />
+    <Content Include="public\images\star-off.png" />
+    <Content Include="public\images\star-on.png" />
+    <Content Include="public\images\svip.jpg" />
+    <Content Include="public\images\tejia.jpg" />
+    <Content Include="public\images\triangle.png" />
+    <Content Include="public\images\updown.png" />
+    <Content Include="public\images\updown2.png" />
+    <Content Include="public\images\vip.jpg" />
+    <Content Include="public\images\wan.png" />
+    <Content Include="public\images\weixin.png" />
+    <Content Include="public\images\yushou.jpg" />
+    <Content Include="public\images\yushou.png" />
+    <Content Include="public\images\zhida.jpg" />
+    <Content Include="public\images\zhu.png" />
+    <Content Include="public\js\area.js" />
+    <Content Include="public\js\index.js" />
+    <Content Include="public\js\jquery.min.js" />
+    <Content Include="public\js\jquery.qrcode.min.js" />
+    <Content Include="public\js\jquery.validate.min.js" />
+    <Content Include="public\js\lib\img\cancel-off.png" />
+    <Content Include="public\js\lib\img\cancel-on.png" />
+    <Content Include="public\js\lib\img\star-half.png" />
+    <Content Include="public\js\lib\img\star-off.png" />
+    <Content Include="public\js\lib\img\star-on.png" />
+    <Content Include="public\js\lib\jquery.raty.js" />
+    <Content Include="public\js\lib\jquery.raty.min.js" />
+    <Content Include="public\js\swiper.min.js" />
+    <Content Include="public\js\zepto.min.js" />
+    <Content Include="public\layer_mobile\layer.js" />
+    <Content Include="public\layer_mobile\need\layer.css" />
+    <Content Include="Scripts\event.js" />
+    <Content Include="Scripts\iscroll-probe.min.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Properties\PublishProfiles\shopo.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jweixin-1.0.0.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\swipe.min.js" />
+    <Content Include="Scripts\touch.js" />
+    <Content Include="Scripts\zepto.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="GONGSI\jiangli.html" />
+    <Content Include="GONGSI\jiesao.html" />
+    <Content Include="GONGSI\jl.jpg" />
+    <Content Include="GONGSI\js.jpg" />
+    <Content Include="GONGSI\kuaixun.html" />
+    <Content Include="GONGSI\kx.jpg" />
+    <Content Include="GONGSI\zc.jpg" />
+    <Content Include="GONGSI\zhengce.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AuthorizeController.cs" />
+    <Compile Include="Controllers\AuthorizeMangeController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseMangeController.cs" />
+    <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CouponController.cs" />
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Third\ThirdPartyModel.cs" />
+    <Compile Include="Third\ThirdPartyPackage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Content\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon.woff" />
+    <Content Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\User.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Order\List.cshtml" />
+    <Content Include="Views\Order\Detail.cshtml" />
+    <Content Include="Views\Order\Confim.cshtml" />
+    <Content Include="Views\Address\List.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Shared\_DetailLayout.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Shared\_NoNavLayout.cshtml" />
+    <Content Include="Views\Coupon\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Authorize\Index.cshtml" />
+    <Content Include="Views\Order\DetailPay.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\AddVip.cshtml" />
+    <Content Include="Views\User\Withd.cshtml" />
+    <Content Include="Views\User\AddWithd.cshtml" />
+    <Content Include="Views\Order\OrderComment.cshtml" />
+    <Content Include="Views\Order\ReturnOrder.cshtml" />
+    <Content Include="Views\Shared\_NoNavLayoutCar.cshtml" />
+    <Content Include="Views\User\BuyCard.cshtml" />
+    <Content Include="Views\User\RenderImg.cshtml" />
+    <Content Include="Views\User\LineMember.cshtml" />
+    <Content Include="Views\Product\Index1.cshtml" />
+    <Content Include="Views\Business\Index.cshtml" />
+    <Content Include="Views\Business\Login.cshtml" />
+    <Content Include="Views\Business\GitIndex.cshtml" />
+    <Content Include="Views\Business\IntegralIndex.cshtml" />
+    <Content Include="Views\Business\Qrcode.cshtml" />
+    <Content Include="Views\User\Qrcode.cshtml" />
+    <Content Include="Views\Business\PushGit.cshtml" />
+    <Content Include="Views\User\MyGifList.cshtml" />
+    <Content Include="Views\User\GifQrcode.cshtml" />
+    <Content Include="Views\Home\ShopList.cshtml" />
+    <Content Include="Views\Business\Withd.cshtml" />
+    <Content Include="Views\Business\AddWithd.cshtml" />
+    <Content Include="Views\Business\Reg.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
+    <Content Include="Views\Home\Map.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\AuthorizeMange\" />
+    <Folder Include="Views\BaseMange\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Manage\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComCloudShop.Layer\ComCloudShop.Layer.csproj">
+      <Project>{2c2b6d00-9355-4918-aaef-d69072865192}</Project>
+      <Name>ComCloudShop.Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComCloudShop.Service\ComCloudShop.Service.csproj">
+      <Project>{96668877-5990-4710-978e-f9adc34e967e}</Project>
+      <Name>ComCloudShop.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComCloudShop.Utility\ComCloudShop.Utility.csproj">
+      <Project>{8d0627b9-0ed6-4791-b1ed-5020d47ebff7}</Project>
+      <Name>ComCloudShop.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComCloudShop.ViewModel\ComCloudShop.ViewModel.csproj">
+      <Project>{2337d55d-cb3d-4410-82b3-03bfbbef3e89}</Project>
+      <Name>ComCloudShop.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComCloudShop.WeixinOauth\ComCloudShop.WeixinOauth.csproj">
+      <Project>{4a7487c7-ef7c-4d14-bcbf-ec81fd20246c}</Project>
+      <Name>ComCloudShop.WeixinOauth</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4607/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

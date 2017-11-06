@@ -1,0 +1,174 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>套餐管理</span>
+        </div>
+
+        <div id="example" class="k-content" style="padding: 2px;">
+            <button id="btnNew">新增</button>
+            <div id="grid">
+                <script type="text/javascript">
+    var i = 1;
+    var sum = 8;
+    var url = "@Url.Content("~/groups/list/")"
+
+    $("#btnNew").kendoButton().click(function () {
+        location.href = '/groups/edit?sysno=0';
+    });
+
+    $(document).ready(function () {
+        $("#grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: url
+                },
+                schema: {
+                    model: {
+                        fields: {
+                            GroupId: { type: "int" },
+                            GroupName: { type: "string" },
+                            Content: { type: "string" },
+                            Suggest: { type: "string" },
+                            PicUrl: { type: "string" }
+                        }
+                    }
+                }
+            },
+
+            filterable: true,
+            sortable: true,
+            resizable: true,
+            columns: [{
+                field: "GroupId",
+                filterable: false,
+                hidden: true
+            },
+                {
+                    field: "GroupName",
+                    filterable: false,
+                    title: "套餐名称"
+                },
+                {
+                    field: "Content",
+                    filterable: false,
+                    title: "套餐内容"
+                },
+                {
+                    field: "Suggest",
+                    filterable: false,
+                    title: "套餐建议"
+                },
+                {
+                    field: "PicUrl",
+                    filterable: false,
+                    title: "详情图片"
+                },
+                {
+                    command: [{
+                        name: "编辑", click: function (e) {
+                            var tr = $(e.target).closest("tr");
+                            var data = this.dataItem(tr);
+                            location.href = '@Url.Content("~/groups/edit?sysno=")' + data.GroupId;
+                        }
+                    }, {
+                        name: "添加产品", click: function (e) {
+                            var tr = $(e.target).closest("tr");
+                            var data = this.dataItem(tr);
+                            location.href = '@Url.Content("~/groups/detail/?sysno=")' + data.GroupId + '&dm=&mc=';
+                                }},
+                                    {name: "产品列表", click: function(e) {
+                                        var tr = $(e.target).closest("tr");
+                                        var data = this.dataItem(tr);
+                                        location.href = '@Url.Content("~/groups/products/?sysno=")' + data.GroupId;
+                                    }}
+                                ]}
+                            ]
+                        });
+                        $(".btnRecord").kendoButton().click(function(){
+                            if($(this).val()=="下页"){
+                                i++;
+                                if(i>sum){
+                                    return;
+                                }
+                                $.getJSON(url,{page:i},function(data1){
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }else if($(this).val()=="上页"){
+                                if(i>0){
+                                    i--;
+                                }else{
+                                    return;
+                                }
+                                $.getJSON(url,{page:i},function(data1){
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }else if($(this).val()=="首页"){
+                                i = 1;
+                                $.getJSON(url,{page:i},function(data1){
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }else if($(this).val()=="尾页"){
+                                i = sum;
+                                $.getJSON(url,{page:i},function(data1){
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }else if($(this).val()=="跳转"){
+                                var j = $.trim($("#textPage").val());
+                                if(j.length <= 0 && parseInt(j)=="NaN"){
+                                    return;
+                                }
+                                i = j;
+                                $.getJSON(url,{page:j},function(data1){
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }
+                        });
+                    });
+
+                </script>
+            </div>
+        </div>
+
+        <div style="padding: 2px;display: none">
+            <input type="button" value="首页" class="btnRecord" />
+            <input type="button" value="上页" class="btnRecord" />
+            <input type="button" value="下页" class="btnRecord" />
+            <input type="button" value="尾页" class="btnRecord" />
+            <span>共 1 页</span>
+            <span>跳转<input type="text" value="" style="width:50px" id="textPage"> 页<input type="button" value="跳转" class="btnRecord" /></span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+

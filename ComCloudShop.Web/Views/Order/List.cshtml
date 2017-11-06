@@ -1,0 +1,229 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Web.Configuration
+
+<div class="wrapper">
+    <div class="accountlist">
+        <div class="hd-nav">
+            <a data-slide-index="0" href="javascript:;" class="active">全部订单<i class="active"></i></a>
+            <a data-slide-index="1" href="javascript:;">待付款<span></span><i></i></a>
+            <a data-slide-index="2" href="javascript:;">配送中<i></i></a>
+            <a data-slide-index="3" href="javascript:;">已完成<i></i></a>
+        </div>
+        <div id="plist">
+        </div>
+        <!--没有订单-->
+        <div class="no-Order" style="display:none;">
+            <img src="~/public/images/no0rder.png" alt="">
+            <p></p>
+        </div>
+        @*<div class="logo-bottom">
+            <img src="~/public/images/logo.png" alt="">
+        </div>*@
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var purl = "@WebConfigurationManager.AppSettings["imgurl"]";
+
+        var c = 0;
+        if (GetQueryString("c") != undefined) {
+            c = GetQueryString("c");
+        }
+
+        //是否数据已加载完成，是否正在加载，是否添加html
+        var isend = 0, isload = 0, isadd = 0;
+
+        var parm = {
+            page: 1,
+            size: 10,
+            status: c
+        }
+
+        $(".hd-nav a").click(function () {
+            var ex = $(this).index() + 1;
+            $(this).find("i").addClass("active").parents().siblings().find("i").removeClass("active");
+            $(this).addClass("active").parents(".hd-nav").find("a").removeClass("active");
+            $(this).addClass("active");
+
+            isend = 0;
+            isload = 0;
+            isadd = 0;
+            parm.page = 1;
+            parm.status = $(this).index();
+            getPageList();
+
+        });
+
+        //加载数据
+        getPageList = function () {
+            $('.no-Order').css('display', 'none');
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Order/GetPageList")',
+                data: parm,
+                success: function (data) {
+                    var content = "";
+                    if (data != "") {
+                        $.each(data, function (i, item) {
+                            var totalnumber = 0;
+                            content += "<div class=\"pdtlist\"><dl><dt><div class=\"state\">状&ensp;态：" +
+                                                "<span>" + getStatusName(item.Status) + "</span></div>" +
+                                                "<div class=\"totalPrice\">总&ensp;价:" +
+                                                "<span>￥" + item.TotalPrice + "</span></div></dt>";
+                            if (item.product.length > 0) {
+                                $.each(item.product, function (j, pro) {
+                                    content += "<dd><div class=\"productInfo\"><a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + pro.ProductId + "\"><h2>" + (pro.SPMC==null?"":pro.SPMC) + "</h2></a>" +
+                                                         "<p>" + (pro.Describle == null ? "" : pro.Describle) + "</p></div><div class=\"productImg\">" +
+                                                         "<img src=\"" + purl + pro.Pic + "\" alt=\"\"></div></dd>"
+                                    totalnumber += pro.Number;
+                                });
+                            }
+                            content += "<dd class=\"checkOut\"><div class=\"checkout\"><p>共<span>" + totalnumber + "</span>件</p></div>"
+                                                    + getStatusUrl(item.Status, item.OrderNum) + "</dd></dl></div>"
+                        });
+                    } else {
+                        isend = 1;
+                        if( parm.page==1){
+                            $('.no-Order').css('display', 'block');
+                            var ms = "";
+                            switch (parm.status) {
+                                case 1:
+                                    ms = '您还没有待付款的订单~';
+                                    break;
+                                case 2:
+                                    ms = '您还没有配送中的订单~';
+                                    break;
+                                case 3:
+                                    ms = '您还没有已完成的订单~';
+                                    break;
+                                default:
+                                    ms = '您还没有购买的订单~';
+                                    break;
+                            }
+                            $('.no-Order p').html(ms);
+                        }
+                    }
+                    if (isadd == 0) {
+                        $('#plist').html(content);
+                    } else {
+                        $('#plist').append(content);
+                    }
+                    isload = 0;
+                }
+            })
+        };
+
+        //加载数据
+        $(".hd-nav a").eq(c).click();
+        $.ajax({
+            type: 'get',
+            url: '@Url.Content("~/Order/GetOrderToPay")',
+            async: true,
+            success: function (data) {
+                if (data.error == 0) {
+                    if (data.result > 0) {
+                        $(".hd-nav a span").toggleClass("circle");
+                    }
+                }
+            }
+        });
+
+        getStatusName= function(status){
+            var title="";
+            switch(status){
+                case 0:
+                    title="待支付";
+                    break;
+                case 1:
+                    title="配送中";
+                    break;
+                case 2:
+                    title="已完成";
+                    break;
+                case 3:
+                    title = "退货中";
+                    break;
+                case 3:
+                    title = "退货完成";
+                    break;
+                default:"";break;
+            }
+            return title;
+        }
+
+        getStatusUrl = function (status,id) {
+            var url = "",view="";
+            if (status == 0) {
+                url = "@Url.Content("~/Order/DetailPay")" + "?ordernum=" + id;
+                view = "查 看";
+                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a>";
+            }
+            else if (status == 3) {
+
+            }
+            else if (status == 4) {
+
+            }
+            else {
+                url = "@Url.Content("~/Order/Detail")" + "?ordernum=" + id;
+                var url1="@Url.Content("~/Order/ReturnOrder")" + "?ordernum=" + id;
+                view = "查 看";
+                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a> <a onclick=\"TH('"+id+"')\" class=\"lookBtn1\">申请退货</a>";
+            }
+
+            return "";
+        }
+
+        
+
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop() + 150;
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight >= scrollHeight) {
+                if (isend == 1 || isload == 1) {
+                    return;
+                }
+                isload = 1;
+                parm.page++;
+                isadd = 1;
+                getPageList();
+            }
+        });
+
+    });
+    function TH(id) {
+       
+        if (confirm("是否确定申请退货？")) {
+
+            var wxdata = {
+                "OrderNum":id
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '@(Url.Content("~/Order/AddReturn1"))',
+                data: wxdata,
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("申请成功！");
+                        window.location.href = "/Order/List";
+                    }
+                    else {
+                        alert("该订单您已经申请单个产品退货，不能操作订单退货！");
+                    }
+                }
+            })
+        }
+        }
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+</script>

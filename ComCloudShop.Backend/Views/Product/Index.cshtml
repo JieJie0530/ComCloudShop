@@ -1,0 +1,913 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+@section HeadCss{
+    <style type="text/css">
+        form {
+            border: 1px solid #CCC;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            width: 400px;
+            background: #EEE;
+        }
+
+        input, select, textarea {
+            max-width: none;
+        }
+
+        img {
+            max-width: 800px;
+        }
+    </style>
+}
+@section HeadScript{
+    <script src="~/public/admin/js/common/jquery.form.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(function () {
+
+        $("#btn_show").bind("click", function () {
+            $("#form_upload").show();
+            var options = {
+                success: function (responseText, statusText, xhr, $form) {
+                    var picPath = responseText.pic;
+                    if (picPath == "") {
+                        alert(responseText.error);
+                    }
+                    else {
+                        $("#form_upload").hide();
+                        $("input[name='picP1']").val(picPath);
+                        $("#resultP1").attr("src", '@Url.Content("~/")' + picPath).show();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            };
+            $("#form_upload").ajaxForm(options)
+        });
+
+
+        $("#btn_show2").bind("click", function () {
+            $("#form_upload2").show();
+            var options = {
+                success: function (responseText, statusText, xhr, $form) {
+                    var picPath = responseText.pic;
+                    if (picPath == "") {
+                        alert(responseText.error);
+                    }
+                    else {
+                        $("#form_upload2").hide();
+                        $("input[name='picP2']").val(picPath);
+                        $("#resultP2").attr("src", '@Url.Content("~/")' + picPath).show();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                };
+                $("#form_upload2").ajaxForm(options)
+            });
+
+            $("#btn_show3").bind("click", function () {
+                $("#form_upload3").show();
+                var options = {
+                    success: function (responseText, statusText, xhr, $form) {
+                        var picPath = responseText.pic;
+                        if (picPath == "") {
+                            alert(responseText.error);
+                        }
+                        else {
+                            $("#form_upload3").hide();
+                            $("input[name='picP3']").val(picPath);
+                            $("#resultP3").attr("src", '@Url.Content("~/")' + picPath).show();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                };
+                $("#form_upload3").ajaxForm(options)
+            });
+        
+            $("#btn_show4").bind("click", function () {
+                $("#form_upload4").show();
+                var options = {
+                    success: function (responseText, statusText, xhr, $form) {
+                        var picPath = responseText.pic;
+                        if (picPath == "") {
+                            alert(responseText.error);
+                        }
+                        else {
+                            $("#form_upload4").hide();
+                            $("input[name='picP4']").val(picPath);
+                            $("#resultP4").attr("src", '@Url.Content("~/upload/detail/")' + picPath).show();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                };
+                $("#form_upload4").ajaxForm(options)
+            });
+
+        });
+
+    </script>
+}
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">上架商品管理</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <th width="5%">商品代码</th>
+                            <td width="15%">
+                                <input class="common-text required" size="20" name="search_spdm" data-bind="value: search_spdm" type="text" />
+                            </td>
+                            <th width="5%">商品名称</th>
+                            <td width="15%">
+                                <input class="common-text required" size="20" name="search_spmc" data-bind="value: search_spmc" type="text" />
+                            </td>
+                            <th width="5%">是否预售</th>
+                            <td width="15%">
+                                <select id="spgg">
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value="  查  询  " />
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnAdd" data-bind="click:btnAdd" value=" 添加产品 " />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>商品代码</th>
+                        <th>商品名称</th>
+                        <th>商品价格</th>
+                        <th>折扣比例</th>
+                        <th>是否上架</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array, as:'item'}">
+                    <tr>
+                        <td data-bind="text:item.SPDM"></td>
+                        <td data-bind="text:item.SPMC"></td>
+                        <td data-bind="text:item.Sale"></td>
+                        <td data-bind="text:item.Discount"></td>
+                        <td data-bind="text:item.IsShow?'是':'否'"></td>
+                        <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.ProductID)}">基本信息</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItem(item.ProductID)}">商品属性</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){location.href ='@Url.Content("~/product/EditShowPic/")'+'?sysno=' + item.ProductID}">图文详情</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenComment(item.ProductID)}">批量评论</a>
+                            <a class="btn btn-primary" href="javascript:void(0);" data-bind="click:function(data,event){$parent.ProductShow(item.ProductID,item.IsShow)},text:item.IsShow?'下架':'发布'"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                共<span data-bind="text:total"></span>条
+                <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+                <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+                <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="display: none" id="dialogComment">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th width="12%"><i class="require-red"></i>选择文件：</th>
+                <td width="38%">
+                    @using (Html.BeginForm("Browse", "Order", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_Upload" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input id="fileUpload" type="file" name="file">
+                        <input type="hidden" name="ProductId" data-bind="value:ProductId" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>表格格式：</th>
+                <td width="38%">
+                    <table>
+                       <tr>
+                           <th>会员名称</th>
+                           <th>评价内容</th>
+                           <th>产品评分</th>
+                       </tr>
+                        <tr>	
+                            <th>王文东</th>
+                            <th>东西好！！！</th>
+                            <th>5</th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:btnUpload" value=" 保 存 " />
+                </td>
+            </tr>
+        </tbody>
+   </table>
+</div>
+<div style="display: none" id="dialog">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th width="12%"><i class="require-red"></i>商品名称：</th>
+                <td width="38%">
+                    <input type="hidden" name="ProductId" data-bind="value:ProductId" />
+                    <input class="common-text required" size="30" name="SPMC" data-bind="value:SPMC" type="text" />
+                </td>
+                <th width="12%"><i class="require-red"></i>商品价格：</th>
+                <td width="38%">
+                    <input class="common-text required" size="30" name="Sale" data-bind="value:Sale" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <th width="12%" style="display:none;"><i class="require-red"></i>商品折扣：</th>
+                <td width="38%" style="display:none;">
+                    <input class="common-text required" size="30" name="Discount" data-bind="value:Discount" type="text" />
+                </td>
+                <th width="12%"><i class="require-red"></i>是否预售：</th>
+                <td width="38%">
+                    <input type="radio" name="SPGG" value="0" data-bind="checked:SPGG" />否
+                    <input type="radio" name="SPGG" value="1" data-bind="checked:SPGG" />是
+                </td>
+                <th width="12%"><i class="require-red"></i>摘 要：</th>
+                <td width="38%">
+                    <input class="common-text required" size="30" name="Describle" data-bind="value:Describle" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>重量：</th>
+                <td width="38%">
+                    <input class="common-text required" size="30" name="Weight" data-bind="value:Weight" type="text" />
+                </td>
+                <th width="12%"><i class="require-red"></i>品牌：</th>
+                <td width="38%">
+                    <input  style=" display:none; " class="common-text required" size="10" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
+
+                    <select data-bind="options:listBrand,
+                                                        optionsValue:function(item){return item.dm;},
+                                                        optionsText:function(item){return item.mc;},
+                                                        value:BeginUseAge,optionsCaption:'--请选择--'" name="BeginUseAge"></select>
+
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>品种：</th>
+                <td width="38%">
+                    <select data-bind="options:listCategory,
+                                                        optionsValue:function(item){return item.dm;},
+                                                        optionsText:function(item){return item.mc;},
+                                                        value:CategoryId,optionsCaption:'--请选择--'" name="CategoryId"></select>
+                </td>
+                <th width="12%"><i class="require-red"></i>连接地址：</th>
+                <td width="38%">
+                    <span>http://mm.hofaf.com/Product/Detail/?pid=</span><span data-bind="text:ProductId"></span>
+
+                    
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>封面图—正面：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show" value="上传图片" />
+                    <br />
+                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP1" src="" />
+                    <input type="hidden" id="picP1" name="picP1" data-bind="value:P1" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>封面图—侧面：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show2" value="上传图片" />
+                    <br />
+                    <form id="form_upload2" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP2" src="" />
+                    <input type="hidden" id="picP2" name="picP2" data-bind="value:P2" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>封面图—反面：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show3" value="上传图片" />
+                    <br />
+                    <form id="form_upload3" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP3" src="" />
+                    <input type="hidden" id="picP3" name="picP3" data-bind="value:P3" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:btnUpdate" value=" 保 存 " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div style="display: none" id="dialogItem">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <span class="crumb-name">商品详情</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <td colspan="4" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:function(event){OpenDialogItemDetail(0)}" value=" 添 加 " />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content" style="min-height:400px;">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>内容</th>
+                        <th style="display:none;" width="200">详情图片</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array2, as:'item'}">
+                    <tr>
+                        <td data-bind="text:item.A1"></td>
+                        <td data-bind="text:item.A2" ></td>
+                        <td style="display:none;" ><img data-bind="attr:{src:'@Url.Content("~/upload/detail/")' + item.A3}" width="200" height="50" /></td>
+                        <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItemDetail(1,data)}">编辑</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.DeleteProductDetail(item.DetailId)}">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div style="display: none" id="dialogItemDetail">
+    <table class="search-tab" width="100%">
+        <tbody>
+            <tr>
+                <th width="12%"><i class="require-red"></i>标题：</th>
+                <td width="38%">
+                    <input type="hidden" name="DetailId" data-bind="value:DetailId" />
+                    <input class="common-text required" size="30" name="A1" data-bind="value:A1" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>内容：</th>
+                <td width="38%">
+                    <textarea data-bind="value:A2" rows="5" cols="35"></textarea>
+                </td>
+            </tr>
+            <tr style=" display:none; ">
+                <th><i class="require-red"></i>详情图片：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show4" value="上传图片" />
+                    <br />
+                    <form id="form_upload4" style="padding:20px; display:none;" action="UploadImg2"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP4" src="" />
+                    <input type="hidden" id="picP4" name="picP4" data-bind="value:A3" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:AddOrUpdateItemDetail" value=" 保 存 " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <div style="display: none" id="editmenu">
+        <form enctype="multipart/form-data" method="post" action="/product/upload">
+            <input type="hidden" name="ProductId" value="" id="productId" />
+            <input type="hidden" name="P1" value="" id="hidP1" />
+            <input type="hidden" name="P2" value="" id="hidP2" />
+            <input type="hidden" name="P3" value="" id="hidP3" />
+            <ul>
+                <li style="padding: 10px;">
+                    正面： <span><img width="40" height="40" src="" id="P1"></span><input type="file" name="files" />
+                </li>
+                <li style="padding: 10px;">
+                    侧面： <span><img width="40" height="40" src="" id="P2"></span><input type="file" name="files" />
+                </li>
+                <li style="padding: 10px;">
+                    反面： <span><img width="40" height="40" src="" id="P3"></span><input type="file" name="files" />
+                </li>
+            </ul>
+            <div style="padding-left: 47px;">
+                <input type="submit" value="保存" id="btnSubmit">
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+    $(function () {
+
+        //select model
+        var select_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+        var brand_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+        var model = function () {
+
+            var m = this;
+            m.size = 10;
+
+            //select
+            //m.search_identity_list = ko.observableArray();
+
+            //分页
+            m.array = ko.observable();
+            m.total = ko.observable(0);
+            m.page_current = ko.observable(0);
+            m.page_total = ko.observable(0);
+
+            //search
+            m.search_spdm = ko.observable("");
+            m.search_spmc = ko.observable("");
+
+            m.listCategory = ko.observableArray();
+            m.listBrand = ko.observableArray();
+
+            //详情
+            m.ProductId = ko.observable(0);
+            m.SPMC = ko.observable("");
+            m.Sale = ko.observable("");
+            m.Discount = ko.observable("");
+            m.Describle = ko.observable("");
+            m.Weight = ko.observable("");
+            m.BeginUseAge = ko.observable("");
+            m.EndUseAge = ko.observable("");
+            m.CategoryId = ko.observable("");
+            m.P1 = ko.observable("");
+            m.P2 = ko.observable("");
+            m.P3 = ko.observable("");
+            m.Contents = ko.observable("");
+            m.SPGG = ko.observable("0");
+            //btn查询
+            m.btnSearch = function () {
+                m.loadData(1);
+            };
+
+            //上一页
+            m.page_pre = function () {
+                var page = (m.page_current() - 1);
+                if (page > 0) {
+                    m.loadData(page);
+                }
+            };
+
+            //下一页
+            m.page_next = function () {
+                var page = (m.page_current() + 1);
+                var total_page = m.page_total();
+                if (page <= total_page) {
+                    m.loadData(page);
+                }
+            };
+            m.btnUpload = function () {
+                var ProductID = m.ProductId();
+                var fileUpload = $("#fileUpload").val();
+                if (fileUpload == "") {
+                    alert("请选择文件!");
+                }
+                else {
+                    $('#form_Upload').submit();
+                }
+                
+            }
+            //批量评论
+            m.OpenComment = function (ProductId) {
+                m.ProductId(ProductId);
+                $("#dialogComment").dialog({ width: "50%" });
+            }
+            //查看
+            m.OpenDialog = function (id) {
+                if (id > 0) {
+                    $.ajax({
+                        method: "get",
+                        url: '@Url.Content("~/Product/GetDetail")',
+                        data: 'id=' + id,
+                        dataType: 'json'
+                    }).done(function (data) {
+
+                        if (data.error == 100) {
+                            console.log(data.result);
+                            m.ProductId(data.result.ProductID);
+                            m.SPMC(data.result.SPMC);
+                            m.Sale(data.result.Sale);
+                            m.Discount(data.result.Discount);
+                            m.Describle(data.result.Describle);
+                            m.Weight(data.result.Weight);
+                            m.BeginUseAge(data.result.BeginUseAge);
+                            m.EndUseAge(data.result.EndUseAge);
+                            m.CategoryId(data.result.CategoryId);
+                            m.P1(data.result.P1);
+                            m.P2(data.result.P2);
+                            m.P3(data.result.P3);
+                            m.Contents(data.result.Contents);
+                            m.SPGG(data.result.SPGG);
+
+                            if (data.result.P1 == null || data.result.P1 == "") {
+                                $("input[name='picP1]").val('');
+                                $("#resultP1").hide();
+                            } else {
+                                $("input[name='picP1']").val(data.result.P1);
+                                $("#resultP1").attr("src", '@Url.Content("~/")' + data.result.P1).show();
+                            }
+                            if (data.result.P2 == null || data.result.P2 == "") {
+                                $("input[name='picP2]").val('');
+                                $("#resultP2").hide();
+                            } else {
+                                $("input[name='picP2']").val(data.result.P2);
+                                $("#resultP2").attr("src", '@Url.Content("~/")' + data.result.P2).show();
+                            }
+                            if (data.result.P3 == null || data.result.P3 == "") {
+                                $("input[name='picP3]").val('');
+                                $("#resultP3").hide();
+                            } else {
+                                $("input[name='picP3']").val(data.result.P3);
+                                $("#resultP3").attr("src", '@Url.Content("~/")' + data.result.P3).show();
+                            }
+                        } else {
+                            alert('系统错误！');
+                        }
+                    });
+                } else {
+                    m.ProductId("");
+                    m.SPMC("");
+                    m.Sale("");
+                    m.Discount("");
+                    m.Describle("");
+                    m.Weight("");
+                    m.BeginUseAge("");
+                    m.EndUseAge("");
+                    m.CategoryId("");
+                    m.P1("");
+                    m.P2("");
+                    m.P3("");
+                    m.Contents("");
+
+                    $("input[name='picP1]").val('');
+                    $("#resultP1").hide();
+                    $("input[name='picP2]").val('');
+                    $("#resultP2").hide();
+                    $("input[name='picP3]").val('');
+                    $("#resultP3").hide();
+                }
+                $("#dialog").dialog({ width: "90%" });
+            };
+
+            //关闭
+            m.CloseDialog = function () {
+                $("#dialog").dialog('close');
+            };
+
+            // （发布/下架）
+            m.ProductShow = function (id, show) {
+                var message = "确定发布吗？";
+                if (show)
+                    message = "确定下架吗？";
+
+                if (confirm(message)) {
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/Product/SetIsShow")',
+                        data: 'sysno=' + id + '&show=' + show,
+                        success: function (data) {
+                            if (data) {
+                                alert('操作成功！');
+                                m.loadData(1);
+                            } else {
+                                alert('操作失败');
+                            }
+                        }
+                    });
+                }
+            }
+
+            @*//上传图片
+            m.ProductUploadPic = function (id) {
+                $("#productId").val(id);
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Content("~/Product/GetProductImg")',
+                    data: 'id=' + id,
+                    success: function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            $("#hidP1").val(data.P1);
+                            $("#hidP2").val(data.P2);
+                            $("#hidP3").val(data.P3);
+                            $("#P1").attr("src", "/Upload/" + data.P1);
+                            $("#P2").attr("src", "/Upload/" + data.P2);
+                            $("#P3").attr("src", "/Upload/" + data.P3);
+                        }
+                        $("#editmenu").dialog({ width: "900px" });
+                        console.log($("input[name=P1]").val());
+                    }
+                });
+            }*@
+
+            m.btnAdd = function () {
+                m.ProductId("");
+                m.BeginUseAge("");
+                $("#dialog").dialog({ width: "90%" });
+            }
+            //更新产品
+            m.btnUpdate = function () {
+
+                m.P1($('input[name="picP1"]').val());
+                m.P2($("input[name='picP2']").val());
+                m.P3($("input[name='picP3']").val());
+
+                var parm = {
+                    //单条model信息
+                    ProductId: m.ProductId(),
+                    SPMC: m.SPMC(),
+                    Sale: m.Sale(),
+                    Discount: 1,
+                    Describle: m.Describle() == null ? "" : m.Describle(),
+                    Weight: m.Weight(),
+                    BeginUseAge: m.BeginUseAge(),
+                    EndUseAge: m.EndUseAge(),
+                    CategoryId: m.CategoryId(),
+                    P1: m.P1(),
+                    P2: m.P2(),
+                    P3: m.P3(),
+                    SPGG:m.SPGG()
+                    //Contents: m.Contents()
+                }
+                console.log(parm);
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Product/UpdateProduct")',
+                    data: parm,
+                    success: function (data) {
+                        if (data) {
+                            alert('保存成功');
+                            m.CloseDialog();
+                            console.log(m.page_current())
+                            m.loadData(m.page_current() );
+                        } else {
+                            alert('保存失败');
+                        }
+                    }
+                })
+            }
+
+            //加载表单数据
+            m.loadData = function (page) {
+                var url = "@Url.Content("~/product/list?page=")" + page + "&dm=" + m.search_spdm() + "&mc=" + m.search_spmc()+"&spgg="+$("#spgg").val();
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    m.total(data.total);
+                    m.page_total(Math.ceil(data.total / m.size));
+                    m.page_current(page);
+                    m.array(data.result);
+                });
+            };
+
+            m.loadCategorySelect = function () {
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Content("~/Product/GetCategorySelect")',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.error == 100) {
+                            $.each(data.result, function (i, item) {
+                                m.listCategory.push(new select_model(item.dm, item.mc));
+                            });
+                        } else {
+                            alert('获取品种列表错误！');
+                        }
+                    }
+                });
+            };
+
+
+            m.loadBrandSelect = function () {
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Content("~/Product/GetBrandSelect")',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.error == 100) {
+                            $.each(data.result, function (i, item) {
+                                m.listBrand.push(new brand_model(item.dm, item.mc));
+                            });
+                        } else {
+                            alert('获取品牌列表错误！');
+                        }
+                    }
+                });
+            };
+
+
+            //分页
+            m.array2 = ko.observable();
+            m.total2 = ko.observable(0);
+
+            //产品详情
+            m.DetailId = ko.observable("");
+            m.ProductId = ko.observable("");
+            m.A1 = ko.observable("");
+            m.A2 = ko.observable("");
+            m.A3 = ko.observable("");
+
+            m.OpenDialogItem = function (id) {
+
+                m.ProductId(id);
+                m.loadData2();
+                $("#dialogItem").dialog({ width: "90%" });
+            }
+
+
+            //打开弹层
+            m.OpenDialogItemDetail = function (type,data) {
+                if (type > 0) {
+                    console.log(data);
+                    m.DetailId(data.DetailId);
+                    m.A1(data.A1);
+                    m.A2(data.A2);
+                    m.A3(data.A3);
+
+                    if (data.A3 == null || data.A3 == "") {
+                        $("input[name='picP4]").val('');
+                        $("#resultP4").hide();
+                    } else {
+                        $("input[name='picP4']").val(data.A3);
+                        $("#resultP4").attr("src", '@Url.Content("~/upload/detail/")' + data.A3).show();
+                    }
+
+                } else {
+                    m.DetailId("");
+                    m.A1("");
+                    m.A2("");
+                    m.A3("");
+
+                    $("input[name='picP4]").val('');
+                    $("#resultP4").hide();
+                }
+                $("#dialogItemDetail").dialog({ width: "600" });
+            }
+
+            //关闭
+            m.CloseDialogItemDetail = function () {
+                $("#dialogItemDetail").dialog('close');
+            };
+
+            //添加/修改 产品详情
+            m.AddOrUpdateItemDetail = function () {
+
+                m.A3($('input[name="picP4"]').val());
+
+                var parm = {
+                    DetailId: m.DetailId(),
+                    ProductId: m.ProductId(),
+                    A1: m.A1() == null ? "" : m.A1(),
+                    A2: m.A2() == null ? "" : m.A2(),
+                    A3: m.A3()
+                }
+                console.log(parm);
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Product/AddOrUpdateProductDetail")',
+                    data: parm,
+                    success: function (data) {
+                        if (data.error == 100) {
+                            alert("保存成功！");
+                            m.CloseDialogItemDetail();
+                            m.loadData2();
+                        } else {
+                            alert('保存失败！');
+                        }
+                    }
+                });
+            }
+
+            //添加/修改 产品详情
+            m.DeleteProductDetail = function (id) {
+
+                if (confirm("确定删除吗？")) {
+                    var parm = {
+                        DetailId: id
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/Product/DeleteProductDetail")',
+                        data: parm,
+                        success: function (data) {
+                            if (data.error == 100) {
+                                alert("删除成功！");
+                                m.loadData2();
+                            } else {
+                                alert("删除失败！");
+                            }
+                        }
+                    });
+                }
+            }
+
+            //加载表单数据
+            m.loadData2 = function () {
+                var url = "@Url.Content("~/product/GetProductItem?ProductId=")" + m.ProductId();
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total2(data.total);
+                        m.array2(data.result);
+                    } else {
+                        alert('get data error!');
+                    }
+                });
+            };
+
+
+        };
+
+        //初始化数据
+        var obj = new model();
+        obj.loadData(1);
+        obj.loadCategorySelect();
+        obj.loadBrandSelect();
+        ko.applyBindings(obj);
+
+    });
+
+    </script>
+
+

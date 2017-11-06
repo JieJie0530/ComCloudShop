@@ -1,0 +1,86 @@
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+E:\商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+E:\ComCloudShop20170309\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.WeixinOauth.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.csprojResolveAssemblyReference.cache
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\obj\Debug\ComCloudShop.WeixinOauth.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.MP.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.xml
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.MP.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Senparc.Weixin.MP.xml
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Service.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\EntityFramework.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Service.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\EntityFramework.xml
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\log4net.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Layer.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.ViewModel.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Utility.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Layer.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\ComCloudShop.Utility.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.WeixinOauth\bin\Debug\Newtonsoft.Json.xml

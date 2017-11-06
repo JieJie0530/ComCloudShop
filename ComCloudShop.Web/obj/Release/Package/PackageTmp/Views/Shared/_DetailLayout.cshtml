@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>方广微商城-产品详情页</title>
+    <meta name="description" content="方广微商城-产品详情页">
+    <meta name="keywords" content="方广微商城-产品详情页">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link rel="stylesheet" href="~/public/css/main.css">
+    <link rel="stylesheet" href="~/public/css/swiper.min.css">
+    <script type="text/javascript" src="~/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/public/js/index.js"></script>
+    <script type="text/javascript" src="~/public/js/swiper.min.js"></script>
+</head>
+<body>
+
+        @RenderBody()
+
+        <!--   公用-->
+        <div class="mainNav mainNav2">
+            <ul>
+                <li><a href="~/Home/">首页<i class="nav01"></i></a></li>
+                <li><a href="javascript:;" class="addTocart">加入购物车</a></li>
+                <li><a href="javascript:;" class="buyNow">立即购买</a></li>
+                <li><a href="~/Cart/">购物车<i class="nav03"><b class="cartN">5</b></i></a></li>
+            </ul>
+        </div>
+    <script type="text/javascript">
+        $(function () {
+
+            //加入购物车
+            $('.addTocart').on('click', function () {
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Cart/Add")',
+                    data: 'pid=' + $('#pid').val() + '&number=' + $('.number .cartNum').val() + '&flag=1',
+                    success: function (data) {
+                        if (data.error == 0) {
+                            $('.mainNav .cartN').html(data.result);
+                        }
+                        else {
+                            alert('添加失败');
+                        }
+                    }
+                });
+            });
+
+            //立即购买
+            $('.buyNow').on('click', function () {
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Cart/Add")',
+                    data: 'pid=' + $('#pid').val() + '&number=' + $('.number .cartNum').val()+'&flag=2',
+                    success: function (data) {
+                        if (data.error == 0) {
+                            location.href = '@Url.Content("~/Cart/")';
+                        }
+                        else {
+                            location.href = '@Url.Content("~/Error/")';
+                        }
+                    }
+                });
+            });
+
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Qrcode</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script src="~/public/js/jquery.qrcode.min.js"></script>
+    <link href="~/public/layer_mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/public/layer_mobile/layer.js"></script>
+</head>
+<body>
+    <div class="qrcode" style="height:300px; padding-top:15px; text-align:center;">
+        <div class="code">
+
+        </div>
+        <p style=" font-size:20px; margin-top:20px; ">把二维码展示给商家扫一扫完成赠送</p>
+    </div>
+    <script type="text/javascript">
+        var GID = '@ViewData["GifID"]';
+        $(".code").qrcode("http://mm.hofaf.com/Business/PushGit?ID=" + GID);
+    </script>
+</body>
+</html>

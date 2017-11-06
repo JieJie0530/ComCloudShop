@@ -1,0 +1,360 @@
+﻿@{
+    Layout = "~/Views/Shared/_NoNavLayout.cshtml";
+}
+@using System.Web.Configuration
+@model ComCloudShop.ViewModel.OrderConfigViewModel
+
+<div class="wrapper">
+    <div class="addAddress">
+        @if (Model.address.AddressId > 0)
+        {
+            <a href="~/Address/List?c=order" title="@Model.address.AddressId">
+                <p><span class="name">@Model.address.UserName</span><span class="tel">@Model.address.Mobile</span></p>
+                <p class="address">@Model.address.Province @Model.address.City @Model.address.District @Model.address.Address</p>
+            </a>
+        }
+        else
+        {
+            <a href="~/Address/List?c=order">
+                请填写收货信息
+            </a>
+        }
+    </div>
+    <div class="pdtlist orderlist listInfo mb60">
+        <dl>
+            <dt>
+                <h3>订单信息</h3>
+            </dt>
+            @foreach (var data in Model.list)
+            {
+                <dd title="@data.CartId">
+                    <div class="productInfo">
+                        <a href="javascript:void(0);"><h2>@(data.SPMC)</h2></a>
+                        <span class="fontR">￥@(string.Format("{0:N}", data.Sale * data.Discount))</span>
+                        <div class="pdtnumber">@(data.ProductNum)</div>
+                    </div>
+                    <div class="productImg">
+                        <img src="@(WebConfigurationManager.AppSettings["imgurl"] + data.Pic)" alt="">
+                    </div>
+                </dd>
+            }
+        </dl>
+    </div>
+    <!--商品价格等信息-->
+    <div class="totalInfo">
+        <ul>
+            <li><span>商品价格：</span><label class="fontR">￥<span class="spprice">@(string.Format("{0:N}", Model.list.Sum(x => x.Sale * x.Discount * x.ProductNum)))</span></label></li>
+            <li><span>满&emsp;&emsp;减： </span><label>-￥@(string.Format("{0:N}", Model.rule.Discount))</label></li>
+            <li><span>优&emsp;&emsp;惠： </span><label><a href="~/Coupon?c=order" title="@Model.coupon.CouponId" id="coupon">-￥@(string.Format("{0:N}", Model.coupon.Amount))<i class="icon-more"></i></a></label></li>
+            <li><span>现有积分： </span><label class="xyjf">0</label></li>
+            <li><span>使用积分： </span><label><input type="text" value="0" id="txt_Use" style="text-align:left; width:30px; border:1px solid #eee; "></label></li>
+            <li><span>积分优惠： </span><label class="yhmoney">0</label></li>
+            <li><span>快&emsp;&emsp;递： </span><label>￥<span class="kdprice">@(WebConfigurationManager.AppSettings["courier"])</span></label></li>
+        </ul>
+        <div class="message">
+            <span>备 注：</span><textarea placeholder="填写发票等信息" id="remark"></textarea>
+        </div>
+    </div>
+</div>
+
+<!--公用-->
+<div class="mainNav mainNav4">
+    <ul>
+        <li><a href="~/Home/">&ensp;<i class="nav01"></i></a></li>
+        <li><p class="fontR">￥<span class="sfprice">@(string.Format("{0:N}", Model.list.Sum(x => x.Sale * x.Discount * x.ProductNum) - Model.rule.Discount - Model.coupon.Amount + decimal.Parse(WebConfigurationManager.AppSettings["courier"])))</span></p><p class="payable">实付款</p></li>
+        <li id="wxpay"><a href="javascript:;">微信支付<i class="weixin"></i></a></li>
+    </ul>
+</div>
+<!--弹层-->
+<div class="layerbox layerbox1" style="display:none;">
+    <div class="writeAddress">
+        <p>还没有填写收货信息，赶快去填写吧~</p>
+        <a href="~/Address/List?c=order" class="writeNow">去填写</a>
+    </div>
+</div>
+<!--弹层2-->
+<div class="layerbox layerbox3" style="display:none;">
+    <div class="writeAddress">
+        <p>还没有完善资料，赶快去完善资料吧~</p>
+        <a href="~/User/Edit" class="writeNow">去填写</a>
+    </div>
+</div>
+<input type="hidden" id="setbl" />
+<div class="layerbox2">
+    <span>订单已经提交，系统正在处理，请稍后。</span>
+</div>
+
+<script type="text/javascript">
+
+    var openid = "";
+    var phone = "";
+    var nowshifu = '@(string.Format("{0:N}", Model.list.Sum(x => x.Sale * x.Discount * x.ProductNum) - Model.rule.Discount - Model.coupon.Amount + decimal.Parse(WebConfigurationManager.AppSettings["courier"])))';
+
+    var wxdata = {
+        "appId": "", //公众号名称，由商户传入
+        "timeStamp": "", //时间戳
+        "nonceStr": "", //随机串
+        "package": "",//扩展包
+        "signType": "MD5", //微信签名算法：MD5
+        "paySign": "" //微信签名
+    }
+
+    $(function () {
+
+        $.ajax({
+            type: 'get',
+            async: false,
+            url: '@Url.Content("~/User/GetBL")',
+            success: function (data) {
+                $("#setbl").val(data);
+                console.log($("#setbl").val());
+            }
+        })
+
+        $("#txt_Use").keyup(function () {
+            JS();
+        })
+
+        $.ajax({
+            type: 'post',
+            async: false,
+            url: '@Url.Content("~/User/GetMemberInfo")',
+            success: function (data) {
+                if (data.error == 1) {
+                    openid = data.result.OpenId;
+                    phone = data.result.Mobile;
+                    GetKYJF(openid, phone);
+                }
+                else if (data.error == 3) {
+                    $('.layerbox2').fadeOut();
+                    $('.layerbox3').show();
+                    b = false;
+                }
+                else {
+                    alert(data.msg);
+                }
+            }
+        })
+
+        //微信支付
+        $('#wxpay').on('click', function () {
+            var address = $('.addAddress a').attr('title');
+            if (address == undefined || address == "") {
+                $('.layerbox1').show();
+                return;
+            }
+            var jf = $("#txt_Use").val();//使用的积分
+            var bl = $("#setbl").val();
+            var parm = {
+                aid: address,
+                cid: $('#coupon').attr('title'),
+                remark: $('#remark').val(),
+                url: "",
+                Jifen: jf,
+                BL: bl
+            }
+
+            $('.layerbox2').fadeIn();
+
+            $.ajax({
+                type: 'post',
+                url: '@Url.Content("~/Order/Add")',
+                data: parm,
+                success: function (data) {
+                    if (data.error == 0) {
+                        $('.layerbox2').fadeOut();
+                        wxdata.appId = data.result.AppId;
+                        wxdata.timeStamp = data.result.Timestamp;
+                        wxdata.nonceStr = data.result.Noncestr;
+                        wxdata.package = data.result.Package;
+                        wxdata.paySign = data.result.PaySign;
+                        callpay();
+                    }
+                    else if (data.error == 3) {
+                        $('.layerbox3').show();
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        });
+
+        
+
+        //function isWeiXin5() {
+        //    var ua = window.navigator.userAgent.toLowerCase();
+        //    var reg = /MicroMessenger\/[5-9]/i;
+        //    return reg.test(ua);
+        //}
+
+        //window.onload = function () {
+        //    if (isWeiXin5() == false) {
+        //        alert("您的微信版本低于5.0，无法使用微信支付功能，请先升级！");
+        //        //跳转页面
+        //    }
+        //};
+
+    });
+
+    function callpay() {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }
+            else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }
+        else {
+            jsApiCall();
+        }
+    }
+
+    //调用微信JS api 支付
+    function jsApiCall() {
+        WeixinJSBridge.invoke(
+        'getBrandWCPayRequest',
+         wxdata,//json串
+         function (res) {
+             //保存支付信息
+             $.ajax({
+                 type: 'post',
+                 url: '@Url.Content("~/Order/SaveBrandWCPayRequest")',
+                 data: 'msg=' + res.err_msg,
+                 success: function (data) {
+                     //微信支付完成
+                     if (res.err_msg == "get_brand_wcpay_request:ok") {
+                         //KouCu();
+                         $.ajax({
+                             type: 'post',
+                             url: '@Url.Content("~/Order/PayOK")',
+                             success: function (data) {
+                                 if (data == 0) {
+                                     location.href = '@Url.Content("~/Order/List?c=2")';
+                                 } else {
+                                     //alert(data);
+                                 }
+                             }
+                         })
+                     }
+                    //微信支付取消
+                     else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                         location.href = '@Url.Content("~/Order/List?c=1")';
+                     }
+                    //微信支付失败
+                     else {
+                         location.href = '@Url.Content("~/Order/List?c=1")';
+                     }
+
+                 }
+             });
+         });
+    }
+
+
+    function JS() {
+        var bl = $("#setbl").val();
+        var txt = $("#txt_Use").val();
+
+        if (txt != "") {
+            var reg = new RegExp("^[0-9]*$");
+            if (!reg.test(txt)) {
+                $("#txt_Use").val("");
+                $(".yhmoney").text("0");
+            }
+            else if (parseFloat(txt) > parseFloat($(".xyjf").text())) {
+                $("#txt_Use").val($(".xyjf").text());
+                $(".yhmoney").text(parseFloat(bl) * parseFloat($("#txt_Use").val()));
+            }
+            else {
+                var yhjg = parseFloat(bl) * parseFloat(txt);
+                var shifu = $(".spprice").text();
+                if (yhjg > shifu) {
+                    $("#txt_Use").val("0");
+                    JS();
+                }
+                else {
+                    $(".yhmoney").text(parseFloat(bl) * parseFloat(txt));
+                    $(".sfprice").text(parseFloat(shifu) - parseFloat(yhjg) + parseFloat($(".kdprice").text()));
+                }
+            }
+        } else {
+            $(".yhmoney").text("0");
+        }
+        $(".sfprice").text(parseFloat(nowshifu) - parseFloat($(".yhmoney").text()));
+        $(".sfprice").text(parseFloat($(".sfprice").text()).toFixed(2));
+    }
+
+    function GetKYJF(openid, phone) {
+
+        var url = "http://wl.fgcare.com/wx/GetDotByOpenID.asp?id=" + openid + "&phone=" + phone;
+        $.ajax({
+            type: "get",
+            url: url,
+            dataType: "jsonp",
+            jsonp: 'FGCallback',
+            success: function (data) {
+                alert(data)
+            }
+            , jsonpCallback: "FGCallback",
+            success: function (json) {
+                if (json.Code == "1") {
+                    $(".xyjf").text(json.IDot);
+                    $.ajax({
+                        async: false,
+                        type: "get",
+                        url: "/User/UpdateJF/?dot=" + json.IDot,
+                        dataType: 'text',
+                        success: function (data) {
+
+                        }
+                    });
+                }
+                else {
+                    $(".xyjf").text("0");
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $(".xyjf").text("0");
+            }
+        });
+    }
+
+    function KouCu() {
+        var syjf = $("#txt_Use").val();
+        if (parseFloat(syjf) > 0) {
+            //alert("phone=" + phone + ",Dot=" + syjf + "+id=" + openid);
+            var url = "http://wl.fgcare.com/wx/setcusdot.asp?phone=" + phone + "&Dot=" + syjf + "&id=" + openid;
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "jsonp",
+                jsonp: 'FGCallback',
+                success: function (data) {
+                    alert(data)
+                }
+                , jsonpCallback: "FGCallback",
+                success: function (json) {
+                    UpdateJF(json.IDot);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
+    }
+
+    function UpdateJF(idot) {
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/User/UpdateJF/?dot=" + idot,
+            dataType: 'text',
+            success: function (data) {
+
+            }
+        });
+    }
+</script>

@@ -1,0 +1,56 @@
+﻿
+@{
+    Layout = null;
+}
+@model List<ComCloudShop.ViewModel.IntViewModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>积分消费列表</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <style type="text/css">
+        .mainbox {
+            top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m3">
+            <div class="header">
+                <div class="h-left-black"></div>
+                <div class="h-title"><h1>积分消费列表</h1></div>
+            </div>
+            <div class="mainbox">
+                @{
+                    foreach (IntViewModel item in Model)
+                    {
+                        <div class="ui-danLst">
+                            <div class="img"><img src="@item.HeadImgUrl" width="80" height="80"></div>
+                            <div class="info">
+                                <h3>消费会员：@item.NickName</h3>
+                                <p>消费积分：@item.Price</p>
+                                <div class="bot">
+                                    <span>消费时间：</span><span class="time">@item.AddTime</span>
+                                </div>
+                            </div>
+                            <div class="icon19"></div>
+                            <a class="all" href="#"></a>
+                        </div>
+                    }
+
+                }
+               
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+</html>

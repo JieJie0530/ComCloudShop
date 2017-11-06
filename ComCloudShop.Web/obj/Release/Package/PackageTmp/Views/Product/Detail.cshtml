@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_NoNavLayout.cshtml";
+}
+@model ComCloudShop.ViewModel.ProductExtendResultModel
+@using System.Web.Configuration;
+
+<div class="wrapper">
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)" alt=""></div>
+            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P2)" alt=""></div>
+            <div class="swiper-slide"><img src="@WebConfigurationManager.AppSettings["imgurl"]@(Model.P3)" alt=""></div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="pdtinfo">
+        <input type="hidden" id="pid" value="@Model.ProductId" />
+        <div class="pdtTitle">
+            <h2>@Model.SPMC</h2>
+            <p>@Model.Describle</p>
+        </div>
+        <div class="pdtPrice">
+            @if (Model.Discount == 1)
+            {
+                <span class="fontR">￥@string.Format("{0:N}", Model.Sale)</span>
+            }
+            else
+            {
+                <span class="fontR">￥@string.Format("{0:N}", Model.Sale * Model.Discount)</span>
+                <span class="fontNO">￥@string.Format("{0:N}", Model.Sale)<i class="discount">@(Model.Discount*10) 折</i></span>
+            }
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <ul class="pdtsale">
+        <li>
+            <i class="discount">促 销</i>
+            <p></p>
+        </li>
+        <li>
+            <span>数&emsp;量：</span>
+            <div class="number">
+                <b id="reduce"></b>
+                <input type="text" value="1" class="cartNum">
+                <b id="add"></b>
+            </div>
+        </li>
+    </ul>
+    <dl class="pdtDes">
+        <dt><h2>产品详情</h2></dt>
+        <dd>
+            <div>月龄：<span>@(Model.BeginUseAge + "个月" + (Model.EndUseAge == 0 ? "" : "~" + Model.EndUseAge + "个月"))</span></div>
+            <div>品种：
+                <span>@(Model.Category.FirstOrDefault(x => x.CategoryType == "种类").CategoryName)</span>
+            </div>
+            @*<div>功能：
+                    <span>
+                    @(Model.Category.FirstOrDefault(x => x.CategoryType == "功能").CategoryName)
+                    </span>
+            </div>*@
+            <div>重量：<span>@(Model.Weight)g</span></div>
+        </dd>
+        @foreach(var data in Model.Detail)
+        {
+            if(!string.IsNullOrEmpty(data.A1))
+            {
+                <dd>
+                    <div>@(data.A1)：<span>@(data.A2)</span></div>
+                </dd>
+            }
+        }
+    </dl>
+    <div class="logo-bottom pdtlogo">
+        <img src="~/public/images/logo2.png" alt="">
+    </div>
+</div>
+
+<!--   公用-->
+<div class="mainNav mainNav2">
+    <ul>
+        <li><a href="~/Home/">首页<i class="nav01"></i></a></li>
+        <li><a href="javascript:;" class="addTocart">加入购物车</a></li>
+        <li><a href="javascript:;" class="buyNow">立即购买</a></li>
+        <li><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
+    </ul>
+</div>
+<!--   轮播图-->
+<script type="text/javascript">
+    $(function () {
+
+        //促销
+        getSaleList = function () {
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Cart/GetRuleList")',
+                success: function (data) {
+                    if (data.error == 0) {
+                        var str = "";
+                        $.each(data.result, function (i, item) {
+                            if (i == 0) {
+                                str += "活动商品购满" + item.Amount + "元，即可享受满减" + item.Discount + "元";
+                            } else {
+                                str += "满" + item.Amount + "减" + item.Discount + "元";
+                            }
+                            if (i < data.result.length - 1) {
+                                str += "，"
+                            }
+                        })
+                        console.log(str);
+                        $('.pdtsale li:first p').html(str);
+                    } else {
+                        location.href = '@Url.Content("~/Error")';
+                    }
+                }
+            })
+        };
+        //促销
+        getSaleList();
+
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 5000,
+            loop: true,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+        });
+
+        $.ajax({
+            type: 'get',
+            url: '@Url.Content("~/Cart/GetCartNumber")',
+            success: function (data) {
+                $('.mainNav .cartN').html(data);
+            }
+        })
+
+        //          购物车最小可为0
+        $("#add").click(function () {
+            var t = $(this).parent().find('input[type="text"]');
+            t.val(parseInt(t.val()) + 1)
+        });
+        $("#reduce").click(function () {
+            var t = $(this).parent().find('input[type="text"]');
+            t.val(parseInt(t.val()) - 1)
+            if (parseInt(t.val()) < 1) {
+                t.val(1);
+            }
+        });
+
+
+        //加入购物车
+        $('.addTocart').on('click', function () {
+            $.ajax({
+                type: 'post',
+                url: '@Url.Content("~/Cart/Add")',
+                data: 'pid=' + $('#pid').val() + '&number=' + $('.number .cartNum').val() + '&flag=1',
+                success: function (data) {
+                    if (data.error == 0) {
+                        $('.mainNav .cartN').html(parseInt($('.mainNav .cartN').html()) + parseInt(data.result));
+                    }
+                    else {
+                        alert('添加失败');
+                    }
+                }
+            });
+        });
+
+        //立即购买
+        $('.buyNow').on('click', function () {
+            $.ajax({
+                type: 'post',
+                url: '@Url.Content("~/Cart/Add")',
+                data: 'pid=' + $('#pid').val() + '&number=' + $('.number .cartNum').val() + '&flag=2',
+                success: function (data) {
+                    if (data.error == 0) {
+                        location.href = '@Url.Content("~/Cart/")';
+                    }
+                    else {
+                        location.href = '@Url.Content("~/Error/")';
+                    }
+                }
+            });
+        });
+
+    });
+</script>

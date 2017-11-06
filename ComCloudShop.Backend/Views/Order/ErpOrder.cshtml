@@ -1,0 +1,248 @@
+﻿@{
+    ViewBag.Title = "ErpOrder";
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<link href="~/Scripts/dialog/dialog.css" rel="stylesheet" />
+<script src="~/Scripts/dialog/dialog.js"></script>
+<script src="~/Scripts/knockout-3.4.0.js"></script>
+
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">未发送Erp订单</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>收货人</th>
+                        <th>收货人手机</th>
+                        <th>订单号</th>
+                        <th>交易单号</th>
+                        <th>支付金额(元)</th>
+                        <th>支付时间</th>
+                        <th>创建时间</th>
+                        <th>转发成功</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:pageList,as:'item'}">
+                    <tr style="text-align:center;">
+                        <td data-bind="text:item.receiver_name"></td>
+                        <td data-bind="text:item.receiver_mobile"></td>
+                        <td data-bind="text:item.outer_tid"></td>
+                        <td data-bind="text:item.ticket_no"></td>
+                        <td data-bind="text:item.pay_moneys"></td>
+                        <td data-bind="text:getTime(item.pay_datatimes)"></td>
+                        <td data-bind="text:getTime(item.ctime)"></td>
+                        <td data-bind="text:item.isresend==true?'✔':'×'"></td>
+                        <td><input type="button" data-bind="click:function(data,event){$parent.Dialog(item.id)}" value="详情"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                <input type="button" value="首页" class="btnRecord" data-bind="click:function(data,event){LoadPage(1)}" />
+                <input type="button" value="上页" class="btnRecord" data-bind="click:function(data,event){page_pre()}" />
+                <input type="button" value="下页" class="btnRecord" data-bind="click:function(data,event){page_next()}" />
+                <input type="button" value="尾页" class="btnRecord" data-bind="click:function(data,event){LoadPage(page_total())}" />
+                <span>共<b data-bind="text:list_total"></b>条  <b data-bind="text:page_current"></b>/<b data-bind="text:page_total"></b> 页</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="dialog" class="dialog">
+    <div class="title"><span id="close">&times;</span></div>
+    @*<h2><span id="close">关闭</span></h2>*@
+    <div class="content" style="background-color: #e9e5e5">
+        <table class="dialog_tb" border="1" cellpadding="0" cellspacing="0" width="100%">
+            <tr><th>商品编码列表</th><td data-bind="text:itemsns"></td><th>商品价格列表</th><td data-bind="text:prices"></td></tr>
+            <tr><th>商品数量</th><td data-bind="text:nums"></td><th>运输费用</th><td data-bind="text:logistics_fee"></td></tr>
+            <tr><th>收件人姓名</th><td data-bind="text:receiver_name"></td><th>收件人手机号</th><td data-bind="text:receiver_mobile"></td></tr>
+            <tr><th>支付时间</th><td data-bind="text:pay_datatimes"></td><th>创建时间</th><td data-bind="text:ctime"></td></tr>
+            <tr><th >运输方式</th><td  data-bind="text:logistics_type"></td><th >卖家</th><td data-bind="text:outer_shop_code"></td></tr>
+            <tr><th>支付金额</th><td data-bind="text:pay_moneys"></td><th>发送成功</th><td data-bind="text:isresend"></td></tr>
+            <tr><th >买家openid</th><td colspan="3" data-bind="text:mail"></td></tr>
+            <tr><th >订单号</th><td colspan="3" data-bind="text:outer_tid"></td></tr>
+            <tr><th >交易单号</th><td colspan="3" data-bind="text:ticket_no"></td></tr>
+
+            <tr><th>收件地址</th>
+                <td colspan="3">
+                    省：<input style="width:200px" data-bind="value:receiver_state" /><br />
+                    市：<input style="width:200px" data-bind="value:receiver_city" /><br />
+                    区：<input style="width:200px" data-bind="value:receiver_district" /><br />
+                    详细地址:<input style="width:300px" data-bind="value:receiver_address" />
+                </td>
+            </tr>
+            
+            @*<tr><th>订单来源</th><td data-bind="text:outer_ddly"></td></tr>*@
+            <tr><th >错误信息</th><td colspan="3" data-bind="text:err_message"></td></tr>
+            <tr><th >买家留言</th><td colspan="3"><textarea style="width:96%;min-height:64px;max-width:480px" readonly="readonly" data-bind="text:buyer_message"></textarea></td></tr>
+            <tr>
+                <td colspan="2"><input style="position:relative;left:50%;" type="button" value="关闭" onclick="$('#dialog').css('display', 'none')" /></td>
+                <td colspan="2"><input style="position:relative;left:50%;" type="button" value="重新发送" data-bind="click:function(data,event){reRend(id(),isresend())}" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    var search = '';
+    $(function () {
+        var model =function (){
+            var obj = this;
+            obj.pageSize = 10;
+            //page
+            obj.list_total = ko.observable(0);//记录总条数
+            obj.page_total = ko.observable(0);//总页数
+            obj.page_current = ko.observable(0);//当前页数
+            obj.pageList = ko.observable();
+            //dialog
+            obj.id = ko.observable(0);
+            obj.mail = ko.observable("");
+            obj.itemsns = ko.observable("");
+            obj.prices = ko.observable("");
+            obj.nums = ko.observable("");
+            obj.receiver_mobile = ko.observable("");
+            obj.receiver_address = ko.observable("");
+            obj.receiver_city = ko.observable("");
+            obj.receiver_district = ko.observable("");
+            obj.receiver_name = ko.observable("");
+            obj.receiver_state = ko.observable("");
+            obj.logistics_type = ko.observable("");
+            obj.logistics_fee = ko.observable("");
+            obj.outer_tid = ko.observable("");
+            obj.outer_shop_code = ko.observable("");
+            obj.outer_ddly = ko.observable("");
+            obj.buyer_message = ko.observable("");
+            obj.pay_datatimes = ko.observable("");
+            obj.pay_moneys = ko.observable("");
+            obj.ctime = ko.observable("");
+            obj.err_message = ko.observable("");
+            obj.ticket_no = ko.observable("");
+            obj.isresend = ko.observable("");
+            //页面数据
+            obj.LoadPage = function (page) {
+                $.ajax({
+                    url: '@Url.Content("~/Order/GetErpOrderList")',
+                    async:false,
+                    data: { page: page, pageSize: obj.pageSize, sqlSearch: search },
+                    type: 'post',
+                    success: function (data) {
+                        if (data.error == 0) {
+                            obj.pageList(data.list);
+                            obj.list_total(data.total);
+                            obj.page_total(Math.ceil(data.total / obj.pageSize));
+                            obj.page_current(page);
+                        }
+                    }
+                });
+            };
+            //下一页
+            obj.page_next = function () {
+                var page = (obj.page_current() + 1);
+                var total_page = obj.page_total();
+                if (page <= total_page) {
+                    obj.LoadPage(page);
+                }
+            };
+            //上一页
+            obj.page_pre = function () {
+                var page = (obj.page_current() - 1);
+                if (page > 0) {
+                    obj.LoadPage(page);
+                }
+            };
+            //详情
+            obj.Dialog = function (id) {
+                if (id > 0) {
+                    $.ajax({
+                        url: '@Url.Content("~/Order/GetErpOrder")',
+                        data: { id: id },
+                        type: 'post',
+                        async: false,
+                        success: function (data) {
+                            obj.id(data.list.id);
+                            obj.mail(data.list.mail);
+                            obj.itemsns(data.list.itemsns);
+                            obj.prices(data.list.prices);
+                            obj.nums(data.list.nums);
+                            obj.receiver_mobile(data.list.receiver_mobile);
+                            //obj.receiver_address(data.list.receiver_state + " " + data.list.receiver_city + " " + data.list.receiver_district + " " + data.list.receiver_address);
+                            obj.receiver_city(data.list.receiver_city);
+                            obj.receiver_district(data.list.receiver_district);
+                            obj.receiver_address(data.list.receiver_address);
+                            obj.receiver_state(data.list.receiver_state);
+                            obj.receiver_name(data.list.receiver_name);
+                            obj.logistics_type(data.list.logistics_type);
+                            obj.logistics_fee(data.list.logistics_fee);
+                            obj.outer_tid(data.list.outer_tid);
+                            obj.outer_shop_code(data.list.outer_shop_code);
+                            obj.outer_ddly(data.list.outer_ddly);
+                            obj.buyer_message(data.list.buyer_message);
+                            obj.pay_datatimes(getTime(data.list.pay_datatimes));
+                            obj.pay_moneys(data.list.pay_moneys);
+                            obj.ctime(getTime(data.list.ctime));
+                            obj.err_message(data.list.err_message);
+                            obj.ticket_no(data.list.ticket_no);
+                            obj.isresend(data.list.isresend==true?'成功':'失败');
+                            $('#dialog').css('display', 'block');
+                        }
+                    });
+                }
+            };
+            //重新发送
+            obj.reRend = function (id, isresend) {
+                var msg="";
+                if (isresend == '失败') {
+                    msg="该条数据尚未发送成功。";
+                }else {
+                    msg="该条订单已经发送成功了。";
+                }
+                if (confirm(msg + "确定重新发送？请确认收件地址！")) {
+                    if (id > 0) {
+                        $.ajax({
+                            url: '@Url.Content("~/Order/ReSendErpOrder")',
+                            data: { id: id, receiver_state: obj.receiver_state(), receiver_city: obj.receiver_city(), receiver_district: obj.receiver_district(), receiver_address: obj.receiver_address() },
+                            type: 'post',
+                            success: function (data) {
+                                if (!data) {
+                                    alert("发送失败!请检查收件地址以及交易单号的正确性！");
+                                }
+                                else {
+                                    obj.LoadPage(obj.page_current());
+                                }
+
+                            }
+                        });
+                    }
+                }
+            };
+            };
+        var object = new model();
+        object.LoadPage(1);
+        ko.applyBindings(object);
+    });
+    function getTime(time) {
+        time = time.substr(6, 13)
+        //var date = new Date(oldtime);
+        var date = new Date(parseInt(time));
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var date = date.getDate();
+        return year + "-" + (month < 10 ? "0" : "") + month + "-" + (date < 10 ? "0" : "") + date + " " + hour + ":" + (minute < 10 ? "0" : "") + minute;
+    };
+</script>

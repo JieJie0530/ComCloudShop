@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.Service", "ComCloudShop.Service\ComCloudShop.Service.csproj", "{96668877-5990-4710-978E-F9ADC34E967E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.Layer", "ComCloudShop.Layer\ComCloudShop.Layer.csproj", "{2C2B6D00-9355-4918-AAEF-D69072865192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.Utility", "ComCloudShop.Utility\ComCloudShop.Utility.csproj", "{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.ViewModel", "ComCloudShop.ViewModel\ComCloudShop.ViewModel.csproj", "{2337D55D-CB3D-4410-82B3-03BFBBEF3E89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.Backend", "ComCloudShop.Backend\ComCloudShop.Backend.csproj", "{C4940567-3867-4112-89EC-5A42987533FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Presentation", "2.Presentation", "{6D841ACB-2BF3-4CD4-9F45-3BF742E08104}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Libraries", "1.Libraries", "{C59C98C8-AC17-4AF3-842A-2560B37D053D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Plugins", "3.Plugins", "{C4CBCB45-CDD1-4D11-88FA-62EA0C242B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Tools", "4.Tools", "{F56A05A1-4393-44E3-9C18-2C6C3BDE7016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.WeixinOauth", "ComCloudShop.WeixinOauth\ComCloudShop.WeixinOauth.csproj", "{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.OrderMotiorJobs", "ComCloudShop.OrderMotiorJobs\ComCloudShop.OrderMotiorJobs.csproj", "{0B7DCDEE-C76C-4A32-A803-94042E2A515B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComCloudShop.Web", "ComCloudShop.Web\ComCloudShop.Web.csproj", "{A0829708-6535-460D-B8C0-6448EC20C24F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96668877-5990-4710-978E-F9ADC34E967E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96668877-5990-4710-978E-F9ADC34E967E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96668877-5990-4710-978E-F9ADC34E967E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96668877-5990-4710-978E-F9ADC34E967E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C2B6D00-9355-4918-AAEF-D69072865192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C2B6D00-9355-4918-AAEF-D69072865192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C2B6D00-9355-4918-AAEF-D69072865192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C2B6D00-9355-4918-AAEF-D69072865192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2337D55D-CB3D-4410-82B3-03BFBBEF3E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2337D55D-CB3D-4410-82B3-03BFBBEF3E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2337D55D-CB3D-4410-82B3-03BFBBEF3E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2337D55D-CB3D-4410-82B3-03BFBBEF3E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4940567-3867-4112-89EC-5A42987533FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4940567-3867-4112-89EC-5A42987533FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4940567-3867-4112-89EC-5A42987533FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4940567-3867-4112-89EC-5A42987533FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B7DCDEE-C76C-4A32-A803-94042E2A515B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B7DCDEE-C76C-4A32-A803-94042E2A515B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B7DCDEE-C76C-4A32-A803-94042E2A515B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B7DCDEE-C76C-4A32-A803-94042E2A515B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0829708-6535-460D-B8C0-6448EC20C24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0829708-6535-460D-B8C0-6448EC20C24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0829708-6535-460D-B8C0-6448EC20C24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0829708-6535-460D-B8C0-6448EC20C24F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96668877-5990-4710-978E-F9ADC34E967E} = {C59C98C8-AC17-4AF3-842A-2560B37D053D}
+		{2C2B6D00-9355-4918-AAEF-D69072865192} = {C59C98C8-AC17-4AF3-842A-2560B37D053D}
+		{8D0627B9-0ED6-4791-B1ED-5020D47EBFF7} = {C4CBCB45-CDD1-4D11-88FA-62EA0C242B51}
+		{2337D55D-CB3D-4410-82B3-03BFBBEF3E89} = {6D841ACB-2BF3-4CD4-9F45-3BF742E08104}
+		{C4940567-3867-4112-89EC-5A42987533FA} = {6D841ACB-2BF3-4CD4-9F45-3BF742E08104}
+		{4A7487C7-EF7C-4D14-BCBF-EC81FD20246C} = {C4CBCB45-CDD1-4D11-88FA-62EA0C242B51}
+		{0B7DCDEE-C76C-4A32-A803-94042E2A515B} = {F56A05A1-4393-44E3-9C18-2C6C3BDE7016}
+		{A0829708-6535-460D-B8C0-6448EC20C24F} = {6D841ACB-2BF3-4CD4-9F45-3BF742E08104}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ComCloudShop.ViewModel.ProductGroupViewModel
+<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>套餐管理</span>&gt;<span>编辑</span>
+        </div>
+        <div id="example" class="k-content" style="padding: 2px;">
+            <form enctype="multipart/form-data"  method="post" action="~/groups/edit/">
+                <input type="hidden" name="GroupId" value="@Model.GroupId">
+                <ul>
+                    <li style="padding: 10px;">
+                        套餐名称：<input   type="text"  name="GroupName"  style="width: 350px"  value="@Model.GroupName"  />
+                    </li>
+                    <li style="padding: 10px;">
+                        套餐建议：  <textarea name="Suggest"   style="width: 350px">@Model.Suggest</textarea>
+                    </li>
+                    <li style="padding: 10px;">
+                        套餐内容：<textarea name="Content" style="width: 350px"    id="Content">@Model.Content</textarea>
+                    </li>
+                    <li style="padding: 10px;">
+                        详情图片：<input type="file"  name="file" style="width: 350px"   id="PicUrl" accept="image/*" />
+                        @if (!string.IsNullOrEmpty(Model.PicUrl)) 
+                        {
+                            <img  src="~/@Model.PicUrl"/>
+                        }
+                    </li>
+                </ul>
+                <div style="padding-left: 47px;">
+                    <input type="submit" value="保存" id="btnSubmit" />
+                    <input type="button" value="返回" id="btnReset" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(function(){
+        $("#btnSubmit,#btnReset").kendoButton();
+
+        $("#btnReset").click(function(){
+            location.href = "@Url.Content("~/groups/index")";
+        });
+
+    })
+</script>
+

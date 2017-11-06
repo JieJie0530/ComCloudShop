@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ComCloudShop.ViewModel
+@using System.Web.Configuration
+@model HomeViewModel
+@section HeadCss{
+    <style type="text/css">
+        body {
+            background: #fff;
+        }
+    </style>
+}
+
+<div class="wrapper mb60">
+    <div class="headsearch">
+        <input type="search" value="" placeholder="有机米粉">
+        <i class="search"></i>
+    </div>
+    <div class="newlist">
+        <ul>
+            <li>FG大冒险<i class="list01"></i></li>
+            <li>星座塔罗<i class="list02"></i></li>
+            <li>吐槽灌水<i class="list03"></i></li>
+            <li onclick="window.location.href = 'http:// wx.fgcare.com/rz'">快速积分<i class="list04"></i></li>
+        </ul>
+    </div>
+    <div class="new">
+        <h1>最新活动</h1>
+        @foreach (var d in Model.batch)
+        {
+            <a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"]+d.pic)" alt=""></a>
+        }
+        @*<a href=""><img src="~/public/images/img-06.jpg" alt=""></a>*@
+    </div>
+    <div class="new">
+        <h1>最新推荐</h1>
+        @foreach (var d in Model.sale)
+        {
+            <a href="~/Sale?pid=@(d.id)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.url)" alt=""></a>
+        }
+        @*<a href=""><img src="~/public/images/img-07.png" alt=""></a>
+        <a href=""><img src="~/public/images/img-07.png" alt=""></a>*@
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.headsearch .search').click(function () {
+            location.href = '@Url.Content("~/Product?search=")' + encodeURI($('.headsearch input').val());
+        })
+    })
+</script>

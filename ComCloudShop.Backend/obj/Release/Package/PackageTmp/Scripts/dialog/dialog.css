@@ -1,0 +1,44 @@
+﻿body {
+
+}
+.btn{
+    position:relative;
+    left:40%;
+    width:200px
+}
+table {
+    border-color:#c2bebe
+    }
+    .dialog_tb th{
+        width:150px;
+    }
+    .dialog_tb tr {
+        height:35px;
+    }
+    .dialog{
+        position:absolute;
+        top:150px;
+        left:30%;
+        width:70%;
+        background:#efebeb;
+        border:2px solid #808080;
+        margin:-102px 0 0 -202px;
+        display:none;
+    }
+    /*h2{font-size:12px;text-align:right;background:#e6dddd;border-bottom:1px solid #e6dddd;padding:5px;cursor:move;}*/
+   
+    .title {
+    font-size:12px;
+    text-align:right;
+    background:#9a9696;
+    border-bottom:1px solid #e6dddd;
+    padding:5px;
+    cursor:move;
+    }
+     .title span{
+         color:#000000;
+         cursor:pointer;
+         background:#e9e5e5;
+         border:1px solid #e9e5e5;
+         padding:0 2px;
+     }

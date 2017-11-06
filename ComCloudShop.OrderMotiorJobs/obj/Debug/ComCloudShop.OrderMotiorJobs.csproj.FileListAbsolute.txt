@@ -1,0 +1,44 @@
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb

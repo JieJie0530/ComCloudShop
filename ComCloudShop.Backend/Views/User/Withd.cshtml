@@ -1,0 +1,243 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">用户信息</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <th width="15%">状态</th>
+                            <td width="35%" colspan="3">
+                                <select class="common-text required" id="search_sel" name="search_sel">
+                                    <option value="3">全部</option>
+                                    <option value="0">待认证</option>
+                                    <option value="1">已认证</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value=" 查 询 " />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>会员名称</th>
+                        <th>提现方式</th>
+                        <th>真实姓名</th>
+                        <th>开户银行</th>
+                        <th>联系手机</th>
+                        <th>到帐帐号</th>
+                        <th>体现金额</th>
+                        <th>申请时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array, as:'item'}">
+                    <tr>
+                        <td data-bind="text:item.UserName"></td>
+                        <td data-bind="text:item.Type"></td>
+                        <td data-bind="text:item.TrueName"></td>
+                        <td data-bind="text:item.Bank"></td>
+                        <td data-bind="text:item.Phone"></td>
+                        <td data-bind="text:item.Number"></td>
+                        <td data-bind="text:item.Price"></td>
+                        <td data-bind="text:item.AddTime"></td>
+                        <td data-bind="text:item.State==0?'待审核':'已审核'"></td>
+                        <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.RenZheng(item.ID)},text:item.State==0?'通过':''" class="btnsearch">通过</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                共<span data-bind="text:total"></span>条
+                <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+                <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+                <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+
+        //select model
+        var select_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+
+        var model = function () {
+
+            var m = this;
+            m.size = 10;
+
+            //分页
+            m.array = ko.observable();
+            m.total = ko.observable(0);
+            m.page_current = ko.observable(0);
+            m.page_total = ko.observable(0);
+
+            //search
+            //m.search_nickName = ko.observable("");
+            //m.search_mobile = ko.observable("");
+            //m.search_openid = ko.observable("");
+
+
+            //详情
+            //m.MemberId=ko.observable("");
+            //m.OpenId =ko.observable("");
+            //m.Birth =ko.observable("");
+            //m.City=ko.observable("");
+            //m.ContactAddr=ko.observable("");
+            //m.Country =ko.observable("");
+            //m.District=ko.observable("");
+            //m.Email=ko.observable("");
+            //m.Gender=ko.observable("");
+            //m.HeadImgUrl=ko.observable("");
+            //m.LastLoginDate = ko.observable("");
+            //m.Mobile = ko.observable("");
+            //m.NickName = ko.observable("");
+            //m.OrignKey = ko.observable("");
+            //m.Province = ko.observable("");
+            //m.QQ = ko.observable("");
+            //m.UserName = ko.observable("");
+
+            //btn查询
+            m.btnSearch = function () {
+                m.loadData(1);
+            };
+
+            //上一页
+            m.page_pre = function () {
+                var page = (m.page_current() - 1);
+                if (page > 0) {
+                    m.loadData(page);
+                }
+            };
+
+            //下一页
+            m.page_next = function () {
+                var page = (m.page_current() + 1);
+                var total_page = m.page_total();
+                if (page <= total_page) {
+                    m.loadData(page);
+                }
+            };
+
+
+            //认证通过
+            m.RenZheng = function (id) {
+                if (id > 0) {
+                    if (confirm("是否确定通过？")) {
+                        $.ajax({
+                            method: "get",
+                            url: '@Url.Content("~/User/WithdOk")',
+                            data: 'id=' + id,
+                            async: false,
+                            dataType: 'text'
+                        }).done(function (data) {
+                            if (data == "ok") {
+                                alert("审核通过!");
+                                window.location.reload();
+                            }
+                        });
+                    }
+                    
+                }
+
+            };
+
+            //查看
+            @*m.OpenDialog = function (id) {
+                if (id > 0) {
+                    $.ajax({
+                        method: "get",
+                        url: '@Url.Content("~/User/Detail")',
+                        data: 'id=' + id,
+                        async: false,
+                        dataType: 'json'
+                    }).done(function (data) {
+                        if (data.error == 100) {
+
+                            m.MemberId(data.result.MemberId);
+                            m.OpenId(data.result.OpenId);
+                            m.Birth(data.result.Birth);
+                            m.City(data.result.City);
+                            m.ContactAddr(data.result.ContactAddr);
+                            m.Country(data.result.Country);
+                            m.District(data.result.District);
+                            m.Email(data.result.Email);
+                            m.Gender(data.result.Gender);
+                            m.HeadImgUrl(data.result.HeadImgUrl);
+                            m.LastLoginDate(data.result.LastLoginDate);
+                            m.Mobile(data.result.Mobile);
+                            m.NickName(data.result.NickName);
+                            m.OrignKey(data.result.OrignKey);
+                            m.Province(data.result.Province);
+                            m.QQ(data.result.QQ);
+                            m.UserName(data.result.UserName);
+
+                        } else {
+                            alert('系统错误！');
+                        }
+                    });
+                }
+                $("#dialog").dialog({ width: "900px" });
+            };*@
+
+            //关闭
+            //m.CloseDialog = function () {
+            //    $("#dialog").dialog('close');
+            //};
+
+            //加载表单数据
+            m.loadData = function (page) {
+                var url = "@Url.Content("~/user/listWithd?page=")" + page + "&nickName=&State=" + $("#search_sel").val();
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total(data.total);
+                        m.page_total(Math.ceil(data.total / m.size));
+                        m.page_current(page);
+                        m.array(data.result);
+                    } else {
+                        alert("Get Data Error");
+                    }
+
+                });
+            };
+        };
+
+        //初始化数据
+        var obj = new model();
+        obj.loadData(1);
+        ko.applyBindings(obj);
+
+    });
+
+</script>

@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewBag.Title = "DetailPay";
+    Layout = "~/Views/Shared/_NoNavLayout.cshtml";
+}
+@using System.Web.Configuration
+@model OrderDetailNewViewModel
+
+<div class="wrapper">
+    <div class="orderSuccess">
+        <h1>您的订单已生成！</h1>
+        <p>请尽快支付。</p>
+        <ul class="orderInfo">
+            <li><label>订单状态：</label><span class="fontR">&nbsp;待支付</span></li>
+            <li><label>订单编号：</label><span>&nbsp;@(Model.OrderNum)</span></li>
+            <li><label>下单时间：</label><span>&nbsp;@(Model.CreatTime)</span></li>
+        </ul>
+    </div>
+    <div class="payBtn">
+        <a href="javascript:void(0);" class="paybtn">微信支付</a><a href="javascript:void(0);" class="cancel">取消订单</a>
+    </div>
+    <div class="orderSuccess">
+        <ul class="address">
+            <li><label>总&emsp;&emsp;额：</label><span class="fontR">&nbsp;￥@(Model.TotalPrice)</span></li>
+            <li><label>订单优惠：</label><span class="fontG">&nbsp;￥@(Model.DisCount)</span></li>
+            <li><label>运&emsp;&emsp;费：</label><span>&nbsp;￥@(Model.KDPay)</span></li>
+            <li><label>收货地址：</label><span>&nbsp;@(Model.Address)</span></li>
+            <li><label>收&ensp;货&ensp;人：</label><span>&nbsp;@(Model.Addressee)</span></li>
+        </ul>
+    </div>
+    <div class="pdtlist orderlist">
+        <dl>
+            <dt>
+                <h3>订单信息</h3>
+                <label class="sum">共<span>@(Model.Number)</span>件</label>
+            </dt>
+            @foreach (var data in Model.list)
+            {
+                <dd>
+                    <div class="productInfo">
+                        <a href="~/Product/Detail?pid=@(data.ProductId)"><h2>@data.SPMC</h2></a>
+                        <span class="fontR">￥@data.BuySale</span>
+                        <div class="pdtnumber">@data.Number</div>
+                    </div>
+                    <div class="productImg">
+                        <img src="@(WebConfigurationManager.AppSettings["imgurl"]+data.Pic)" alt="">
+                    </div>
+                </dd>
+            }
+        </dl>
+        <div class="totalmoney">
+            <ul>
+                <li>实&emsp;付：<span class="fontR">￥@(Model.PayPrice)</span></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var openid="";
+	var phone="";
+	var jifen='@(Model.Jifen)';
+
+	var wxdata = {
+	    "appId": "", //公众号名称，由商户传入
+	    "timeStamp": "", //时间戳
+	    "nonceStr": "", //随机串
+	    "package": "",//扩展包
+	    "signType": "MD5", //微信签名算法：MD5
+	    "paySign": "" //微信签名
+	};
+    $(function () {
+        
+        $.ajax({
+            type: 'post',
+            url: '@(Url.Content("~/User/GetMemberInfo"))',
+            data:'',
+            success:function(data){
+                openid = data.result.OpenId;
+                phone = data.result.Mobile;
+            }
+        });
+        
+        $('.paybtn').on('click', function () {
+            $.ajax({
+                type: 'post',
+                url: '@(Url.Content("~/Order/OrderPay"))',
+                data:'no='+@(Model.OrderNum),
+                success:function(data){
+                    if (data.error == 0) {
+                        wxdata.appId = data.result.AppId;
+                        wxdata.timeStamp = data.result.Timestamp;
+                        wxdata.nonceStr = data.result.Noncestr;
+                        wxdata.package = data.result.Package;
+                        wxdata.paySign = data.result.PaySign;
+                        callpay();
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        });
+
+        //取消订单
+        $('.payBtn .cancel').on('click',function(){
+            if(confirm('确定取消此订单吗？')){
+                $.ajax({
+                    type: 'post',
+                    url: '@(Url.Content("~/Order/OrderCancel"))',
+                    data:'no='+@(Model.OrderNum),
+                    success:function(data){
+                        if (data == 0) {
+                            location.href='@Url.Content("~/Order/List")';
+                        }
+                        else {
+                            location.href='@Url.Content("~/Error/")';
+                        }
+                    }
+                });
+            }
+        });
+
+    });
+    
+    function callpay() {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+            }
+            else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+            }
+        }
+        else {
+            jsApiCall();
+        }
+    }
+
+    //调用微信JS api 支付
+    function jsApiCall() {
+        WeixinJSBridge.invoke(
+        'getBrandWCPayRequest',
+         wxdata,//json串
+         function (res) {
+             //保存支付信息
+             $.ajax({
+                 type: 'post',
+                 url: '@Url.Content("~/Order/SaveBrandWCPayRequest")',
+                 data: 'msg=' + res.err_msg,
+                 success: function (data) {
+
+                     if (res.err_msg == "get_brand_wcpay_request:ok") {
+                         $.ajax({
+                             type: 'post',
+                             url: '@Url.Content("~/Order/PayOK")',
+                             success: function (data) {
+                                 KouCu();
+                                 if (data == 0) {
+                                     location.href = '@Url.Content("~/Order/List?c=2")';
+                                 } else {
+                                     //alert(data);
+                                 }
+                             }
+                         })
+                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                         location.href = '@Url.Content("~/Order/List?c=1")';
+                     } else {
+                         location.href = '@Url.Content("~/Order/List?c=1")';
+                     }
+
+                 }
+             });
+         });
+    }
+
+    function KouCu() {
+        if (parseInt(jifen) > 0) {
+            var url = "http://wl.fgcare.com/wx/setcusdot.asp?phone=" + phone + "&Dot=" + jifen + "&id=" + openid;
+            $.ajax({
+                type: "get",
+                url: url,
+                dataType: "jsonp",
+                jsonp: 'FGCallback',
+                success: function (data) {
+                    alert(data)
+                }
+                , jsonpCallback: "FGCallback",
+                success: function (json) {
+                    UpdateJF(json.IDot);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+        }
+    }
+
+    function UpdateJF(idot) {
+        $.ajax({
+            async: false,
+            type: "get",
+            url: "/User/UpdateJF/?dot=" + idot,
+            dataType: 'text',
+            success: function (data) {
+
+            }
+        });
+    }
+</script>
+

@@ -1,0 +1,333 @@
+﻿
+@{
+    ViewBag.Title = "订单评论";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ComCloudShop.ViewModel.ProductExtendResultModel
+@using System.Web.Configuration;
+<script src="~/public/js/jquery.min.js"></script>
+<script src="~/public/js/lib/jquery.raty.min.js"></script>
+
+<style type="text/css">
+    .top {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+    border-bottom: .4vw solid #ccc;
+}
+    .top2 span {
+    font-size: 4.5vw;
+    line-height: 15vw;
+}
+</style>
+<style type="text/css">
+    body {
+     background:#fff;
+    }
+    #order_product_list li .lblCount {
+        color: #000;
+    }
+    #default-demo img {
+        width: 30px; float:left;
+    }
+
+    #default-demo {
+        width: 100%;
+        text-align: right;
+        margin-bottom: 20px;
+    }
+
+    .demo {
+        width: 100%;
+    }
+
+    .defaultleft {
+        width: 30%;
+        float: left;
+        color: #000;
+        text-align: center;
+    }
+
+    .pleare {
+        width: 100%;
+        background: #fff;
+        border-top: 1px solid #F3F3F5;
+    }
+
+    #txt_pl {
+        width: 100%;
+        padding: 9px;
+        text-align: left;
+        height: 150px;
+        font-size: 14px;
+        background: #F3F3F5;
+    }
+
+    .see {
+        text-align: center;
+        margin: 60px auto 0;
+        display: block;
+        width: 50%;
+        line-height: 35px;
+        background: #F4413F;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 12px;
+    }
+
+    .list li .left > img {
+        height: 142px;
+    }
+
+    .list li .right p {
+        padding:10px 0;
+    }
+    .zq {
+     height:160px; padding:20px 0;
+    }
+    .list {
+    height:100%;
+    }
+    .list li .left{
+     width:40%; display:inline-block; float:left;
+    }
+        .list li .right {
+          width:50%;   display:inline-block; float:left;
+        }
+</style>
+<style>
+    .ek .lq .left span label {
+        color: #999;
+        margin-left: 20px;
+    }
+
+    .zq .right span label {
+        font-size: 40px;
+    }
+
+    #selfBack {
+        z-index: 9999;
+    }
+
+  
+    .tab .ky {
+        border-bottom: .2rem solid #FF474E;
+    }
+
+    .tab li a {
+        color: #434857;
+        display: inline-block;
+        line-height: 4rem;
+        font-size: 1.7rem;
+        border-bottom: 4px solid #fff;
+        width: 100%;
+        text-align: center;
+    }
+
+    .tab li:first-child span {
+        display: inline-block;
+        position: absolute;
+        background: #BCBBC4;
+        width: .05rem;
+        height: 2.5rem;
+        top: 19px;
+    }
+
+    .yk {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .zq .yk .lq {
+        margin: 30px 30px 0;
+        background-size: 97% 100%;
+        width: 94%;
+        height: 10rem;
+    }
+
+    .zq .left h3 {
+        width: 53%;
+        font-size: 1.6rem;
+        margin-top: 1.6rem;
+        white-space: nowrap;
+    }
+
+    .zq .left span {
+        font-size: 1.4rem;
+        color: #fff;
+    }
+
+        .zq .left span label {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-left: 20px;
+        }
+
+    .zq .right span {
+        color: #F8E71C;
+        line-height: 10rem;
+        margin-right: 1rem;
+        font-size: 1.6rem;
+    }
+
+        .zq .right span label {
+            font-size: 2rem;
+        }
+
+    .tanbox > div {
+        width: 90%;
+        background: #fff;
+        position: fixed;
+        left: 45%;
+        top: 45%;
+        margin-left: -40%;
+        font-size: 2rem;
+    }
+
+        .tanbox > div > h3 {
+            background: #F0EFF5;
+            text-align: center;
+            line-height: 4rem;
+            width: 100%;
+            color: #4B4B4B;
+            position: relative;
+            font-weight: normal;
+            font-size: 1.2rem;
+        }
+
+            .tanbox > div > h3 a {
+                position: absolute;
+                right: 2rem;
+                width: 30px;
+                height: 80px;
+                top: .5rem;
+                transform: scale(1.4);
+            }
+
+    .tanbox .kc input[type="text"] {
+        border: 0;
+        padding: 31px 0;
+        font-size: 1.7rem;
+        outline: none;
+    }
+
+    .tanbox .see {
+        display: block;
+        width: 60%;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        color: #fff;
+        text-align: center;
+        border-radius: 50px;
+        margin: 50px auto;
+        background: #F4413F;
+    }
+
+    .cuowu {
+        width: 500px;
+        margin: 20px auto;
+        font-size: 1.2rem;
+    }
+
+    .dpj .meiyou {
+        width: 100%;
+        height: 10rem;
+        transform: scale(1.6);
+    }
+
+    .dpj p {
+        font-size: 1.5rem;
+    }
+
+    .dpj .gg {
+        line-height: 3.5rem;
+        font-size: 1.5rem;
+    }
+
+    body .zq .ek .lq {
+        margin: 30px 30px 0;
+        background-size: 97% 100%;
+        width: 94%;
+        height: 10rem;
+    }
+</style>
+<div class="container container2">
+    <div class="top top2">
+        <span>发表评论</span>
+    </div>
+
+    <div class="zq">
+        <ul class="list" id="order_product_list">
+            <li>
+                <div class="left ">
+                    <img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)">
+                </div>
+                <div class="right">
+                    <p>评分：</p>
+                    <div id="default-demo"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="demo">
+        <div class="pleare">
+            <textarea id="txt_pl" placeholder="亲，说出您的使用感受吧！"></textarea>
+        </div>
+    </div>
+    <div style=" clear:both;"></div>
+    <div>
+        <a class="see" id="couponsubmit">提交</a>
+    </div>
+
+    <script type="text/javascript">
+        $.fn.raty.defaults.path = '/public/images';
+
+        $('#default-demo').raty();
+
+        $("#default-demo").css("width", "100%");
+
+        $("#couponsubmit").click(function () {
+
+            var txt_pl = $("#txt_pl").val();
+            var score = $("#default-demo input").val();
+            if (score == "" || score == "0") {
+                alert("请选择产品评分！")
+            }
+            else if (txt_pl.length <= 10) {
+                alert("评论字数不能少于10个字！");
+            }
+            else {
+
+                var wxdata = {
+                    "MemberID": @Convert.ToInt32(ViewData["MemberID"]),
+                    "OrderNum": @Convert.ToSingle(ViewData["OrderNum"]),
+                    "ProductID": @Model.ProductId,
+                    "Contents": txt_pl,
+                    "Pics": "",
+                    "ProductScore": score,
+                    "ProductPackaging": "",
+                    "DeliverySpeed": "",
+                    "Remack":""
+                };
+
+                $.ajax({
+                    type: 'post',
+                    url: '@(Url.Content("~/Order/AddComment"))',
+                    data: wxdata,
+                    success:function(data){
+                        if (data == "ok") {
+                            alert("评论成功！");
+                            window.location.href="/Order/List";
+                        }
+                        else {
+                            alert("评论失败！");
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+</div>
+

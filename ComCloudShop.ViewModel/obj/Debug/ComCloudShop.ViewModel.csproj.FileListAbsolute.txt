@@ -1,0 +1,49 @@
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\商城\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\商城\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+E:\商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\ComCloudShop_20170227版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\ComCloudShop20170302\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\ComCloudShop20170309\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\项目\ComCloudShop20170309\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\ComCloudShop20170309\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\项目\ComCloudShop20170309\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\项目\ComCloudShop20170309\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb

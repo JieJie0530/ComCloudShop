@@ -1,0 +1,141 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_NoNavLayout.cshtml";
+}
+@model IEnumerable<DeliveryAddressViewModel>
+
+@*<div class="wrapper">
+    <div class="logo-top">
+        <img src="~/public/images/logo.png" alt="">
+    </div>
+    <div class="couponlist addlist">
+        <ul id="addlist">
+            @if (Model.Count() > 0)
+            {
+                foreach (var m in Model)
+                {
+                    <li title="@m.AddressId">
+                        <p>@m.UserName&nbsp;&nbsp;@m.Mobile</p>
+                        <p>@m.Province @m.City @m.District @m.Address</p>
+                        <a href="~/Address/Edit?id=@m.AddressId" class="iconR"></a>
+                    </li>
+                }
+            }
+        </ul>
+        <a href="~/Address/Edit" class="addBtn">新增地址</a>
+    </div>
+</div>*@
+
+
+<!--无收货地址-->
+@if (Model.Count() > 0)
+{
+    <div class="wrapper address-edit">
+        <div class="couponlist addlist">
+            <ul>
+                @foreach (var m in Model)
+                {
+                    <li title="@m.AddressId">
+                        <div class="editAddress">
+                            <b class="icon-chose"></b>
+                            <p>@m.UserName&nbsp;&nbsp;@m.Mobile</p>
+                            <p>@m.Province @m.City @m.District @m.Address</p>
+                        </div>
+                        <div class="icon-tool">
+                            <a class="icon-delete" href="javascript:void(0);"></a>
+                            <a href="~/Address/Edit?id=@m.AddressId" class="icon-edit"></a>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <a href="~/Address/Edit"><img src="~/public/images/addAddress.png" alt=""></a>
+            @if (Session["address_source"].ToString() == "order")
+            {
+                <a href="javascript:void(0);" class="addBtn">确  定</a>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="wrapper add-Address-No" style="background:#ede9e9;">
+       
+        <h2>您未填写收货地址~</h2>
+        <a href="~/Address/Edit" class="clickAdd"><img src="~/public/images/addAddress.png" alt=""></a>
+    </div>
+}
+
+
+<script type="text/javascript">
+
+    $(function () {
+
+        //删除
+        $('.icon-delete').on('click', function () {
+
+            console.log($(this).parents('li').attr('title'));
+            var othis = $(this);
+            if (confirm('确定删除吗？')) {
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Address/DelAddress")',
+                    data: 'addressid=' + othis.parents('li').attr('title'),
+                    success: function (data) {
+                        if (data == 0) {
+                            othis.parents('li').remove();
+                        } else {
+                            alert('系统错误~');
+                        }
+                    }
+                });
+            }
+        });
+
+        //提交选中地址
+        $('.couponlist .addBtn').on('click', function () {
+
+            var aid = $('.editAddress .hover').parents('li').attr('title');
+            if (aid == undefined) {
+                return;
+            }
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Address/SetAddress")',
+                data: 'addressid=' + aid,
+                success: function (data) {
+                    if (data == 0) {
+                        location.href = '@Url.Content("~/Order/Confim")';
+                    } else {
+                        alert('系统错误~');
+                    }
+                }
+            })
+        });
+
+        //选择地址
+        $(".address-edit .addlist li").click(function () {
+            $(this).find(".icon-chose").addClass("hover").parents().siblings().find(".icon-chose").removeClass("hover");
+        });
+
+    });
+
+
+    @*$('#addlist li').on('click', function () {
+        if ("@Session["address_source"]" == "order") {
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Address/SetAddress")',
+                data:'addressid='+$(this).attr('title'),
+                success: function (data) {
+                    if (data == 0) {
+                        location.href = '@Url.Content("~/Order/Confim/")';
+                    } else {
+                        alert('系统错误~');
+                    }
+                }
+            })
+        }
+    });*@
+
+</script>
+

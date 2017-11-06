@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="金辉物联-产品详情页">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link rel="stylesheet" href="~/public/css/swiper.min.css">
+    <script type="text/javascript" src="~/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/public/js/index.js"></script>
+    <script type="text/javascript" src="~/public/js/swiper.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/jweixin-1.0.0.js"></script>
+    @RenderSection("HeadScript", required: false)
+</head>
+<body>
+    
+    <div>
+        @RenderBody()
+    </div>
+
+    @*<script type="text/javascript">
+        var MemberID = '@((ViewData["ShareViewModel"] as ShareViewModel).MemberID)';
+        var Url = '@((ViewData["ShareViewModel"] as ShareViewModel).Url)';
+        $(function () {
+            if (Url.indexOf('?') > 0) {
+                Url += "&MID=" + MemberID;
+            }
+            else {
+                Url += "?MID=" + MemberID;
+            }
+          wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: "wx62b5712fd19c318a", // 必填，公众号的唯一标识
+            timestamp: '@((ViewData["ShareViewModel"] as ShareViewModel).timestamp)', // 必填，生成签名的时间戳
+            nonceStr: '@((ViewData["ShareViewModel"] as ShareViewModel).nonceStr)', // 必填，生成签名的随机串
+            signature: '@((ViewData["ShareViewModel"] as ShareViewModel).signature)',// 必填，签名，见附录1
+            jsApiList: [  //需要使用的网页服务接口
+              'checkJsApi',  //判断当前客户端版本是否支持指定JS接口
+              'onMenuShareTimeline', //分享给好友
+              'onMenuShareAppMessage', //分享到朋友圈
+              'onMenuShareQQ',  //分享到QQ
+              'onMenuShareWeibo' //分享到微博
+            ]
+          });
+    })
+
+
+       wx.ready(function () {
+           //wx.checkJsApi({
+           //    jsApiList: [
+           //        'getLocation'
+           //    ],
+           //    success: function (res) {
+           //        // alert(JSON.stringify(res));
+           //        // alert(JSON.stringify(res.checkResult.getLocation));
+           //        if (res.checkResult.getLocation == false) {
+           //            alert('你的微信版本太低，不支持微信JS接口，请升级到最新的微信版本！');
+           //            return;
+           //        }
+           //    }
+           //});
+
+           //wx.getLocation({
+           //    success: function (res) {
+           //        //var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+           //        //var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+           //        //var speed = res.speed; // 速度，以米/每秒计
+           //        //var accuracy = res.accuracy; // 位置精度
+           //        //$.get("http://api.map.baidu.com/geoconv/v1/?coords=" + longitude + "," + latitude + "&from=1&to=5&ak=saMNvgAiaMmcYZhTu2glttrC", "", function (data) {
+           //        //    alert(data)
+           //        //    if (data.status == 0) {
+           //        //        var x = data.result[0].x;
+           //        //        var y = data.result[0].y;
+           //        //        $.get("http://api.map.baidu.com/geocoder/v2/?ak=saMNvgAiaMmcYZhTu2glttrC&location=" + y + "," + x + "&output=json&pois=0", "", function (datas) {
+           //        //            if (datas.status == 0) {
+           //        //                var address = datas.result.formatted_address;
+           //        //                alert(address)
+           //        //            }
+           //        //        }, "jsonp");
+           //        //    }
+           //        //}, "jsonp");
+           //    },
+           //    cancel: function (res) {
+           //        alert('用户拒绝授权获取地理位置');
+           //    }
+           //});
+
+
+ wx.onMenuShareTimeline({
+     title: '快来金辉物联商城享受花1000送2000赚3000的购物新体验吧！',
+   link: Url,
+   imgUrl: 'http://song.tct8.cn/UpFiles/case02ef1d25-f6fb-4b6f-ac3f-e300914a6065.jpg',
+   success: function () {
+
+   },
+   cancel: function () {
+
+   }
+});
+
+wx.onMenuShareAppMessage({
+    title: '金辉物联商城', // 分享标题
+    desc: '快来金辉物联商城享受花1000送2000赚3000的购物新体验吧！', // 分享描述
+    link: Url,
+    imgUrl: 'http://song.tct8.cn/UpFiles/case02ef1d25-f6fb-4b6f-ac3f-e300914a6065.jpg', // 分享图标
+    type: '', // 分享类型,music、video或link，不填默认为link
+    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    success: function () {
+
+    },
+    cancel: function () {
+        // 用户取消分享后执行的回调函数
+    }
+});
+});
+wx.error(function (res) {
+ alert(res.errMsg);  //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
+});
+    </script>*@
+</body>
+</html>

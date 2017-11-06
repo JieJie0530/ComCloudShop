@@ -1,0 +1,462 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">用户信息</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+        <div class="result-title">
+            <div class="result-list">
+                <table class="search-tab" width="100%">
+                    <tbody>
+                        <tr>
+                            <th width="15%">昵称</th>
+                            <td width="35%">
+                                <input class="common-text required" size="20" name="search_nickName" data-bind="value: search_nickName" type="text" />
+                            </td>
+                            <th width="15%">openid</th>
+                            <td width="35%">
+                                <input class="common-text required" size="20" name="search_openid" data-bind="value: search_openid" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="15%">手机号</th>
+                            <td width="35%" colspan="3">
+                                <input class="common-text required" size="20" name="search_mobile" data-bind="value: search_mobile" type="text" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value="  查  询  " />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>头像</th>
+                        <th>openid</th>
+                        <th>昵称</th>
+                        <th>省份</th>
+                        <th>性别</th>
+                        <th>手机</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array, as:'item'}">
+                    <tr>
+                        <td><img data-bind="attr:{src:item.HeadImgUrl}" width="50" height="50" /></td>
+                        <td data-bind="text:item.OpenId"></td>
+                        <td data-bind="text:item.NickName"></td>
+                        <td data-bind="text:item.City"></td>
+                        <td data-bind="text:item.Gender==1?'男':(item.Gender==2?'女':'其它')"></td>
+                        <td data-bind="text:item.Mobile"></td>
+                        <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                共<span data-bind="text:total"></span>条
+                <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+                <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+                <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div style="display: none" id="dialog">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th><i class="require-red"></i>头像：</th>
+                <td>
+                    <input type="hidden" name="MemberId" data-bind="value:MemberId" />
+                    <img data-bind="attr:{src:HeadImgUrl}" width="120" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>openid：</th>
+                <td data-bind="text:OpenId">
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>昵称：</th>
+                <td data-bind="text:NickName">
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>性别：</th>
+                <td data-bind="text:Gender==1?'男':(Gender==2?'女':'其它')"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>省份：</th>
+                <td data-bind="text:Province"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>城市：</th>
+                <td data-bind="text:City"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>县级市：</th>
+                <td data-bind="text:District"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>地址：</th>
+                <td data-bind="text:ContactAddr"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>真实姓名：</th>
+                <td data-bind="text:UserName"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>手机号：</th>
+                <td data-bind="text:Mobile"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>Email：</th>
+                <td data-bind="text:Email"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>QQ：</th>
+                <td data-bind="text:QQ"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>出生日期：</th>
+                <td data-bind="text:Birth"></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>最后登陆时间：</th>
+                <td data-bind="text:LastLoginDate"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        //select model
+        var select_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+
+        var model = function () {
+
+            var m = this;
+            m.size = 10;
+
+            //分页
+            m.array = ko.observable();
+            m.total = ko.observable(0);
+            m.page_current = ko.observable(0);
+            m.page_total = ko.observable(0);
+
+            //search
+            m.search_nickName = ko.observable("");
+            m.search_mobile = ko.observable("");
+            m.search_openid = ko.observable("");
+
+
+            //详情
+            m.MemberId=ko.observable("");
+            m.OpenId =ko.observable("");
+            m.Birth =ko.observable("");
+            m.City=ko.observable("");
+            m.ContactAddr=ko.observable("");
+            m.Country =ko.observable("");
+            m.District=ko.observable("");
+            m.Email=ko.observable("");
+            m.Gender=ko.observable("");
+            m.HeadImgUrl=ko.observable("");
+            m.LastLoginDate = ko.observable("");
+            m.Mobile = ko.observable("");
+            m.NickName = ko.observable("");
+            m.OrignKey = ko.observable("");
+            m.Province = ko.observable("");
+            m.QQ = ko.observable("");
+            m.UserName = ko.observable("");
+
+            //btn查询
+            m.btnSearch = function () {
+                m.loadData(1);
+            };
+
+            //上一页
+            m.page_pre = function () {
+                var page = (m.page_current() - 1);
+                if (page > 0) {
+                    m.loadData(page);
+                }
+            };
+
+            //下一页
+            m.page_next = function () {
+                var page = (m.page_current() + 1);
+                var total_page = m.page_total();
+                if (page <= total_page) {
+                    m.loadData(page);
+                }
+            };
+
+            //查看
+            m.OpenDialog = function (id) {
+                if (id > 0) {
+                    $.ajax({
+                        method: "get",
+                        url: '@Url.Content("~/User/Detail")',
+                        data: 'id=' + id,
+                        async: false,
+                        dataType: 'json'
+                    }).done(function (data) {
+                        if (data.error == 100) {
+
+                            m.MemberId(data.result.MemberId);
+                            m.OpenId(data.result.OpenId);
+                            m.Birth(data.result.Birth);
+                            m.City(data.result.City);
+                            m.ContactAddr(data.result.ContactAddr);
+                            m.Country(data.result.Country);
+                            m.District(data.result.District);
+                            m.Email(data.result.Email);
+                            m.Gender(data.result.Gender);
+                            m.HeadImgUrl(data.result.HeadImgUrl);
+                            m.LastLoginDate(data.result.LastLoginDate);
+                            m.Mobile(data.result.Mobile);
+                            m.NickName(data.result.NickName);
+                            m.OrignKey(data.result.OrignKey);
+                            m.Province(data.result.Province);
+                            m.QQ(data.result.QQ);
+                            m.UserName(data.result.UserName);
+
+                        } else {
+                            alert('系统错误！');
+                        }
+                    });
+                }
+                $("#dialog").dialog({ width: "900px" });
+            };
+
+            //关闭
+            m.CloseDialog = function () {
+                $("#dialog").dialog('close');
+            };
+
+            //加载表单数据
+            m.loadData = function (page) {
+                var url = "@Url.Content("~/user/list?page=")" + page + "&nickName=" + m.search_nickName() + "&mobile=" + m.search_mobile() + "&openid=" + m.search_openid();
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total(data.total);
+                        m.page_total(Math.ceil(data.total / m.size));
+                        m.page_current(page);
+                        m.array(data.result);
+                    } else {
+                        alert("Get Data Error");
+                    }
+
+                });
+            };
+        };
+
+        //初始化数据
+        var obj = new model();
+        obj.loadData(1);
+        ko.applyBindings(obj);
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+@*<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>用户管理</span>
+        </div>
+
+        <div id="example" class="k-content" style="padding: 2px;">
+            <div id="grid">
+                <script type="text/javascript">
+    var i = 1;
+    var sum = "@ViewData["page"]";
+                    var url = "@Url.Content("~/user/list")";
+                    $(document).ready(function () {
+                        $("#grid").kendoGrid({
+                            dataSource: {
+                                type: "json",
+                                transport: {
+                                    read: url
+                                },
+                                schema: {
+                                    model: {
+                                        fields: {
+                                            MemberId: { type: "int" },
+                                            OpenId: { type: "string" },
+                                            NickName: { type: "string" },
+                                            Province: { type: "string" },
+                                            City: { type: "string" },
+                                            Sex: { type: "string" }
+                                        }
+                                    }
+                                }
+                            },
+                            //height: 600,
+                            filterable: true,
+                            sortable: true,
+                            resizable: true,
+                            columns: [{
+                                field: "MemberId",
+                                filterable: false,
+                                hidden: false
+                            },
+                                {
+                                    field: "NickName",
+                                    filterable: false,
+                                    title: "昵称"
+                                },
+                                {
+                                    field: "Province",
+                                    filterable: false,
+                                    title: "省份"
+                                },
+                                {
+                                    field: "City",
+                                    filterable: false,
+                                    title: "城市"
+                                },
+                                {
+                                    field: "Sex",
+                                    filterable: false,
+                                    title: "性别"
+                                },
+                                {
+                                    command: [{
+                                        name: "编辑", click: function (e) {
+                                            var tr = $(e.target).closest("tr");
+                                            var data = this.dataItem(tr);
+                                            alert("编辑功能没有")
+                                        }
+                                    }, {
+                                        name: "设置", click: function (e) {
+                                            var tr = $(e.target).closest("tr");
+                                            var data = this.dataItem(tr);
+                                            alert("设置功能没有")
+                                        }
+                                    }
+                                    ]
+                                }
+                            ]
+                        });
+                        $(".btnRecord").kendoButton().click(function () {
+                            if ($(this).val() == "下页") {
+                                i++;
+                                if (i > sum) {
+                                    return;
+                                }
+                                $.getJSON(url, { page: i }, function (data1) {
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            } else if ($(this).val() == "上页") {
+                                if (i > 0) {
+                                    i--;
+                                } else {
+                                    return;
+                                }
+                                $.getJSON(url, { page: i }, function (data1) {
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            } else if ($(this).val() == "首页") {
+                                i = 1;
+                                $.getJSON(url, { page: i }, function (data1) {
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            } else if ($(this).val() == "尾页") {
+                                i = sum;
+                                $.getJSON(url, { page: i }, function (data1) {
+                                    console.log(data1);
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            } else if ($(this).val() == "跳转") {
+                                var j = $.trim($("#textPage").val());
+                                if (j.length <= 0 && parseInt(j) == "NaN") {
+                                    return;
+                                }
+
+                                $.getJSON(url, { page: j }, function (data1) {
+                                    var dataSource = new kendo.data.DataSource({
+                                        data: data1
+                                    });
+                                    var grid = $("#grid").data("kendoGrid");
+                                    grid.setDataSource(dataSource);
+                                });
+                            }
+                        });
+                    });
+
+                </script>
+            </div>
+        </div>
+
+        <div style="padding: 2px">
+            <input type="button" value="首页" class="btnRecord" />
+            <input type="button" value="上页" class="btnRecord" />
+            <input type="button" value="下页" class="btnRecord" />
+            <input type="button" value="尾页" class="btnRecord" />
+            <span>共 @ViewData["page"] 页</span>
+            <span>跳转<input type="text" value="" style="width: 60px" id="textPage">
+                页<input type="button" value="跳转" class="btnRecord" /></span>
+        </div>
+    </div>
+</div>*@
+
+

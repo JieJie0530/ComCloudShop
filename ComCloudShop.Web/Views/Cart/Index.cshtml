@@ -1,0 +1,481 @@
+﻿
+@{
+    ViewBag.Title = "购物车";
+    Layout = "~/Views/Shared/_NoNavLayoutCar.cshtml";
+}
+
+@model IEnumerable<ComCloudShop.ViewModel.CartDisplayModel>
+@using System.Web.Configuration;
+@section HeadScript{
+<link href="~/public/css/main1.css" rel="stylesheet" />
+}
+<div class="wrapper">
+    <div class="hdDelete">
+        <i class="icon-home"></i><span>删除商品</span>
+    </div>
+    <div class="tips">
+        <div class="bigSale">
+            <p></p>
+        </div>
+    </div>
+    @if (Model.Count() > 0)
+    {
+    <!--产品列表-->
+        <div class="pdt-List pb60">
+            <ul id="plist">
+                @foreach (var data in Model)
+                {
+                    <li title="@data.CartId" vel="@data.SPGG" class="prolist" >
+                        <div class="productInfo cartList">
+                            <a href="~/Product/Detail?pid=@data.ProductId"><h2>@data.SPMC<i class="icon-more"></i></h2></a>
+                            <p>@data.Describle</p>
+                            <div class="number">
+                                <b class="reduce"></b>
+                                <input type="text" value="@data.ProductNum" class="cartNum">
+                                <b class="add"></b>
+                            </div>
+                            <p class="fontR">￥<span class="spprice">@data.Sale</span></p>
+                        </div>
+                        <div class="productImg" style="background:#fff">
+                            <img src="@(WebConfigurationManager.AppSettings["imgurl"] + data.P1)" alt="">
+                        </div>
+                        <!--选中-->
+                        <div class="check-Box">
+                            <label for="choseA"></label>
+                            <input type="checkbox" name="chose">
+                        </div>
+                    </li>
+                }
+            </ul>
+
+            <h2 class="zengping" style="text-align:center; color:#e61c4c;">任选赠品之一</h2>
+            <div class="pdt-List1 pdt-List zengping">
+                <ul></ul>
+            </div>
+
+            <div class="checkOut cartpay mb60" style="@(Model.Count() > 0 ? "" : "display:none;")">
+                <div class="checkout">
+                    <p>&emsp;</p>
+                    <a href="javascript:void(0)">&emsp;</a>
+                </div>
+                <ul class="payInfo">
+                    <li>满&emsp;减：<span>￥-<n id="mj">0.00</n></span></li>
+                    <li>共&emsp;计：<span class="fontR">￥ <n id="ypay">0.00</n></span></li>
+                </ul>
+                @*<div class="payable">应 付：<span class="fontR">￥<n id="ypay">0.00</n></span></div>*@
+            </div>
+        </div>
+    }
+    <img id="none" src="~/public/images/cart-none.png" alt="" style="@(Model.Count() > 0 ? "display:none;" : "")">
+    
+    <div style="clear:both; height:60px;"></div>
+</div>
+
+<!--   公用-->
+<div class="mainNav mainNav3">
+    <ul>
+        <li><i class="icon-all" id="allPdt"></i><span>全选</span></li>
+        <li>
+            <p>实 付：<label class="fontR">￥<n id="spay">0.00</n></label></p>
+            <p class="total">(共<n id="bnum">0</n>件，不含运费)</p>
+        </li>
+        <li><a href="javascript:;" class="addTocart">结 算</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $.ajaxSetup({ async: false });
+    $(function () {
+
+        var prolists = $(".prolist");//全部的商品
+        prolists.each(function () {
+            if ($(this).attr("vel") == "1") {
+                $(this).addClass("yushou");
+            }
+        })
+
+        var btn = document.getElementById("allPdt");
+        //var items = document.getElementsByName("chose");
+        var items = $("input:[name='chose']");
+        var isadd = 0;//是否添加html
+        items.checked = false;
+
+        var salelist =new Array();
+       
+        getPageList = function () {
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Product/GetProductList1")',
+                data: "",
+                success: function (data) {
+                    if (data.error == 0) {
+                        if (data.result.length == 0) {
+                            isend = 1;
+                            return;
+                        }
+                        var html = "";
+                        $.each(data.result, function (i, item) {
+                            html += "<li><div class=\"productImg\">" +
+                                           "<a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + item.ProductId + "\">" +
+                                           "<img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\">" +
+                                           "</a></div><div class=\"productInfo\">" +
+                                           "<a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + item.ProductId + "\"><h2>" + (item.SPMC == null ? "" : item.SPMC) + "</h2></a>" +
+                                           "<p class=\"fontR\"><input name=\"Fruit\" pid='" + item.ProductId + "' class='Fruit' style='-webkit-appearance:a;width:22px' type=\"radio\"/></p></div></li>"
+                                           });
+                        if (isadd == 0) {
+                            $('.pdt-List1 ul').html(html);
+                        } else {
+                            $('.pdt-List1 ul').append(html);
+                        }
+                    } else {
+                        alert('系统错误~请稍后再试~谢谢');
+                    }
+                    isload = 0;
+                }
+            });
+        }
+
+        //促销
+        getSaleList = function () {
+            $.ajax({
+                type: 'get',
+                url: '@Url.Content("~/Cart/GetRuleList")',
+                success: function (data) {
+                    if (data.error == 0) {
+                        var str = "";
+                        $.each(data.result, function (i, item) {
+                            salelist[i] = [item.Amount, item.Discount];
+                            if (i == 0) {
+                                str += "活动商品购满" + item.Amount + "元，即可享受满减" + item.Discount + "元";
+                            } else {
+                                str += "满" + item.Amount + "减" + item.Discount + "元";
+                            }
+                            if (i < data.result.length - 1) {
+                                str += "，"
+                            }
+                        })
+                        $('.tips .bigSale p').html(str);
+                    } else {
+                        location.href = '@Url.Content("~/Error")';
+                    }
+                }
+            })
+        };
+        //促销
+        getSaleList();
+        getPageList();
+
+
+        //购物车单选
+        $(".check-Box > label").click(function () {
+            var list = getPrice(this);
+            var ypay, spay, bnum;
+
+            if ($(this).hasClass('hover')) {
+                $(this).removeClass('hover');
+                $(this).next('input')[0].checked = false;
+                isAllChecked(false);
+                ypay = (parseFloat($('#ypay').html()) - list[0]).toFixed(2);
+                spay = (parseFloat($('#spay').html()) - list[0]).toFixed(2);
+                bnum = parseInt($('#bnum').html()) - parseInt(list[1]);
+            } else {
+                $(this).addClass('hover');
+                $(this).next('input')[0].checked = true;
+                isAllChecked(true);
+                ypay = (parseFloat($('#ypay').html()) + list[0]).toFixed(2);
+                //spay = (parseFloat($('#spay').html()) + list[0]).toFixed(2);
+                bnum = parseInt($('#bnum').html()) + parseInt(list[1]);
+            }
+            showPriceInfo(ypay, bnum);
+
+            //$(this).toggleClass('hover');
+        });
+
+        //购物车加减
+        $(".add").click(function () {
+            var t = $(this).parent().find('input[type="text"]');
+            var number = parseInt(t.val()) + 1;
+            var cid = $(this).parents('li').attr('title');
+            updateNum(cid, number);
+            t.val(number);
+            if ($(this).parents('li').find("input:[name='chose']")[0].checked) {
+                var ypay, spay, bnum;
+                var price = parseFloat($(this).parents('li').find('.productInfo .fontR span').html());
+                ypay = (parseFloat($('#ypay').html()) + price).toFixed(2);
+                //spay = (parseFloat($('#spay').html()) + price).toFixed(2);
+                bnum = parseInt($('#bnum').html()) + 1;
+                if (ypay > 0) {
+                    showPriceInfo(ypay, bnum);
+                }
+            }
+        });
+        $(".reduce").click(function () {
+            var t = $(this).parent().find('input[type="text"]');
+            var number = parseInt(t.val()) - 1;
+            if (number < 1) {
+                return;
+            }
+            var cid = $(this).parents('li').attr('title');
+            updateNum(cid, number);
+            t.val(number);
+            if ($(this).parents('li').find("input:[name='chose']")[0].checked) {
+                var ypay, spay, bnum;
+                var price = parseFloat($(this).parents('li').find('.productInfo .fontR span').html());
+                ypay = (parseFloat($('#ypay').html()) - price).toFixed(2);
+                //spay = (parseFloat($('#spay').html()) - price).toFixed(2);
+                bnum = parseInt($('#bnum').html()) - 1;
+                if (ypay > 0) {
+                    showPriceInfo(ypay, bnum);
+                }
+            }
+        });
+
+        updateNum = function (cid, number) {
+            $.ajax({
+                type: 'post',
+                url: '@Url.Content("~/Cart/Update")',
+                data: 'cid=' + cid + '&number=' + number,
+                success: function (data) {
+                    if (data.error != 0) {
+                        alert('出错啦~');
+                    }
+                }
+            });
+        }
+
+        getPrice = function (obj) {
+            var arr = new Array();
+            var num = parseInt($(obj).parents('li').find('.number input').val());
+            var price =  parseFloat($(obj).parents('li').find('.spprice').text());
+            arr[0] = num * price;
+            arr[1] = num;
+            return arr;
+        }
+
+
+        getSaleDisCount = function (p) {
+            var price = 0;
+            $.each(salelist, function (i, item) {
+
+                if (item[0] <= parseFloat(p)) {
+                    price = item[1];
+                }
+                if (item[0] > parseFloat(p)) {
+                    return false;
+                }
+            })
+            return parseFloat(price).toFixed(2);
+        }
+
+        isAllChecked = function (obj) {
+            var flag = true;
+            $.each(items, function (i, item) {
+                if (item.checked != obj) {
+                    flag = false;
+                    return false;
+                }
+            });
+            if (obj && flag) {
+                $("#allPdt").addClass("hover");
+            } else {
+                $("#allPdt").removeClass("hover");
+            }
+        }
+
+        showPriceInfo = function (p1, n1) {
+            $('#ypay').html(p1);
+            $('#mj').html(getSaleDisCount(p1))
+            $('#spay').html(parseFloat($('#ypay').html()) - parseFloat($('#mj').html()));
+            $('#bnum').html(n1);
+        }
+
+        //全选
+        btn.onclick = function () {
+
+            if ($('#plist li').length == 0) {
+                return;
+            }
+
+            //取消全选
+            if ($(this).hasClass('hover')) {
+                $("#allPdt").removeClass("hover");
+                $(".check-Box > label").removeClass("hover");
+                $.each(items, function (i, item) {
+                    item.checked = false;
+                });
+                showPriceInfo('0.00', 0);
+            } else {
+                $("#allPdt").addClass("hover");
+                $(".check-Box > label").addClass("hover");
+                var ypay = 0, spay = 0, bnum = 0;
+                $.each(items, function (i, item) {
+                    item.checked = true;
+                    var list = getPrice(item);
+                    ypay += list[0];
+                    //spay += list[0];
+                    bnum += list[1];
+                });
+                showPriceInfo(ypay.toFixed(2), bnum);
+            }
+        };
+
+        //删除选中产品
+        $(".hdDelete > span").click(function () {
+            if ($(":checked").parents('li').length == 0) {
+                return;
+            }
+            var cid = new Array();
+            $.each($(":checked").parents('li'), function (i, item) {
+                cid[i] = parseInt(item['title']);
+            });
+            var parm = {
+                cid: cid
+            }
+            $.ajax({
+                type: 'post',
+                url: '@Url.Content("~/Cart/Delete")',
+                data: parm,
+                success: function (data) {
+                    if (data.error == 0) {
+                        $(":checked").parents("li").remove();
+                        items = $("input:[name='chose']");
+                        $("#allPdt").removeClass("hover");
+                        showPriceInfo('0.00', 0);
+                        
+                        if ($('#plist li').length == 0) {
+                            $('.pdt-List').css('display', 'none');
+                            $('#none').css('display', 'block');
+                        }
+
+                    } else {
+                        alert('出错啦~');
+                    }
+                }
+            })
+        });
+
+        //结算
+        $('.addTocart').on('click', function () {
+
+
+
+
+            //加入购物车
+            var Fruits = $(".Fruit:checked");
+            if (Fruits.length > 0) {
+                var pid = Fruits.eq(0).attr("pid");
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/Cart/Add")',
+                    data: 'pid=' + pid + '&number=1&flag=1',
+                    success: function (data) {
+                        if (data.error == 0) {
+                            if ($(":checked").parents('.prolist').length == 0) {
+                                return;
+                            }
+                            var cid = new Array();
+                            var spgg = "";
+                            var b = true;
+                            $.each($(":checked").parents('.prolist'), function (i, item) {
+                                cid[i] = parseInt(item['title']);
+                                if (spgg == "") {
+                                    spgg = parseInt($(item).attr("vel"));
+                                }
+                                else if (spgg != parseInt($(item).attr("vel"))) {
+                                    alert("预售商品不能与现售商品一起购买，请分开购买！");
+                                    b = false;
+                                }
+                            });
+                            if (b) {
+                                var l = cid.length;
+                                cid[l] = pid;
+                                var parm = {
+                                    cid: cid
+                                }
+                                $.ajax({
+                                    type: 'post',
+                                    url: '@Url.Content("~/Cart/Submit")',
+                                    data: parm,
+                                    success: function (data) {
+                                        if (data == 0) {
+                                            location.href = '@Url.Content("~/Order/Confim")';
+                                        }
+                                        else {
+                                            location.href = '@Url.Content("~/Error")';
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                        else {
+
+                        }
+                    }
+                });
+            }
+            else {
+                if ($(":checked").parents('.prolist').length == 0) {
+                    return;
+                }
+                var cid = new Array();
+                var spgg = "";
+                var b = true;
+                $.each($(":checked").parents('.prolist'), function (i, item) {
+                    
+                    cid[i] = parseInt(item['title']);
+                    if (spgg == "") {
+                        spgg = parseInt($(item).attr("vel"));
+                    }
+                    else if (spgg != parseInt($(item).attr("vel"))) {
+                        alert("预售商品不能与现售商品一起购买，请分开购买！");
+                        b = false;
+                    }
+                });
+                if (b) {
+                    var parm = {
+                        cid: cid
+                    }
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/Cart/Submit")',
+                        data: parm,
+                        success: function (data) {
+                            if (data == 0) {
+                                location.href = '@Url.Content("~/Order/Confim")';
+                            }
+                            else {
+                                location.href = '@Url.Content("~/Error")';
+                            }
+                        }
+                    })
+                }
+            }
+
+        });
+
+
+        //返回首页
+        $('.icon-home').on('click', function () {
+            location.href = '@Url.Content("~/Home/")';
+        })
+
+        $(".pdt-List1").click(function () {
+        })
+
+        $(".check-Box > label").each(function () {
+            $(this).click();
+        })
+    });
+</script>
+<style type="text/css">
+    .pdt-List1 {
+        width:100%;
+        overflow-x:scroll;
+    }
+        .pdt-List1 ul {
+           width:1000%;
+        }
+    .pdt-List1 li {width:150px; float:left; height:235px; margin:6px;}
+    .pdt-List1 li .productInfo {padding:0; margin-top:150px;}
+    .pdt-List li.yushou {background:url(../public/images/yushou.png) right bottom no-repeat #fff;background-size:33%;}
+</style>

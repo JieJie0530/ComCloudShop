@@ -1,0 +1,40 @@
+[2017-03-08 22:42:21,620]  6 -- INFO  -- ComCloudShop.Web.Controllers.OrderController [Pay] -- Order Pay 
+[2017-04-24 15:43:54,114]  7 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-04-27 12:37:28,729]  312 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-04-27 12:37:30,357]  314 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/?pid=149
+[2017-04-30 22:28:36,252]  10 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-06-21 13:15:28,464]  6 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-06-26 15:21:52,565]  46 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-06-26 15:21:55,776]  5 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-06-26 15:22:13,190]  34 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-04 13:44:18,524]  6 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/Authorize/index
+[2017-07-15 10:46:47,506]  9 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-15 10:46:55,487]  8 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-15 10:47:07,582]  12 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-15 14:23:19,763]  36 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-15 14:23:19,922]  36 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-15 17:23:24,740]  42 -- INFO  -- ComCloudShop.Web.Controllers.OrderController [Pay] -- OrderNum 150011060546200
+[2017-07-16 09:00:37,470]  9 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/Authorize/index
+[2017-07-16 09:00:37,485]  9 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-16 09:15:15,234]  35 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/Authorize/index
+[2017-07-16 09:15:15,261]  35 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-23 07:25:59,221]  8 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-23 07:25:59,389]  8 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-23 07:26:15,721]  15 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-23 07:26:15,724]  15 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-23 07:49:10,470]  58 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-23 07:49:10,506]  58 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-26 11:09:02,575]  48 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeMangeController [WeiXinWebAuthorize] -- url http://localhost:4607/AuthorizeMange/index
+[2017-07-26 11:09:02,743]  48 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeMangeController [Index] -- data.error=0
+[2017-07-26 15:48:37,340]  8 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-26 15:48:37,558]  8 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-27 10:43:23,747]  21 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeMangeController [WeiXinWebAuthorize] -- url http://localhost:4607/AuthorizeMange/
+[2017-07-27 10:43:23,919]  21 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeMangeController [Index] -- data.error=0
+[2017-07-27 10:44:19,319]  24 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeMangeController [WeiXinWebAuthorize] -- url http://localhost:4607/AuthorizeMange/
+[2017-07-27 10:44:19,467]  24 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeMangeController [Index] -- data.error=0
+[2017-07-27 13:06:55,512]  7 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-27 13:06:55,686]  7 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-27 13:07:03,426]  6 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeController [WeiXinWebAuthorize] -- url http://localhost:4607/authorize/
+[2017-07-27 13:07:03,427]  6 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeController [Index] -- data.error=0
+[2017-07-27 13:07:25,451]  13 -- INFO  -- ComCloudShop.Web.Controllers.AuthorizeMangeController [WeiXinWebAuthorize] -- url http://localhost:4607/AuthorizeMange/index
+[2017-07-27 13:07:25,452]  13 -- DEBUG -- ComCloudShop.Web.Controllers.AuthorizeMangeController [Index] -- data.error=0

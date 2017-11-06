@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+@model GiftViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script src="~/public/js/jquery.qrcode.min.js"></script>
+    <link href="~/public/layer_mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/public/layer_mobile/layer.js"></script>
+    <title>赠品发放</title>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m3">
+            <div class="header">
+                <div class="h-left-black"></div>
+                <div class="h-title"><h1>赠品详情</h1></div>
+            </div>
+            <div class="mainbox" style="top:50px;">
+                <div class="ui-itembox">
+                    <div class="ui-item big">
+                      <img src='http://admin.hofaf.com\@Model.P1' width="80">
+                        
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit hui">产品名称</div>
+                        <div class="txt">@Model.SPMC</div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit hui">领取会员</div>
+                        <div class="txt">@Model.NickName</div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit hui">赠品状态</div>
+                        <div class="txt">等待赠送</div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="dtxt">
+                        领取须知：赠送成功之后将不能赠送
+                    </div>
+                </div>
+                <div class="ui-line70"></div>
+
+
+            </div>
+            <div class="pay-info">
+                <div class="p p2" style="width:100%;"><a onclick="Zsong()">立即赠送</a></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function Zsong() {
+            var ID = '@Model.ID';
+            var MangerID = '@ViewData["MangerID"]';
+            var parm = {
+                ID:ID,
+                MangerID: MangerID
+            };
+            $.ajax({
+                type: 'post',
+                async: false,
+                data: parm,
+                url: '@Url.Content("~/Business/DuiHuan")',
+                success: function (data) {
+                    if (data == "Ok") {
+                        alert("发放成功");
+                        window.location.href = "/Business/GitIndex";
+                    } else if (data == "err") {
+                        alert("发放失败");
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

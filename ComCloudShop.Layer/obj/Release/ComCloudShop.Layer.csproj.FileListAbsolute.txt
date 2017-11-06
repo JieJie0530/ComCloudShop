@@ -1,0 +1,108 @@
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\fangguang\MircoShop\Tempfee\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\文档\方格蓝\PartyObject\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\文档\方格蓝\方广\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll.config
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Layer.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Service.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.Utility.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\ComCloudShop.ViewModel.pdb
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.csprojResolveAssemblyReference.cache
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.dll
+D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Layer\obj\Release\ComCloudShop.Layer.pdb

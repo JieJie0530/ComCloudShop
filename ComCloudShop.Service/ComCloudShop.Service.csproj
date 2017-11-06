@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96668877-5990-4710-978E-F9ADC34E967E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComCloudShop.Service</RootNamespace>
+    <AssemblyName>ComCloudShop.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cart.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryRelation.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Coupon.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveryAddress.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErpOrder.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GiftList.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupRelation.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupSaleRelation.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HomeImage.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IntList.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manger.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MangerCate.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeIntegral.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MemberCoupon.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MircoShopEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MircoShopEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MircoShopEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MircoShopEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MircoShopEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderComment.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderDetail.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderProductDetail.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderReturn.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBrand.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductDetail.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductGroup.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductImg.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductOrder.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductSaleGroup.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recharge.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnOrder.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleRule.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserCoupon.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Withdrawal.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="MircoShopEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MircoShopEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MircoShopEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MircoShopEntities.edmx</DependentUpon>
+      <LastGenOutput>MircoShopEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="MircoShopEntities.edmx.diagram">
+      <DependentUpon>MircoShopEntities.edmx</DependentUpon>
+    </None>
+    <None Include="MircoShopEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MircoShopEntities.edmx</DependentUpon>
+      <LastGenOutput>MircoShopEntities.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

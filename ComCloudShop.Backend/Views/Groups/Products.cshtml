@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="rrcc" id="RightBox">
+    <div class="center"></div>
+    <div class="right" id="li010">
+        <div class="right01">
+            <img src="~/Content/images/04.gif" alt="" />
+            后台管理 &gt; <span>套餐管理&gt; 套餐产品列表</span>
+        </div>
+
+        <link rel="stylesheet" href="~/Content/styles/kendo.silver.min.css">
+        <div id="example" class="k-content" style="padding: 2px;">
+            <div id="grid2">
+                <script type="text/javascript">
+
+    var id = "@ViewData["id"]";
+
+    $(document).ready(function () {
+        $("#grid2").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "@Url.Content("~/groups/relationproduct?sysno=")"+id
+                                },
+                                schema: {
+                                    model: {
+                                        fields: {
+                                            ProductId: { type: "int" },
+                                            SPMC: { type: "string" },
+                                            Sale: { type: "string" },
+                                            Discount: { type: "string" }
+
+                                        }
+                                    }
+                                },
+                                pageSize: 20
+                            },
+                            //height:700,
+                            filterable: true,
+                            sortable: true,
+                            resizable: true,
+                            columns: [
+                                {
+                                    field: "ProductId",
+                                    filterable: false,
+                                    hidden: true
+                                },
+                                {
+                                    field: "SPMC",
+                                    filterable: false,
+                                    title: "商品名称"
+                                },
+                                {
+                                    field: "Sale",
+                                    filterable: false,
+                                    title: "商品价格"
+                                },
+                                {
+                                    field: "Discount",
+                                    filterable: false,
+                                    title: "折扣比例"
+                                },
+                                {
+                                    field: "GroupName",
+                                    filterable: false,
+                                    title: "套餐名称"
+                                },
+                                {
+                                    command: [{
+                                        name: "删除", click: function (e) {
+                                            var tr = $(e.target).closest("tr");
+                                            var data = this.dataItem(tr);
+                                            $.post("@Url.Content("~/groups/deletegrouprelation")", { pid: data.ProductId, gid: id }, function (data) {
+                                                if (data) {
+                                                    alert('保存成功'); location.href = location.href; return;
+                                                }
+                                                alert('保存错误'); return;
+                                            })
+
+                                        }
+                                    }]
+                                }
+                            ]
+                        });
+                    });
+
+                </script>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+
+

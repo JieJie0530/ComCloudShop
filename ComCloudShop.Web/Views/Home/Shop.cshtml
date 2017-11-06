@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+@model ComCloudShop.Service.Manger
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商家详情</title>
+    <link href="~/public/css/style2.css" rel="stylesheet" />
+    <style type="text/css">
+        .icon26{background:url(../../public/images/26.png) no-repeat;}
+.icon27{background:url(../images/27.png) no-repeat;}
+.icon28{background:url(../images/28.png) no-repeat;}
+.icon29{background:url(../../public/images/29.png) no-repeat;}
+.icon30{background:url(../../public/images/30.png) no-repeat;}
+    </style>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m3">
+            <div class="header" style="background: url(images/topbg.png) repeat-x;">
+                <div class="h-left-black"></div>
+                <div class="h-rgith-menu sh">
+                    <div class="icon icon43"></div>
+                    <div class="icon icon44"></div>
+                    <div class="icon icon45"></div>
+                </div>
+            </div>
+            <div class="mainbox" style="top:0;">
+                <div class="dmimg">
+                    <img class="dd" src="http://admin.hofaf.com\@Model.Storefront">
+                    <div class="icon icon46"></div>
+                </div>
+                <div class="ui-itembox">
+                    <div class="ui-item big" style="height:54px;">
+                        <div class="yl" style="margin:0;">
+                            <h3>@Model.ShopName</h3>
+                        </div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit big">@Model.Phone</div>
+                        <div class="btn dh"><a href="tel:@Model.Phone"><span class="icon icon29"></span></a></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit big" style="width:100%;"><span class="icon icon26"></span>@Model.ShopAddress</div>
+                        <div class="btn dh"><a href="/Home/Map?id=@Model.ID"><span class="icon icon30"></span></a></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">主营业务</div>
+                    </div>
+                    <div class="dtxt">
+                        @Model.Business
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</body>
+</html>
