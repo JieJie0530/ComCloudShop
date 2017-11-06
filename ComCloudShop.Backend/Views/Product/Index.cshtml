@@ -50,6 +50,27 @@
             $("#form_upload").ajaxForm(options)
         });
 
+        $("#btn_show3").bind("click", function () {
+            $("#form_upload3").show();
+            var options = {
+                success: function (responseText, statusText, xhr, $form) {
+                    var picPath = responseText.pic;
+                    if (picPath == "") {
+                        alert(responseText.error);
+                    }
+                    else {
+                        $("#form_upload3").hide();
+                        $("input[name='picP3']").val(picPath);
+                        $("#resultP3").attr("src", '@Url.Content("~/")' + picPath).show();
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            };
+            $("#form_upload3").ajaxForm(options)
+        });
 
 
         });
@@ -119,6 +140,7 @@
                             <a href="javascript:void(0);" data-bind="click:function(data,event){location.href ='@Url.Content("~/product/EditShowPic/")'+'?sysno=' + item.ProductID}">图文详情</a>
                             @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenComment(item.ProductID)}">批量评论</a>*@
                             <a class="btn btn-primary" href="javascript:void(0);" data-bind="click:function(data,event){$parent.ProductShow(item.ProductID,item.IsShow)},text:item.IsShow?'下架':'发布'"></a>
+
                         </td>
                     </tr>
                 </tbody>
@@ -232,6 +254,20 @@
 
 
                     </td>*@
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>视频封面：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show3" value="上传图片" />
+                    <br />
+                    <form id="form_upload3" style="padding:20px; display:none;" action="UploadImg1"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP3" src="" />
+                    <input type="hidden" id="picP3" name="picP3" data-bind="value:P3" />
+                </td>
             </tr>
             <tr>
                 <th><i class="require-red"></i>上传课程视频：</th>

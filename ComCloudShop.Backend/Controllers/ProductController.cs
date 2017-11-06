@@ -179,7 +179,7 @@ namespace ComCloudShop.Backend.Controllers
         /// <param name="collection"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult UploadImg2(FormCollection collection)//HttpPostedFileBase upImg
+        public JsonResult UploadImg1(FormCollection collection)//HttpPostedFileBase upImg
         {
             //Request.Files["goods_image"];
             HttpFileCollectionBase files = Request.Files;
@@ -193,9 +193,9 @@ namespace ComCloudShop.Backend.Controllers
             {
                 try
                 {
-                    string filePhysicalPath = Server.MapPath("~/upload/detail/" + name + filetype);
+                    string filePhysicalPath = Server.MapPath("~/public/product/" + name + filetype);
                     upImg.SaveAs(filePhysicalPath);
-                    pic =  + name + filetype;
+                    pic = "public/product/" + name + filetype;
                 }
                 catch (Exception ex)
                 {
@@ -212,17 +212,6 @@ namespace ComCloudShop.Backend.Controllers
                 error = error
             });
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
