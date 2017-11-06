@@ -129,3 +129,15 @@ E:\项目\分销商城\ComCloudShop\ComCloudShop.Service\bin\Debug\zh-Hans\Entit
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.csprojResolveAssemblyReference.cache
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.dll
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\ComCloudShop.Service.dll.config
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\ComCloudShop.Service.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\ComCloudShop.Service.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramework.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramework.SqlServer.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramework.xml
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramework.SqlServer.xml
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.pdb

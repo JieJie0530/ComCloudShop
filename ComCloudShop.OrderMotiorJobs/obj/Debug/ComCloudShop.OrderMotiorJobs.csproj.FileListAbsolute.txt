@@ -42,3 +42,9 @@ E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCl
 E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
 E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
 E:\项目\分销商城\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe.config
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\bin\Debug\ComCloudShop.OrderMotiorJobs.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.exe
+E:\项目\课程分销\ComCloudShop\ComCloudShop.OrderMotiorJobs\obj\Debug\ComCloudShop.OrderMotiorJobs.pdb

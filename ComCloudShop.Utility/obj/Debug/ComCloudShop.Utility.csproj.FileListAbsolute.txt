@@ -41,3 +41,8 @@ E:\项目\分销商城\ComCloudShop\ComCloudShop.Utility\bin\Debug\ComCloudShop.
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.dll
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.pdb
 E:\项目\分销商城\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\bin\Debug\ComCloudShop.Utility.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\bin\Debug\ComCloudShop.Utility.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Debug\ComCloudShop.Utility.pdb

@@ -47,3 +47,8 @@ E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudSho
 E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
 E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
 E:\项目\分销商城\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\bin\Debug\ComCloudShop.ViewModel.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Debug\ComCloudShop.ViewModel.pdb

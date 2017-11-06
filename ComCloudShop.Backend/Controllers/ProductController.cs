@@ -149,7 +149,7 @@ namespace ComCloudShop.Backend.Controllers
             string pic = "", error = "";
             //判断文件格式
             string filetype = fileName.Substring(fileName.LastIndexOf('.')).ToUpper();
-            if ((fileName.LastIndexOf('.') > -1 && (filetype == ".JPG" || filetype == ".PNG" || filetype == ".JPEG")))
+            if ((fileName.LastIndexOf('.') > -1 && (filetype == ".MP4")))
             {
                 try
                 {

@@ -548,8 +548,12 @@ namespace ComCloudShop.Layer
                     if (modelProduct == null) {
                         modelProduct = new Product();
                         modelProduct.ProductGuid = Guid.NewGuid().ToString();
-                        string spdms = db.Products.OrderByDescending(d => d.SPDM).First().SPDM;
-                        int spdm = Convert.ToInt32(spdms) + 1;
+                        int spdm = 3000;
+                        if (db.Products.ToList().Count() > 0) {
+                            string spdms = db.Products.OrderByDescending(d => d.SPDM).First().SPDM;
+                            spdm = Convert.ToInt32(spdms) + 1;
+                        }
+                        
                         modelProduct.SPDM = spdm.ToString();
                         modelProduct.SPMC = data.SPMC;
                         modelProduct.Sale = data.Sale;
