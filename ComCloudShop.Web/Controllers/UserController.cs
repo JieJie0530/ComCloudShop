@@ -17,6 +17,60 @@ namespace ComCloudShop.Web.Controllers
 {
     public class UserController : BaseController
     {
+
+        // GET: Business
+        [HttpGet]
+        public ActionResult Reg()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult Regs()
+        {
+            return null;
+        }
+        // GET: Business
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        MircoShopEntities db = new MircoShopEntities();
+        [HttpPost]
+        public JsonResult Logins()
+        {
+            string username = Request["UserName"];
+            string Pwd = Request["Pwd"];
+            var result = new ResultViewModel<string>();
+            var list = db.Members.Where(d => d.Mobile == username && d.QQ == Pwd);
+            if (list.Count() > 0)
+            {
+                ComCloudShop.Service.Member models = list.FirstOrDefault();
+                //db.Entry<ComCloudShop.Service.Manger>(models).State = EntityState.Modified;
+                //db.SaveChanges();
+                WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
+                modeluser.Id = models.MemberId;
+                modeluser.nickname = models.NickName;
+                modeluser.headimgurl = models.HeadImgUrl;
+                modeluser.openid = models.OpenId;
+                modeluser.Phone = models.Mobile;
+                modeluser.province = models.Province;
+                modeluser.city = models.City;
+                modeluser.country = models.Country;
+                modeluser.sex = models.Gender;
+                Session[AppConstant.weixinuser] = modeluser;
+
+                result.result = "登录成功";
+                result.error = 0;
+                result.msg = "登录成功";
+            }
+            else
+            {
+                result.error = 1;
+                result.msg = "用户名密码错误";
+            }
+            return Json(result);
+        }
         UserService _service = new UserService();
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult RenderImg() {

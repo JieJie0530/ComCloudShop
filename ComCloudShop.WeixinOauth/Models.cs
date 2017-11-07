@@ -12,11 +12,11 @@ namespace ComCloudShop.WeixinOauth
         //方广
         public const string AppId = "wx70b0579cfed26caf";
         public const string AppSecret = "30fbd19e58a8dbba87dc610a628f2604";
-        public const string PartnerId = "1465897002";//商户id
+        public const string PartnerId = "1491408622";//商户id
         public const string PartnerKey = "02A983BDED92448897666B0AC4D471BD";
 
-        public const string mch_id = "1465897002";
-        public const string mch_key = "1465897002";
+        public const string mch_id = "1491408622";
+        public const string mch_key = "1491408622";
         public const string OneED = "3000";//买一张会员卡提高3000的提现额度
 
 
@@ -84,6 +84,9 @@ namespace ComCloudShop.WeixinOauth
         public string[] privilege { get; set; }
 
         public string unionid { get; set; }
+
+        public string Phone { get; set; }
+
 
         public int Id { get; set; }
 

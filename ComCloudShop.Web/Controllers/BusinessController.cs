@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace ComCloudShop.Web.Controllers
 {
-    public class BusinessController : BaseMangeController
+    public class BusinessController :Controller
     {
         // GET: Business
         public ActionResult Index()
@@ -24,8 +24,8 @@ namespace ComCloudShop.Web.Controllers
 
                 model = db.Mangers.Where(d => d.ID == model.ID).FirstOrDefault();
 
-                ViewData["SumPrice"] = db.IntLists.Where(d => d.ManagerID == model.ID.ToString()).Sum(d => d.Price);
-                ViewData["GifCount"] = db.GiftLists.Where(d => d.ManagerID == model.ID.ToString() && d.State==1).Count();
+                //ViewData["SumPrice"] = db.IntLists.Where(d => d.ManagerID == model.ID.ToString()).Sum(d => d.Price);
+                //ViewData["GifCount"] = db.GiftLists.Where(d => d.ManagerID == model.ID.ToString() && d.State==1).Count();
 
             }
             else {

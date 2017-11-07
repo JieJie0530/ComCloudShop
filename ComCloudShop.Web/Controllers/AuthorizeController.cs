@@ -30,11 +30,11 @@ namespace ComCloudShop.Web.Controllers
                 #region 本地测试
 
                 //本地测试
-                var user = new WeixinOauthUserInfo();
-                user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
-                user.nickname = "杰杰";
-                user.Id = 3533;
-                this.Session[AppConstant.weixinuser] = user;
+                //var user = new WeixinOauthUserInfo();
+                //user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
+                //user.nickname = "杰杰";
+                //user.Id = 3533;
+                //this.Session[AppConstant.weixinuser] = user;
                 #endregion
 
                 //#region 上线部署
@@ -52,6 +52,7 @@ namespace ComCloudShop.Web.Controllers
                 //}
 
                 //#endregion
+                return RedirectToAction("Index", "Error");
             }
             return RedirectToAction("Index", "Home");
             //Response.Redirect(helper.GetAuthorizeUri(Server.UrlEncode("http://www.cc-wang.cn/authorize/do/"), OauthScope.snsapi_userinfo));

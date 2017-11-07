@@ -10,24 +10,24 @@
     <div class="headaccount">
         <div class="accountImg"><img src="@Model.url" alt=""></div>
         <h2>微信账号 @Model.username</h2>
-        <p>我的积分：@Model.integral&nbsp;&nbsp;&nbsp;可提现:@Model.balance &nbsp;&nbsp;&nbsp;提现额度:@Model.Cashbalance</p>
-        <a class="entera">完善资料</a>
+        <p>可提现:@Model.balance</p>
+        
         <a href="~/User/Edit" class="enter"></a>
     </div>
     <div class="accountNav">
         <ul>
             <li><a href="~/Order/List?c=0">全部订单<i class="nav01"></i></a></li>
-            <li><a href="~/Order/List?c=1">待付款<i class="nav02"></i></a></li>
+            @*<li><a href="~/Order/List?c=1">待付款<i class="nav02"></i></a></li>
             <li><a href="~/Order/List?c=2">配送中<i class="nav03"></i></a></li>
-            <li><a href="~/Order/List?c=3">已完成<i class="nav04"></i></a></li>
+            <li><a href="~/Order/List?c=3">已完成<i class="nav04"></i></a></li>*@
         </ul>
     </div>
     <div class="accountInfo">
         <ul>
 
-            <li><a href="~/User/BuyCard">成为分享一员<i class="enter"></i></a></li>
-            <li id="livip"><a>成为超级分享商<i class="enter"></i></a></li>
-            <li id="erweima"><a>我要分享二维码<i class="enter"></i></a></li>
+            @*<li><a href="~/User/BuyCard">成为分享一员<i class="enter"></i></a></li>*@
+            <li id="livip"><a>升级VIP<i class="enter"></i></a></li>
+            <li id="erweima"><a>分享二维码<i class="enter"></i></a></li>
             <li class="tab_per">
                 <a>我的线下分享员<i class="enter"></i></a>
                 <ul style=" display:none; ">
@@ -36,11 +36,11 @@
                 </ul>
             </li>
             <li><a href="~/User/Withd">我要提现<i class="enter"></i></a></li>
-            <li><a href="~/User/MyGifList">我的赠品<i class="enter"></i></a></li>
-            <li><a href="~/Address/List?c=address">收货地址管理<i class="enter"></i></a></li>
+            <li style="display:none;"><a href="~/User/MyGifList">我的赠品<i class="enter"></i></a></li>
+            <li style="display:none;"><a href="~/Address/List?c=address">收货地址管理<i class="enter"></i></a></li>
         </ul>
     </div>
-    <div class="accountSave">
+    <div class="accountSave" style="display:none;">
         <span>共收益了<label>@Model.TotalIn</label>元</span>
     </div>
 </div>
@@ -59,14 +59,9 @@
             }
         })
         $("#livip").click(function () {
-            var Cashbalance = '@Model.Cashbalance';
-            var follow='@Model.follow';
-            if (parseFloat(Cashbalance) > 0 || follow!="") {
-                alert("超级分享商只能是新账户没有成为分享一员的才能开通！");
-            }
-            else {
+           
                 window.location.href = "AddVip";
-            }
+          
         })
     })
     

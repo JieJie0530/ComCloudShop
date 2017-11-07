@@ -49,26 +49,34 @@ namespace ComCloudShop.Web.Controllers
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-
-            string query = Request.Url.Query.ToString();
-            if (!IsLogin && !(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName == "authorize"))
-            {
-                Response.Redirect(Url.Content("~/authorize/" + query));
-                //RedirectToAction("Index", "authorize");
-            }
-            ShareViewModel model = new ShareViewModel();
-            model.timestamp = WeixinOauthHelper.GenerateTimeStamp();
-            model.nonceStr = WeixinOauthHelper.GenerateNonceStr();
-
-            string url = "http://" + Request.Url.Host + Request.Url.LocalPath + query.Replace("#", "");//不能要
-
-            string str = "jsapi_ticket=" + WeixinOauthHelper.GetJsapiTicket() + "&noncestr=" + model.nonceStr + "&timestamp=" + model.timestamp + "&url=" + url;
-            model.signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
-            model.Url = url;
-            model.MemberID = UserInfo.Id.ToString();
-            ViewData["ShareViewModel"] = model;
-
             base.OnActionExecuting(filterContext);
+            string query = Request.Url.Query.ToString();
+            if (!IsLogin)
+            {
+                if (filterContext.ActionDescriptor.ActionName == "Login" || filterContext.ActionDescriptor.ActionName == "Reg" || filterContext.ActionDescriptor.ActionName == "Regs" || filterContext.ActionDescriptor.ActionName == "Logins")
+                {
+                  
+                }
+                else
+                {
+                    filterContext.HttpContext.Response.Redirect("/User/Login");
+                }
+
+            }
+          
+          
+          
+            //ShareViewModel model = new ShareViewModel();
+            //model.timestamp = WeixinOauthHelper.GenerateTimeStamp();
+            //model.nonceStr = WeixinOauthHelper.GenerateNonceStr();
+            //string url = "http://" + Request.Url.Host + Request.Url.LocalPath + query.Replace("#", "");//不能要
+            //string str = "jsapi_ticket=" + WeixinOauthHelper.GetJsapiTicket() + "&noncestr=" + model.nonceStr + "&timestamp=" + model.timestamp + "&url=" + url;
+            //model.signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
+            //model.Url = url;
+            //model.MemberID = UserInfo.Id.ToString();
+            //ViewData["ShareViewModel"] = model;
+
+            
         }
     }
 }

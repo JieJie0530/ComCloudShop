@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>金辉物联商城</title>
+    <title>北京启光心智通教育</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -22,6 +22,7 @@
 </head>
 <body>
     @RenderBody()
+
     @*<div style="width:100%; height:50px; clear:both;"></div>*@
     <!--公用-->
     @*<div class="mainNav">
@@ -49,78 +50,7 @@
             });
         });
     </script>
-  <script type="text/javascript">
-        var MemberID = '@((ViewData["ShareViewModel"] as ShareViewModel).MemberID)';
-        var Url = '@((ViewData["ShareViewModel"] as ShareViewModel).Url)';
-        $(function () {
-            if (Url.indexOf('?') > 0) {
-                Url += "&MID=" + MemberID;
-            }
-            else {
-                Url += "?MID=" + MemberID;
-            }
-          wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: "wx62b5712fd19c318a", // 必填，公众号的唯一标识
-            timestamp: '@((ViewData["ShareViewModel"] as ShareViewModel).timestamp)', // 必填，生成签名的时间戳
-            nonceStr: '@((ViewData["ShareViewModel"] as ShareViewModel).nonceStr)', // 必填，生成签名的随机串
-            signature: '@((ViewData["ShareViewModel"] as ShareViewModel).signature)',// 必填，签名，见附录1
-            jsApiList: [  //需要使用的网页服务接口
-              'checkJsApi',  //判断当前客户端版本是否支持指定JS接口
-              'onMenuShareTimeline', //分享给好友
-              'onMenuShareAppMessage', //分享到朋友圈
-              'onMenuShareQQ',  //分享到QQ
-              'onMenuShareWeibo', //分享到微博
-              'scanQRCode'
-            ]
-          });
-    })
-       
-
-       wx.ready(function () {
-         
-
- wx.onMenuShareTimeline({
-     title: '快来金辉物联商城享受花1000送2000赚3000的购物新体验吧！',
-   link: Url,
-   imgUrl: 'http://song.tct8.cn/UpFiles/case02ef1d25-f6fb-4b6f-ac3f-e300914a6065.jpg',
-   success: function () {
-
-   },
-   cancel: function () {
-
-   }
-});
-
-wx.onMenuShareAppMessage({
-    title: '金辉物联', // 分享标题
-    desc: '快来金辉物联商城享受花1000送2000赚3000的购物新体验吧！', // 分享描述
-    link: Url,
-    imgUrl: 'http://song.tct8.cn/UpFiles/case02ef1d25-f6fb-4b6f-ac3f-e300914a6065.jpg', // 分享图标
-    type: '', // 分享类型,music、video或link，不填默认为link
-    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-    success: function () {
-
-    },
-    cancel: function () {
-        // 用户取消分享后执行的回调函数
-    }
-});
-       });
-
-wx.error(function (res) {
- alert(res.errMsg);  //打印错误消息。及把 debug:false,设置为debug:ture就可以直接在网页上看到弹出的错误提示
-});
-function QRCode() {
-    wx.scanQRCode({
-        needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-        scanType: ["qrCode"], // 可以指定扫二维码还是一维码，默认二者都有
-        success: function (res) {
-            var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-        }
-    });
-}
-    </script>
+  
 
 </body>
 </html>

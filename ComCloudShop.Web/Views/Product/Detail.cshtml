@@ -8,13 +8,11 @@
 
 <div class="wrapper">
     <!-- Slider main container -->
-    <div class="swiper-container">
+    <div>
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)" alt=""></div>
-            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P2)" alt=""></div>
-            <div class="swiper-slide"><img src="@WebConfigurationManager.AppSettings["imgurl"]@(Model.P3)" alt=""></div>
+            <div><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" alt=""></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -38,7 +36,7 @@
         </div>
         <div class="clearfix"></div>
     </div>
-    <ul class="pdtsale">
+    <ul class="pdtsale" style="display:none;">
         <li style="display:none;">
             <i class="discount">促 销</i>
             <p></p>
@@ -129,15 +127,7 @@
     padding: 0 0.5rem;
 }
 </style>
-<!--   公用-->
-<div class="mainNav mainNav2">
-    <ul>
-        <li><a href="~/Home/">首页<i class="nav01"></i></a></li>
-        <li><a href="javascript:;" class="addTocart">加入购物车</a></li>
-        <li><a href="javascript:;" class="buyNow">立即购买</a></li>
-        <li><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
-    </ul>
-</div>
+
 <!--   轮播图-->
 <script type="text/javascript">
     $(function () {

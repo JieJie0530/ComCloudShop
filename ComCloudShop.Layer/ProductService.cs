@@ -377,7 +377,7 @@ namespace ComCloudShop.Layer
                 {
                     result.result = (from a in db.Products
                                 where (string.IsNullOrEmpty(spdm) ? 1 == 1 : a.SPDM.Contains(spdm)) &&
-                                (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) && a.SPGG == spgg 
+                                (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) 
                                 orderby a.ProductId descending
                                 select new AdminProductListViewModel
                                 {
@@ -391,7 +391,7 @@ namespace ComCloudShop.Layer
 
                     result.total = (from a in db.Products
                                     where ( string.IsNullOrEmpty(spdm) ? 1 == 1 : a.SPDM.Contains(spdm)) &&
-                                    (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) && a.SPGG == spgg 
+                                    (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc))
                                     orderby a.ProductId descending
                                     select new AdminProductListViewModel
                                     {
@@ -553,7 +553,7 @@ namespace ComCloudShop.Layer
                             string spdms = db.Products.OrderByDescending(d => d.SPDM).First().SPDM;
                             spdm = Convert.ToInt32(spdms) + 1;
                         }
-                        
+                        modelProduct.BZSJ = 0;
                         modelProduct.SPDM = spdm.ToString();
                         modelProduct.SPMC = data.SPMC;
                         modelProduct.Sale = data.Sale;
@@ -569,6 +569,7 @@ namespace ComCloudShop.Layer
                         db.SaveChanges();
                         data.ProductID = modelProduct.ProductId;
                     }
+                    modelProduct.BZSJ = 0;
                     modelProduct.SPMC = data.SPMC;
                     modelProduct.Sale = data.Sale;
                     modelProduct.Discount = data.Discount;
@@ -595,21 +596,21 @@ namespace ComCloudShop.Layer
                         modelCategory.CategoryId = (int)data.CategoryId;
                     }
                     //更新产品配图
-                    //var modelPorductImg = db.ProductImgs.FirstOrDefault(x => x.ProductId == data.ProductID);
+                    var modelPorductImg = db.ProductImgs.FirstOrDefault(x => x.ProductId == data.ProductID);
 
-                    //if (modelPorductImg == null)
-                    //{
-                    //    modelPorductImg = new ProductImg();
-                    //    modelPorductImg.ProductId = data.ProductID;
-                    //    modelPorductImg.P1 = data.P1;
-                    //    modelPorductImg.P2 = data.P2;
-                    //    modelPorductImg.P3 = data.P3;
+                    if (modelPorductImg == null)
+                    {
+                        modelPorductImg = new ProductImg();
+                        modelPorductImg.ProductId = data.ProductID;
+                        modelPorductImg.P1 = data.P1;
+                        modelPorductImg.P2 ="";
+                        modelPorductImg.P3 = data.P3;
 
-                    //    db.ProductImgs.Add(modelPorductImg);
-                    //}
-                    //modelPorductImg.P1 = data.P1;
-                    //modelPorductImg.P2 = data.P2;
-                    //modelPorductImg.P3 = data.P3;
+                        db.ProductImgs.Add(modelPorductImg);
+                    }
+                    modelPorductImg.P1 = data.P1;
+                    modelPorductImg.P2 = "";
+                    modelPorductImg.P3 = data.P3;
 
                     db.SaveChanges();
 
@@ -778,7 +779,7 @@ namespace ComCloudShop.Layer
             {
                 StringBuilder strSql = new StringBuilder();
                 var pageindex = size * (page - 1);
-                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.Statuts=1  and a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  ORDER BY a.ProductId ", size, pageindex);
+                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  ORDER BY a.ProductId ", size, pageindex);
                 return db.Database.SqlQuery<ProductViewModel>(strSql.ToString()).ToList();
             }
         }
