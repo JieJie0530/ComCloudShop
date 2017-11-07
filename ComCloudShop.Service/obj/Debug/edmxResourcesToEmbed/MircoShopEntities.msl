@@ -237,6 +237,7 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MircoShopModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="BrandPic" ColumnName="BrandPic" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />

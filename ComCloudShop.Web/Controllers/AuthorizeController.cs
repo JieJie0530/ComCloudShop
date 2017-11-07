@@ -30,26 +30,26 @@ namespace ComCloudShop.Web.Controllers
                 #region 本地测试
 
                 //本地测试
-                //var user = new WeixinOauthUserInfo();
-                //user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
-                //user.nickname = "杰杰";
-                //user.Id = 3533;
-                //this.Session[AppConstant.weixinuser] = user;
+                var user = new WeixinOauthUserInfo();
+                user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
+                user.nickname = "杰杰";
+                user.Id = 3533;
+                this.Session[AppConstant.weixinuser] = user;
                 #endregion
 
                 //#region 上线部署
 
                 //上线
-                var data = WeiXinWebAuthorize();
-                logger.Debug("data.error=" + data.error);
-                if (data.error == 0)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Error");
-                }
+                //var data = WeiXinWebAuthorize();
+                //logger.Debug("data.error=" + data.error);
+                //if (data.error == 0)
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Index", "Error");
+                //}
 
                 //#endregion
             }

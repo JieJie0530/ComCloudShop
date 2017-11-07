@@ -172,6 +172,7 @@
     <Content Include="public\css\main1.css" />
     <Content Include="public\css\style.css" />
     <Content Include="public\css\style2.css" />
+    <Content Include="public\css\style2017.css" />
     <Content Include="public\css\swiper.min.css" />
     <Content Include="public\css\user.css" />
     <Content Include="public\images\1443584338752549142.png" />
@@ -191,6 +192,7 @@
     <Content Include="public\images\accountsave.png" />
     <Content Include="public\images\addAddress.png" />
     <Content Include="public\images\address.png" />
+    <Content Include="public\images\banner.png" />
     <Content Include="public\images\border-01.png" />
     <Content Include="public\images\cancel-off.png" />
     <Content Include="public\images\cancel-on.png" />
@@ -198,11 +200,21 @@
     <Content Include="public\images\chi.png" />
     <Content Include="public\images\chose.png" />
     <Content Include="public\images\chuan.png" />
+    <Content Include="public\images\close_03.png" />
+    <Content Include="public\images\coloumns_03.jpg" />
+    <Content Include="public\images\coloumns_05.jpg" />
+    <Content Include="public\images\coloumns_07.jpg" />
+    <Content Include="public\images\coloumns_09.png" />
+    <Content Include="public\images\course_03.jpg" />
     <Content Include="public\images\delete.png" />
     <Content Include="public\images\discount.png" />
+    <Content Include="public\images\down_03.png" />
     <Content Include="public\images\edit.png" />
     <Content Include="public\images\enter.png" />
     <Content Include="public\images\filter.png" />
+    <Content Include="public\images\foot_07.png" />
+    <Content Include="public\images\foot_10.jpg" />
+    <Content Include="public\images\freindship.png" />
     <Content Include="public\images\guan.png" />
     <Content Include="public\images\head-banner.jpg" />
     <Content Include="public\images\img-01.png" />

@@ -563,6 +563,8 @@ namespace ComCloudShop.Layer
                         modelProduct.BeginUseAge = data.BeginUseAge;
                         modelProduct.EndUseAge = data.EndUseAge;
                         modelProduct.SPGG = data.SPGG;
+                        modelProduct.SubTitle = data.P1;//视频
+                        modelProduct.Title = data.P3;//图片
                         db.Products.Add(modelProduct);
                         db.SaveChanges();
                         data.ProductID = modelProduct.ProductId;
@@ -575,6 +577,8 @@ namespace ComCloudShop.Layer
                     modelProduct.BeginUseAge = data.BeginUseAge;
                     modelProduct.EndUseAge = data.EndUseAge;
                     modelProduct.SPGG = data.SPGG;
+                    modelProduct.SubTitle = data.P1;//视频
+                    modelProduct.Title = data.P3;//图片
                     //modelProduct.Contents = data.Contents;
                     //更新产品品种
                     if (data.CategoryId > 0)
@@ -591,21 +595,21 @@ namespace ComCloudShop.Layer
                         modelCategory.CategoryId = (int)data.CategoryId;
                     }
                     //更新产品配图
-                    var modelPorductImg = db.ProductImgs.FirstOrDefault(x => x.ProductId == data.ProductID);
+                    //var modelPorductImg = db.ProductImgs.FirstOrDefault(x => x.ProductId == data.ProductID);
 
-                    if (modelPorductImg == null)
-                    {
-                        modelPorductImg = new ProductImg();
-                        modelPorductImg.ProductId = data.ProductID;
-                        modelPorductImg.P1 = data.P1;
-                        modelPorductImg.P2 = data.P2;
-                        modelPorductImg.P3 = data.P3;
+                    //if (modelPorductImg == null)
+                    //{
+                    //    modelPorductImg = new ProductImg();
+                    //    modelPorductImg.ProductId = data.ProductID;
+                    //    modelPorductImg.P1 = data.P1;
+                    //    modelPorductImg.P2 = data.P2;
+                    //    modelPorductImg.P3 = data.P3;
 
-                        db.ProductImgs.Add(modelPorductImg);
-                    }
-                    modelPorductImg.P1 = data.P1;
-                    modelPorductImg.P2 = data.P2;
-                    modelPorductImg.P3 = data.P3;
+                    //    db.ProductImgs.Add(modelPorductImg);
+                    //}
+                    //modelPorductImg.P1 = data.P1;
+                    //modelPorductImg.P2 = data.P2;
+                    //modelPorductImg.P3 = data.P3;
 
                     db.SaveChanges();
 

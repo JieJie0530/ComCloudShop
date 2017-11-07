@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ComCloudShop.Layer;
 using ComCloudShop.ViewModel;
 using ComCloudShop.Utility;
+using ComCloudShop.Utility.Helper;
 
 namespace ComCloudShop.Backend.Controllers
 {
@@ -59,7 +60,45 @@ namespace ComCloudShop.Backend.Controllers
             return Json(_service.DeleteNew(CategoryId));
         }
 
-
+        /// <summary>
+        /// 图片上传
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult UploadImg(FormCollection collection)//HttpPostedFileBase upImg
+        {
+            //Request.Files["goods_image"];
+            HttpFileCollectionBase files = Request.Files;
+            HttpPostedFileBase upImg = files["upImg"];
+            string fileName = System.IO.Path.GetFileName(upImg.FileName);
+            long name = TimestampUtil.GenerateTimeStamp(DateTime.Now);
+            string pic = "", error = "";
+            //判断文件格式
+            string filetype = fileName.Substring(fileName.LastIndexOf('.')).ToUpper();
+            if ((fileName.LastIndexOf('.') > -1 && (filetype == ".JPG" || filetype == ".PNG" || filetype == ".JPEG")))
+            {
+                try
+                {
+                    string filePhysicalPath = Server.MapPath("~/upload/sale/" + name + filetype);
+                    upImg.SaveAs(filePhysicalPath);
+                    pic = "upload/sale/" + name + filetype;
+                }
+                catch (Exception ex)
+                {
+                    error = ex.Message;
+                }
+            }
+            else
+            {
+                error = "上传的文件格式不符合要求";
+            }
+            return Json(new
+            {
+                pic = pic,
+                error = error
+            });
+        }
         public ActionResult Edit(int status, int cid = 0) 
         {
             if (status == 0)

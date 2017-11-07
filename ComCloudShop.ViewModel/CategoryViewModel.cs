@@ -11,7 +11,7 @@ namespace ComCloudShop.ViewModel
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
-
+        public string BrandPic { get; set; }
         public int CategoryType { get; set; }
 
         public int ParentId { get; set; }

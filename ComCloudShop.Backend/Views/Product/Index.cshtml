@@ -1,8 +1,6 @@
-﻿@@ -0,0 +1,817 @@
-﻿@{
+﻿﻿@{
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
-
 @section HeadCss{
     <style type="text/css">
         form {
@@ -38,8 +36,8 @@
                     }
                     else {
                         $("#form_upload").hide();
-                        @*$("input[name='picP1']").val(picPath);
-                        $("#resultP1").attr("src", '@Url.Content("~/")' + picPath).show();*@
+                        $("input[name='picP1']").val(picPath);
+                        @*$("#resultP1").attr("src", '@Url.Content("~/")' + picPath).show();*@
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -101,13 +99,7 @@
                             <td width="15%">
                                 <input class="common-text required" size="20" name="search_spmc" data-bind="value: search_spmc" type="text" />
                             </td>
-                            <th width="5%">是否预售</th>
-                            <td width="15%">
-                                <select id="spgg">
-                                    <option value="0">否</option>
-                                    <option value="1">是</option>
-                                </select>
-                            </td>
+                            
                         </tr>
                         <tr>
                             <td colspan="6" style="text-align :center">

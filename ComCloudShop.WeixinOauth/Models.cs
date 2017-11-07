@@ -10,8 +10,8 @@ namespace ComCloudShop.WeixinOauth
     public class WeiXinConst
     {
         //方广
-        public const string AppId = "wx62b5712fd19c318a";
-        public const string AppSecret = "054c263b8d89f587475544d22adc6fa2";
+        public const string AppId = "wx70b0579cfed26caf";
+        public const string AppSecret = "30fbd19e58a8dbba87dc610a628f2604";
         public const string PartnerId = "1465897002";//商户id
         public const string PartnerKey = "02A983BDED92448897666B0AC4D471BD";
 

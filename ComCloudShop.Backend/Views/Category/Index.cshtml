@@ -1,7 +1,37 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
+@section HeadScript{
+    <script src="~/public/admin/js/common/jquery.form.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
 
+            $("#btn_show").bind("click", function () {
+                $("#form_upload").show();
+                var options = {
+                    success: function (responseText, statusText, xhr, $form) {
+                        var picPath = responseText.pic;
+                        if (picPath == "") {
+                            alert(responseText.error);
+                        }
+                        else {
+                            $("#form_upload").hide();
+                            $("input[name='BrandPic']").val(picPath);
+                            $("#resultBig").attr("src", "/" + picPath).show();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                };
+                $("#form_upload").ajaxForm(options)
+            });
+
+        });
+
+    </script>
+}
 <div class="main-wrap">
     <div class="crumb-wrap">
         <div class="crumb-list">
@@ -29,8 +59,8 @@
             <table class="result-tab" width="100%">
                 <thead>
                     <tr>
-                        <th>品种名称</th>
-                        <th>连接</th>
+                        <th>模块名称</th>
+                        <th>图片</th>
                         <th>上级</th>
                         <th width="200">操作</th>
                     </tr>
@@ -38,7 +68,7 @@
                 <tbody data-bind="foreach:{data:array, as:'item'}">
                     <tr>
                         <td data-bind="text:item.CategoryName"></td>
-                        <td><span>http://mm.hofaf.com/Product/Index/?type=</span><span data-bind="text:CategoryId"></span></td>
+                        <td><img data-bind="attr:{src:'@Url.Content("~/")'+item.BrandPic}" width="200" height="60" /></td>
                         <td data-bind="text:item.ParentId"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}">修改</a>
@@ -61,7 +91,7 @@
 <div style="display: none" id="dialog">
     <table class="insert-tab" width="100%">
         <tbody>
-             <tr>
+             <tr style="display:none">
                  <th><i class="require-red"></i>父类：</th>
                  <td>
                      <select data-bind="options:listCategory,
@@ -71,10 +101,24 @@
                  </td>
              </tr>
             <tr>
-                <th><i class="require-red"></i>品种名称：</th>
+                <th><i class="require-red"></i>模块名称：</th>
                 <td>
                     <input type="hidden" name="CategoryId" data-bind="value:CategoryId" />
                     <input class="common-text required" size="40" name="CategoryName" data-bind="value:CategoryName" type="text" placeholder="请输入品种名称" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>模块图片：</th>
+                <td>
+                    <input type="button" id="btn_show" value="上传图片" />
+                    <br />
+                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultBig" src="" />
+                    <input type="hidden" id="BrandPic" name="BrandPic" data-bind="value:BrandPic" />
                 </td>
             </tr>
             <tr>
@@ -113,7 +157,7 @@
             m.PId = ko.observable("");
             m.CategoryId = ko.observable("");
             m.CategoryName = ko.observable("");
-
+            m.BrandPic = ko.observable("");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
@@ -141,8 +185,10 @@
                 if (type > 0) {
                     m.CategoryId(data.CategoryId);
                     m.CategoryName(data.CategoryName);
-                    console.log("1=" + data.ParentId)
                     m.PId(data.ParentId);
+                    m.BrandPic(data.BrandPic);
+                    $("input[name='image']").val(data.BrandPic);
+                    $("#resultBig").attr("src", '@Url.Content("~/")' + data.BrandPic).show();
                 } else {
                     m.CategoryId("");
                     m.CategoryName("");
@@ -160,13 +206,14 @@
             m.btnUpdate = function () {
 
                 var pid = m.PId();
-
+                m.BrandPic($('input[name="BrandPic"]').val());
                 var parm = {
                     //单条model信息
                     CategoryId: m.CategoryId(),
                     CategoryName: m.CategoryName(),
                     CategoryType: 1,
-                    ParentId: pid
+                    ParentId: pid,
+                    BrandPic: m.BrandPic()
                 }
                 console.log(pid);
                 $.ajax({

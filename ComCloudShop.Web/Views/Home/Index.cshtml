@@ -68,22 +68,33 @@
                     width: 100%;
                     height: 100%;
                 }
-                .prodic a img{width:95%;}
+
+        .prodic a img {
+            width: 95%;
+        }
+
         .prodic a {
             width: 45%;
             display: block;
-            float: left;    margin:5px 8px; height:210px;
-    border: 1px solid #ececec;
+            float: left;
+            margin: 5px 8px;
+            height: 210px;
+            border: 1px solid #ececec;
         }
+
             .prodic a p {
-              text-align:center; font-size:12px;color:#4d4d4d; padding:5px 0;
+                text-align: center;
+                font-size: 12px;
+                color: #4d4d4d;
+                padding: 5px 0;
             }
     </style>
     <script type="text/javascript" src="/public/js/swiper.min.js"></script>
     <link rel="stylesheet" href="~/public/css/swiper.min.css">
+    <link href="~/public/css/style2017.css" rel="stylesheet" />
 }
 
-<div class="wrapper mb60">
+<div class="wrapper">
 
     <!-- Slider main container -->
     <div class="swiper-container">
@@ -105,128 +116,186 @@
         <div class="swiper-pagination"></div>
     </div>
 
-    <div class="headsearch">
-        <input type="search" value="" placeholder="搜一搜，惊喜无限！">
-        <i class="search"></i>
-    </div>
-    <div class="region row row_category">
-        <ul class="flex flex-f-row">
-            <li class="flex_in">
-                <a href="~/Product/Index" title="全部商品">
-                    <div class="CarouselImg"><img src="~/public/images/1443584338752549142.png"></div>
-                </a>
-                <p> 全部商品 </p>
-            </li>
+    @*<div class="headsearch">
+            <input type="search" value="" placeholder="搜一搜，惊喜无限！">
+            <i class="search"></i>
+        </div>*@
+    @*<div class="region row row_category">
+            <ul class="flex flex-f-row">
+                <li class="flex_in">
+                    <a href="~/Product/Index" title="全部商品">
+                        <div class="CarouselImg"><img src="~/public/images/1443584338752549142.png"></div>
+                    </a>
+                    <p> 全部商品 </p>
+                </li>
 
-            <li class="flex_in">
-                <a href="~/User/Index" title="个人中心">
-                    <div class="CarouselImg"><img src="~/public/images/1443584373727011961.png"></div>
-                </a>
-                <p> 分享中心 </p>
-            </li>
+                <li class="flex_in">
+                    <a href="~/User/Index" title="个人中心">
+                        <div class="CarouselImg"><img src="~/public/images/1443584373727011961.png"></div>
+                    </a>
+                    <p> 分享中心 </p>
+                </li>
 
-            <li class="flex_in">
-                <a href="http://mp.weixin.qq.com/s?__biz=MzIzNDU5Njk4OA==&amp;mid=100000006&amp;idx=1&amp;sn=fce37bfb393314768935f1d2e6508114&amp;chksm=68f2be155f8537032264dce3c9e45bf1557c0ef20be4a64b304d74f0129b33aecbf1def06960&amp;scene=18#wechat_redirect" title="联系我们">
-                    <div class="CarouselImg"><img src="~/public/images/1443586300343329180.png"></div>
-                </a>
-                <p> 联系我们 </p>
-            </li>
+                <li class="flex_in">
+                    <a href="http://mp.weixin.qq.com/s?__biz=MzIzNDU5Njk4OA==&amp;mid=100000006&amp;idx=1&amp;sn=fce37bfb393314768935f1d2e6508114&amp;chksm=68f2be155f8537032264dce3c9e45bf1557c0ef20be4a64b304d74f0129b33aecbf1def06960&amp;scene=18#wechat_redirect" title="联系我们">
+                        <div class="CarouselImg"><img src="~/public/images/1443586300343329180.png"></div>
+                    </a>
+                    <p> 联系我们 </p>
+                </li>
 
-            <li class="flex_in">
-                <a href="~/Cart/Index" title="购物车">
-                    <div class="CarouselImg"><img src="~/public/images/1443584408064043342.png"></div>
-                </a>
-                <p> 购物车 </p>
-            </li>
+                <li class="flex_in">
+                    <a href="~/Cart/Index" title="购物车">
+                        <div class="CarouselImg"><img src="~/public/images/1443584408064043342.png"></div>
+                    </a>
+                    <p> 购物车 </p>
+                </li>
 
-        </ul>
-    </div>
+            </ul>
+        </div>*@
     <div style="clear:both;">
 
     </div>
-    <div class="region row row_category" style="    overflow: scroll;">
-        <ul class="flex flex-f-row" style="width: 1000%;height:40px;">
-
-            @{
-                foreach (ComCloudShop.Service.MangerCate item in ViewBag.CateList as List<ComCloudShop.Service.MangerCate>)
-                {
-                    <li class="flex_in" style="width:93px;">
-                        <a href="~/Home/ShopList?title=@item.Brand" title="@item.Brand">
-                            <div class="CarouselImg"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)"></div>
-                        </a>
-                        <p>@item.Brand</p>
-                    </li>
-                }
-            }
+    <!----------------column开始------------------>
+    <div class="column">
+        <ul>
+            <li><a href="#"><img src="~/public/images/coloumns_03.jpg" /><p>登录注册</p></a></li>
+            <li><a href="#"><img src="~/public/images/coloumns_05.jpg" /><p>我的订单</p></a></li>
+            <li><a href="#"><img src="~/public/images/coloumns_07.jpg" /><p>VIP服务</p></a></li>
+            <li><a href="#"><img src="~/public/images/coloumns_09.png" /><p>奖学金</p></a></li>
         </ul>
     </div>
-    <div style="clear:both;"></div>
-    <div class="region row row_category">
-        <ul class="flex flex-f-row">
-            <li class="flex_in" style="width:45%;height:100px; margin:0 2.5%;">
-                <a href="~/Product/Index1" style="height:100%;" title="全部商品">
-                    <div class="CarouselImg" style="width:100%; height:100%;border-radius:0"><img src="~/public/images/yushou.png" style="border-radius:0;height:100%"></div>
-                </a>
-            </li>
-            <li class="flex_in" style="width:45%;height:100px; margin:0 2.5%;">
-                <a href="http://mm.hofaf.com/Product/Index/?type=46" style="height:100%;" title="全部商品">
-                    <div class="CarouselImg" style="width:100%;height:100%;border-radius:0"><img src="~/public/images/tejia.png" style="border-radius:0;height:100%"></div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div style="clear:both;"></div>
-    <div class="new" style="margin-top:20px; margin-bottom:20px; text-align:center;">
-        <a href="http://mm.hofaf.com/Product/Index/?type=45"><img src="~/public/images/zhida.png" style="width:95%; margin:0 2.5%;" alt=""></a>
-    </div>
-
-    <div style="clear:both;"></div>
-    
-   
-    <div class="new">
-        @foreach (var d in Model.batch)
-        {
-            if (d.Useful == "index")
-            {
-                <a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a>
-                if (d.list.Count > 0)
-                {
-                    <div class="prodic">
-                        @{
-                            foreach (ComCloudShop.ViewModel.ProductListViewModel item in d.list)
-                            {
-                                <a href="~/Product/Detail?pid=@(item.ProductId)">
-                                    <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.Pic)" alt="">
-                                    <p>@item.SPMC<span style="float:right; color:red;">￥@item.Sale</span></p>
-                                </a>
-                            }
-                        }
-                    </div>
-                                    }
-                                }
-
-                            }
-        @*<a href=""><img src="~/public/images/img-06.jpg" alt=""></a>*@
-    </div>
-    <div class="new">
-        <h1>品牌推荐</h1>
-        <div class="pinpai">
-
+    <!----------------column结束------------------>
+    <!----------------classify开始------------------>
+    <div class="classify">
+        <div class="title">
+            <h1 class="ch">课程分类</h1>
+            <span class="en">Course recommendation</span>
+        </div>
+        <div class="classify_course">
             @{
-                ResultViewModel<IEnumerable<BrandViewModel>> model = ViewBag.BrandList as ResultViewModel<IEnumerable<BrandViewModel>>;
+                ResultViewModel<IEnumerable<CategoryViewModel>> model = ViewBag.Cate as ResultViewModel<IEnumerable<CategoryViewModel>>;
                 if (model.error == 100)
                 {
-                    foreach (BrandViewModel item in model.result as List<BrandViewModel>)
+                    foreach (CategoryViewModel item in model.result as List<CategoryViewModel>)
                     {
-                        <a href="/Product/Index?brand=@item.ID"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
+                        @*<a href="/Product/Index?brand=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>*@
+                        <a href="/Product/Index?brand=@item.CategoryId"> <img src="http://localhost:10787/@( item.BrandPic)" alt="@item.CategoryName"></a>
                     }
-                }
             }
-
-
+            }
         </div>
     </div>
-
+    <!----------------classify结束------------------>
+    <!----------------Recommend开始------------------>
+    <div class="Recommend">
+        <div class="title">
+            <h1 class="ch">课程推荐</h1>
+            <span class="en">Course recommendation</span>
+        </div>
+        <div class="Recommend_course">
+            <ul>
+                <li>
+                    <div class="image">
+                        <span class="vip">vip免费</span>
+                        <img src="~/public/images/course_03.jpg" />
+                    </div>
+                    <div class="text">
+                        <div class="text_content">
+                            你可以吗？10分分钟及以后找 你可以吗？10分分钟及
+                        </div>
+                        <div class="text_other">
+                            <div class="play">播放次数：920</div>
+                            <div class="price">Y39.90</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <span class="vip">vip免费</span>
+                        <img src="~/public/images/course_03.jpg" />
+                    </div>
+                    <div class="text">
+                        <div class="text_content">
+                            你可以吗？10分分钟及以后找 你可以吗？10分分钟及
+                        </div>
+                        <div class="text_other">
+                            <div class="play">播放次数：920</div>
+                            <div class="price">Y39.90</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <span class="vip">vip免费</span>
+                        <img src="~/public/images/course_03.jpg" />
+                    </div>
+                    <div class="text">
+                        <div class="text_content">
+                            你可以吗？10分分钟及以后找 你可以吗？10分分钟及
+                        </div>
+                        <div class="text_other">
+                            <div class="play">播放次数：920</div>
+                            <div class="price">Y39.90</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <span class="vip">vip免费</span>
+                        <img src="~/public/images/course_03.jpg" />
+                    </div>
+                    <div class="text">
+                        <div class="text_content">
+                            你可以吗？10分分钟及以后找 你可以吗？10分分钟及
+                        </div>
+                        <div class="text_other">
+                            <div class="play">播放次数：920</div>
+                            <div class="price">Y39.90</div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="image">
+                        <span class="vip">vip免费</span>
+                        <img src="~/public/images/course_03.jpg" />
+                    </div>
+                    <div class="text">
+                        <div class="text_content">
+                            你可以吗？10分分钟及以后找 你可以吗？10分分钟及
+                        </div>
+                        <div class="text_other">
+                            <div class="play">播放次数：920</div>
+                            <div class="price">Y39.90</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!----------------Recommend结束------------------>
+    <!----------------linkUrl开始------------------>
+    <div class="linkUrl">
+        <div class="title">
+            <h1 class="ch">友情链接</h1>
+            <span class="en">Friendship link</span>
+        </div>
+        <div class="LinkUrl_Friend">
+            <a href="#"><img src="~/public/images/freindship.png" /></a>
+            <a href="#"><img src="~/public/images/freindship.png" /></a>
+            <a href="#"><img src="~/public/images/freindship.png" /></a>
+            <a href="#"><img src="~/public/images/freindship.png" /></a>
+            <a href="#"><img src="~/public/images/freindship.png" /></a>
+        </div>
+    </div>
+    <!----------------linkUrl结束------------------>
+    <!----------------foot开始------------------>
+    <div class="foot">
+        <ul>
+            <li class="on"><a href="#"><img src="~/public/images/foot_10.jpg" /><p>首页</p></a></li>
+            <li><a href="/User/index"><img src="~/public/images/foot_07.png" /><p>我的</p></a></li>
+        </ul>
+    </div>
+    <!----------------foot结束------------------>
 </div>
 
 <script type="text/javascript">

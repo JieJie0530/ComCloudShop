@@ -260,6 +260,7 @@
     <Property Name="CategoryType" Type="Int32" Nullable="false" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="ParentId" Type="Int32" />
+    <Property Name="BrandPic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CategoryRelation">
     <Key>

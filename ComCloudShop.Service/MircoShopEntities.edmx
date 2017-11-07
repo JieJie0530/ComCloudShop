@@ -26,6 +26,7 @@
           <Property Name="CategoryType" Type="int" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ParentId" Type="int" />
+          <Property Name="BrandPic" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CategoryRelation">
           <Key>
@@ -766,6 +767,7 @@
           <Property Name="CategoryType" Type="Int32" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="ParentId" Type="Int32" />
+          <Property Name="BrandPic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CategoryRelation">
           <Key>
@@ -1245,6 +1247,7 @@
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="MircoShopModel.Category">
               <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="BrandPic" ColumnName="BrandPic" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />

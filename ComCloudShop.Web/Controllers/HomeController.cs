@@ -33,23 +33,25 @@ namespace ComCloudShop.Web.Controllers
             {
                 var data = _service.GetProductGroupSaleAll();
                
-                List<BatchViewModel> list = data.batch.ToList();
-                if (list.Count > 0) {
-                    foreach (BatchViewModel item in list)
-                    {
-                        try
-                        {
-                            item.list = bllpro.GetProductList("0", 1, 4, "", Convert.ToInt32(item.url.Split('=')[1]), 0, 0, 0, 0).ToList();
-                        }
-                        catch (Exception ex)
-                        {
-                            item.list = new List<ProductListViewModel>();
-                        }
-                    }
-                }
+                //List<BatchViewModel> list = data.batch.ToList();
+                //if (list.Count > 0) {
+                //    foreach (BatchViewModel item in list)
+                //    {
+                //        try
+                //        {
+                //            item.list = bllpro.GetProductList("0", 1, 4, "", Convert.ToInt32(item.url.Split('=')[1]), 0, 0, 0, 0).ToList();
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            item.list = new List<ProductListViewModel>();
+                //        }
+                //    }
+                //}
                 BrandService bll = new BrandService();
                 ViewBag.BrandList = bll.GetBrandList(1, 1, 10000000);
-                ViewBag.CateList = db.MangerCates.OrderByDescending(d => d.Sort).ToList();
+                CategoryService bllcate = new CategoryService();
+                ViewBag.Cate = bllcate.GetCategoryList(1, 1, 10000000);
+                //ViewBag.CateList = db.MangerCates.OrderByDescending(d => d.Sort).ToList();
                 return View(data);
             }
             catch

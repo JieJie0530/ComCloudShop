@@ -180,6 +180,7 @@ namespace ComCloudShop.Layer
                                      CategoryId = a.CategoryId,
                                      CategoryName = a.CategoryName,
                                      CategoryType = a.CategoryType,
+                                     BrandPic=a.BrandPic,
                                      ParentId = (int)a.ParentId
                                  }).Skip((page - 1) * size).Take(size).ToList();
 
@@ -219,9 +220,11 @@ namespace ComCloudShop.Layer
                     {
                         model = db.Categories.FirstOrDefault(x => x.CategoryId == data.CategoryId);
                         model.CategoryName = data.CategoryName;
+                        model.BrandPic = data.BrandPic;
                     }
                     else
                     {
+                        model.BrandPic = data.BrandPic;
                         model.CategoryName = data.CategoryName;
                         model.CategoryType = data.CategoryType;
                         model.ParentId = data.ParentId;

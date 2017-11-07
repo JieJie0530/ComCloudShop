@@ -19,5 +19,6 @@ namespace ComCloudShop.Service
         public int CategoryType { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> ParentId { get; set; }
+        public string BrandPic { get; set; }
     }
 }
