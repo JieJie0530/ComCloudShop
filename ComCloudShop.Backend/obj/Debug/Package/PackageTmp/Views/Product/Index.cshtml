@@ -1,7 +1,6 @@
-﻿@{
+﻿﻿@{
     Layout = "~/Views/Shared/_LayoutNew.cshtml";
 }
-
 @section HeadCss{
     <style type="text/css">
         form {
@@ -20,7 +19,6 @@
         img {
             max-width: 800px;
         }
-
     </style>
 }
 @section HeadScript{
@@ -39,7 +37,7 @@
                     else {
                         $("#form_upload").hide();
                         $("input[name='picP1']").val(picPath);
-                        $("#resultP1").attr("src", '@Url.Content("~/")' + picPath).show();
+                        @*$("#resultP1").attr("src", '@Url.Content("~/")' + picPath).show();*@
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -50,9 +48,8 @@
             $("#form_upload").ajaxForm(options)
         });
 
-
-        $("#btn_show2").bind("click", function () {
-            $("#form_upload2").show();
+        $("#btn_show3").bind("click", function () {
+            $("#form_upload3").show();
             var options = {
                 success: function (responseText, statusText, xhr, $form) {
                     var picPath = responseText.pic;
@@ -60,62 +57,19 @@
                         alert(responseText.error);
                     }
                     else {
-                        $("#form_upload2").hide();
-                        $("input[name='picP2']").val(picPath);
-                        $("#resultP2").attr("src", '@Url.Content("~/")' + picPath).show();
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log(textStatus);
-                        console.log(errorThrown);
+                        $("#form_upload3").hide();
+                        $("input[name='picP3']").val(picPath);
+                        $("#resultP3").attr("src", '@Url.Content("~/")' + picPath).show();
                     }
-                };
-                $("#form_upload2").ajaxForm(options)
-            });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            };
+            $("#form_upload3").ajaxForm(options)
+        });
 
-            $("#btn_show3").bind("click", function () {
-                $("#form_upload3").show();
-                var options = {
-                    success: function (responseText, statusText, xhr, $form) {
-                        var picPath = responseText.pic;
-                        if (picPath == "") {
-                            alert(responseText.error);
-                        }
-                        else {
-                            $("#form_upload3").hide();
-                            $("input[name='picP3']").val(picPath);
-                            $("#resultP3").attr("src", '@Url.Content("~/")' + picPath).show();
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log(textStatus);
-                        console.log(errorThrown);
-                    }
-                };
-                $("#form_upload3").ajaxForm(options)
-            });
-        
-            $("#btn_show4").bind("click", function () {
-                $("#form_upload4").show();
-                var options = {
-                    success: function (responseText, statusText, xhr, $form) {
-                        var picPath = responseText.pic;
-                        if (picPath == "") {
-                            alert(responseText.error);
-                        }
-                        else {
-                            $("#form_upload4").hide();
-                            $("input[name='picP4']").val(picPath);
-                            $("#resultP4").attr("src", '@Url.Content("~/upload/detail/")' + picPath).show();
-                        }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        console.log(textStatus);
-                        console.log(errorThrown);
-                    }
-                };
-                $("#form_upload4").ajaxForm(options)
-            });
 
         });
 
@@ -137,18 +91,20 @@
                 <table class="search-tab" width="100%">
                     <tbody>
                         <tr>
-                            <th width="15%">商品代码</th>
-                            <td width="35%">
+                            <th width="5%">商品代码</th>
+                            <td width="15%">
                                 <input class="common-text required" size="20" name="search_spdm" data-bind="value: search_spdm" type="text" />
                             </td>
-                            <th width="15%">商品名称</th>
-                            <td width="35%">
+                            <th width="5%">课程名称</th>
+                            <td width="15%">
                                 <input class="common-text required" size="20" name="search_spmc" data-bind="value: search_spmc" type="text" />
                             </td>
+                            
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align :center">
-                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value="  查  询  " />
+                            <td colspan="6" style="text-align :center">
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value=" 查 询 " />
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnAdd" data-bind="click:btnAdd" value=" 添加产品 " />
                             </td>
                         </tr>
                     </tbody>
@@ -159,11 +115,9 @@
             <table class="result-tab" width="100%">
                 <thead>
                     <tr>
-                        <th>商品代码</th>
-                        <th>商品名称</th>
-                        <th>商品价格</th>
-                        <th>折扣比例</th>
-                        <th>是否上架</th>
+                        <th>课程代码</th>
+                        <th>课程名称</th>
+                        <th>课程价格</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -172,13 +126,13 @@
                         <td data-bind="text:item.SPDM"></td>
                         <td data-bind="text:item.SPMC"></td>
                         <td data-bind="text:item.Sale"></td>
-                        <td data-bind="text:item.Discount"></td>
-                        <td data-bind="text:item.IsShow?'是':'否'"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.ProductID)}">基本信息</a>
-                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItem(item.ProductID)}">产品详情</a>
+                            @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItem(item.ProductID)}">商品属性</a>*@
                             <a href="javascript:void(0);" data-bind="click:function(data,event){location.href ='@Url.Content("~/product/EditShowPic/")'+'?sysno=' + item.ProductID}">图文详情</a>
+                            @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenComment(item.ProductID)}">批量评论</a>*@
                             <a class="btn btn-primary" href="javascript:void(0);" data-bind="click:function(data,event){$parent.ProductShow(item.ProductID,item.IsShow)},text:item.IsShow?'下架':'发布'"></a>
+
                         </td>
                     </tr>
                 </tbody>
@@ -193,44 +147,74 @@
 
     </div>
 </div>
-
+<div style="display: none" id="dialogComment">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th width="12%"><i class="require-red"></i>选择文件：</th>
+                <td width="38%">
+                    @using (Html.BeginForm("Browse", "Order", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_Upload" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input id="fileUpload" type="file" name="file">
+                        <input type="hidden" name="ProductId" data-bind="value:ProductId" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>表格格式：</th>
+                <td width="38%">
+                    <table>
+                        <tr>
+                            <th>会员名称</th>
+                            <th>评价内容</th>
+                            <th>产品评分</th>
+                        </tr>
+                        <tr>
+                            <th>王文东</th>
+                            <th>东西好！！！</th>
+                            <th>5</th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:btnUpload" value=" 保 存 " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div style="display: none" id="dialog">
     <table class="insert-tab" width="100%">
         <tbody>
             <tr>
-                <th width="12%"><i class="require-red"></i>商品名称：</th>
+                <th width="12%"><i class="require-red"></i>课程名称：</th>
                 <td width="38%">
                     <input type="hidden" name="ProductId" data-bind="value:ProductId" />
                     <input class="common-text required" size="30" name="SPMC" data-bind="value:SPMC" type="text" />
                 </td>
-                <th width="12%"><i class="require-red"></i>商品价格：</th>
+                <th width="12%"><i class="require-red"></i>课程价格：</th>
                 <td width="38%">
                     <input class="common-text required" size="30" name="Sale" data-bind="value:Sale" type="text" />
                 </td>
             </tr>
             <tr>
-                <th width="12%"><i class="require-red"></i>商品折扣：</th>
-                <td width="38%">
-                    <input class="common-text required" size="30" name="Discount" data-bind="value:Discount" type="text" />
-                </td>
-                <th width="12%"><i class="require-red"></i>摘 要：</th>
+                @*<th width="12%" style="display:none;"><i class="require-red"></i>商品折扣：</th>
+                    <td width="38%" style="display:none;">
+                        <input class="common-text required" size="30" name="Discount" data-bind="value:Discount" type="text" />
+                    </td>*@
+                @*<th width="12%"><i class="require-red"></i>是否预售：</th>
+                    <td width="38%">
+                        <input type="radio" name="SPGG" value="0" data-bind="checked:SPGG" />否
+                        <input type="radio" name="SPGG" value="1" data-bind="checked:SPGG" />是
+                    </td>*@
+                <th width="12%"><i class="require-red"></i>备 注：</th>
                 <td width="38%">
                     <input class="common-text required" size="30" name="Describle" data-bind="value:Describle" type="text" />
                 </td>
-            </tr>
-            <tr>
-                <th width="12%"><i class="require-red"></i>重量：</th>
-                <td width="38%">
-                    <input class="common-text required" size="30" name="Weight" data-bind="value:Weight" type="text" />
-                </td>
-                <th width="12%"><i class="require-red"></i>月龄区间：</th>
-                <td width="38%">
-                    <input class="common-text required" size="10" name="BeginUseAge" data-bind="value:BeginUseAge" type="text" />至
-                    <input class="common-text required" size="10" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <th width="12%"><i class="require-red"></i>品种：</th>
+                <th width="12%"><i class="require-red"></i>课程模块：</th>
                 <td width="38%">
                     <select data-bind="options:listCategory,
                                                         optionsValue:function(item){return item.dm;},
@@ -238,46 +222,57 @@
                                                         value:CategoryId,optionsCaption:'--请选择--'" name="CategoryId"></select>
                 </td>
             </tr>
-            <tr>
-                <th><i class="require-red"></i>封面图—正面：</th>
-                <td colspan="3">
-                    <input type="button" id="btn_show" value="上传图片" />
-                    <br />
-                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
-                          method="post" enctype="multipart/form-data">
-                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
-                        <input type="submit" value="上传" />
-                    </form>
-                    <img alt="" style="display:none;" width="250" height="80" id="resultP1" src="" />
-                    <input type="hidden" id="picP1" name="picP1" data-bind="value:P1" />
+            <tr style="display:none;">
+                <th width="12%"><i class="require-red"></i>重量：</th>
+                <td width="38%">
+                    <input class="common-text required" size="30" name="Weight" data-bind="value:Weight" type="text" />
+                </td>
+                <th width="12%"><i class="require-red"></i>品牌：</th>
+                <td width="38%">
+                    <input style=" display:none; " class="common-text required" size="10" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
+
+                    <select data-bind="options:listBrand,
+                                                        optionsValue:function(item){return item.dm;},
+                                                        optionsText:function(item){return item.mc;},
+                                                        value:BeginUseAge,optionsCaption:'--请选择--'" name="BeginUseAge"></select>
+
                 </td>
             </tr>
             <tr>
-                <th><i class="require-red"></i>封面图—侧面：</th>
-                <td colspan="3">
-                    <input type="button" id="btn_show2" value="上传图片" />
-                    <br />
-                    <form id="form_upload2" style="padding:20px; display:none;" action="UploadImg"
-                          method="post" enctype="multipart/form-data">
-                        <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
-                        <input type="submit" value="上传" />
-                    </form>
-                    <img alt="" style="display:none;" width="250" height="80" id="resultP2" src="" />
-                    <input type="hidden" id="picP2" name="picP2" data-bind="value:P2" />
-                </td>
+
+                @*<th width="12%"><i class="require-red"></i>连接地址：</th>
+                    <td width="38%">
+                        <span>http://mm.hofaf.com/Product/Detail/?pid=</span><span data-bind="text:ProductId"></span>
+
+
+                    </td>*@
             </tr>
             <tr>
-                <th><i class="require-red"></i>封面图—反面：</th>
+                <th><i class="require-red"></i>视频封面：</th>
                 <td colspan="3">
                     <input type="button" id="btn_show3" value="上传图片" />
                     <br />
-                    <form id="form_upload3" style="padding:20px; display:none;" action="UploadImg"
+                    <form id="form_upload3" style="padding:20px; display:none;" action="UploadImg1"
                           method="post" enctype="multipart/form-data">
                         <input name="upImg" style="width:350px;height:25px;" size="38" type="file" />
                         <input type="submit" value="上传" />
                     </form>
                     <img alt="" style="display:none;" width="250" height="80" id="resultP3" src="" />
                     <input type="hidden" id="picP3" name="picP3" data-bind="value:P3" />
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>上传课程视频：</th>
+                <td colspan="3">
+                    <input type="button" id="btn_show" value="上传视频" />
+                    <br />
+                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
+                          method="post" enctype="multipart/form-data">
+                        <input name="upImg" style="width:350px;height:25px;" type="file" />
+                        <input type="submit" value="上传" />
+                    </form>
+                    <img alt="" style="display:none;" width="250" height="80" id="resultP1" src="" />
+                    <input type="hidden" id="picP1" name="picP1" data-bind="value:P1" />
                 </td>
             </tr>
             <tr>
@@ -315,15 +310,15 @@
                     <tr>
                         <th>标题</th>
                         <th>内容</th>
-                        <th width="200">详情图片</th>
+                        <th style="display:none;" width="200">详情图片</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody data-bind="foreach:{data:array2, as:'item'}">
                     <tr>
                         <td data-bind="text:item.A1"></td>
-                        <td data-bind="text:item.A2" ></td>
-                        <td ><img data-bind="attr:{src:'@Url.Content("~/upload/detail/")' + item.A3}" width="200" height="50" /></td>
+                        <td data-bind="text:item.A2"></td>
+                        <td style="display:none;"><img data-bind="attr:{src:'@Url.Content("~/upload/detail/")' + item.A3}" width="200" height="50" /></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItemDetail(1,data)}">编辑</a>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.DeleteProductDetail(item.DetailId)}">删除</a>
@@ -352,7 +347,7 @@
                     <textarea data-bind="value:A2" rows="5" cols="35"></textarea>
                 </td>
             </tr>
-            <tr>
+            <tr style=" display:none; ">
                 <th><i class="require-red"></i>详情图片：</th>
                 <td colspan="3">
                     <input type="button" id="btn_show4" value="上传图片" />
@@ -375,30 +370,30 @@
     </table>
 </div>
 
-    <div style="display: none" id="editmenu">
-        <form enctype="multipart/form-data" method="post" action="/product/upload">
-            <input type="hidden" name="ProductId" value="" id="productId" />
-            <input type="hidden" name="P1" value="" id="hidP1" />
-            <input type="hidden" name="P2" value="" id="hidP2" />
-            <input type="hidden" name="P3" value="" id="hidP3" />
-            <ul>
-                <li style="padding: 10px;">
-                    正面： <span><img width="40" height="40" src="" id="P1"></span><input type="file" name="files" />
-                </li>
-                <li style="padding: 10px;">
-                    侧面： <span><img width="40" height="40" src="" id="P2"></span><input type="file" name="files" />
-                </li>
-                <li style="padding: 10px;">
-                    反面： <span><img width="40" height="40" src="" id="P3"></span><input type="file" name="files" />
-                </li>
-            </ul>
-            <div style="padding-left: 47px;">
-                <input type="submit" value="保存" id="btnSubmit">
-            </div>
-        </form>
-    </div>
+<div style="display: none" id="editmenu">
+    <form enctype="multipart/form-data" method="post" action="/product/upload">
+        <input type="hidden" name="ProductId" value="" id="productId" />
+        <input type="hidden" name="P1" value="" id="hidP1" />
+        <input type="hidden" name="P2" value="" id="hidP2" />
+        <input type="hidden" name="P3" value="" id="hidP3" />
+        <ul>
+            <li style="padding: 10px;">
+                正面： <span><img width="40" height="40" src="" id="P1"></span><input type="file" name="files" />
+            </li>
+            <li style="padding: 10px;">
+                侧面： <span><img width="40" height="40" src="" id="P2"></span><input type="file" name="files" />
+            </li>
+            <li style="padding: 10px;">
+                反面： <span><img width="40" height="40" src="" id="P3"></span><input type="file" name="files" />
+            </li>
+        </ul>
+        <div style="padding-left: 47px;">
+            <input type="submit" value="保存" id="btnSubmit">
+        </div>
+    </form>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
     $(function () {
 
@@ -407,7 +402,10 @@
             this.dm = dm;
             this.mc = mc;
         }
-
+        var brand_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
         var model = function () {
 
             var m = this;
@@ -427,6 +425,7 @@
             m.search_spmc = ko.observable("");
 
             m.listCategory = ko.observableArray();
+            m.listBrand = ko.observableArray();
 
             //详情
             m.ProductId = ko.observable(0);
@@ -442,7 +441,7 @@
             m.P2 = ko.observable("");
             m.P3 = ko.observable("");
             m.Contents = ko.observable("");
-
+            m.SPGG = ko.observable("0");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
@@ -464,7 +463,22 @@
                     m.loadData(page);
                 }
             };
+            m.btnUpload = function () {
+                var ProductID = m.ProductId();
+                var fileUpload = $("#fileUpload").val();
+                if (fileUpload == "") {
+                    alert("请选择文件!");
+                }
+                else {
+                    $('#form_Upload').submit();
+                }
 
+            }
+            //批量评论
+            m.OpenComment = function (ProductId) {
+                m.ProductId(ProductId);
+                $("#dialogComment").dialog({ width: "50%" });
+            }
             //查看
             m.OpenDialog = function (id) {
                 if (id > 0) {
@@ -490,6 +504,8 @@
                             m.P2(data.result.P2);
                             m.P3(data.result.P3);
                             m.Contents(data.result.Contents);
+                            m.SPGG(data.result.SPGG);
+
                             if (data.result.P1 == null || data.result.P1 == "") {
                                 $("input[name='picP1]").val('');
                                 $("#resultP1").hide();
@@ -511,7 +527,6 @@
                                 $("input[name='picP3']").val(data.result.P3);
                                 $("#resultP3").attr("src", '@Url.Content("~/")' + data.result.P3).show();
                             }
-
                         } else {
                             alert('系统错误！');
                         }
@@ -592,6 +607,11 @@
                 });
             }*@
 
+            m.btnAdd = function () {
+                m.ProductId("");
+                m.BeginUseAge("");
+                $("#dialog").dialog({ width: "90%" });
+            }
             //更新产品
             m.btnUpdate = function () {
 
@@ -604,7 +624,7 @@
                     ProductId: m.ProductId(),
                     SPMC: m.SPMC(),
                     Sale: m.Sale(),
-                    Discount: m.Discount(),
+                    Discount: 1,
                     Describle: m.Describle() == null ? "" : m.Describle(),
                     Weight: m.Weight(),
                     BeginUseAge: m.BeginUseAge(),
@@ -612,7 +632,8 @@
                     CategoryId: m.CategoryId(),
                     P1: m.P1(),
                     P2: m.P2(),
-                    P3: m.P3()
+                    P3: m.P3(),
+                    SPGG:m.SPGG()
                     //Contents: m.Contents()
                 }
                 console.log(parm);
@@ -635,7 +656,7 @@
 
             //加载表单数据
             m.loadData = function (page) {
-                var url = "@Url.Content("~/product/list?page=")" + page + "&dm=" + m.search_spdm() + "&mc=" + m.search_spmc();
+                var url = "@Url.Content("~/product/list?page=")" + page + "&dm=" + m.search_spdm() + "&mc=" + m.search_spmc()+"&spgg="+$("#spgg").val();
                 $.ajax({
                     method: "get",
                     url: url,
@@ -661,6 +682,24 @@
                             });
                         } else {
                             alert('获取品种列表错误！');
+                        }
+                    }
+                });
+            };
+
+
+            m.loadBrandSelect = function () {
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Content("~/Product/GetBrandSelect")',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.error == 100) {
+                            $.each(data.result, function (i, item) {
+                                m.listBrand.push(new brand_model(item.dm, item.mc));
+                            });
+                        } else {
+                            alert('获取品牌列表错误！');
                         }
                     }
                 });
@@ -797,10 +836,10 @@
         var obj = new model();
         obj.loadData(1);
         obj.loadCategorySelect();
+        obj.loadBrandSelect();
         ko.applyBindings(obj);
 
     });
 
-    </script>
-
+</script>
 

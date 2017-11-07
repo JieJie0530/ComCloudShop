@@ -5,18 +5,21 @@
 }
 @model ComCloudShop.ViewModel.ProductExtendResultModel
 @using System.Web.Configuration;
-
+<link href="~/public/js/zy.media.min.css" rel="stylesheet" />
+<script src="~/public/js/zy.media.min.js"></script>
 <div class="wrapper">
     <!-- Slider main container -->
     <div>
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" alt=""></div>
+        <div class="playvideo">
+            <div class="zy_media">
+                <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
+                    <source src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)"  type="video/mp4">
+                </video>
+            </div>
+            <div id="modelView">&nbsp;</div>
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
     </div>
+    <div class="clearfix"></div>
     <div class="pdtinfo">
         <input type="hidden" id="pid" value="@Model.ProductId" />
         <div class="pdtTitle">
@@ -127,6 +130,23 @@
     padding: 0 0.5rem;
 }
 </style>
+<!--   公用-->
+<div class="mainNav mainNav2">
+    <ul>
+        <li style="width:33.3%"><a href="~/Home/">首页<i class="nav01"></i></a></li>
+        <li style="width:33.3%"><a href="javascript:;" class="buyNow">立即购买</a></li>
+        <li style="width:33.3%"><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
+    </ul>
+</div>
+<script>
+//document.documentElement.style.overflow='hidden';
+document.body.style.overflow='hidden';
+zymedia('video',{autoplay: true});
+var screenheight = window.screen.height/2;
+var videoheight = $(".zy_media").height()/2;
+var padding_top = screenheight-videoheight;
+$(".playvideo").css({"top":padding_top});
+</script>
 
 <!--   轮播图-->
 <script type="text/javascript">
@@ -154,42 +174,7 @@
             $(this).attr("src", "/admin/" + $(this).attr("src"));
         })
 
-        //促销
-        getSaleList = function () {
-            $.ajax({
-                type: 'get',
-                url: '@Url.Content("~/Cart/GetRuleList")',
-                success: function (data) {
-                    if (data.error == 0) {
-                        var str = "";
-                        $.each(data.result, function (i, item) {
-                            if (i == 0) {
-                                str += "活动商品购满" + item.Amount + "元，即可享受满减" + item.Discount + "元";
-                            } else {
-                                str += "满" + item.Amount + "减" + item.Discount + "元";
-                            }
-                            if (i < data.result.length - 1) {
-                                str += "，"
-                            }
-                        })
-                        console.log(str);
-                        $('.pdtsale li:first p').html(str);
-                    } else {
-                        location.href = '@Url.Content("~/Error")';
-                    }
-                }
-            })
-        };
-        //促销
-        getSaleList();
-
-        var mySwiper = new Swiper('.swiper-container', {
-            autoplay: 5000,
-            loop: true,
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-        });
-        $(".swiper-container").height($(".swiper-container").width());
+      
         $.ajax({
             type: 'get',
             url: '@Url.Content("~/Cart/GetCartNumber")',

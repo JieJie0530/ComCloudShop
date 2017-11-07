@@ -39,8 +39,19 @@
                         </tr>
                         <tr>
                             <th width="15%">快递单号</th>
-                            <td width="35%" colspan="3">
+                            <td width="35%">
                                 <input class="common-text required" size="20" name="search_expressNum" data-bind="value: search_expressNum" type="text" />
+                            </td>
+                            <th width="15%">认证方式</th>
+                            <td width="35%">
+                                <select class="common-text required" id="search_sel" name="search_sel">
+                                    <option value="10">全部</option>
+                                    <option value="0">待支付</option>
+                                    <option value="1">配送中</option>
+                                    <option value="2">已完成</option>
+                                    <option value="3">退货中</option>
+                                    <option value="4">退货完成</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -72,13 +83,14 @@
                         <td data-bind="text:item.OrderNum"></td>
                         <td><a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogMember(item.MemberId)},text:item.NickName"></a></td>
                         <td data-bind="text:item.PayableAmount"></td>
-                        <td data-bind="text:item.Stutas==2?'已完成':(item.Stutas==0?'待支付':((item.ExpressNum==''||item.ExpressNum==null)?'待发货':'配送中'))"></td>
+                        <td data-bind="text:item.Stutas==0?'待支付':(item.Stutas==1?'配送中':(item.Stutas==2?'已完成':(item.Stutas==3?'退货中':'已退货')))"></td>
                         <td data-bind="text:getLocalTimeLong(item.PayDate)"></td>
                         <td data-bind="text:item.PayNum"></td>
                         <td data-bind="text:item.ErpOrderId"></td>
                         <td data-bind="text:item.ExpressNum"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.OrderNum)}">详情</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OkTuiKuan(item.OrderNum)},text:Stutas==3?'确定退款':''"></a>
                         </td>
                     </tr>
                 </tbody>
@@ -149,6 +161,7 @@
     <table class="result-tab" width="100%">
         <thead>
             <tr>
+                <th>商品图片</th>
                 <th>商品代码</th>
                 <th>商品名称</th>
                 <th>购买金额</th>
@@ -157,6 +170,7 @@
         </thead>
         <tbody data-bind="foreach:{data:ProductList, as:'item'}">
             <tr>
+                <td><img data-bind="attr:{src:item.P1}" width="120" /></td>
                 <td data-bind="text:item.SPDM"></td>
                 <td data-bind="text:item.SPMC"></td>
                 <td data-bind="text:item.BuySale"></td>
@@ -380,12 +394,27 @@
                 }
             };
 
+            m.OkTuiKuan = function (orderNum) {
+                $.ajax({
+                    type: 'get',
+                    url: '@Url.Content("~/Order/OkTuiKuan")',
+                    data: 'OrderNum=' + orderNum,
+                    success: function (data) {
+                        if (data == "SUCCESS") {
+                            alert("退款成功！");
+                            m.loadData(1);
+                        }
+                        else {
+                            alert("退款失败！");
+                        }
+                    }
+                })
+            }
+
             //查看
             m.OpenDialog = function (orderNum) {
-
                 //清空数据
                 m.ClearData();
-
                 $.ajax({
                     type: 'get',
                     url: '@Url.Content("~/Order/Detail")',
@@ -554,7 +583,7 @@
                         alert('请填写快递单号！');
                         return;
                     }
-                    
+
                     var parm = {
                         OrderNum: m.OrderNum(),
                         ExpressNum: m.ExpressNum(),
@@ -601,7 +630,7 @@
 
             //加载表单数据
             m.loadData = function (page) {
-                var url = "@Url.Content("~/Order/List")" + "?page=" + page + "&orderNum=" + m.search_orderNum() + "&nickName=" + m.search_nickName() + "&payNum=" + m.search_payNum() + "&erpOrderId=" + m.search_erpOrderId() + "&expressNum=" + m.search_expressNum();
+                var url = "@Url.Content("~/Order/List")" + "?page=" + page + "&orderNum=" + m.search_orderNum() + "&nickName=" + m.search_nickName() + "&payNum=" + m.search_payNum() + "&erpOrderId=" + m.search_erpOrderId() + "&expressNum=" + m.search_expressNum() + "&Stutas=" + $("#search_sel").val() + "&SPGG=0";
                 $.ajax({
                     method: "get",
                     url: url,
@@ -629,220 +658,3 @@
     });
 
 </script>
-
-
-
-
-@*<div class="rrcc" id="RightBox">
-        <div class="center"></div>
-        <div class="right" id="li010">
-            <div class="right01">
-                <img src="~/Content/images/04.gif" alt="" />
-                后台管理 &gt; <span>订单管理</span>
-            </div>
-
-            <div id="example" class="k-content" style="padding: 2px;height:860px">
-                <div id="grid">
-                    <script type="text/javascript">
-                        var i = 1;
-                        var sum = "@ViewData["page"]";
-                        var url = "@Url.Content("~/order/list")";
-                        $(document).ready(function () {
-                            $("#grid").kendoGrid({
-                                dataSource: {
-                                    type: "json",
-                                    transport: {
-                                        read: url
-                                    },
-                                    schema: {
-                                        model: {
-                                            fields: {
-                                                OrderId: { type: "int" },
-                                                OrderNum: { type: "string" },
-                                                MemberName: { type: "string" },
-                                                Address: { type: "string" },
-                                                Mobile: { type: "string" },
-                                                PayNum: { type: "string" },
-                                                Status: { type: "string" },
-                                                ErpOrderId: { type: "string" },
-                                                Message: { type: "string" },
-                                                PayableAmount: { type: "number" },
-                                                UserName: { type: "string" },
-                                                Createdate: { type: "date" }
-                                            }
-                                        }
-                                    }
-                                },
-                                //height: 600,
-                                filterable: true,
-                                sortable: true,
-                                resizable: true,
-                                columns: [{
-                                    field: "OrderId",
-                                    filterable: false,
-                                    hidden: true
-                                },
-                                    {
-                                        field: "OrderNum",
-                                        filterable: false,
-                                        title: "订单编号"
-                                    },
-                                    {
-                                        field: "MemberName",
-                                        filterable: false,
-                                        title: "会员名"
-                                    },
-                                    {
-                                        field: "UserName",
-                                        filterable: false,
-                                        title: "收货人"
-                                    },
-                                    {
-                                        field: "Mobile",
-                                        filterable: false,
-                                        title: "手机"
-                                    },
-                                    {
-                                        field: "Address",
-                                        filterable: false,
-                                        title: "收货地址 "
-                                    },
-                                    {
-                                        field: "PayableAmount",
-                                        filterable: false,
-                                        title: "实付金额（元）",
-                                        format: "{0:c}"
-                                    },
-                                    {
-                                        field: "Status",
-                                        filterable: false,
-                                        title: "状态 "
-                                    },
-                                    {
-                                        field: "Createdate",
-                                        filterable: false,
-                                        title: "订单时间 ",
-                                        format: "{0: yyyy-MM-dd HH:mm:ss}"
-                                        //template: '#= kendo.toString(Createdate,"yyyy/MM/dd HH:mm:ss") #'
-                                    },
-                                    {
-                                        field: "Message",
-                                        filterable: false,
-                                        title: "买家留言 "
-                                    },
-                                    {
-                                        field: "ErpOrderId",
-                                        filterable: false,
-                                        title: "ERP订单编号 "
-                                    },
-                                    {
-                                        field: "PayNum",
-                                        filterable: false,
-                                        title: "微信支付号 "
-                                    },
-
-                                    {
-                                        command: [{
-                                            name: "详情", click: function (e) {
-                                                var tr = $(e.target).closest("tr");
-                                                var data = this.dataItem(tr);
-                                                location.href = '@Url.Content("~/order/detail/?n=")' + data.OrderNum;
-                                            }
-                                        }, {
-                                            name: "取消", click: function (e) {
-                                                var tr = $(e.target).closest("tr");
-                                                var data = this.dataItem(tr);
-                                                if ($.trim(data.ErpOrderId).length > 0) {
-                                                    alert("订单不能取消~"); return false;
-                                                }
-                                                $.post("@Url.Content("~/order/delete")", { n: data.OrderNum }, function (data1) {
-                                                    if (data1) {
-                                                        location.href = url;
-                                                    } else {
-                                                        alert("出错了~"); return false;
-                                                    }
-                                                });
-                                            }
-                                        }
-                                        ]
-                                    }
-                                ]
-                            });
-                            $(".btnRecord").kendoButton().click(function () {
-                                if ($(this).val() == "下页") {
-                                    i++;
-                                    if (i > sum) {
-                                        return;
-                                    }
-                                    $.getJSON(url, { page: i }, function (data1) {
-                                        var dataSource = new kendo.data.DataSource({
-                                            data: data1
-                                        });
-                                        var grid = $("#grid").data("kendoGrid");
-                                        grid.setDataSource(dataSource);
-                                    });
-                                } else if ($(this).val() == "上页") {
-                                    if (i > 0) {
-                                        i--;
-                                    } else {
-                                        return;
-                                    }
-                                    $.getJSON(url, { page: i }, function (data1) {
-                                        var dataSource = new kendo.data.DataSource({
-                                            data: data1
-                                        });
-                                        var grid = $("#grid").data("kendoGrid");
-                                        grid.setDataSource(dataSource);
-                                    });
-                                } else if ($(this).val() == "首页") {
-                                    i = 1;
-                                    $.getJSON(url, { page: i }, function (data1) {
-                                        var dataSource = new kendo.data.DataSource({
-                                            data: data1
-                                        });
-                                        var grid = $("#grid").data("kendoGrid");
-                                        grid.setDataSource(dataSource);
-                                    });
-                                } else if ($(this).val() == "尾页") {
-                                    i = sum;
-                                    $.getJSON(url, { page: i }, function (data1) {
-                                        var dataSource = new kendo.data.DataSource({
-                                            data: data1
-                                        });
-                                        var grid = $("#grid").data("kendoGrid");
-                                        grid.setDataSource(dataSource);
-                                    });
-                                } else if ($(this).val() == "跳转") {
-                                    var j = $.trim($("#textPage").val());
-                                    if (j.length <= 0 && parseInt(j) == "NaN") {
-                                        return;
-                                    }
-
-                                    $.getJSON(url, { page: j }, function (data1) {
-                                        var dataSource = new kendo.data.DataSource({
-                                            data: data1
-                                        });
-                                        var grid = $("#grid").data("kendoGrid");
-                                        grid.setDataSource(dataSource);
-                                    });
-                                }
-                            });
-                        });
-
-                    </script>
-                </div>
-            </div>
-
-            <div style="padding: 2px">
-                <input type="button" value="首页" class="btnRecord" />
-                <input type="button" value="上页" class="btnRecord" />
-                <input type="button" value="下页" class="btnRecord" />
-                <input type="button" value="尾页" class="btnRecord" />
-                <span>共 @ViewData["page"] 页</span>
-                <span>
-                    跳转<input type="text" value="" style="width: 50px" id="textPage">
-                    页<input type="button" value="跳转" class="btnRecord" />
-                </span>
-            </div>
-        </div>
-    </div>*@

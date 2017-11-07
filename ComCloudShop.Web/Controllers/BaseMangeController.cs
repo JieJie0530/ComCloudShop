@@ -58,17 +58,7 @@ namespace ComCloudShop.Web.Controllers
                 }
                 //RedirectToAction("Index", "authorize");
             }
-            //ShareViewModel model = new ShareViewModel();
-            //model.timestamp = WeixinOauthHelper.GenerateTimeStamp();
-            //model.nonceStr = WeixinOauthHelper.GenerateNonceStr();
-
-            //string url = "http://" + Request.Url.Host + Request.Url.LocalPath + query.Replace("#", "");//不能要
-
-            //string str = "jsapi_ticket=" + WeixinOauthHelper.GetJsapiTicket() + "&noncestr=" + model.nonceStr + "&timestamp=" + model.timestamp + "&url=" + url;
-            //model.signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
-            //model.Url = url;
-            //ViewData["ShareViewModel"] = model;
-
+            
             base.OnActionExecuting(filterContext);
         }
     }

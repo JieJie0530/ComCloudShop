@@ -1,0 +1,295 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商家入驻</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script src="~/public/js/jquery.qrcode.min.js"></script>
+    <link href="~/public/layer_mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/public/layer_mobile/layer.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.3"></script>
+    <style type="text/css">
+        .page,.mainbox,.page_all,.pay-info{position:static;}
+    </style>
+</head>
+<body>
+    <div class="page_all">
+        <input type="hidden" id="ShidPhotoZ" />
+        <input type="hidden" id="ShidPhotoF" />
+        <img src="~/public/images/regs.jpg" style="width:100%" />
+        <div class="page m3">
+            <div class="mainbox">
+
+                @*<div class="ui-item">
+                    <div class="tit">店面照片：</div>
+                    <div class="go"></div>
+                </div>
+                <div class="ui-itembox">
+                    
+                </div>
+
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">营业执照：</div>
+                        <div class="go"></div>
+                    </div>
+                </div>
+                <div class="ui-itembox">
+                    
+                </div>*@
+
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">商户名称<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="ShopName" placeholder="输入商户名称" ></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">主营项目<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="Business" placeholder="主营项目"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">简单介绍<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="Introduce" placeholder="简单介绍"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">详细地址<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="ShopAddress" placeholder="详细地址"></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">联系人<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="Contacts" placeholder="联系人"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">手机号<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="Phone" placeholder="手机号"></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">帐号<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="UserName" placeholder="帐号"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">密码<span style="color:red;">*</span></div>
+                        <div class="inp"><input type="text" id="Pwd" placeholder="密码"></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox" style="height:auto;">
+                    <div class="ui-item" style="height:auto;">
+                        <div class="tit">营业执照<span style="color:red;">*</span></div>
+                        <div class="inp" style="height:auto;"><img src="~/public/images/sc.png" id="PhotoZ" style="width:50px;" onclick="weiXinImg()" /></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox"  style="height:auto;">
+                    <div class="ui-item"  style="height:auto;">
+                        <div class="tit">店面照片<span style="color:red;">*</span></div>
+                        <div class="inp"  style="height:auto;"><img src="~/public/images/sc.png" id="PhotoF" style="width:50px;" onclick="weiXinImg1()" /></div>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">温馨提示</div>
+                    </div>
+                    <div class="smin">
+                        <p>用于登录多商户后台,请认真填写,请填写正确的信息以保证快速审核！</p>
+                    </div>
+                </div>
+                <div class="ui-line18"></div>
+                <div class="pay-info">
+                    <div class="p p2" style="width:100%;"><a id="go" onclick="addService()">立即申请入驻</a></div>
+                </div>
+            </div>
+        </div>
+        <div id="container"></div>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+        <script type="text/javascript">
+
+            var map = new BMap.Map("container");
+            $(function () {
+               
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: "wx62b5712fd19c318a", // 必填，公众号的唯一标识
+                    timestamp: '@((ViewData["ShareViewModel"] as ShareViewModel).timestamp)', // 必填，生成签名的时间戳
+                    nonceStr: '@((ViewData["ShareViewModel"] as ShareViewModel).nonceStr)', // 必填，生成签名的随机串
+                    signature: '@((ViewData["ShareViewModel"] as ShareViewModel).signature)',// 必填，签名，见附录1
+                    jsApiList: ['chooseImage', 'uploadImage', 'previewImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+            })
+
+
+            function weiXinImg() {
+                wx.chooseImage({
+                    count: 1, // 默认9
+                    sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: function (res) {
+                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        $("#PhotoZ").attr("src", localIds[0]);
+                        weiXinUpload(localIds[0]);
+                    }
+                });
+            }
+
+            function weiXinImg1() {
+                wx.chooseImage({
+                    count: 1, // 默认9
+                    sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: function (res) {
+                        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        $("#PhotoF").attr("src", localIds[0]);
+                        weiXinUpload1(localIds[0]);
+                    }
+                });
+            }
+
+
+            function weiXinUpload(localIds) {
+                wx.uploadImage({
+                    localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得 
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        var serverId = res.serverId; // 返回图片的服务器端ID
+                        $('#ShidPhotoZ').val(serverId);
+                    }
+                });
+            }
+
+            function weiXinUpload1(localIds) {
+                wx.uploadImage({
+                    localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得 
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: function (res) {
+                        var serverId = res.serverId; // 返回图片的服务器端ID
+                        $('#ShidPhotoF').val(serverId);
+                    }
+                });
+            }
+            var lng = "";
+            var lat = "";
+            var localSearch = new BMap.LocalSearch(map);
+            function searchByStationName(keyword) {
+                map.clearOverlays();//清空原来的标注
+                localSearch.setSearchCompleteCallback(function (searchResult) {
+                    var poi = searchResult.getPoi(0);
+                    lng = poi.point.lng;
+                    lat = poi.point.lat;
+                });
+                localSearch.search(keyword);
+            }
+            function addService() {
+                var txt = $("#go").text();
+                if (txt == "立即申请入驻") {
+
+                    var Storefront = $("#ShidPhotoZ").val();//店面照片
+                    var license = $("#ShidPhotoF").val();//营业执照
+
+                    var ShopName = $("#ShopName").val();//商户名称
+                    var Business = $("#Business").val();//主营项目
+                    var Introduce = $("#Introduce").val();//简单介绍
+                    var ShopAddress = $("#ShopAddress").val();//详细地址
+                    
+
+                    var Contacts = $("#Contacts").val();//联系人
+                    var Phone = $("#Phone").val();//手机号
+                    var UserName = $("#UserName").val();
+                    var Pwd = $("#Pwd").val();
+
+                    if (Storefront == "") {
+                        alert("请上传营业执照！");
+                        return false;
+                    }
+                    else if (license == "") {
+                        alert("请上传店面照片！");
+                        return false;
+                    }
+                    else if (ShopName == "") {
+                        alert("请填写商户名称！");
+                        return false;
+                    }
+                    else if (Business == "") {
+                        alert("请填写主营项目！");
+                        return false;
+                    }
+                    else if (Introduce == "") {
+                        alert("请填写简单介绍！");
+                        return false;
+                    }
+                    else if (ShopAddress == "") {
+                        alert("请填写详细地址!");
+                    }
+                    else if (Contacts == "") {
+                        alert("请填写联系人!");
+                    }
+                    else if (Phone == "") {
+                        alert("请填写手机号!");
+                    }
+                    else if (UserName == "") {
+                        alert("请填写登录名!");
+                    }
+                    else if (Pwd == "") {
+                        alert("请填写密码!");
+                    }
+                    else {
+
+                        searchByStationName(ShopAddress);
+                        if (lat == "" || lng == "") {
+                            alert("地址获取失败！请填写正确准确地址！");
+                        }
+                        else {
+                            $("#go").val("提交中");
+                            var parm = {
+                                license: license,
+                                Storefront: Storefront,
+                                ShopName: ShopName,
+                                Business: Business,
+                                Introduce: Introduce,
+                                ShopAddress: ShopAddress,
+                                Contacts: Contacts,
+                                Phone: Phone,
+                                UserName: UserName,
+                                Pwd: Pwd,
+                                lng: lng,
+                                lat:lat
+                            }
+
+                            $.ajax({
+                                type: 'post',
+                                url: '@Url.Content("~/Business/Regs")',
+                                data: parm,
+                                success: function (data) {
+                                    if (data == "ok") {
+                                        alert("申请成功!");
+
+                                    }
+                                    else {
+                                        alert(data)
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+                else {
+                    alert("提交中！")
+                }
+
+            }
+        </script>
+</body>
+</html>

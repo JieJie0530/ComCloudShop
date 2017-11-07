@@ -5,20 +5,21 @@
 }
 @model ComCloudShop.ViewModel.ProductExtendResultModel
 @using System.Web.Configuration;
-
+<link href="~/public/js/zy.media.min.css" rel="stylesheet" />
+<script src="~/public/js/zy.media.min.js"></script>
 <div class="wrapper">
     <!-- Slider main container -->
-    <div class="swiper-container">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)" alt=""></div>
-            <div class="swiper-slide"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P2)" alt=""></div>
-            <div class="swiper-slide"><img src="@WebConfigurationManager.AppSettings["imgurl"]@(Model.P3)" alt=""></div>
+    <div>
+        <div class="playvideo">
+            <div class="zy_media">
+                <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
+                    <source src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)"  type="video/mp4">
+                </video>
+            </div>
+            <div id="modelView">&nbsp;</div>
         </div>
-        <!-- If we need pagination -->
-        <div class="swiper-pagination"></div>
     </div>
+    <div class="clearfix"></div>
     <div class="pdtinfo">
         <input type="hidden" id="pid" value="@Model.ProductId" />
         <div class="pdtTitle">
@@ -33,13 +34,13 @@
             else
             {
                 <span class="fontR">￥@string.Format("{0:N}", Model.Sale * Model.Discount)</span>
-                <span class="fontNO">￥@string.Format("{0:N}", Model.Sale)<i class="discount">@(Model.Discount*10) 折</i></span>
+                <span class="fontNO" style="display:none;">￥@string.Format("{0:N}", Model.Sale)<i class="discount">@(Model.Discount * 10) 折</i></span>
             }
         </div>
         <div class="clearfix"></div>
     </div>
-    <ul class="pdtsale">
-        <li>
+    <ul class="pdtsale" style="display:none;">
+        <li style="display:none;">
             <i class="discount">促 销</i>
             <p></p>
         </li>
@@ -53,46 +54,118 @@
         </li>
     </ul>
     <dl class="pdtDes">
-        <dt><h2>产品详情</h2></dt>
-        <dd>
-            <div>月龄：<span>@(Model.BeginUseAge + "个月" + (Model.EndUseAge == 0 ? "" : "~" + Model.EndUseAge + "个月"))</span></div>
-            <div>品种：
+        <dt><h2 class="hover" vel="0">产品详情</h2><h2 vel="1">评论列表</h2></dt>
+        <dd class="prodetial">
+            <div>
+                品种：
                 <span>@(Model.Category.FirstOrDefault(x => x.CategoryType == "种类").CategoryName)</span>
             </div>
             @*<div>功能：
-                    <span>
-                    @(Model.Category.FirstOrDefault(x => x.CategoryType == "功能").CategoryName)
-                    </span>
-            </div>*@
-            <div>重量：<span>@(Model.Weight)g</span></div>
+                        <span>
+                        @(Model.Category.FirstOrDefault(x => x.CategoryType == "功能").CategoryName)
+                        </span>
+                </div>*@
+            <div style="display:none;">重量：<span>@(Model.Weight)g</span></div>
+            
         </dd>
-        @foreach(var data in Model.Detail)
-        {
-            if(!string.IsNullOrEmpty(data.A1))
+        @{
+            if (Model.Detail != null)
             {
-                <dd>
-                    <div>@(data.A1)：<span>@(data.A2)</span></div>
-                </dd>
+                foreach (var data in Model.Detail)
+                {
+                    if (!string.IsNullOrEmpty(data.A1))
+                    {
+                        <dd class="prodetial">
+                            <div>@(data.A1)：<span>@(data.A2)</span></div>
+                        </dd>
+                    }
+                }
             }
-        }
-    </dl>
-    <div class="logo-bottom pdtlogo">
-        <img src="~/public/images/logo2.png" alt="">
-    </div>
-</div>
+            <div class="xqimg prodetial">
+                @(new HtmlString(Model.Contents))
+            </div>
 
-<!--   公用-->
-<div class="mainNav mainNav2">
-    <ul>
-        <li><a href="~/Home/">首页<i class="nav01"></i></a></li>
-        <li><a href="javascript:;" class="addTocart">加入购物车</a></li>
-        <li><a href="javascript:;" class="buyNow">立即购买</a></li>
-        <li><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
-    </ul>
+        }
+        <dd class="proComm" style="padding:0; padding-bottom:20px; ">
+            <ul>
+                @{
+                    var commentlist = ViewData["CommentList"] as List<ComCloudShop.ViewModel.OrderCommentViewModel>;
+                    if (commentlist != null)
+                    {
+                        foreach (var data in commentlist)
+                        {
+                            <li class="radius5 lispl">
+                                <div class="tit radius5"> <span>@data.UserName</span> <span class="titdate">@data.AddTime</span></div>
+                                <p>评分：@data.ProductScore 分</p>
+                                <p>评论：@data.Contents</p>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </dd>
+    </dl>
 </div>
+<style type="text/css">
+    .list li {
+    background: #FFF;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+    .list li .tit {
+    height: 2.2rem;
+    line-height: 2.2rem;
+    background: #f8f8f8;
+    padding: 0 0.5rem;
+    text-align: right;
+    color: #999;
+}
+    .list li .tit span {
+    float: left;
+    color: #333;
+}
+    .list li p {
+    line-height: 1.5rem;
+    display: block;
+    padding: 0 0.5rem;
+}
+</style>
+
+<script>
+//document.documentElement.style.overflow='hidden';
+document.body.style.overflow='hidden';
+zymedia('video',{autoplay: true});
+var screenheight = window.screen.height/2;
+var videoheight = $(".zy_media").height()/2;
+var padding_top = screenheight-videoheight;
+$(".playvideo").css({"top":padding_top});
+</script>
+
 <!--   轮播图-->
 <script type="text/javascript">
     $(function () {
+        $(".proComm").css("display", "none");
+        $(".prodetial").css("display", "block");
+
+        var hlist = $(".pdtDes dt h2");
+        hlist.click(function () {
+            hlist.removeClass("hover");
+            $(this).addClass("hover");
+            var vel = $(this).attr("vel");
+            if (vel == "0") {
+                $(".proComm").css("display", "none");
+                $(".prodetial").css("display", "block");
+            }
+            else {
+                $(".proComm").css("display", "block");
+                $(".prodetial").css("display", "none");
+            }
+        })
+
+        var imglist = $(".xqimg img");
+        imglist.each(function () {
+            $(this).attr("src", "/admin/" + $(this).attr("src"));
+        })
 
         //促销
         getSaleList = function () {
@@ -129,7 +202,7 @@
             pagination: '.swiper-pagination',
             paginationClickable: true,
         });
-
+        $(".swiper-container").height($(".swiper-container").width());
         $.ajax({
             type: 'get',
             url: '@Url.Content("~/Cart/GetCartNumber")',

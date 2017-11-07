@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "我的线下";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ComCloudShop.Service
+@model  ComCloudShop.Service.Member
+<section class="class=" wrap""="">
+    <div class="content">
+        @{
+            List<Member> list = ViewData["list"] as List<Member>;
+            if (list.Count > 0)
+            {
+                foreach (Member item in list)
+                {
+                    <a>
+                        <dl>
+                            <dt><img src="@item.HeadImgUrl" border="0"></dt>
+                            <div>
+                                <h3>&nbsp;会&nbsp;员&nbsp;名：@item.NickName</h3>
+                                <h3>加入时间：@item.CreateDate</h3>
+                            </div>
+                        </dl>
+                    </a>
+                }
+            }
+
+        }
+        
+    </div>
+</section>
+<style type="text/css">
+    .content a {
+    height: 5.0em;
+    overflow: hidden;
+    display: block;
+    padding: 0.6em;
+    background: #fff;
+    margin-bottom: 0.3em;
+    box-shadow: 1px 1px 1px #e0e0e0;
+}
+    .content a dl {
+    height: 6.0em;
+    overflow: hidden;
+    background: url(images/icon_arrow_right.png) no-repeat;
+    background-position: right 2em;
+    padding-right: 2.2em;
+}
+    .content a dl dt {
+    width: 6.6em;
+    height: 6.0em;
+    margin-right: 0.6em;
+    float: left;
+    background: #eee;
+}
+    .content a dl dt img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1em;
+}
+    .content a dl div h3 {
+    color: #333;
+    width: 96%;
+    height: 2em;
+    line-height: 2em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    font-size: 1em;
+    font-weight: 100;
+}
+</style>
+

@@ -16,6 +16,7 @@ using Senparc.Weixin.MP;
 using ComCloudShop.Layer;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.Containers;
+using ComCloudShop.Service;
 
 namespace ComCloudShop.Web.Controllers
 {
@@ -28,37 +29,33 @@ namespace ComCloudShop.Web.Controllers
             if (this.Session[AppConstant.weixinuser] == null)
             {
                 #region 本地测试
-
                 //本地测试
                 //var user = new WeixinOauthUserInfo();
                 //user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
                 //user.nickname = "杰杰";
-                //user.Id = 3533;
+                //user.Id = 3672;
                 //this.Session[AppConstant.weixinuser] = user;
                 #endregion
-
                 //#region 上线部署
-
                 //上线
-                //var data = WeiXinWebAuthorize();
-                //logger.Debug("data.error=" + data.error);
-                //if (data.error == 0)
-                //{
-                //    return RedirectToAction("Index", "Home");
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Index", "Error");
-                //}
+                var data = WeiXinWebAuthorize();
+                logger.Debug("data.error=" + data.error);
+                if (data.error == 0)
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    return RedirectToAction("Login", "User");
+                }
 
                 //#endregion
-                return RedirectToAction("Index", "Error");
             }
             return RedirectToAction("Index", "Home");
             //Response.Redirect(helper.GetAuthorizeUri(Server.UrlEncode("http://www.cc-wang.cn/authorize/do/"), OauthScope.snsapi_userinfo));
         }
+        MircoShopEntities db = new MircoShopEntities();
 
-        
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// 获取web授权数据
@@ -111,55 +108,30 @@ namespace ComCloudShop.Web.Controllers
                             model.openid = data.openid;
                             model.nickname = data_user.nickname;
                             model.headimgurl = data_user.headimgurl;
-                            var _mservice = new MemberService();
-                            var member = _mservice.GetWechatUser(data.openid);
-                            if (member.MemberId == 0)
+
+                            var models = db.Members.Where(d => d.OpenId == data_user.openid).FirstOrDefault();
+                            if (models == null)
                             {
-                                member = new MemberViewModel();
-                                member.OpenId = data.openid;
-                                member.NickName = data_user.nickname;
-                                member.HeadImgUrl = data_user.headimgurl;
-                                if (Request["MID"] != null)
-                                {
-                                    member.follow = Request["MID"].ToString();//上级
-                                    member.fsate = 1;//关系待订单确认
-                                }
-                                else {
-                                    member.follow = "";//上级
-                                }
-                                member.ISVip = 0;
-                                member.Cashbalance = "0";
-                                member.balance = "0";
-                                member.integral = 0;
-                                member.TotalIn = 0;
-                                member.Email = "zj";
-                                if (_mservice.Add(member))
-                                {
-                                    model.Id = _mservice.GetWechatUser(data.openid).MemberId;
-                                }
-                                else
-                                {
-                                    model.Id = 0;
-                                }
+                                this.Session["Oauth"] = data_user;
+                                result.error = 1;
                             }
                             else
                             {
-                                model.Id = member.MemberId;
-                                member.NickName = data_user.nickname;
-                                member.HeadImgUrl = data_user.headimgurl;
-                                if (member.fsate == 1) {
-                                    if (Request["MID"] != null)
-                                    {
-                                        member.follow = Request["MID"].ToString();//上级
-                                        
-                                    }
-                                }
-                                _mservice.Update(member);
+                                WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
+                                modeluser.Id = models.MemberId;
+                                modeluser.nickname = models.NickName;
+                                modeluser.headimgurl = models.HeadImgUrl;
+                                modeluser.openid = models.OpenId;
+                                modeluser.Phone = models.Mobile;
+                                modeluser.province = models.Province;
+                                modeluser.city = models.City;
+                                modeluser.country = models.Country;
+                                modeluser.sex = models.Gender;
+                                Session[AppConstant.weixinuser] = modeluser;
+                                result.error = 0;
+                                result.msg = "获取授权成功！";
                             }
-                            this.Session[AppConstant.weixinuser] = model;
                         }
-                        result.error = 0;
-                        result.msg = "获取授权成功！";
                     }
                 }
             }

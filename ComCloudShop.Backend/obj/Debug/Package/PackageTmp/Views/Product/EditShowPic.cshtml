@@ -48,7 +48,8 @@
         console.log(content);
         $.post("/Product/EditShowPic", "Contents=" + content + "&Proid=" + id, function (obj) {
             if (obj == "ok") {
-                alert("编辑成功")
+                alert("编辑成功");
+                window.location.href = '/Product/Index';
             }
         }, "text");
     }

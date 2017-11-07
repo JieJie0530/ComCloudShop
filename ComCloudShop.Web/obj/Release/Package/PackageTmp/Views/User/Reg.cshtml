@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>注册</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#Fwxy").click(function () {
+                $("#FW").addClass("lshow");
+            });
+            $('#FW').on('click', function (event) {
+                if ($(event.target).is('#ClossFW')) {
+                    event.preventDefault();
+                    $(this).removeClass('lshow');
+                }
+            });
+        });
+
+        function addService() {
+            var txt = $("#go").text();
+            if (txt == "注册") {
+
+
+                var Phone = $("#Phone").val();//手机号
+                var Pwd = $("#Pwd").val();
+                var TJPhone = $("#TJPhone").val();//推荐人手机号
+                var vel1 = $("#vel1").val();//验证码
+                if (Phone == "") {
+                    alert("请填写手机号!");
+                }
+                else if (vel1 == "") {
+                    alert("请填写验证码!");
+                }
+                else if (Pwd == "") {
+                    alert("请填写密码!");
+                }
+                else {
+                    $("#go").val("提交中");
+                    var parm = {
+
+                        Phone: Phone,
+                        Pwd: Pwd,
+                        TJPhone: TJPhone,
+                        vel1: vel1
+                    }
+
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/User/Regs")',
+                        data: parm,
+                        success: function (data) {
+                            if (data == "ok") {
+                                alert("注册成功!");
+
+                            }
+                            else {
+                                alert(data)
+                            }
+                        }
+                    })
+                }
+            }
+            else {
+                alert("提交中！")
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m2">
+            <div class="logob">
+               <img src="/public/images/logos.png" width="100" height="100">
+            </div>
+            <div class="inputbox">
+                <div class="ui-inputbox">
+                    <div class="bf">+86</div>
+                    <div class="txt-btn"><a href="#">发送验证码</a></div>
+                    <div class="input-mini"><input type="text" id="Phone" placeholder="输入手机号码"></div>
+                </div>
+                <div class="ui-inputbox"><input type="text" id="vel1" placeholder="请输入六位短信验证码"></div>
+                <div class="ui-inputbox"><input type="password" id="Pwd" placeholder="请输入六位短信验证码"></div>
+                <div class="ui-inputbox"><input type="text"  id="TJPhone" placeholder="请输入推荐人手机号"></div>
+                <div class="login-link">
+                    <p class="s2"><a href="#">已有账号？立即登陆</a></p>
+                </div>
+            </div>
+            <div class="ui-btn b-black"><a href="#">注册</a></div>
+            <div class="login-link">
+                <p class="s1">点击代表同意<span id="Fwxy">《开间服务协议》</span></p>
+            </div>
+        </div>
+        <div id="FW" class="pop-box page pop1">
+            <div class="header">
+                <div id="ClossFW" class="h-left-txt">关闭</div>
+                <div class="h-title"><h1>服务协议</h1></div>
+            </div>
+            <div class="txtbox">
+                <h2>开间服务协议</h2>
+                <p>去哪儿网（www.qunar.com）所提供的各项服务和内容的所有权和运作权均归北京趣拿信息技术有限公司及其关联公司（以下简称“去哪儿”）所有。<b>如果您在本网站、去哪儿关联公司网站或其他去哪儿提供的移动应用或软件上（以下简称“去哪儿网”），访问、预定或使用我们的产品或服务（以上统称为“服务”），便视为您接受了以下服务协议，请仔细阅读以下内容。如果您不同意以下任何内容，请立刻停止访问本网站或使用本网站服务。</b></p>
+                <p><b>一、协议总则</b></p>
+                <p>1、本协议内容包括协议正文、去哪儿网子频道各单项服务协议及其他去哪儿已经发布的或将来可能发布的各类规则，包括但不限于 隐私政策、 免责声明、 知识产权声明、 权利声明、 旅游度假预订须知、 去哪儿旅图用户协议、 去哪儿网个人账户协议等其他协议（“其他条款”）。如果本协议与“其他条款”有不一致之处，则以“其他条款”为准。除另行明确声明外，任何去哪儿提供的服务均受本协议约束。</p>
+                <p>2、去哪儿如制订、修改本协议及/或各类规则向用户提供基于互联网以及移动网的相关服务的，应在本页面及其相应页面提前公布通知，您应该定期登陆本页面及其他相关页面，了解最新的协议内容。变更后的协议和规则在本页面及相关页面公布后七天，将自动生效。<b>如您不同意相关变更，应当立即停止访问去哪儿网或使用去哪儿服务。若您在网站协议和规则变更七日后继续使用去哪儿服务的，即表示您接受已经修订的协议和规则。</b></p>
+                <p>若您作为去哪儿的关联公司或合作公司的用户登陆去哪儿平台，访问去哪儿网站或使用去哪儿服务，即视为您同意本协议的所有条款及去哪儿公布的其他规则、说明和操作指引。</p>
+                <p><b>二、用户权利</b></p>
+                <p>在您完成注册申请手续后，意味着您已获得去哪儿账户（用户名）的使用权。您应提供及时、详尽及准确的个人资料，并不断更新注册资料，符合及时、详尽准确的要求。您应妥善保管您的账户（用户名）和密码，通过您的账户（用户名）和密码操作或实施的行为，将视为您本人的行为，由您本人承担相应的责任和后果。如果您发现他人不当使用您的账户或有任何其他可能危及您的账户安全的情形时，您应当立即以书面、有效方式通知去哪儿，要求去哪儿暂停相关服务。在此，您理解去哪儿对您的请求采取行动需要合理时间，去哪儿对在采取行动前已经产生的后果（包括但不限于您的任何损失）不承担任何责任。</p>
+                <p><b>三、使用规则</b></p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

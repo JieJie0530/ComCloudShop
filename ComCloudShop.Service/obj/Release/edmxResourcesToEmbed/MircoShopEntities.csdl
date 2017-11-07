@@ -143,6 +143,15 @@
     <EntitySet Name="ErpOrders" EntityType="MircoShopModel.ErpOrder" />
     <EntitySet Name="OrderDetails" EntityType="MircoShopModel.OrderDetail" />
     <EntitySet Name="MeIntegrals" EntityType="MircoShopModel.MeIntegral" />
+    <EntitySet Name="Withdrawals" EntityType="MircoShopModel.Withdrawal" />
+    <EntitySet Name="OrderComments" EntityType="MircoShopModel.OrderComment" />
+    <EntitySet Name="OrderReturns" EntityType="MircoShopModel.OrderReturn" />
+    <EntitySet Name="ProductBrands" EntityType="MircoShopModel.ProductBrand" />
+    <EntitySet Name="Recharges" EntityType="MircoShopModel.Recharge" />
+    <EntitySet Name="Mangers" EntityType="MircoShopModel.Manger" />
+    <EntitySet Name="GiftLists" EntityType="MircoShopModel.GiftList" />
+    <EntitySet Name="IntLists" EntityType="MircoShopModel.IntList" />
+    <EntitySet Name="MangerCates" EntityType="MircoShopModel.MangerCate" />
   </EntityContainer>
   <EntityType Name="HomeImage">
     <Key>
@@ -153,6 +162,7 @@
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="Useful" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Link" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sort" Type="Int32" />
   </EntityType>
   <EntityType Name="ProductSaleGroup">
     <Key>
@@ -208,6 +218,7 @@
     <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsShow" Type="Boolean" Nullable="false" />
+    <Property Name="SPGG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Member">
     <Key>
@@ -225,13 +236,20 @@
     <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
     <Property Name="ContactAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="OrignKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OrignKey" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="LastLoginDate" Type="Int32" />
     <Property Name="LoginDate" Type="Int32" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="QQ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Birth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="follow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="balance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cashbalance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fsate" Type="Int32" />
+    <Property Name="ISVip" Type="Int32" />
+    <Property Name="integral" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalIn" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -242,6 +260,7 @@
     <Property Name="CategoryType" Type="Int32" Nullable="false" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="ParentId" Type="Int32" />
+    <Property Name="BrandPic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CategoryRelation">
     <Key>
@@ -283,9 +302,9 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
-    <Property Name="mail" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="itemsns" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
-    <Property Name="prices" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="mail" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="itemsns" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="prices" MaxLength="200" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="nums" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="receiver_name" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="receiver_address" MaxLength="100" FixedLength="false" Unicode="true" Type="String" />
@@ -305,6 +324,7 @@
     <Property Name="err_message" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" Type="String" />
     <Property Name="ctime" Nullable="false" Precision="3" Type="DateTime" />
     <Property Name="isresend" Type="Boolean" Nullable="false" />
+    <Property Name="skusns" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -337,7 +357,8 @@
     <Property Name="Receipt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ReceiptType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Original" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Jifen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Jifen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SPGG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="MeIntegral">
     <Key>
@@ -346,5 +367,135 @@
     <Property Name="OpenId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="JiFen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Withdrawal">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="DZTime" Type="DateTime" Precision="3" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="Remack" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TrueName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Types" Type="Int32" />
+  </EntityType>
+  <EntityType Name="OrderComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="OrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Contents" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Pics" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ProductScore" Type="Int32" />
+    <Property Name="ProductPackaging" Type="Int32" />
+    <Property Name="DeliverySpeed" Type="Int32" />
+    <Property Name="Remack" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrderReturn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="OrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Statu" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bank" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductBrand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandPic" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Sort" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Recharge">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="State" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Manger">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OpenID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShopName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ShopAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Lng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Proportion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsRecommend" Type="Int32" />
+    <Property Name="balance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Contacts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="license" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Storefront" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Business" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Introduce" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" />
+  </EntityType>
+  <EntityType Name="GiftList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="LQTime" Type="DateTime" Precision="3" />
+    <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Int32" />
+  </EntityType>
+  <EntityType Name="IntList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="MangerCate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Sort" Type="Int32" />
   </EntityType>
 </Schema>

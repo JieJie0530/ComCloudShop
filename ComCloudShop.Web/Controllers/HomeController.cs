@@ -14,7 +14,7 @@ using ComCloudShop.Service;
 
 namespace ComCloudShop.Web.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly ProductService _service = new ProductService();
 
@@ -47,7 +47,7 @@ namespace ComCloudShop.Web.Controllers
             }
             catch(Exception e)
             {
-               return Error();
+                return null;
             }
         }
         public ActionResult ShopList()
@@ -61,23 +61,6 @@ namespace ComCloudShop.Web.Controllers
             return View(list);
         }
 
-        public ActionResult User() 
-        {
-            return View(UserInfo);
-        }
-
-
-        public ActionResult Map() {
-            int id = Convert.ToInt32(Request["id"]);
-            ComCloudShop.Service.Manger model = db.Mangers.Where(d => d.ID == id).FirstOrDefault();
-            return View(model);
-        }
-
-        public ActionResult Shop() {
-            int id = Convert.ToInt32(Request["id"]);
-            ComCloudShop.Service.Manger model=  db.Mangers.Where(d => d.ID == id).FirstOrDefault();
-            return View(model);
-        }
 
 
 

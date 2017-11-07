@@ -246,11 +246,11 @@ namespace ComCloudShop.Web.Controllers
 
                     var data = new OrderAddParmModel();
                     data.CartList = parm.list;
-                    data.AddressId = parm.aid;
+                    data.AddressId =0;
                     data.CouponId = parm.cid;
                     data.MemberId = UserInfo.Id;
                     data.Remark = remark;
-                    data.KuaiDi = WebConfigurationManager.AppSettings["KUAIDI"];
+                    data.KuaiDi = "";
                     data.Carriage = decimal.Parse(Request["Carriage"]);
                     data.SPGG= Request["spgg"].ToString();
                     if (Request["Jifen"] == "")

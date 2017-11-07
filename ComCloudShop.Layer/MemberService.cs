@@ -56,6 +56,8 @@ namespace ComCloudShop.Layer
                     m.TotalIn = model.TotalIn;
                     m.integral = model.integral;
                     m.Email = model.Email;
+                    m.QQ = model.QQ;
+                    m.Mobile = model.Mobile;
                     try
                     {
                         db.Members.Add(m);

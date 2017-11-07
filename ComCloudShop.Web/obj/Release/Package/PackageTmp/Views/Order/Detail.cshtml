@@ -34,17 +34,33 @@
             </dt>
             @foreach (var data in Model.list)
             {
-                <dd>
-                    <div class="productInfo">
-                        <a href="~/Product/Detail?pid=@(data.ProductId)"><h2>@data.SPMC</h2></a>
-                        <span class="fontR">￥@data.BuySale</span>
-                        <div class="pdtnumber">@data.Number</div>
-                    </div>
-                    <div class="productImg">
-                        <img src="@(WebConfigurationManager.AppSettings["imgurl"]+data.Pic)" alt="">
-                    </div>
-                </dd>
-            }
+                if (data.BuySale > 0)
+                {
+                    <dd>
+                        <div class="productInfo">
+                            <a href="~/Product/Detail?pid=@(data.ProductId)"><h2>@data.SPMC</h2></a>
+                            <span class="fontR">￥@data.BuySale</span>
+                            <div class="pdtnumber">@data.Number</div>
+                        </div>
+                        <div class="productImg">
+                            <img src="@(WebConfigurationManager.AppSettings["imgurl"] + data.Pic)" alt="">
+                        </div>
+                        <div class="btnPl">
+                            @{
+                                if (data.Status == 0)
+                                {
+                                    <a href="~/Order/ReturnOrder?ProductID=@data.ProductId&OrderNum=@Model.OrderNum" class="lookBtn1">申请退货</a>
+                                }
+
+                                if (Model.Status == 2)
+                                {
+                                    <a href="~/Order/OrderComment?ProductID=@data.ProductId&OrderNum=@Model.OrderNum" class="lookBtn">评论</a>
+                                }
+                            }
+                        </div>
+                    </dd>
+                                    }
+                                }
         </dl>
         <div class="totalmoney">
             <ul>

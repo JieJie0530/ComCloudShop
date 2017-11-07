@@ -4,30 +4,32 @@
 
 @model IEnumerable<ComCloudShop.ViewModel.ProductViewModel>
 @using System.Web.Configuration;
+
 <div class="wrapper">
     <div class="hdFilter">
         <div class="topfilter">
             <div class="searchInput">
                 <div class="search-input">
                     <input type="text">
-                    <i class="icon-search"></i>
+                    
                     <a class="icon-delete"></a>
+                    <i class="icon-search"></i>
                 </div>
             </div>
             <div class="searchBox">
-                <span>筛 选</span>
+                <span>分 类</span>
             </div>
             <div class="clearfix"></div>
         </div>
         <!-- 筛选-->
         <div class="search-box">
             <ul>
-                <li>
+                <li style="min-height:25px;">
                     <div class="varietyTitle">产品类别<span class="hover" type="0">全 部</span></div>
                     <div class="variety">
                     </div>
                 </li>
-                <li>
+                <li style="display:none;">
                     <div class="varietyTitle">月 龄<span class="hover" begin="0" end="0">全 部</span></div>
                     <div class="variety">
                         <span begin="6" end="12">6月-1岁</span>
@@ -38,9 +40,20 @@
             </ul>
         </div>
         <ul class="filterbox">
-            <li>默 认</li>
-            <li>价 格<i class="icon-filter"></i></li>
-            <li>销 量<i class="icon-filter"></i></li>
+            <li style="width:20%;">默 认</li>
+            <li style="width:50%;">
+                价格区间：
+                <select id="Sel_price" style="width:50%; padding:5px 0;">
+                    <option value="">全部</option>
+                    <option value="0,50">0~50</option>
+                    <option value="50,100">50～100</option>
+                    <option value="100,200">100～200</option>
+                    <option value="200,500">200~500</option>
+                    <option value="500,1000">500~1000</option>
+                    <option value="1000,">1000以上</option>
+                </select>
+            </li>
+            <li style="width:30%;">销 量<i class="icon-filter"></i></li>
         </ul>
     </div>
     <!--       产品列表-->
@@ -64,9 +77,6 @@
             }*@
         </ul>
     </div>
-    <div class="logo-bottom mb60">
-        <img src="~/public/images/logo.png" alt="">
-    </div>
 </div>
 
 <script type="text/javascript" src="~/public/js/jquery.min.js"></script>
@@ -75,6 +85,8 @@
     $(function () {
 
         var search = "@ViewBag.Search";
+        var type = "@ViewBag.type";
+        var brand = "@ViewBag.brand";
         $('.search-input input').val(search);
         var isadd = 0;//是否添加html
         var isend = 0;//是否数据已加载完成
@@ -83,16 +95,28 @@
         //    search = GetQueryString("search");
         //    $('.search-input input').val(search);
         //}
-        console.log(search);
+        var minprice=0;
+        var maxprice=0;
+        var price = $("#Sel_price").val();
+        if (price != "") {
+            minprice= price.split(',')[0];
+            maxprice = price.split(',')[1];
+        }
+       
+        
+        
         var parm = {
+            spgg:0,
             page: 1,
             size: 10,
             search: search,
-            type: 0,
-            begin: 0,
-            end: 0
+            type: type,
+            begin: brand,
+            end: 0,
+            minprice: minprice,
+            maxprice: maxprice
         };
-
+        console.log(parm);
         getPageList = function () {
             $.ajax({
                 type: 'get',
@@ -106,13 +130,13 @@
                         }
                         var html = "";
                         $.each(data.result, function (i, item) {
-                            html += "<li><div class=\"productInfo\">" +
-                                           "<a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + item.ProductId + "\"><h2>" + (item.SPMC == null ? "" : item.SPMC) + "</h2></a>" +
-                                           "<p>" + (item.Describle == null ? "" : item.Describle) + "</p><p>建议" + item.BeginUseAge + "个月及以上宝宝适用</p>" +
-                                           "<p class=\"fontR\">￥<span>" + item.Sale + "</span></p></div><div class=\"productImg\">" +
+                            html += "<li><div class=\"productImg\">" +
                                            "<a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + item.ProductId + "\">" +
                                            "<img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\">" +
-                                           "</a></div></li>"
+                                           "</a></div><div class=\"productInfo\">" +
+                                           "<a href=\"" + "@Url.Content("~/Product/Detail?pid=")" + item.ProductId + "\"><h2>" + (item.SPMC == null ? "" : item.SPMC) + "</h2></a>" +
+                                           "<p>" + (item.Describle == null ? "" : item.Describle) + "</p>" +
+                                           "<p class=\"fontR\">￥<span>" + item.Sale + "</span></p></div></li>"
                         });
                         if (isadd == 0) {
                             $('.pdt-List ul').html(html);
@@ -131,6 +155,7 @@
             $.ajax({
                 type: 'get',
                 url: '@Url.Content("~/Product/GetCategoryList")',
+                data: "types=" + type,
                 success: function (data) {
                     if (data.error == 0) {var html = "";
                         $.each(data.result, function (i, item) {
@@ -179,33 +204,54 @@
             return parseFloat($(a).find('.fontR>span').text()) > parseFloat($(b).find('.fontR>span').text()) ? -1 : 1;
         }
 
-        var sortByDiv = function(sortBy) {
-            var sortEle = $('.pdt-List li').sort(sortBy);
-            //排列的那个div
-            $('.pdt-List ul').empty().append(sortEle);
-        }
+        //var sortByDiv = function(sortBy) {
+        //    var sortEle = $('.pdt-List li').sort(sortBy);
+        //    //排列的那个div
+        //    $('.pdt-List ul').empty().append(sortEle);
+        //}
 
-        $('.hdFilter .filterbox li:nth-child(2)').toggle(function(){
-            //点击的那个点
-            $(this).find("i").addClass("hover-down").removeClass("hover-up");
-            sortByDiv(asc);
+        //$('.hdFilter .filterbox li:nth-child(2)').toggle(function(){
+        //    //点击的那个点
+        //    $(this).find("i").addClass("hover-down").removeClass("hover-up");
+        //    sortByDiv(asc);
 
-        },function(){
-            $(this).find("i").addClass("hover-up").removeClass("hover-down");
-            sortByDiv(desc);
-        });
+        //},function(){
+        //    $(this).find("i").addClass("hover-up").removeClass("hover-down");
+        //    sortByDiv(desc);
+        //});
 
         //筛选信息框
         $(".hdFilter .topfilter .searchBox").click(function () {
             $(this).parents(".hdFilter").find(".search-box").slideToggle();
         });
+        $("#Sel_price").change(function () {
+            parm.page = 1;
+            isadd = 0;
+            isend = 0;
+            parm.search = $(this).parent('.search-input').find('input').val();
+            var price = $("#Sel_price").val();
+            if (price != "") {
+                minprice = price.split(',')[0];
+                maxprice = price.split(',')[1];
 
+                parm.minprice = minprice;
+                parm.maxprice = maxprice;
+            }
+            getPageList();
+        })
         //查询icon
         $('.hdFilter .search-input .icon-search').click(function () {
             parm.page = 1;
             isadd = 0;
             isend = 0;
             parm.search = $(this).parent('.search-input').find('input').val();
+            var price = $("#Sel_price").val();
+            if (price != "") {
+                minprice = price.split(',')[0];
+                maxprice = price.split(',')[1];
+                parm.minprice = minprice;
+                parm.maxprice = maxprice;
+            }
             getPageList();
         });
 
@@ -216,6 +262,8 @@
 
         $(".hdFilter .searchInput input").focus(function () {
             $(".icon-delete").show();
+            $(".icon-search").hide();
+            alert("sdf")
         });
         $('.icon-delete').click(function () {
             $(this).parent('.search-input').find('input').val('');
@@ -236,7 +284,10 @@
                 getPageList();
             }
         });
-
     });
-
 </script>
+<style type="text/css">
+select{
+-webkit-appearance: none;
+}
+</style>

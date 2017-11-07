@@ -5,21 +5,6 @@
 @model ComCloudShop.ViewModel.OrderConfigViewModel
 
 <div class="wrapper">
-    <div class="addAddress">
-        @if (Model.address.AddressId > 0)
-        {
-            <a href="~/Address/List?c=order" title="@Model.address.AddressId">
-                <p><span class="name">@Model.address.UserName</span><span class="tel">@Model.address.Mobile</span></p>
-                <p class="address">@Model.address.Province @Model.address.City @Model.address.District @Model.address.Address</p>
-            </a>
-        }
-        else
-        {
-            <a href="~/Address/List?c=order">
-                请填写收货信息
-            </a>
-        }
-    </div>
     <div class="pdtlist orderlist listInfo mb60">
         <dl>
             <dt>
@@ -44,11 +29,11 @@
     <div class="totalInfo">
         <ul>
             <li><span>商品价格：</span><label class="fontR">￥<span class="spprice">@(Model.list.Sum(x => x.Sale * x.Discount * x.ProductNum).ToString("0.00"))</span></label></li>
-            <li><span>运&emsp;&emsp;费： </span><label>￥<span class="kdprice">@(decimal.Parse(WebConfigurationManager.AppSettings["courier"])*Model.list.Where(d=> d.Sale > 0).Sum(x=>x.ProductNum))</span></label></li>
+            <li style="display:none;"><span>运&emsp;&emsp;费： </span><label>￥<span class="kdprice">0</span></label></li>
             <li style="display:none;"><span>满&emsp;&emsp;减： </span><label>-￥@(Model.rule.Discount)</label></li>
             <li style="display:none;"><span>优&emsp;&emsp;惠： </span><label><a href="~/Coupon?c=order" title="@Model.coupon.CouponId" id="coupon">-￥@(string.Format("{0:N}", Model.coupon.Amount))<i class="icon-more"></i></a></label></li>
-            <li><span>现有积分： </span><label class="xyjf">0</label></li>
-            <li><span>使用积分： </span><label><input type="text" id="txt_Use" placeholder="请手动输入积分" style="text-align:left; width:130px; border:1px solid red; "></label></li>
+            <li style="display:none;"><span>现有积分： </span><label class="xyjf">0</label></li>
+            <li style="display:none;"><span>使用积分： </span><label><input type="text" id="txt_Use" placeholder="请手动输入积分" style="text-align:left; width:130px; border:1px solid red; "></label></li>
             <li style="display:none;"><span>积分优惠： </span><label class="yhmoney">0</label></li>
             
         </ul>
@@ -106,32 +91,13 @@
                 JS();
             })
 
-        $.ajax({
-            type: 'post',
-            async: false,
-            url: '@Url.Content("~/User/GetMemberInfo")',
-            success: function (data) {
-                    if (data.error == 1) {
-                       $(".xyjf").text(data.result.integral);
-                    }
-                    else {
-                        alert(data.msg);
-                    }
-                }
-            })
-
         //微信支付
         $('#wxpay').on('click', function () {
-                var address = $('.addAddress a').attr('title');
-                if (address == undefined || address == "") {
-                $('.layerbox1').show();
-                    return;
-                }
                 var sfprice = parseFloat($(".sfprice").text());
                 var Carriage = parseFloat($(".kdprice").text());
                 var spgg = $(".prolist").eq(0).attr("vel");
                 var parm = {
-                aid: address,
+                aid: "",
                 cid: $('#coupon').attr('title'),
                 remark: $('#remark').val(),
                 url: "",

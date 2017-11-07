@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+@model ComCloudShop.Service.Member
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>积分支付</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <style type="text/css">
+        .main {
+           padding:50px 20px;
+        }
+        .showp{ font-size:20px; font-family:微软雅黑; margin-bottom:30px;}
+            .showp input {
+               height:40px; border:none; border-bottom:1px solid #ececec; width:100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="h-left-black"></div>
+        <div class="h-title"><h1>积分支付</h1></div>
+    </div>
+    <div class="main">
+        <p class="showp" style="font-size:15px;">剩余可用积分：@Model.integral</p> 
+        <p class="showp" style=" margin-top:60px;"> 请输入积分<input type="tel" id="integral" /></p>
+        <p class="showp" style="font-size:15px;">输入积分时请与商家确定积分无误</p> 
+            <div id="QDInt" style=" margin-top:20px;" class="ui-btn b-black"><a class="QDInta" href="#">积分付款</a></div>
+        <div style=" margin-top:20px;" class="ui-btn b-black"><a href="/User/BuyCard">积分充值</a></div>
+     </div>
+    <script type="text/javascript">
+        $("#QDInt").click(function () {
+            var txt = $(".QDInta").text();
+            if (txt == "积分付款") {
+                var Price = $("#integral").val();
+                var State = 0;
+                var ManageID = '@ViewData["ManageID"]';
+                var MemberID = '@ViewData["MemberID"]';
+                var balance = '@Model.integral';
+                var parm = {
+                    MemberID: MemberID,
+                    Price: Price,
+                    ManageID: ManageID,
+                    State: State
+                }
+                if (parseFloat(Price) > parseFloat(balance)) {
+                    alert("积分不足!");
+                }
+                else {
+                    $(".QDInta").text("支付中");
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/User/AddIntList")',
+                        data: parm,
+                        success: function (data) {
+                            if (data == "ok") {
+                                alert("申请成功!");
+                                window.location.href = "/User/Index";
+                            }
+                            else {
+                                alert("申请失败!")
+                            }
+                        }
+                    })
+                }
+            } else {
+                alert("支付中！");
+            }
+        })
+    </script>
+</body>
+</html>

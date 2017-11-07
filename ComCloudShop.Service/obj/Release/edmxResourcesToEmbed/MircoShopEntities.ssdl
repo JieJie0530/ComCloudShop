@@ -21,6 +21,7 @@
     <Property Name="CategoryType" Type="int" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ParentId" Type="int" />
+    <Property Name="BrandPic" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="CategoryRelation">
     <Key>
@@ -66,9 +67,10 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="mail" Type="nvarchar" MaxLength="50" />
-    <Property Name="itemsns" Type="nvarchar" MaxLength="50" />
-    <Property Name="prices" Type="nvarchar" MaxLength="100" />
+    <Property Name="mail" Type="nvarchar" MaxLength="200" />
+    <Property Name="itemsns" Type="nvarchar" MaxLength="200" />
+    <Property Name="skusns" Type="varchar" MaxLength="200" />
+    <Property Name="prices" Type="nvarchar" MaxLength="200" />
     <Property Name="nums" Type="nvarchar" MaxLength="500" />
     <Property Name="receiver_name" Type="nvarchar" MaxLength="100" />
     <Property Name="receiver_address" Type="nvarchar" MaxLength="100" />
@@ -88,6 +90,19 @@
     <Property Name="err_message" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="ctime" Type="datetime" Nullable="false" />
     <Property Name="isresend" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GiftList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductID" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="LQTime" Type="datetime" />
+    <Property Name="OrderID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ManagerID" Type="nvarchar" MaxLength="50" />
+    <Property Name="State" Type="int" />
   </EntityType>
   <EntityType Name="GroupRelation">
     <Key>
@@ -117,6 +132,52 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="Useful" Type="varchar" MaxLength="255" />
     <Property Name="Link" Type="varchar" MaxLength="255" />
+    <Property Name="Sort" Type="int" />
+  </EntityType>
+  <EntityType Name="IntList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ManagerID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="State" Type="int" />
+    <Property Name="AddTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Manger">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="OpenID" Type="nvarchar" MaxLength="100" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShopName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShopAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="Lng" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lat" Type="nvarchar" MaxLength="50" />
+    <Property Name="Proportion" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsRecommend" Type="int" />
+    <Property Name="balance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Contacts" Type="nvarchar" MaxLength="50" />
+    <Property Name="license" Type="nvarchar" MaxLength="100" />
+    <Property Name="Storefront" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Business" Type="nvarchar" MaxLength="500" />
+    <Property Name="Introduce" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="int" />
+  </EntityType>
+  <EntityType Name="MangerCate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="BrandPic" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Sort" Type="int" />
   </EntityType>
   <EntityType Name="MeIntegral">
     <Key>
@@ -133,6 +194,13 @@
     <Property Name="MemberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="OpenId" Type="nvarchar" MaxLength="50" />
     <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+    <Property Name="follow" Type="nvarchar" MaxLength="50" />
+    <Property Name="fsate" Type="int" />
+    <Property Name="ISVip" Type="int" />
+    <Property Name="integral" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalIn" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="balance" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cashbalance" Type="nvarchar" MaxLength="50" />
     <Property Name="Gender" Type="tinyint" Nullable="false" />
     <Property Name="City" Type="nvarchar" MaxLength="10" />
     <Property Name="Province" Type="nvarchar" MaxLength="10" />
@@ -142,7 +210,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="40" />
     <Property Name="ContactAddr" Type="nvarchar" MaxLength="100" />
     <Property Name="CreateDate" Type="datetime" />
-    <Property Name="OrignKey" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrignKey" Type="nvarchar" MaxLength="500" />
     <Property Name="LastLoginDate" Type="int" />
     <Property Name="LoginDate" Type="int" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
@@ -158,6 +226,23 @@
     <Property Name="MemberId" Type="int" Nullable="false" />
     <Property Name="CouponId" Type="int" Nullable="false" />
     <Property Name="IsUsed" Type="bit" />
+  </EntityType>
+  <EntityType Name="OrderComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Contents" Type="nvarchar" MaxLength="500" />
+    <Property Name="Pics" Type="nvarchar" MaxLength="500" />
+    <Property Name="ProductScore" Type="int" />
+    <Property Name="ProductPackaging" Type="int" />
+    <Property Name="DeliverySpeed" Type="int" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Remack" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -190,7 +275,8 @@
     <Property Name="Receipt" Type="nvarchar" MaxLength="50" />
     <Property Name="ReceiptType" Type="nvarchar" MaxLength="50" />
     <Property Name="Original" Type="nvarchar" MaxLength="50" />
-    <Property Name="Jifen" Type="varchar" MaxLength="50" />
+    <Property Name="Jifen" Type="nvarchar" MaxLength="50" />
+    <Property Name="SPGG" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="OrderProductDetail">
     <Key>
@@ -202,6 +288,23 @@
     <Property Name="BuyNum" Type="int" Nullable="false" />
     <Property Name="BuySale" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="RealSale" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderReturn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="500" />
+    <Property Name="OrderNum" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Statu" Type="int" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Bank" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -225,6 +328,17 @@
     <Property Name="Weight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="Contents" Type="nvarchar(max)" />
     <Property Name="IsShow" Type="bit" Nullable="false" />
+    <Property Name="SPGG" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductBrand">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="BrandPic" Type="nvarchar" MaxLength="200" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Sort" Type="int" />
   </EntityType>
   <EntityType Name="ProductDetail">
     <Key>
@@ -283,6 +397,16 @@
     <Property Name="SaleOrder" Type="int" Nullable="false" />
     <Property Name="Ctime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Recharge">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="nvarchar" MaxLength="50" />
+    <Property Name="MemberID" Type="int" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="State" Type="int" />
+  </EntityType>
   <EntityType Name="ReturnOrder">
     <Key>
       <PropertyRef Name="ReturnId" />
@@ -322,6 +446,24 @@
     <Property Name="Original" Type="nvarchar" MaxLength="25" />
     <Property Name="OrderNum" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Withdrawals">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="int" />
+    <Property Name="TrueName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Bank" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="DZTime" Type="datetime" />
+    <Property Name="State" Type="int" />
+    <Property Name="Remack" Type="nvarchar" MaxLength="50" />
+    <Property Name="Types" Type="int" />
+  </EntityType>
   <EntityContainer Name="MircoShopModelStoreContainer">
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -329,22 +471,31 @@
     <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeliveryAddress" EntityType="Self.DeliveryAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErpOrder" EntityType="Self.ErpOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GiftList" EntityType="Self.GiftList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupRelation" EntityType="Self.GroupRelation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroupSaleRelation" EntityType="Self.GroupSaleRelation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomeImage" EntityType="Self.HomeImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IntList" EntityType="Self.IntList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manger" EntityType="Self.Manger" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MangerCate" EntityType="Self.MangerCate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MeIntegral" EntityType="Self.MeIntegral" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MemberCoupon" EntityType="Self.MemberCoupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderComment" EntityType="Self.OrderComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderProductDetail" EntityType="Self.OrderProductDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderReturn" EntityType="Self.OrderReturn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductBrand" EntityType="Self.ProductBrand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductDetail" EntityType="Self.ProductDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGroup" EntityType="Self.ProductGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductImg" EntityType="Self.ProductImg" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductOrder" EntityType="Self.ProductOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductSaleGroup" EntityType="Self.ProductSaleGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recharge" EntityType="Self.Recharge" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReturnOrder" EntityType="Self.ReturnOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SaleRule" EntityType="Self.SaleRule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserCoupon" EntityType="Self.UserCoupon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Withdrawals" EntityType="Self.Withdrawals" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

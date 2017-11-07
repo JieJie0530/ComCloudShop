@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+@model ComCloudShop.Service.Manger
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Qrcode</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script src="~/public/js/jquery.qrcode.min.js"></script>
+    <link href="~/public/layer_mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/public/layer_mobile/layer.js"></script>
+</head>
+<body>
+    <div class="qrcode" style="height:300px; padding-top:15px; text-align:center;">
+        <div class="code">
+            
+        </div>
+        <p style="font-size:20px; margin-top:20px;">扫一扫，输入积分完成消费</p>
+    </div>
+    <script type="text/javascript">
+        var MID = '@Model.ID';
+        $(".code").qrcode("http://mm.hofaf.com/User/Qrcode?MID=" + MID);
+    </script>
+</body>
+</html>

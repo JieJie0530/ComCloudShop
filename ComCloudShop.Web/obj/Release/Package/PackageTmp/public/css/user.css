@@ -1,0 +1,1167 @@
+
+
+.btns {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width:auto;
+}
+.btn-info {
+    background-color: #23c6c8;
+    border-color: #23c6c8;
+    color: #FFFFFF;
+}
+
+
+body{
+	background: #ecf0f3;
+}
+.top_tips{
+	padding: 0.5rem 0;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	color: #FFF;
+	font-weight: 300;
+	font-size: 0.9rem;
+
+}
+
+/*注册登陆 HZ*/
+#reg .formbox{
+	padding: 0 0.4rem 0.8rem;
+	color: #666;
+	font-size: 0.8rem;
+}
+#reg .formbox label,#reg .formbox input{
+	vertical-align: middle;
+}
+
+#reg .captchabox{
+	margin-top: 0.75rem;
+}
+#reg .captchabox input.captcha {
+	padding:0 0.5rem;
+	background:#FFF;
+	border-radius: 0.25rem;
+	border: #e3e3e3 1px solid;
+	outline: none;
+	color: #666;
+	height: 2rem;
+	line-height: 1.5em; /*注意这里是em，解决placeholder垂直居中的问题*/
+	vertical-align:middle;
+	width: 7.2rem;
+	font-size: 0.8rem;
+	font-weight: 300;
+	font-family:Helvetica;
+	display: inline-block;
+	float: left;
+}
+#reg .captchabox input.getcaptcha {
+	background:#009ef0;
+	border: #009ef0 1px solid;
+	outline: none;
+	cursor: pointer;
+	height: 2rem;
+	border-radius: 0.25rem;
+	color: #FFF;
+	width: 6.45rem;
+	font-size: 0.8rem;
+	font-family:Helvetica;
+	display: inline-block;
+	float: right;
+}
+#reg .captchabox input.locked{
+	background: #CCC;
+	border: #CCC 1px solid;
+	color: #999;
+	font-size: 0.7rem;
+}
+
+#reg .regular-checkbox {
+	display: none;
+}
+#reg .regular-checkbox + label {
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0rem -0.375rem 0.25rem -0.3rem rgba(0,0,0,0.05);
+	padding: 0.45rem;
+	border-radius: 0.25rem;
+	display: inline-block;
+	position: relative;
+}
+
+#reg .regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+#reg .regular-checkbox:checked + label {
+	background-color: #e9ecee;
+	border: 1px solid #009ef0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0rem -0.375rem 0.25rem -0.3rem rgba(0,0,0,0.05), inset 0.375rem 0.25rem -0.3rem rgba(255,255,255,0.1);
+	color: #009ef0;
+}
+#reg .regular-checkbox:checked + label:after {
+	content: '\2714';
+	font-size: 0.7rem;
+	line-height: 0.9rem;
+	position: absolute;
+	top: 0rem;
+	left: 0.075rem;
+	color: #009ef0;
+}
+
+/* RADIO */
+
+#reg .regular-radio {
+	display: none;
+}
+
+#reg .regular-radio + label {
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0rem -0.375rem 0.25rem -0.3rem rgba(0,0,0,0.05);
+	padding: 0.5rem;
+	border-radius: 50%;
+	display: inline-block;
+	position: relative;
+}
+
+#reg .regular-radio:checked + label:after {
+	content: ' ';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	position: absolute;
+	top: 0.25rem;
+	background: #99a1a7;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+	text-shadow: 0px;
+	left: 0.25rem;
+	font-size: 32px;
+}
+
+#reg .regular-radio:checked + label {
+	background-color: #e9ecee;
+	color: #99a1a7;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0rem -0.375rem 0.25rem -0.3rem rgba(0,0,0,0.05), inset 0.375rem 0.25rem -0.3rem rgba(255,255,255,0.1), inset 0rem 0rem 0.25rem rgba(0,0,0,0.1);
+}
+
+#reg .regular-radio + label:active, .regular-radio:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+
+#reg .go {
+	margin-top: 1rem;
+}
+#reg .go input{
+	height: 2rem;
+	cursor: pointer;
+	width: 100%;
+	background: #ffaa00;
+	font-size: 0.8rem;
+	font-family:Helvetica;
+	color: #FFF;
+	border: none;
+	outline: none;
+	border-radius: 0.25rem;
+}
+#reg .go input:hover,#reg .go input:active{
+	background: #ff9900;
+}
+#reg .go .w60{
+	display: block;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/*填充信息 编辑信息 HZ*/
+#reg .item{
+	margin-top: 0.5rem;
+}
+#reg .item input{
+	padding:0 0.5rem;
+	background:#FFF;
+	border-radius: 0.25rem;
+	border: #e3e3e3 1px solid;
+	outline: none;
+	color: #666;
+	height: 1.5rem;
+	line-height: 1.5em; /*注意这里是em，解决placeholder垂直居中的问题 重要的事情说三遍>_<*/
+	vertical-align:middle;
+	font-size: 0.8rem;
+	font-weight: 300;
+	font-family:Helvetica;
+}
+#reg .item textarea{
+	padding:0 0.5rem;
+	background:#FFF;
+	border-radius: 0.25rem;
+	border: #e3e3e3 1px solid;
+	outline: none;
+	color: #666;
+	height: 3.6rem;
+	line-height: 1.2rem; 
+	vertical-align:middle;
+	font-size: 0.8rem;
+	font-weight: 300;
+	font-family:Helvetica;
+}
+#reg .item select{
+	padding:0 0.5rem;
+	background:#FFF;
+	border-radius: 0.25rem;
+	border: #e3e3e3 1px solid;
+	outline: none;
+	color: #666;
+	height: 1.5rem;
+	line-height: 1.5em; /*注意这里是em*/
+	vertical-align:middle;
+	font-size: 0.8rem;
+	font-weight: 300;
+	font-family:Helvetica;
+}
+#reg .item .item_checkbox{
+	padding-top: 0.6rem;
+}
+#reg .item .item_checkbox  span{
+	font-size: 0.7rem;
+	padding-left: 0.4rem;
+}
+#reg .item .item_checkbox  .explain{
+	font-size: 0.6rem;
+	padding-left: 1.4rem;
+	color: #999;
+	padding-top: 0.2rem;
+}
+#reg .item .readonly{
+	background:#F6F6F6;
+	border: #eaeaea 1px solid;
+	color: #B5B5B5;
+}
+/*满屏select专用 W6*/
+#reg .w6{
+	width: 15.2rem;
+}
+/*满屏input专用 W5*/
+#reg .w5{
+	width: 14.15rem;
+}
+/*50%宽度*/
+#reg .w3{
+	width: 7.45rem;
+}
+#reg .w31{
+	width: 6.40rem;
+}
+
+#reg .item h2{
+	color: #333;
+	font-weight: normal;
+	font-size: 0.8rem;
+	padding-bottom: 0.3rem;
+	padding-left: 0.2rem;
+}
+#reg .item h2 em{
+	color: #F60;
+}
+#reg .item h2 span{
+	color: #009ef0;
+	font-size: 0.45rem;
+}
+#reg .item h3{
+	color: #333;
+	font-weight: normal;
+	font-size: 0.8rem;
+	padding-bottom: 0.6rem;
+	padding-left: 0.2rem;
+}
+#reg .item .tips{
+	color: #009ef0;
+	font-size: 0.5rem;
+	padding-left: 0.2rem;
+	padding-top: 0.1rem;
+}
+#reg .item .warning{
+	color: #F00;
+	font-size: 0.5rem;
+	padding-left: 0.2rem;
+	padding-top: 0.1rem;
+}
+
+
+/*跳转提示页面 HZ*/
+#reg .form_tips{
+	font-size: 0.7rem;
+}
+#reg .btn_box {
+	margin-top: 1.5rem;
+	text-align: center;
+}
+#reg .btn_box .btn_goto{
+	display: block;
+	height: 2rem;
+	line-height: 2rem;
+	text-align: center;
+	background: #ffaa00;
+	font-size: 0.8rem;
+	color: #FFF;
+	border: none;
+	border-radius: 0.25rem;
+	margin-bottom: 0.8rem;
+}
+#reg .btn_box .btn_goto:hover{
+	background: #ff9900;
+}
+#reg .btn_box .more_link{
+	display: block;
+	margin-top: 0.8rem;
+	height: 2rem;
+	line-height: 2rem;
+	text-align: center;
+	font-size: 0.8rem;
+	color: #ffaa00;
+	border-radius: 0.25rem;
+	background: #FFF;
+	border: #ECECEC 1px solid;
+}
+#reg .btn_box .w60{
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*加入企业搜索结果页 HZ*/
+#reg .co_return{
+	background: #FFF;
+	border: #E3E3E3 1px solid;
+	padding: 0.5rem;
+	margin-top: 0.5rem;
+}
+#reg .co_return h3{
+	font-size: 0.75rem;
+	font-weight: normal;
+	color: #333;
+}
+#reg .co_return .address{
+	font-size: 0.6rem;
+	padding-top: 0.4rem;
+	padding-bottom: 0.4rem;
+	margin-bottom: 0.4rem;
+	border-bottom: #ECECEC 1px dashed;
+	color: #888;
+}
+#reg .co_return .join{
+	display: inline-block;
+	padding: 0.2rem 0.4rem;
+	border-radius:0.2rem; 
+	background: #FFAA00;
+	color: #FFF;
+}
+
+
+/*个人资料 HZ*/
+#my .mybox{
+	margin-bottom: 0.4rem;
+	background: #FFF;
+	border-top: #E3E3E3 1px solid;
+}
+#my .mybox li{
+	min-height: 2rem;
+	font-size: 0.7rem;
+	padding: 0 0.4rem;
+	border-bottom: #E3E3E3 1px solid;
+}
+#my .mybox li a{
+	display: block;
+}
+#my .mybox li h4{
+	width: 4.2rem;
+	line-height: 2rem;
+	float: left;
+	font-size: 0.65rem;
+	font-weight: normal;
+}
+#my .mybox li span{
+	display: block;
+	height: 2rem;
+	line-height: 2rem;
+	overflow: hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis; 
+	width: 10rem;
+	font-size: 0.6rem;
+	float: left;
+	text-align: right;
+	color: #666;
+}
+#my .mybox li b{
+	float: right;
+	display: block;
+	text-align: right;
+	width: 0.4rem;
+	font-size: 0.9rem;
+	line-height: 2rem;
+	color: #999;
+}
+#my .mybox li.avatar{
+	height: 4rem;
+	line-height: 4rem;
+	position: relative;
+}
+#my .mybox .avatar h4,#my .mybox .avatar b{
+	line-height: 4rem;
+}
+ 
+#my .mybox li.avatar span{
+	height: 4rem;
+	overflow: visible;
+	line-height: 4rem;
+}
+#my .mybox li.avatar span i{
+	display:inline-block;
+	width: 2.6rem;
+	height: 2.6rem;
+	border: #F5F5F5 1px solid;
+	border-radius: 50%;
+	padding: 0.1rem;
+	vertical-align: middle;
+}
+#my .mybox li.avatar span i img{
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 50%;
+}
+#my .mybox li.avatar input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .01;
+	filter: alpha(opacity=1);
+	cursor: pointer;
+	z-index: 1;
+}
+
+
+/*评价管理 HZ*/
+#reg .evallistbox{
+	padding-bottom:0.8rem;
+	color: #666;
+	font-size: 0.8rem;
+}
+#reg .evalitem{
+	background: #FFF;
+	border-bottom: #E3E3E3 1px solid;
+	padding: 0.7rem 0.5rem;
+}
+#reg .evalitem:first-child{
+	border-top: #E3E3E3 1px solid;
+}
+#reg .evalitem dl{
+	padding-bottom: 0.3rem;
+}
+#reg .evalitem dt{
+	font-size: 0.65rem;
+	height: 1rem;
+	line-height: 1rem;
+	font-weight: bold;
+	color: #333;
+}
+#reg .evalitem dd{
+	font-size: 0.6rem;
+	height: 1rem;
+	line-height: 1rem;
+	overflow: hidden;
+	color: #888;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis; 
+}
+#reg .evalitem .detail{
+	font-size: 0.75rem;
+	display: inline-block;
+	padding: 0.2rem 0.4rem;
+	border-radius:0.3rem; 
+	background: #FFAA00;
+	color: #FFF;
+}
+.bottom_tips{
+	text-align: center;
+	font-size: 0.5rem;
+	color: #999;
+	padding: 0.6rem 0;
+}
+
+/*绑定汇智卡 HZ*/
+.hzcardnum{
+	text-align: center;
+	font-size: 1rem;
+	
+}
+
+
+/*用户中心主页 HZ*/
+#uc .main_hd{
+	height: 4.2rem;
+	background: url(../images/uc_topbg.jpg) no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+#uc .main_hd .avatar{
+	width: 2.6rem;
+	height: 2.6rem;
+	border-radius: 50%;
+	float: left;
+	margin: 0.5rem 0 0 0.75rem;
+	border: #E3E3E3 0.1rem solid;
+}
+#uc .main_hd .avatar img{
+	width: 2.6rem;
+	height: 2.6rem;
+	background: #FFF;
+	border-radius: 50%;
+}
+#uc .main_hd .uesr_name{
+	float: left;
+	padding-left: 0.8rem;
+	padding-top: 0.8rem;
+}
+#uc .main_hd .name{
+	font-size: 0.8rem;
+	padding-bottom: 0.15rem;
+	color: #FFF;
+}
+#uc .main_hd .mp{
+	font-size: 0.6rem;
+	color: #FFF;
+}
+#uc .main_hd .mp span{
+	display: inline-block;
+	background: rgba(0,0,0,0.4);
+	padding: 0.2rem 0.3rem;
+	border-radius: 0.3rem;
+}
+
+#uc .fun_list{
+	margin-bottom: 0.4rem;
+	background: #FFF;
+	border-top: #E3E3E3 1px solid;
+}
+
+#uc .fun_list li{
+	height: 2rem;
+	line-height: 2rem;
+	font-size: 0.7rem;
+	border-bottom: #E3E3E3 1px solid;
+}
+#uc .fun_list li a{
+	display: block;
+}
+#uc .fun_list li .icon{
+	width: 0.8rem;
+	font-size: 0.8rem;
+	height: 2rem;
+	line-height: 2rem;
+	display: block;
+	padding:0 0 0 0.4rem;
+	float: left;
+	color: #ffaa00;
+}
+#uc .fun_list li span{
+	padding-left: 0.5rem;
+}
+#uc .fun_list li b{
+	float: right;
+	padding-right: 0.5rem;
+	font-size: 0.9rem;
+	color: #999;
+}
+
+
+
+
+/*报修列表 HZ*/
+
+#service .service_list li{
+	background: #FFF;
+	border-bottom: #E3E3E3 1px solid;
+	padding: 0.5rem 0.4rem;
+}
+#service .service_list li a{
+	display: block;
+	width: 14.5rem;
+	float: left;
+}
+#service .service_list li .arrow{
+	float: right;
+	color: #999;
+	padding-top: 0.62rem;
+	width: 0.6rem;
+}
+#service .service_list h2{
+	font-size: 0.6rem;
+}
+
+#service .service_list .date{
+	display: block;
+	font-size: 0.5rem;
+	padding-top: 0.2rem;
+	color: #999;
+}
+#service .service_list .state{
+	display: block;
+	font-size: 0.55rem;
+	padding-top: 0.35rem;
+	color: #666;
+}
+#service .service_list .state.s1{
+	color: #0079df;
+}
+#service .service_list .state.s2{
+	color: #4cbe00;
+}
+
+#service .add_repair {
+	height: 2rem;
+	width: 100%;
+	position: fixed;
+	bottom: 2.6rem;	
+	text-align: center;
+}
+#service .add_repair .btn_add{
+	display: inline-block;
+	height: 2rem;
+	line-height: 2rem;
+	width: 90%;
+	background: #ffaa00;
+	font-size: 0.8rem;
+	font-family:Helvetica;
+	color: #FFF;
+	border: none;
+	outline: none;
+	border-radius: 0.25rem;
+}
+#service .add_repair .btn_add:hover{
+	background: #ff9900;
+}
+#service .add_repair .btn_add i{
+	padding-right: 0.3rem;
+}
+
+/*上传报修 HZ*/
+#reg .item .uploadpic{
+	margin-top: 0.4rem;
+}
+#reg .item .uploadpic .btn_file{
+	width: 4.6rem;
+	height: 4.6rem;
+	display: block;
+	float: left;
+	margin-right: 0.6rem;
+	position: relative;
+}
+#reg .item .uploadpic .btn_file:last-child{
+	margin-right: 0;
+}
+#reg .item .uploadpic .btn_file img{
+	width: 4.5rem;
+	height: 4.5rem;
+	border: #FFF 1px dashed;
+}
+#reg .item .uploadpic .btn_file input[type=file] {
+	position: absolute;
+	padding: 0;
+	top: 0;
+	left: 0;
+	width: 4.5rem;
+	height: 4.5rem;
+	opacity: .01;
+	filter: alpha(opacity=1);
+	cursor: pointer;
+	z-index: 1;
+}
+
+
+/*报修详情*/
+#service .s_d .abstr{
+	padding: 0.8rem 0.4rem;
+	background: #FAFAFA;
+	border-bottom: #E3E3E3 1px dashed;
+	border-top: #E3E3E3 1px dashed;
+}
+#service .s_d .abstr h2{
+	font-size: 0.6rem;
+}
+
+#service .s_d .abstr .date{
+	display: block;
+	font-size: 0.5rem;
+	padding-top: 0.2rem;
+	color: #999;
+}
+#service .s_d .abstr .state{
+	display: block;
+	font-size: 0.55rem;
+	padding-top: 0.35rem;
+	color: #666;
+}
+#service .s_d .abstr .state.s1{
+	color: #0079df;
+}
+#service .s_d .abstr .state.s2{
+	color: #4cbe00;
+}
+#service .s_d .s_d_item{
+	font-size: 0.8rem;
+	line-height: 1rem;
+	padding: 0.6rem 0.4rem;
+	color: #666;
+	border-bottom: #E3E3E3 1px dashed;
+}
+#service .s_d .s_d_item h2{
+	font-size: 0.7rem;
+	color: #FFF;
+	font-weight: normal;
+	display: inline-block;
+	background: #FFAA00;
+	padding: 0.3rem 0.6rem;
+	border-radius: 0.3rem;
+	margin-bottom: 0.5rem;
+}
+#service .s_d .item {
+	padding: 0.1rem 0;
+	font-size: 0.7rem;
+	color: #666;
+}
+#service .s_d .item h3{
+	font-size: 0.6rem;
+	font-weight: normal;
+	color: #000;
+	width: 3.1rem;
+	float: left;
+	text-align: right;
+}
+#service .s_d .item span{
+	display: block;
+	font-size: 0.6rem;
+	color: #666;
+	width: 11.8rem;
+	float: right;
+}
+#service .s_d .item span figure{
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+#service .s_d .item span a{
+	display: block;
+}
+#service .s_d .item span img{
+	width: 3.7rem;
+}
+#service .s_d .item .time{
+	font-size: 0.6rem;
+	color: #000;
+}
+#service .s_d .item .caption{
+	font-size: 0.6rem;
+	color: #666;
+	padding-bottom: 0.2rem;
+}
+#service .s_d .item em{
+	color: #5fa001;
+}
+#service .s_d .item h4{
+	font-size: 0.6rem;
+	font-weight: normal;
+	color: #000;
+	width: 5rem;
+	float: left;
+}
+#service .s_d .item h4 b{
+	font-weight: normal;
+	color: #FA0;
+}
+/*发表评价*/
+#service .s_d .item textarea{
+	padding:0 0.5rem;
+	background:#FFF;
+	border-radius: 0.25rem;
+	border: #e3e3e3 1px solid;
+	outline: none;
+	color: #666;
+	height: 3.6rem;
+	line-height: 1.2rem; 
+	vertical-align:middle;
+	font-size: 0.8rem;
+	font-weight: 300;
+	font-family:Helvetica;
+}
+#service .go {
+	margin-top: 1rem;
+}
+#service .go input{
+	height: 2rem;
+	cursor: pointer;
+	width: 100%;
+	background: #ffaa00;
+	font-size: 0.8rem;
+	font-family:Helvetica;
+	color: #FFF;
+	border: none;
+	outline: none;
+	border-radius: 0.25rem;
+}
+#service .go input:hover,#service .go input:active{
+	background: #ff9900;
+}
+#service .w5{
+	width: 14.15rem;
+}
+
+/*星星*/
+#service .s_d .item #star01,
+#service .s_d .item #star02,
+#service .s_d .item #star03{
+	padding-top: 0.3rem;
+}
+#service .s_d .item .ratyli{
+	font-size: 0.6rem;
+	color: #666;
+	width: 11.8rem;
+	float: right;
+}
+#service .s_d .item .ratyli span{
+	display: inline;
+	font-size: 1rem;
+	width: auto;
+	float: none;
+	padding-right: 0.5rem;
+}
+/* all sign style */
+.ratyli .rate{color:#CCC; font-size: 1rem;}
+
+/* empty sign style */
+#service .s_d .item .ratyli span.rate-empty{color: #CCC;}
+
+/* full sign style after rating*/
+#service .s_d .item .ratyli.rated span.rate-full{color: #FA0;}
+
+/* active signs (hover)*/
+#service .s_d .item .ratyli span.rate-active{color: #FA0;}
+
+
+/*申请服务 20160831 Edit*/
+#service .btnbox{
+	text-align: center;
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
+}
+#service .btn_cancel{
+	display: inline-block;
+	height: 2rem;
+	line-height: 2rem;
+	width: 90%;
+	background: #EEE;
+	font-size: 0.8rem;
+	font-family:Helvetica;
+	color: #333;
+	border: none;
+	outline: none;
+	border-radius: 0.25rem;
+}
+#service .btn_cancel:hover{
+	background: #DDD;
+}
+#service .btn_cancel i{
+	padding-right: 0.3rem;
+}
+#reg .itemgroup{
+	margin-top: 0.75rem;
+	background: #FFF;
+	padding:0.3rem 0.8rem;
+	border-radius: 0.2rem;
+	border: #CCC 1px dashed;
+}
+#reg .itemgroup .ctrl{
+	height: 2rem;
+	padding-top: 0.8rem;
+	text-align: right;
+}
+#reg .itemgroup .ctrl a{
+	margin: 0 0.5rem;
+	display: inline-block;
+}
+#reg .itemgroup .ctrl a.add{
+	color: #F90;
+}
+#reg .itemgroup .ctrl a.remove{
+	color: #999;
+}
+#reg .itemgroup .ctrl i{
+	font-size: 1.5rem;
+}
+#reg .w4{
+	width: 12rem;
+}
+#reg .w41{
+	width: 13rem;
+}
+
+
+/*充值 20160812 EDIT*/
+#rchg .rechargebox {
+	width: 14.6rem;
+	background: #FFF;
+	margin: 0 auto;
+	border-radius: 0.4rem;
+	border: #E3E3E3 1px solid;
+	font-size: 0.7rem;
+	padding-bottom: 0.8rem;
+}
+#rchg .rechargebox .username{
+	text-align: center;
+	padding: 0.6rem 0.4rem 0.4rem;
+	color: #666;
+}
+#rchg .rechargebox .money{
+	text-align: center;
+}
+#rchg .rechargebox .money li{
+	width: 5rem;
+	display: inline-block;
+	border: #CCC 2px solid;
+	text-align: center;
+	padding: 0.4rem 0;
+	margin: 0.5rem;
+	font-size: 0.8rem;
+}
+#rchg .rechargebox .money li a{
+	display: block;
+}
+#rchg .rechargebox .money li.act{
+	border: #0092dd 2px solid;
+	background: #0092dd;
+	color: #FFF;
+}
+#rchg .rechargebox .money li.act a{
+	color: #FFF;
+}
+#rchg .rechargebox .discount{
+	padding-top: 0.3rem;
+	color: #666;
+	text-align: center;
+	color: #F90;
+}
+#rchg .rechargebox .tips{
+	padding-top: 0.3rem;
+	color: #666;
+	text-align: center;
+}
+#rchg .rechargebox .rchg_btn{
+	text-align: center;
+	padding-top: 1rem;
+}
+#rchg .rechargebox .rchg_btn a{
+	display: inline-block;
+	width: 5rem;
+	border-radius: 0.2rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	text-align: center;
+	background: #FF6600;
+	border: #FF6600 1px solid;
+	font-size: 0.8rem;
+	color: #FFF;
+	margin: 0 0.3rem;
+}
+#rchg .rechargebox .rchg_btn a.back{
+	background: #EEE;
+	color: #333;
+	border: #DDD 1px solid;
+}
+#rchg .goto_record{
+	text-align: center;
+	font-size: 0.7rem;
+	padding-top: 1rem;
+}
+
+#rchg .bill_type{
+	padding-bottom: 0.5rem;
+	text-align: center;
+}
+#rchg .bill_type li{
+	display: inline-block;
+	text-align: center;
+	width: 4.5rem;
+	height: 1.3rem;
+	margin: 0 0.2rem;
+	line-height: 1.3rem;
+	font-size: 0.75rem;
+	border: #CCC 1px dashed;
+	border-radius: 0.2rem;
+	background: #FAFAFA;
+}
+#rchg .bill_type li a{
+	display: block;
+}
+#rchg .bill_type li.act{
+	background: #0092dd;
+	color: #FFF;
+}
+#rchg .bill_type li.act a{
+	color: #FFF;
+}
+
+/*交易*/
+#rchg .bill_list li{
+	background: #FFF;
+	border-bottom: #E3E3E3 1px solid;
+	padding: 0.5rem 0.4rem;
+}
+
+#rchg .bill_list h2{
+	font-size: 0.6rem;
+	color: #0079df;
+}
+#rchg .bill_list h2 em{
+	padding-left: 0.8rem;
+	font-size: 0.55rem;
+	font-weight: normal;
+	color: #999;
+}
+
+#rchg .bill_list span{
+	display: block;
+	font-size: 0.55rem;
+	padding-top: 0.2rem;
+	color: #999;
+}
+#rchg .bill_list span em{
+	padding-left: 0.6rem;
+}
+
+
+
+/*充值 20160812 END*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*========================================*/
+
+
+
+
+
+
+
+
+
+
+/*去除边框*/
+#my .no_bt{
+	border-top: none;
+}
+
+
+
+
+/*错误提示页面*/
+#err .wrap{
+	padding:0 0.4rem 0.8rem;
+	color: #666;
+	font-size: 0.6rem;
+}
+#err a{
+	color: #009ef0;
+}
+#err .infobox{
+	padding-top: 1rem;
+}
+#err .infobox p{
+	padding-bottom: 0.5rem;
+}
+#err .infobox ul{
+	padding-left: 1rem;
+	padding-bottom: 0.5rem;
+	color: #009ef0;
+}
+#err .infobox ul li{
+	list-style-type:disc ;
+	list-style-position: outside;
+}
+
+#err .btn_box {
+	margin-top: 1.5rem;
+	text-align: center;
+}
+#err .btn_box .btn_goto{
+	display: block;
+	height: 2rem;
+	line-height: 2rem;
+	text-align: center;
+	background: #009ef0;
+	font-size: 0.8rem;
+	color: #FFF;
+	border: none;
+	border-radius: 0.25rem;
+	margin-bottom: 1rem;
+}
+#err .btn_box .btn_goto:hover{
+	background: #ff9900;
+}
+#err .btn_box .more_link{
+	display: block;
+	margin-top: 0.5rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	text-align: center;
+	font-size: 0.6rem;
+	color: #009ef0;
+}

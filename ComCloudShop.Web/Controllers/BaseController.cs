@@ -59,7 +59,7 @@ namespace ComCloudShop.Web.Controllers
                 }
                 else
                 {
-                    filterContext.HttpContext.Response.Redirect("/User/Login");
+                    filterContext.HttpContext.Response.Redirect("/Authorize/Index/"+query+"");
                 }
 
             }

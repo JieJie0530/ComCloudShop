@@ -6,38 +6,44 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\JieJie\Desktop\shop\Admin</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\JieJie\Desktop\xuexiadmin</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/ComCloudShop.Backend.dll">
-      <publishTime>04/22/2017 17:22:52</publishTime>
+      <publishTime>11/07/2017 19:44:57</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Backend.pdb">
-      <publishTime>04/22/2017 17:22:52</publishTime>
+      <publishTime>11/07/2017 19:44:57</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Layer.dll">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:55</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Layer.pdb">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:55</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Service.dll">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Service.pdb">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Utility.dll">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
     </File>
     <File Include="bin/ComCloudShop.Utility.pdb">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
     </File>
     <File Include="bin/ComCloudShop.ViewModel.dll">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
     </File>
     <File Include="bin/ComCloudShop.ViewModel.pdb">
-      <publishTime>04/22/2017 14:12:22</publishTime>
+      <publishTime>11/07/2017 19:44:54</publishTime>
+    </File>
+    <File Include="bin/ComCloudShop.WeixinOauth.dll">
+      <publishTime>11/07/2017 19:44:55</publishTime>
+    </File>
+    <File Include="bin/ComCloudShop.WeixinOauth.pdb">
+      <publishTime>11/07/2017 19:44:55</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/18/2016 09:33:50</publishTime>
@@ -56,6 +62,18 @@
     </File>
     <File Include="bin/Newtonsoft.Json.pdb">
       <publishTime>12/09/2016 18:03:13</publishTime>
+    </File>
+    <File Include="bin/Senparc.Weixin.dll">
+      <publishTime>04/13/2017 20:53:30</publishTime>
+    </File>
+    <File Include="bin/Senparc.Weixin.MP.dll">
+      <publishTime>04/13/2017 20:58:08</publishTime>
+    </File>
+    <File Include="bin/Senparc.Weixin.MP.pdb">
+      <publishTime>04/13/2017 20:58:08</publishTime>
+    </File>
+    <File Include="bin/Senparc.Weixin.pdb">
+      <publishTime>04/13/2017 20:53:30</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>06/01/2016 13:35:55</publishTime>
@@ -85,37 +103,37 @@
       <publishTime>04/18/2016 09:34:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.resources.dll">
-      <publishTime>04/18/2016 09:34:42</publishTime>
+      <publishTime>03/02/2015 09:32:38</publishTime>
     </File>
     <File Include="bin/zh-Hans/EntityFramework.SqlServer.resources.dll">
-      <publishTime>04/18/2016 09:34:42</publishTime>
+      <publishTime>03/02/2015 09:32:38</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
-      <publishTime>02/19/2016 09:15:23</publishTime>
+      <publishTime>08/08/2012 17:54:36</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
-      <publishTime>04/18/2016 09:34:30</publishTime>
+      <publishTime>08/08/2012 17:54:34</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
-      <publishTime>02/19/2016 09:15:22</publishTime>
+      <publishTime>08/08/2012 17:54:40</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
-      <publishTime>02/19/2016 09:15:22</publishTime>
+      <publishTime>08/08/2012 17:54:30</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
-      <publishTime>04/18/2016 09:34:06</publishTime>
+      <publishTime>08/08/2012 17:54:44</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
-      <publishTime>04/18/2016 09:34:11</publishTime>
+      <publishTime>11/01/2012 20:44:28</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
-      <publishTime>04/18/2016 09:34:30</publishTime>
+      <publishTime>08/08/2012 17:54:34</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
-      <publishTime>04/18/2016 09:34:30</publishTime>
+      <publishTime>08/08/2012 17:54:34</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
-      <publishTime>04/18/2016 09:34:30</publishTime>
+      <publishTime>08/08/2012 17:54:34</publishTime>
     </File>
     <File Include="Content/images/01.gif">
       <publishTime>04/18/2016 09:30:09</publishTime>
@@ -4026,11 +4044,17 @@
     <File Include="Views/Address/Index.cshtml">
       <publishTime>02/19/2017 00:16:10</publishTime>
     </File>
+    <File Include="Views/Brand/Index.cshtml">
+      <publishTime>11/07/2017 20:08:14</publishTime>
+    </File>
+    <File Include="Views/Cate/Index.cshtml">
+      <publishTime>07/21/2017 20:00:13</publishTime>
+    </File>
     <File Include="Views/Category/Edit.cshtml">
       <publishTime>06/01/2016 16:20:31</publishTime>
     </File>
     <File Include="Views/Category/Index.cshtml">
-      <publishTime>02/17/2017 10:50:54</publishTime>
+      <publishTime>11/06/2017 21:08:31</publishTime>
     </File>
     <File Include="Views/Coupon/Index.cshtml">
       <publishTime>03/02/2017 14:03:14</publishTime>
@@ -4048,7 +4072,19 @@
       <publishTime>06/01/2016 16:19:31</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/19/2017 00:51:18</publishTime>
+      <publishTime>05/04/2017 13:35:36</publishTime>
+    </File>
+    <File Include="Views/Manger/Index.cshtml">
+      <publishTime>07/31/2017 15:01:20</publishTime>
+    </File>
+    <File Include="Views/Manger/Withd.cshtml">
+      <publishTime>07/23/2017 08:28:26</publishTime>
+    </File>
+    <File Include="Views/News/Add.cshtml">
+      <publishTime>05/08/2017 22:42:03</publishTime>
+    </File>
+    <File Include="Views/News/Index.cshtml">
+      <publishTime>05/08/2017 22:29:50</publishTime>
     </File>
     <File Include="Views/Order/Detail.cshtml">
       <publishTime>04/18/2016 09:30:09</publishTime>
@@ -4057,7 +4093,13 @@
       <publishTime>02/20/2017 00:45:38</publishTime>
     </File>
     <File Include="Views/Order/Index.cshtml">
-      <publishTime>02/19/2017 20:42:54</publishTime>
+      <publishTime>07/26/2017 14:03:02</publishTime>
+    </File>
+    <File Include="Views/Order/Index1.cshtml">
+      <publishTime>07/31/2017 12:50:32</publishTime>
+    </File>
+    <File Include="Views/Order/RList.cshtml">
+      <publishTime>09/04/2017 14:37:34</publishTime>
     </File>
     <File Include="Views/Product/Detail.cshtml">
       <publishTime>06/01/2016 16:06:59</publishTime>
@@ -4066,13 +4108,13 @@
       <publishTime>02/14/2017 10:57:37</publishTime>
     </File>
     <File Include="Views/Product/EditShowPic.cshtml">
-      <publishTime>02/24/2017 10:04:38</publishTime>
+      <publishTime>04/26/2017 16:05:22</publishTime>
     </File>
     <File Include="Views/Product/Erp.cshtml">
       <publishTime>02/15/2017 16:35:13</publishTime>
     </File>
     <File Include="Views/Product/Index.cshtml">
-      <publishTime>04/22/2017 14:52:56</publishTime>
+      <publishTime>11/06/2017 19:54:36</publishTime>
     </File>
     <File Include="Views/Rule/Index.cshtml">
       <publishTime>02/17/2017 17:01:15</publishTime>
@@ -4096,16 +4138,19 @@
       <publishTime>11/15/2016 11:28:04</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutNew.cshtml">
-      <publishTime>04/22/2017 14:40:39</publishTime>
+      <publishTime>11/07/2017 20:06:18</publishTime>
     </File>
     <File Include="Views/System/Index.cshtml">
-      <publishTime>02/16/2017 10:52:09</publishTime>
+      <publishTime>04/28/2017 18:14:57</publishTime>
     </File>
     <File Include="Views/UpLoad/WebImgUploads.cshtml">
       <publishTime>12/02/2016 11:42:06</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>02/19/2017 16:37:15</publishTime>
+      <publishTime>08/21/2017 15:49:55</publishTime>
+    </File>
+    <File Include="Views/User/Withd.cshtml">
+      <publishTime>06/09/2017 15:11:56</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>04/18/2016 09:30:09</publishTime>
@@ -4114,7 +4159,7 @@
       <publishTime>04/18/2016 09:30:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/22/2017 17:22:54</publishTime>
+      <publishTime>11/07/2017 20:26:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

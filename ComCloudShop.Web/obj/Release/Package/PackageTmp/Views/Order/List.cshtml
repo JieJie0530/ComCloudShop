@@ -20,9 +20,9 @@
             <img src="~/public/images/no0rder.png" alt="">
             <p></p>
         </div>
-        <div class="logo-bottom">
+        @*<div class="logo-bottom">
             <img src="~/public/images/logo.png" alt="">
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -145,6 +145,12 @@
                 case 2:
                     title="已完成";
                     break;
+                case 3:
+                    title = "退货中";
+                    break;
+                case 3:
+                    title = "退货完成";
+                    break;
                 default:"";break;
             }
             return title;
@@ -155,13 +161,25 @@
             if (status == 0) {
                 url = "@Url.Content("~/Order/DetailPay")" + "?ordernum=" + id;
                 view = "查 看";
-            } else {
-                url = "@Url.Content("~/Order/Detail")" + "?ordernum=" + id;
-                view = "查 看";
+                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a>";
             }
-            var html = "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a>";
-            return html;
+            else if (status == 3) {
+
+            }
+            else if (status == 4) {
+
+            }
+            else {
+                url = "@Url.Content("~/Order/Detail")" + "?ordernum=" + id;
+                var url1="@Url.Content("~/Order/ReturnOrder")" + "?ordernum=" + id;
+                view = "查 看";
+                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a> <a onclick=\"TH('"+id+"')\" class=\"lookBtn1\">申请退货</a>";
+            }
+
+            return "";
         }
+
+        
 
         $(window).scroll(function () {
             var scrollTop = $(this).scrollTop() + 150;
@@ -179,7 +197,30 @@
         });
 
     });
+    function TH(id) {
+       
+        if (confirm("是否确定申请退货？")) {
 
+            var wxdata = {
+                "OrderNum":id
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '@(Url.Content("~/Order/AddReturn1"))',
+                data: wxdata,
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("申请成功！");
+                        window.location.href = "/Order/List";
+                    }
+                    else {
+                        alert("该订单您已经申请单个产品退货，不能操作订单退货！");
+                    }
+                }
+            })
+        }
+        }
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);

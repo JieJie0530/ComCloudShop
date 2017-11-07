@@ -23,3 +23,8 @@ D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.dll
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170301\ComCloudShop_20170301版\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\bin\Release\ComCloudShop.ViewModel.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\bin\Release\ComCloudShop.ViewModel.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.ViewModel\obj\Release\ComCloudShop.ViewModel.pdb

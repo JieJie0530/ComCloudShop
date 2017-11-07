@@ -12,7 +12,6 @@ namespace ComCloudShop.Web.Controllers
     {
         private readonly ProductService _service = new ProductService();
 
-
         // GET: Sale
         public ActionResult Index(int pid)
         {
@@ -49,7 +48,7 @@ namespace ComCloudShop.Web.Controllers
                 result.error = 2;
                 result.msg = ex.Message;
             }
-                return Json(result,JsonRequestBehavior.AllowGet);
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
     }

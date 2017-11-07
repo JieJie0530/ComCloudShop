@@ -133,6 +133,7 @@
     <EntitySetMapping Name="HomeImages">
       <EntityTypeMapping TypeName="MircoShopModel.HomeImage">
         <MappingFragment StoreEntitySet="HomeImage">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="Useful" ColumnName="Useful" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -179,6 +180,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MircoShopModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="SPGG" ColumnName="SPGG" />
           <ScalarProperty Name="IsShow" ColumnName="IsShow" />
           <ScalarProperty Name="Contents" ColumnName="Contents" />
           <ScalarProperty Name="Weight" ColumnName="Weight" />
@@ -203,6 +205,13 @@
     <EntitySetMapping Name="Members">
       <EntityTypeMapping TypeName="MircoShopModel.Member">
         <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="TotalIn" ColumnName="TotalIn" />
+          <ScalarProperty Name="integral" ColumnName="integral" />
+          <ScalarProperty Name="ISVip" ColumnName="ISVip" />
+          <ScalarProperty Name="fsate" ColumnName="fsate" />
+          <ScalarProperty Name="Cashbalance" ColumnName="Cashbalance" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="follow" ColumnName="follow" />
           <ScalarProperty Name="District" ColumnName="District" />
           <ScalarProperty Name="Birth" ColumnName="Birth" />
           <ScalarProperty Name="QQ" ColumnName="QQ" />
@@ -228,6 +237,7 @@
     <EntitySetMapping Name="Categories">
       <EntityTypeMapping TypeName="MircoShopModel.Category">
         <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="BrandPic" ColumnName="BrandPic" />
           <ScalarProperty Name="ParentId" ColumnName="ParentId" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
           <ScalarProperty Name="CategoryType" ColumnName="CategoryType" />
@@ -277,6 +287,7 @@
     <EntitySetMapping Name="ErpOrders">
       <EntityTypeMapping TypeName="MircoShopModel.ErpOrder">
         <MappingFragment StoreEntitySet="ErpOrder">
+          <ScalarProperty Name="skusns" ColumnName="skusns" />
           <ScalarProperty Name="isresend" ColumnName="isresend" />
           <ScalarProperty Name="ctime" ColumnName="ctime" />
           <ScalarProperty Name="err_message" ColumnName="err_message" />
@@ -306,6 +317,7 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="MircoShopModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="SPGG" ColumnName="SPGG" />
           <ScalarProperty Name="Jifen" ColumnName="Jifen" />
           <ScalarProperty Name="Original" ColumnName="Original" />
           <ScalarProperty Name="ReceiptType" ColumnName="ReceiptType" />
@@ -343,6 +355,145 @@
           <ScalarProperty Name="JiFen" ColumnName="JiFen" />
           <ScalarProperty Name="NickName" ColumnName="NickName" />
           <ScalarProperty Name="OpenId" ColumnName="OpenId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Withdrawals">
+      <EntityTypeMapping TypeName="MircoShopModel.Withdrawal">
+        <MappingFragment StoreEntitySet="Withdrawals">
+          <ScalarProperty Name="Types" ColumnName="Types" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Bank" ColumnName="Bank" />
+          <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+          <ScalarProperty Name="Remack" ColumnName="Remack" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="DZTime" ColumnName="DZTime" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderComments">
+      <EntityTypeMapping TypeName="MircoShopModel.OrderComment">
+        <MappingFragment StoreEntitySet="OrderComment">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="Remack" ColumnName="Remack" />
+          <ScalarProperty Name="DeliverySpeed" ColumnName="DeliverySpeed" />
+          <ScalarProperty Name="ProductPackaging" ColumnName="ProductPackaging" />
+          <ScalarProperty Name="ProductScore" ColumnName="ProductScore" />
+          <ScalarProperty Name="Pics" ColumnName="Pics" />
+          <ScalarProperty Name="Contents" ColumnName="Contents" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderReturns">
+      <EntityTypeMapping TypeName="MircoShopModel.OrderReturn">
+        <MappingFragment StoreEntitySet="OrderReturn">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="BankNumber" ColumnName="BankNumber" />
+          <ScalarProperty Name="Bank" ColumnName="Bank" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Statu" ColumnName="Statu" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductBrands">
+      <EntityTypeMapping TypeName="MircoShopModel.ProductBrand">
+        <MappingFragment StoreEntitySet="ProductBrand">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="BrandPic" ColumnName="BrandPic" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recharges">
+      <EntityTypeMapping TypeName="MircoShopModel.Recharge">
+        <MappingFragment StoreEntitySet="Recharge">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mangers">
+      <EntityTypeMapping TypeName="MircoShopModel.Manger">
+        <MappingFragment StoreEntitySet="Manger">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Business" ColumnName="Business" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Storefront" ColumnName="Storefront" />
+          <ScalarProperty Name="license" ColumnName="license" />
+          <ScalarProperty Name="Contacts" ColumnName="Contacts" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="IsRecommend" ColumnName="IsRecommend" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Proportion" ColumnName="Proportion" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="ShopAddress" ColumnName="ShopAddress" />
+          <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+          <ScalarProperty Name="OpenID" ColumnName="OpenID" />
+          <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GiftLists">
+      <EntityTypeMapping TypeName="MircoShopModel.GiftList">
+        <MappingFragment StoreEntitySet="GiftList">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="LQTime" ColumnName="LQTime" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntLists">
+      <EntityTypeMapping TypeName="MircoShopModel.IntList">
+        <MappingFragment StoreEntitySet="IntList">
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+          <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MangerCates">
+      <EntityTypeMapping TypeName="MircoShopModel.MangerCate">
+        <MappingFragment StoreEntitySet="MangerCate">
+          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="BrandPic" ColumnName="BrandPic" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -193,11 +193,17 @@
             <span class="en">Friendship link</span>
         </div>
         <div class="LinkUrl_Friend">
-            <a href="#"><img src="~/public/images/freindship.png" /></a>
-            <a href="#"><img src="~/public/images/freindship.png" /></a>
-            <a href="#"><img src="~/public/images/freindship.png" /></a>
-            <a href="#"><img src="~/public/images/freindship.png" /></a>
-            <a href="#"><img src="~/public/images/freindship.png" /></a>
+            @{
+                ResultViewModel<IEnumerable<BrandViewModel>> modelB = ViewBag.BrandList as ResultViewModel<IEnumerable<BrandViewModel>>;
+                if (model.error == 100)
+                {
+                    foreach (BrandViewModel item in modelB.result as List<BrandViewModel>)
+                    {
+                       <a href="@item.Brand"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
+                    }
+                }
+            }
+            
         </div>
     </div>
     <!----------------linkUrl结束------------------>

@@ -152,23 +152,27 @@
                  url: '@Url.Content("~/Order/SaveBrandWCPayRequest")',
                  data: 'msg=' + res.err_msg,
                  success: function (data) {
-
+                     //微信支付完成
                      if (res.err_msg == "get_brand_wcpay_request:ok") {
+
                          $.ajax({
                              type: 'post',
                              url: '@Url.Content("~/Order/PayOK")',
                              success: function (data) {
-                                 KouCu();
                                  if (data == 0) {
                                      location.href = '@Url.Content("~/Order/List?c=2")';
                                  } else {
                                      //alert(data);
                                  }
                              }
-                         })
-                     } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                         });
+                     }
+                    //微信支付取消
+                     else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                          location.href = '@Url.Content("~/Order/List?c=1")';
-                     } else {
+                     }
+                    //微信支付失败
+                     else {
                          location.href = '@Url.Content("~/Order/List?c=1")';
                      }
 

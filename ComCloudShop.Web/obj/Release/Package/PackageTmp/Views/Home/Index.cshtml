@@ -10,45 +10,225 @@
         body {
             background: #fff;
         }
+
+        .swiper-container .swiper-slide > img {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .row_category li {
+            overflow: hidden;
+            text-align: center;
+            width: 25%;
+            margin: 0.6rem 0;
+            float: left;
+        }
+
+            .row_category li a {
+                display: block;
+                overflow: hidden;
+            }
+
+            .row_category li p {
+                color: #333;
+                font-size: 0.8rem;
+            }
+
+        .row_category .CarouselImg {
+            border-radius: 50%;
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        .row_category li a img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .pinpai {
+            width: 95%;
+            margin-left: 2.5%;
+        }
+
+            .pinpai a {
+                border: 1px #ddd solid;
+                background: #fff;
+                overflow: hidden;
+                padding: 0 1%;
+                width: 20.85%;
+                float: left;
+                text-align: center;
+                height: 50px;
+                line-height: 50px;
+                margin: 2.5px 5px 2.5px 0;
+            }
+
+                .pinpai a img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+        .prodic a img {
+            width: 95%;
+        }
+
+        .prodic a {
+            width: 45%;
+            display: block;
+            float: left;
+            margin: 5px 8px;
+            height: 210px;
+            border: 1px solid #ececec;
+        }
+
+            .prodic a p {
+                text-align: center;
+                font-size: 12px;
+                color: #4d4d4d;
+                padding: 5px 0;
+            }
     </style>
+    <script type="text/javascript" src="/public/js/swiper.min.js"></script>
+    <link rel="stylesheet" href="~/public/css/swiper.min.css">
+    <link href="~/public/css/style2017.css" rel="stylesheet" />
 }
 
-<div class="wrapper mb60">
-    <div class="headsearch">
-        <input type="search" value="" placeholder="有机米粉">
-        <i class="search"></i>
+<div class="wrapper">
+
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+
+            @foreach (var d in Model.batch)
+            {
+                if (d.Useful == "lunbo")
+                {
+                    <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                }
+
+            }
+
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
     </div>
-    <div class="newlist">
+    <div style="clear:both;">
+
+    </div>
+    <!----------------column开始------------------>
+    <div class="column">
         <ul>
-            <li>FG大冒险<i class="list01"></i></li>
-            <li>星座塔罗<i class="list02"></i></li>
-            <li>吐槽灌水<i class="list03"></i></li>
-            <li onclick="window.location.href = 'http:// wx.fgcare.com/rz'">快速积分<i class="list04"></i></li>
+            <li><a href="/User/Login"><img src="~/public/images/coloumns_03.jpg" /><p>登录注册</p></a></li>
+            <li><a href="/Order/List?c=0"><img src="~/public/images/coloumns_05.jpg" /><p>我的订单</p></a></li>
+            <li><a href="/User/AddVip"><img src="~/public/images/coloumns_07.jpg" /><p>VIP服务</p></a></li>
+            <li><a href=""><img src="~/public/images/coloumns_09.png" /><p>奖学金</p></a></li>
         </ul>
     </div>
-    <div class="new">
-        <h1>最新活动</h1>
-        @foreach (var d in Model.batch)
-        {
-            <a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"]+d.pic)" alt=""></a>
-        }
-        @*<a href=""><img src="~/public/images/img-06.jpg" alt=""></a>*@
+    <!----------------column结束------------------>
+    <!----------------classify开始------------------>
+    <div class="classify">
+        <div class="title">
+            <h1 class="ch">课程分类</h1>
+            <span class="en">Course recommendation</span>
+        </div>
+        <div class="classify_course">
+            @{
+                ResultViewModel<IEnumerable<CategoryViewModel>> model = ViewBag.Cate as ResultViewModel<IEnumerable<CategoryViewModel>>;
+                if (model.error == 100)
+                {
+                    foreach (CategoryViewModel item in model.result as List<CategoryViewModel>)
+                    {
+                        @*<a href="/Product/Index?brand=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>*@
+                        <a href="/Product/Index?brand=@item.CategoryId"> <img src="http://localhost:10787/@( item.BrandPic)" alt="@item.CategoryName"></a>
+                    }
+            }
+            }
+        </div>
     </div>
-    <div class="new">
-        <h1>最新推荐</h1>
-        @foreach (var d in Model.sale)
-        {
-            <a href="~/Sale?pid=@(d.id)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.url)" alt=""></a>
-        }
-        @*<a href=""><img src="~/public/images/img-07.png" alt=""></a>
-        <a href=""><img src="~/public/images/img-07.png" alt=""></a>*@
+    <!----------------classify结束------------------>
+    <!----------------Recommend开始------------------>
+    <div class="Recommend">
+        <div class="title">
+            <h1 class="ch">课程推荐</h1>
+            <span class="en">Course recommendation</span>
+        </div>
+        <div class="Recommend_course">
+            <ul>
+                @{
+                    IEnumerable<ProductViewModel> models = ViewBag.Product as IEnumerable<ProductViewModel>;
+                    if (model.error == 100)
+                    {
+                        foreach (ProductViewModel item in models as List<ProductViewModel>)
+                        {
+                            <li onclick="window.location.href = '/Product/Detail?pid=@item.ProductId'">
+                                <div class="image">
+                                    <span class="vip">vip免费</span>
+                                    <img src="http://localhost:10787/@( item.P3)" alt="@item.P3">
+                                </div>
+                                <div class="text">
+                                    <div class="text_content">
+                                        @item.SPDM
+                                    </div>
+                                    <div class="text_other">
+                                        <div class="play">播放次数：920</div>
+                                        <div class="price">￥@item.Sale</div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                }
+                
+            </ul>
+        </div>
     </div>
+    <!----------------Recommend结束------------------>
+    <!----------------linkUrl开始------------------>
+    <div class="linkUrl">
+        <div class="title">
+            <h1 class="ch">友情链接</h1>
+            <span class="en">Friendship link</span>
+        </div>
+        <div class="LinkUrl_Friend">
+            @{
+                ResultViewModel<IEnumerable<BrandViewModel>> modelB = ViewBag.BrandList as ResultViewModel<IEnumerable<BrandViewModel>>;
+                if (model.error == 100)
+                {
+                    foreach (BrandViewModel item in modelB.result as List<BrandViewModel>)
+                    {
+                       <a href="@item.Brand"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
+                    }
+                }
+            }
+            
+        </div>
+    </div>
+    <!----------------linkUrl结束------------------>
+    <!----------------foot开始------------------>
+    <div class="foot">
+        <ul>
+            <li class="on"><a href="#"><img src="~/public/images/foot_10.jpg" /><p>首页</p></a></li>
+            <li><a href="/User/index"><img src="~/public/images/foot_07.png" /><p>我的</p></a></li>
+        </ul>
+    </div>
+    <!----------------foot结束------------------>
 </div>
 
 <script type="text/javascript">
     $(function () {
         $('.headsearch .search').click(function () {
-            location.href = '@Url.Content("~/Product?search=")' + encodeURI($('.headsearch input').val());
+            location.href = '@Url.Content("~/Product/index?search=")' + encodeURI($('.headsearch input').val());
         })
+
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 5000,
+            loop: true,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+        });
+
     })
 </script>

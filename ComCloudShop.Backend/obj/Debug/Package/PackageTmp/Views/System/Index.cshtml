@@ -61,7 +61,7 @@
             <i class="icon-font"></i>
             <a href="~/">后台管理</a>
             <span class="crumb-step">&gt;</span>
-            <span class="crumb-name">最新活动</span>
+            <span class="crumb-name">@(Convert.ToString(ViewBag.type)=="index"?"广告位":"轮播图")</span>
         </div>
     </div>
     <div class="result-wrap">
@@ -84,6 +84,7 @@
                     <tr>
                         <th>图片</th>
                         <th>活动地址</th>
+                        <th>排序</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -91,6 +92,7 @@
                     <tr>
                         <td><img data-bind="attr:{src:'@Url.Content("~/")'+item.Image}" width="250" height="80" /></td>
                         <td data-bind="text:item.Link"></td>
+                        <td data-bind="text:item.Sort"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}" class="btnsearch">修改</a>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.Delete(data)}" class="btnsearch">删除</a>
@@ -136,6 +138,12 @@
                 </td>
             </tr>
             <tr>
+                <th><i class="require-red"></i>排序：</th>
+                <td>
+                    <input class="common-text required" size="40" name="Sort" data-bind="value:Sort" type="text"  />
+                </td>
+            </tr>
+            <tr>
                 <th><i class="require-red"></i>活动地址：</th>
                 <td>
                     <input class="common-text required" size="40" name="Link" data-bind="value:Link" type="text" placeholder="请输活动地址" />
@@ -151,7 +159,7 @@
 </div>
 
 <script type="text/javascript">
-
+    var types = '@ViewBag.type';
     $(function () {
 
         //select model
@@ -178,7 +186,7 @@
             m.Image = ko.observable("");
             m.Useful = ko.observable("");
             m.Link = ko.observable("");
-
+            m.Sort = ko.observable("");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
@@ -205,16 +213,18 @@
             m.OpenDialog = function (type, data) {
                 if (type > 0) {
                     m.PicId(data.PicId);
+                    m.Sort(data.Sort);
                     m.Image(data.Image);
                     $("input[name='image']").val(data.Image);
                     $("#result").attr("src", '@Url.Content("~/")' + data.Image).show();
 
-                    m.Useful(data.Useful);
+                    m.Useful(types);
                     m.Link(data.Link);
                 } else {
                     m.PicId("");
                     m.Image("");
-                    m.Useful("首页");
+                    m.Image("1");
+                    m.Useful(types);
                     m.Link("");
                     $("#result").hide();
                 }
@@ -235,7 +245,8 @@
                     PicId: m.PicId(),
                     Image: m.Image(),
                     Link: m.Link(),
-                    Useful: m.Useful()
+                    Useful: m.Useful(),
+                    Sort: m.Sort()
                 }
                 console.log(parm);
                 $.ajax({
@@ -274,7 +285,7 @@
 
             //加载表单数据
             m.loadData = function (page) {
-                var url = "@Url.Content("~/system/list?page=")" + page;
+                var url = "@Url.Content("~/system/list?page=")" + page + "&type=" + types;
                 $.ajax({
                     method: "get",
                     url: url,

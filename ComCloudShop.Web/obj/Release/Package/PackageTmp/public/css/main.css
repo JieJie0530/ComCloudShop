@@ -433,29 +433,29 @@ html {
 .newlist .list01 {
   width: 37px;
   height: 37px;
-  background: url(../images/img-02.png) no-repeat;
+  background: url(../images/ico01.png) no-repeat;
   background-size: 100% 100%;
   margin-left: -18.5px;
 }
 .newlist .list02 {
   width: 35.5px;
   height: 35.5px;
-  background: url(../images/img-03.png) no-repeat;
+  background: url(../images/ico04.png) no-repeat;
   background-size: 100% 100%;
   margin-left: -17.5px;
 }
 .newlist .list03 {
-  width: 52px;
-  height: 30.5px;
-  background: url(../images/img-04.png) no-repeat;
+  width: 37px;
+  height: 37px;
+  background: url(../images/ico02.png) no-repeat;
   background-size: 100% 100%;
-  margin-left: -27.5px;
+  margin-left: -17.5px;
   bottom: 24px;
 }
 .newlist .list04 {
   width: 35px;
   height: 34px;
-  background: url(../images/img-05.png) no-repeat;
+  background: url(../images/ico03.png) no-repeat;
   background-size: 100% 100%;
   margin-left: -17.5px;
   bottom: 22px;
@@ -478,7 +478,7 @@ html {
 }
 .headaccount {
   padding: 15px 0 15px 70px;
-  background: #e23b6b;
+  background:rgb(255,153,0);
   position: relative;
   color: #fff;
 }
@@ -613,7 +613,6 @@ html {
   background: #fff;
 }
 .accountInfo li {
-  height: 44px;
   line-height: 44px;
   margin: 0 5px;
   padding: 0 0 0 10px;
@@ -798,6 +797,20 @@ html {
 .pdtlist dd .checkout > p {
   margin-bottom: 3px;
 }
+.pdtlist dd .lookBtn1 {
+  display: inline-block;
+  padding: 7px 22px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #e61c4c;
+  font-size: 13px;
+  color: #fff;
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  margin-top: -16px;
+}
 .pdtlist dd .lookBtn {
   display: inline-block;
   padding: 7px 22px;
@@ -980,6 +993,17 @@ div.error {
   line-height: 30px;
   padding: 6px 0;
 }
+ .editInfo .editInfobox > li span.btspan{
+  font-size: 13px;
+  color: #666666;
+  position: absolute;
+  left:95%;
+  top: 0;
+  width:5%;
+  height: 30px;
+  line-height: 30px;
+  padding: 6px 0;
+}
 .editInfo .editInfobox > li .editInput {
   height: 28px;
   line-height: 28px;
@@ -1133,7 +1157,7 @@ div.error {
 }
 .swiper-container {
   width: 100%;
-  height: 200px;
+  height: 100%;
   background: #fff;
 }
 .swiper-container .swiper-slide {
@@ -1309,7 +1333,12 @@ div.error {
   font-size: 15px;
   padding: 15px 0 12px;
   text-align: center;
+  width:50%;
+      display: inline-block;
 }
+    .pdtDes dt h2.hover {
+       border-bottom:1px solid #e61c4c;
+    }
 .pdtDes dd {
   font-size: 13px;
   color: #666666;
@@ -1426,7 +1455,7 @@ div.error {
   background: url(../images/search_01.png) no-repeat top left;
   background-size: 100%;
   position: absolute;
-  left: 10px;
+  right: 10px;
   top: 50%;
   margin-top: -8.5px;
   z-index: 99;
@@ -1520,7 +1549,7 @@ div.error {
 }
 .hdFilter .search-box .variety > span {
   display: inline-block;
-  width: 47px;
+  width: 60px;
   margin-bottom: 13px;
   text-align: center;
 }
@@ -1530,26 +1559,49 @@ div.error {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+.proComm {
+    background-color:rgb(231,235,234);
+}
+.lispl {
+    padding:10px; background:#fff;
+    margin-bottom:10px; 
+}
+    .lispl .tit {
+    
+     background-color:rgb(248,248,248);
+     padding:10px 5px;
+    }
+    .lispl .tit {
+    color:#000;
+    }
+   .lispl .tit  .titdate{
+      color:#000;
+       float:right;
+     
+    }
 .pdt-List li {
   margin: 6px 0;
-  padding: 5px 10px 5px 5px;
-  min-height: 160px;
-  border-top: 1px solid #dadada;
-  border-bottom: 1px solid #dadada;
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-  list-style-type: none;
+    padding: 5px 0;
+    height: 280px;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    list-style-type: none;
+    width: 46%;
+    float: left;
+    padding-left: 5px;
+    margin-left: 6px;
 }
-.pdt-List li .productInfo {
-  padding-left: 170px;
-}
+
 .pdt-List li .productInfo h2 {
   color: #4d4d4d;
   font-size: 14px;
   padding: 20px 0 5px 0;
   max-height:34px;
   overflow:hidden;
+  text-align:left;
 }
 .pdt-List li .productInfo p {
   color: #666666;
@@ -1557,6 +1609,7 @@ div.error {
   max-height: 36px;
   overflow: hidden;
   margin: 5px 0;
+
 }
 .pdt-List li .productInfo .fontR {
   font-size: 15px;
@@ -1572,9 +1625,6 @@ div.error {
   width: 160px;
   height: 160px;
   background: #f5f5f5;
-  position: absolute;
-  top: 5px;
-  left: 5px;
 }
 .pdt-List li .productImg > img {
   width: 100%;

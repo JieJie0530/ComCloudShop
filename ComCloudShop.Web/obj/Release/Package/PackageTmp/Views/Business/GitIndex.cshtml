@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+@model List<ComCloudShop.ViewModel.GiftViewModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>赠品记录列表</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <style type="text/css">
+        .mainbox{top:50px;}
+    </style>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m3">
+            <div class="header">
+                <div class="h-left-black"></div>
+                <div class="h-title"><h1>赠品记录列表</h1></div>
+            </div>
+            <div class="mainbox">
+                @{
+                    foreach (ComCloudShop.ViewModel.GiftViewModel item in Model)
+                    {
+                        <div class="ui-danLst">
+                            <div class="img"><img src="http://admin.hofaf.com\@item.P1" width="80" height="80"></div>
+                            <div class="info">
+                                <h3>赠品名称：@item.SPMC</h3>
+                                <p>领取会员：@item.NickName</p>
+                                <div class="bot">
+                                    <span>领取时间：</span><span class="time">@item.LQTime</span>
+                                </div>
+                            </div>
+                            <div class="icon19"></div>
+                            <a class="all" href="#"></a>
+                        </div>
+                    }
+
+                }
+
+                
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+</body>
+</html>

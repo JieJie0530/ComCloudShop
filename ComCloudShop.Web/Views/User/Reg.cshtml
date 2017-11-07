@@ -7,23 +7,75 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>注册</title>
     <link href="~/public/css/style.css" rel="stylesheet" />
     <script src="~/public/js/jquery.min.js"></script>
     <script type="text/javascript">
-     $(function(){
-		$("#Fwxy").click(function(){
-			$("#FW").addClass("lshow");
-		 });
-		 $('#FW').on('click', function(event){
-			  if($(event.target).is('#ClossFW')) {
-				  event.preventDefault();
-				  $(this).removeClass('lshow');
-			  }
-		  });
-	 });
+        $(function () {
+            $("#Fwxy").click(function () {
+                $("#FW").addClass("lshow");
+            });
+            $('#FW').on('click', function (event) {
+                if ($(event.target).is('#ClossFW')) {
+                    event.preventDefault();
+                    $(this).removeClass('lshow');
+                }
+            });
+        });
+
+        function addService() {
+            var txt = $("#go").text();
+            if (txt == "注册") {
+
+
+                var Phone = $("#Phone").val();//手机号
+                var Pwd = $("#Pwd").val();
+                var TJPhone = $("#TJPhone").val();//推荐人手机号
+                var vel1 = $("#vel1").val();//验证码
+                if (Phone == "") {
+                    alert("请填写手机号!");
+                }
+                else if (vel1 == "") {
+                    alert("请填写验证码!");
+                }
+                else if (Pwd == "") {
+                    alert("请填写密码!");
+                }
+                else {
+                    $("#go").val("提交中");
+                    var parm = {
+
+                        Phone: Phone,
+                        Pwd: Pwd,
+                        TJPhone: TJPhone,
+                        vel1: vel1
+                    }
+
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Content("~/User/Regs")',
+                        data: parm,
+                        success: function (data) {
+                            if (data == "ok") {
+                                alert("注册成功!");
+
+                            }
+                            else {
+                                alert(data)
+                            }
+                        }
+                    })
+                }
+            }
+            else {
+                alert("提交中！")
+            }
+
+        }
+
     </script>
+
 </head>
 <body>
     <div class="page_all">
@@ -35,15 +87,16 @@
                 <div class="ui-inputbox">
                     <div class="bf">+86</div>
                     <div class="txt-btn"><a href="#">发送验证码</a></div>
-                    <div class="input-mini"><input type="text" placeholder="输入手机号码"></div>
+                    <div class="input-mini"><input type="text" id="Phone" placeholder="输入手机号码"></div>
                 </div>
-                <div class="ui-inputbox"><input type="text" placeholder="请输入六位短信验证码"></div>
-                <div class="ui-inputbox"><input type="text" placeholder="请输入推荐人手机号"></div>
+                <div class="ui-inputbox"><input type="text" id="vel1" placeholder="请输入短信验证码"></div>
+                <div class="ui-inputbox"><input type="password" id="Pwd" placeholder="请输入密码"></div>
+                <div class="ui-inputbox"><input type="text"  id="TJPhone" placeholder="请输入推荐人手机号"></div>
                 <div class="login-link">
                     <p class="s2"><a href="#">已有账号？立即登陆</a></p>
                 </div>
             </div>
-            <div class="ui-btn b-black"><a href="#">注册</a></div>
+            <div class="ui-btn b-black"><a href="#" id="go" onclick="addService()">注册</a></div>
             <div class="login-link">
                 <p class="s1">点击代表同意<span id="Fwxy">《开间服务协议》</span></p>
             </div>

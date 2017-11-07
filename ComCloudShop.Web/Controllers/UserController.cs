@@ -12,6 +12,7 @@ using ComCloudShop.WeixinOauth;
 using ComCloudShop.Service;
 using System.Text;
 using System.Data.Entity;
+using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 
 namespace ComCloudShop.Web.Controllers
 {
@@ -25,9 +26,51 @@ namespace ComCloudShop.Web.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Regs()
+        public ActionResult Regs()
         {
-            return null;
+            try
+            {
+                MemberViewModel member = new MemberViewModel();
+               
+                string Phone = Request["Phone"];
+                string Pwd = Request["Pwd"];
+                string TJPhone = Request["TJPhone"];
+                var list = db.Members.Where(d => d.Mobile == Phone);
+                if (list.Count() > 0)
+                {
+                    return Content("该登录名已存在!");
+                }
+                else
+                {
+                    var _mservice = new MemberService();
+                    member.Mobile = Phone;
+                    member.UserName = "";
+                    member.QQ = Pwd;
+                    member.OpenId = "";
+                    member.NickName = "";
+                    member.HeadImgUrl = "";
+                    member.follow = "";//上级 
+                    member.ISVip = 0;
+                    member.Cashbalance = "0";
+                    member.balance = "0";
+                    member.integral = 0;
+                    member.TotalIn = 0;
+                    member.Email = "zj";
+                    if (_mservice.Add(member)) {
+                        return Content("ok");
+                    }
+                    else
+                    {
+                        return Content("申请报错");
+                    }
+                  
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Content(ex.ToString());
+            }
         }
         // GET: Business
         [HttpGet]
@@ -46,8 +89,15 @@ namespace ComCloudShop.Web.Controllers
             if (list.Count() > 0)
             {
                 ComCloudShop.Service.Member models = list.FirstOrDefault();
-                //db.Entry<ComCloudShop.Service.Manger>(models).State = EntityState.Modified;
-                //db.SaveChanges();
+
+                var model = this.Session["Oauth"] as OAuthUserInfo;
+                models.OpenId = model.openid;
+                models.HeadImgUrl = model.headimgurl;
+                models.NickName = model.nickname;
+
+                db.Entry<ComCloudShop.Service.Member>(models).State = EntityState.Modified;
+                db.SaveChanges();
+
                 WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
                 modeluser.Id = models.MemberId;
                 modeluser.nickname = models.NickName;
@@ -58,6 +108,7 @@ namespace ComCloudShop.Web.Controllers
                 modeluser.city = models.City;
                 modeluser.country = models.Country;
                 modeluser.sex = models.Gender;
+
                 Session[AppConstant.weixinuser] = modeluser;
 
                 result.result = "登录成功";
@@ -336,7 +387,6 @@ namespace ComCloudShop.Web.Controllers
                 var model = new UserIndexViewModel();
                 UserService user = new UserService();
                 Member m = user.GetMemberByOpenID(UserInfo.openid);
-                
                 model.username = UserInfo.nickname;
                 model.url = UserInfo.headimgurl;
                 model.openid = UserInfo.openid;

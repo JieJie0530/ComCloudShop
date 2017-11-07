@@ -20,9 +20,9 @@
         }
 </style>
 <div class="wrapper">
-    <div class="logo-top">
+    @*<div class="logo-top">
         <img src="~/public/images/logo.png" alt="">
-    </div>
+    </div>*@
     <div class="editInfo">
         <form action="~/User/Edit" method="post" id="commentForm" onsubmit="return check()">
             <input type="hidden" name="MemberId" value="@Model.MemberId" />
@@ -30,8 +30,8 @@
             <ul class="editInfobox">
                 <li><span>真实姓名</span><div class="editInput"><input type="text" name="Name" id="Name" minlength="2" value="@Model.Name"></div><span class="btspan" style="color:red">*</span></li>
                 <li><span>手机号码</span><div class="editInput"><input type="tel" name="Mobile" id="Mobile" maxlength="11" minlength="11" value="@Model.Mobile"></div><span class="btspan" style="color:red">*</span></li>
-                <li><span>邮&emsp;&emsp;箱</span><div class="editInput"><input type="email" name="Email" id="Email" value="@Model.Email"></div></li>
-                <li><span>Q&emsp;&emsp;Q</span><div class="editInput"><input type="text" name="QQ" id="QQ" value="@Model.QQ"></div></li>
+                <li style="display:none;"><span>邮&emsp;&emsp;箱</span><div class="editInput"><input type="email" name="Email" id="Email" value="@Model.Email"></div></li>
+                <li style="display:none;"><span>Q&emsp;&emsp;Q</span><div class="editInput"><input type="text" name="QQ" id="QQ" value="@Model.QQ"></div></li>
                 <li><span>出生年月</span><div class="editInput"><input type="date" name="Birthday" id="Birthday" value="@Model.Birthday"></div></li>
                 <li>
                     <span>省&emsp;&emsp;份</span>

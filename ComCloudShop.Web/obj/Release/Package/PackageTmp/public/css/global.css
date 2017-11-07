@@ -1,0 +1,270 @@
+﻿/*CSS Reset*/
+
+html {
+	font-size: 20px;
+}
+.fa-home{ background:url(/weixin/img/22.png);height: 16px;width:20px; margin-top:0.5rem; border:none;}
+
+body, p, h1, h2, h3, h4, ul, li, dl, dt, dd {
+	margin: 0;
+	padding: 0;
+} 
+ul, li {
+	list-style: none;
+}
+body {
+	font-family: "\5FAE\8F6F\96C5\9ED1", Helvetica;
+	-webkit-text-size-adjust: none;
+	color: #333;
+}
+article, footer, header, nav, section, hgroup {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+i,em{
+	font-style: normal;
+}
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="date"],
+input,
+button,
+select,
+textarea{
+	appearance:none;
+	-webkit-appearance: none;
+	-moz-appearance:none; 
+}
+/*去除type=number时 出现的数字增减按钮*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+a {
+	text-decoration: none;
+	color: #333;
+}
+a:visited {
+	text-decoration: none;
+	color: #333;
+}
+a:hover {
+	text-decoration: none;
+	color: #009ef0;
+}
+img, video {
+	border: none;
+	/*max-width: 100%;*/
+	width: 100%;
+}
+img{
+	display: block;
+}
+.clearfix:after {
+	content: '.';
+	clear: both;
+	display: block;
+	height: 0;
+	visibility: hidden;
+	line-height: 0;
+	font-size: 0;
+}
+.clearfix {
+	zoom: 1;
+}
+
+header{
+	height: 2rem;
+	background: #009ef0;
+}
+
+.hidden {
+	display: none !important; 
+}
+
+
+/*footer USE*/
+footer{
+	height: 2.2rem;
+	width: 100%;
+	background: #454545;
+	position: fixed;
+	bottom: 0rem;
+}
+footer ul{
+	margin-top: 0.2rem;
+}
+footer ul li{
+	width: 25%;
+	float: left;
+	text-align: center;
+}
+footer i{
+	display: inline-block;
+}
+footer .icon_nav{
+	height: 1.1rem;
+	width: 1.1rem;
+	fill:#FFFFFF;
+}
+
+footer ul li span{
+	display: block;
+	font-size: 0.45rem;
+	line-height: 0.6rem;
+}
+footer a {
+	display: block;
+	text-decoration: none;
+	color: #FFF;
+}
+footer a:visited {
+	text-decoration: none;
+	color: #FFF;
+}
+footer a:hover {
+	text-decoration: none;
+	color: #FFF;
+}
+footer ul li.curr a{
+	color: #ffaa00;
+}
+footer ul li.curr .icon_nav{
+	height: 1.1rem;
+	width: 1.1rem;
+	fill:#ffaa00;
+}
+footer ul li.disable a{
+	color: #999;
+}
+footer ul li.disable .icon_nav{
+	height: 1.1rem;
+	width: 1.1rem;
+	fill:#999;
+}
+
+/*非固定底部*/
+footer.static{
+	position: static;
+}
+footer.static ul{
+	margin-top:0;
+	padding-top: 0.2rem;
+}
+
+
+/*备用底部 功能按钮*/
+.footbar{
+	height: 2rem;
+	width: 100%;
+	background: #009ef0;
+	position: fixed;
+	bottom: 0rem;
+}
+
+.loadingmore{
+	height: 1.6rem;
+	line-height: 1.6rem;
+	text-align: center;
+	font-size: 0.9rem;
+	color: #AAA;
+}
+.loadingmore span{
+	font-size: 0.4rem;
+	display: block;
+}
+
+#top_blank{
+	height: 2rem;
+}
+#bottom_blank{
+	height: 2.2rem;
+}
+#bottom_blank42{
+	height: 4.2rem;
+}
+#bottom_blank48{
+	height: 4.8rem;
+}
+
+
+/*外边距*/
+.mt01{
+	margin-top: 0.1rem;
+}
+.mt02{
+	margin-top: 0.2rem;
+}
+.mb04{
+	margin-bottom: 0.4rem;
+}
+.mt04{
+	margin-top: 0.4rem;
+}
+.mb08{
+	margin-bottom: 0.8rem;
+}
+.mt08{
+	margin-top: 0.8rem;
+}
+
+/*文字颜色*/
+.font_colorf60{
+	color: #F60;
+}
+.font_green{
+	color: #5fa001;
+}
+/*文字对齐*/
+.txt_center{
+	text-align: center;
+}
+/*背景色*/
+.bgwhite {
+	background: #FFF;
+}
+
+/*layer弹出层自定义样式*/
+.pop_btn .layermcont{
+	padding: 20px 40px;
+}
+.pop_btn .layermbtn span:first-child{
+	background: #E3E3E3;
+	border-radius:0 0 0 5px;
+	color: #666;
+	height: 40px;
+	font-size: 16px;
+}
+.pop_btn .layermbtn span:last-child{
+	background: #009ef0;
+	border-radius:0 0 5px 0;
+	color: #FFF;
+	height: 40px;
+	font-size: 16px;
+}
+
+
+/*首页 */
+
+/*杩斿洖棣栭〉*/
+
+.gohome {
+	position: fixed;
+	right: 0.5rem;
+	top: 0.2rem;
+	font-size: 1rem;
+	z-index: 9990;
+}
+.gohome a{
+	display: block;
+	width: 1.2rem;
+	height: 1.2rem;
+	text-align: center;
+	color: #FFF;
+}
+.gohome a.dark{
+	color: #F90;
+}

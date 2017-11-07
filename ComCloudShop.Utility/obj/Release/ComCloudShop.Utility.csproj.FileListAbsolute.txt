@@ -18,3 +18,8 @@ D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.csprojResolveAssemblyReference.cache
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.dll
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170209\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\bin\Release\ComCloudShop.Utility.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\bin\Release\ComCloudShop.Utility.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Utility\obj\Release\ComCloudShop.Utility.pdb

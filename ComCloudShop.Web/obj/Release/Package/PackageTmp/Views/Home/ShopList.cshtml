@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<ComCloudShop.Service.Manger>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商家列表</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        
+    </script>
+</head>
+<body>
+    <div class="page_all">
+        <div id="index" class="page">
+            <div class="header" style="background:#e61c4c;">
+                <div id="Menu" class="h-left"></div>
+                <div class="h-chose" style="position:relative;">
+                    <ul>
+                        <li class="curr" style="width:100%">商家列表</li>
+                        <img style="position:absolute; right:10px; width:30px; height:30px; " onclick="QRCode();" src="~/public/images/sarn.png" />
+                    </ul>
+                </div>
+            </div>
+            <div class="lst01" style="top:45px;">
+                @{
+                    foreach (ComCloudShop.Service.Manger item in Model)
+                    {
+
+                        <div class="ui-danLst" style="height:67px;">
+                            <div class="info" style="margin-left:16px; height:37px;">
+                                <h3>@item.ShopName</h3>
+                                <p>@item.ShopAddress</p>
+                            </div>
+                            <div class="icon19"></div>
+                            <a class="all" href="/Home/Shop?id=@item.ID"></a>
+                        </div>
+
+
+                    }
+                }
+            </div>
+            <div class="ui-line70"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />   
+<style type="text/css">
+    .btn {
+        border-radius: 3px;
+    }
+
+    .btn-info {
+        background-color: #23c6c8;
+        border-color: #23c6c8;
+        color: #FFFFFF;
+        float: right;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        z-index: 999999;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+</style>
+<link rel="stylesheet" href="~/public/css/style.css">
+<div class="page_all">
+    <div class="page m3">
+        <div class="header" style="background: #e23b6b;">
+            <div class="h-left-black"></div>
+            <div class="h-title"><h1 style="position:relative;">提现记录<a href="AddWithd" class="btn-info btn">申请提现</a></h1></div>
+        </div>
+        <div class="mainbox" style="top:55px;">
+            @{
+                List<ComCloudShop.Service.Withdrawal> list = ViewData.Model as List<ComCloudShop.Service.Withdrawal>;
+                if (list != null)
+                {
+                    if (list.Count > 0)
+                    {
+                        foreach (ComCloudShop.Service.Withdrawal item in ViewData.Model as List<ComCloudShop.Service.Withdrawal>)
+                        {
+                    <div class="ui-itembox">
+                        <div class="ui-item big">
+                            <h3>申请方式：@item.Type</h3>
+                            <h3>申请金额：@item.Price</h3>
+                            <h3>申请时间：@item.AddTime</h3>
+                            <div class="btn pay"><a href="#">@(item.State == 0 ? "申请中" : "成功")</a></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="ui-line25"></div>
+                            }
+                        }
+                    }
+                }
+            <div class="ui-minitxt">
+                已加载全部
+            </div>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>用户登录</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m2">
+            <div class="logob">
+                <img src="~/public/images/logos.png" width="100" height="100">
+            </div>
+            <div class="inputbox">
+                <div class="ui-inputbox"><input type="text" id="username" placeholder="输入用户名"></div>
+                <div class="ui-inputbox" style="border-bottom:1px solid #ddd;"><input type="password"  id="pwd" placeholder="登录密码"></div>
+            </div>
+            <div class="ui-btn b-black" style="margin-top:10px;" ><a onclick="Login()" id="alogin">立即登陆</a></div>
+            <div class="ui-btn b-black" style="margin-top:10px;"><a href="/Business/Reg" >申请入驻</a></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function () {
+            $(".b-black").click(function () {
+                Login();
+            })
+        })
+
+        function Login() {
+
+            var UserName=$("#username").val();
+            var pwd=$("#pwd").val();
+            var parm = {
+                UserName: UserName,
+                pwd: pwd
+            }
+            $.ajax({
+                type: 'post',
+                async: false,
+                data: parm,
+                url: '@Url.Content("~/Business/Logins")',
+                success: function (data) {
+                    if (data.error == 1) {
+                        alert(data.msg);
+                    }
+                    else if (data.error == 0) {
+                        alert(data.msg);
+                        window.location.href = "/Business/Index"
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

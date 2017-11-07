@@ -58,3 +58,15 @@ D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.csprojResolveAssemblyReference.cache
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.dll
 D:\Project\方格蓝\F - 方广好妈妈食品\MircoShop\方广修改版20170303\ComCloudShop20170302\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\ComCloudShop.Service.dll.config
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\ComCloudShop.Service.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\ComCloudShop.Service.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\EntityFramework.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\EntityFramework.SqlServer.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\EntityFramework.xml
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\EntityFramework.SqlServer.xml
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\zh-Hans\EntityFramework.resources.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.csprojResolveAssemblyReference.cache
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.dll
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Release\ComCloudShop.Service.pdb
