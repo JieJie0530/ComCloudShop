@@ -1,6 +1,11 @@
-﻿using ComCloudShop.Utility;
+﻿using ComCloudShop.Service;
+using ComCloudShop.Utility;
 using ComCloudShop.ViewModel;
 using ComCloudShop.WeixinOauth;
+using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.AdvancedAPIs;
+using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
+using Senparc.Weixin.MP.Containers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,5 +66,6 @@ namespace ComCloudShop.Web.Controllers
             
             base.OnActionExecuting(filterContext);
         }
+       
     }
 }

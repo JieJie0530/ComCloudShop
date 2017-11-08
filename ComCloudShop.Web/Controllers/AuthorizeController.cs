@@ -42,7 +42,7 @@ namespace ComCloudShop.Web.Controllers
                 logger.Debug("data.error=" + data.error);
                 if (data.error == 0)
                 {
-                    return RedirectToAction("Index", "User");
+                    //return RedirectToAction("Index", "User");
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace ComCloudShop.Web.Controllers
                 //#endregion
             }
             return RedirectToAction("Index", "Home");
-            //Response.Redirect(helper.GetAuthorizeUri(Server.UrlEncode("http://www.cc-wang.cn/authorize/do/"), OauthScope.snsapi_userinfo));
+            
         }
         MircoShopEntities db = new MircoShopEntities();
 

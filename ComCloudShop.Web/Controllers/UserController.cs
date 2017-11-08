@@ -127,15 +127,12 @@ namespace ComCloudShop.Web.Controllers
         public ActionResult RenderImg() {
             UserService user = new UserService();
             Member m = user.GetMemberByOpenID(UserInfo.openid);
-            if (Convert.ToInt32(m.Cashbalance) > 0)
+            if (string.IsNullOrEmpty(m.OrignKey))
             {
-                if (string.IsNullOrEmpty(m.OrignKey))
-                {
-                    string url = WeixinOauthHelper.CreateQrCode(m);
-                    m.OrignKey = url;
-                    logger.Debug("erweima=" + m.OrignKey);
-                    user.UpdateMember(m);
-                }
+                string url = WeixinOauthHelper.CreateQrCode(m);
+                m.OrignKey = url;
+                logger.Debug("erweima=" + m.OrignKey);
+                user.UpdateMember(m);
             }
             return View(m);
         }

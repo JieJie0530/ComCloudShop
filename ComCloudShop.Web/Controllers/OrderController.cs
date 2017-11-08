@@ -544,41 +544,7 @@ namespace ComCloudShop.Web.Controllers
                     var orderdetail = _service.GetOrderDetail(pay[0]);
                     if (orderdetail != null) {
                         if (orderdetail.Stutas == 1) {//如果已经支付
-                            var user = _user.GetMemberBID(orderdetail.MemberId);
-                            WeixinOauthHelper.TuiSong(user.OpenId, "您的订单号" + pay[0] + "已付款，感谢您对我们的支持！");
-                            if (orderdetail.Jifen != null) {
-                                if (orderdetail.Jifen != "") {
-                                    if ( Convert.ToDecimal(orderdetail.Jifen)>0)
-                                    {
-                                        user.integral -= Convert.ToDecimal(orderdetail.Jifen);
-                                        _user.UpdateMember(user);
-                                    }
-                                }
-                            }
-
-                            IEnumerable<OrderProductViewModel> list = _service.GetOrderProductDetail(pay[0]).ToList();
-                            foreach (OrderProductViewModel item in list)
-                            {
-                                if (item.BuySale <= 0) {
-                                    ComCloudShop.Service.GiftList g = new GiftList();
-                                    g.MemberID = orderdetail.MemberId.ToString();
-                                    g.ProductID = item.ProductId.ToString();
-                                    g.AddTime = DateTime.Now;
-                                    g.LQTime = null;
-                                    g.OrderID = orderdetail.OrderNum;
-                                    g.ManagerID = "";
-                                    g.State = 0;
-                                    _service.AddGif(g);
-                                }
-                            }
-                             
-                            //if (user.follow != "" && user.fsate == 1) {
-                            //    user.fsate = 2;
-                                
-                            //    _user.UpdateMember(user); //确定上下级关系 
-
-                            //}
-                            
+                          
                         }
                     }
 

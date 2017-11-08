@@ -1010,8 +1010,6 @@ namespace ComCloudShop.Layer
                                 join
                                    c in db.UserCoupons on a.CouponId equals c.CouponId into temp
                                 from tt in temp.DefaultIfEmpty()
-                                join
-                                    d in db.DeliveryAddresses on a.AddressId equals d.AddressId
                                 where a.OrderNum == no
                                 select new
                                 {
@@ -1023,11 +1021,11 @@ namespace ComCloudShop.Layer
                                     a.Carriage,
                                     a.DiscountAmount,
                                     Amount = tt.Amount == null ? 0 : tt.Amount,
-                                    Addressee = d.UserName,
+                                    Addressee = "",
                                     KD = a.LogisticsType,
                                     Jifen = a.Jifen,
                                     MemberID = a.MemberId,
-                                   Address = d.Province + d.City + d.District + d.Address
+                                   Address = ""
                                }).ToList().FirstOrDefault();
 
                     if (data != null)
