@@ -142,7 +142,7 @@
                     foreach (CategoryViewModel item in model.result as List<CategoryViewModel>)
                     {
                         @*<a href="/Product/Index?brand=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>*@
-                        <a href="/Product/Index?brand=@item.CategoryId"> <img src="http://localhost:10787/@( item.BrandPic)" alt="@item.CategoryName"></a>
+                        <a href="/Product/Index?brand=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>
                     }
             }
             }
