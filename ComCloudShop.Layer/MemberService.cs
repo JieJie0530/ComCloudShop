@@ -351,6 +351,64 @@ namespace ComCloudShop.Layer
             }
             return result;
         }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="nickName"></param>
+        /// <param name="mobile"></param>
+        /// <returns></returns>
+        public ResultViewModel<IEnumerable<AdminMemberListViewModel>> GetMemberListNew1(int page, int size, string nickName, string mobile, string openid, int isvip,string follow)
+        {
+            var result = new ResultViewModel<IEnumerable<AdminMemberListViewModel>>();
+            try
+            {
+                using (var db = new MircoShopEntities())
+                {
+                    result.result = (from a in db.Members
+                                     where (string.IsNullOrEmpty(nickName) ? 1 == 1 : a.NickName.Contains(nickName)) &&
+                                     (string.IsNullOrEmpty(follow) ? 1 == 1 : a.follow== follow) &&
+                                               (string.IsNullOrEmpty(mobile) ? 1 == 1 : a.Mobile.Contains(mobile)) &&
+                                               (string.IsNullOrEmpty(openid) ? 1 == 1 : a.OpenId.Contains(openid)) &&
+                                               (isvip == 0 ? 1 == 1 : a.ISVip == isvip)
+                                     orderby a.MemberId descending
+                                     select new AdminMemberListViewModel
+                                     {
+                                         MemberId = a.MemberId,
+                                         OpenId = a.OpenId,
+                                         NickName = a.NickName,
+                                         HeadImgUrl = a.HeadImgUrl,
+                                         Gender = a.Gender,
+                                         Province = a.Province,
+                                         City = a.City,
+                                         Mobile = a.Mobile,
+                                         IsVip = (int)a.ISVip
+                                     }).Skip((page - 1) * size).Take(size).ToList();
+
+                    result.total = (from a in db.Members
+                                    where (string.IsNullOrEmpty(nickName) ? 1 == 1 : a.NickName.Contains(nickName)) &&
+                                      (string.IsNullOrEmpty(follow) ? 1 == 1 : a.follow == follow) &&
+                                              (string.IsNullOrEmpty(mobile) ? 1 == 1 : a.Mobile.Contains(mobile))
+                                    orderby a.MemberId descending
+                                    select new AdminMemberListViewModel
+                                    {
+                                        MemberId = a.MemberId
+                                    }).Count();
+
+                    result.error = (int)ErrorEnum.OK;
+                    result.msg = "success";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.error = (int)ErrorEnum.Error;
+                result.msg = ex.Message;
+            }
+            return result;
+        }
+
         /// <summary>
         /// 获取用户列表
         /// </summary>

@@ -21,7 +21,12 @@ namespace ComCloudShop.Backend.Controllers
                 string MemberID = Request["MemberID"];
                 string NickName = Request["NickName"];
                 string Mobile = Request["Mobile"];
-                string flollw = Request["Follow"];
+                //string flollw = Request["Follow"];
+                string admin = AdminUser;
+                var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
+                string flollw = ms.FirstOrDefault().Phone;
+
+                
                 Member m = new Member();
                 if (MemberID != "")
                 {
@@ -122,8 +127,27 @@ namespace ComCloudShop.Backend.Controllers
             var list = _service.GetMemberListNew(page, AppConstant.PageSize, nickName, mobile, openid, isvip);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="nickName"></param>
+        /// <param name="mobile"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public JsonResult list1(string nickName,string mobile, string openid, int isvip, int page = 1)
+        {
+            using (var db = new MircoShopEntities())
+            {
+                string admin = AdminUser;
+                var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
+                string follow = ms.FirstOrDefault().Phone;
 
-
+                var list = _service.GetMemberListNew1(page, AppConstant.PageSize, nickName, mobile, openid, isvip, follow);
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        
         public ContentResult WithdOk(int id) {
             if (_service.UpdateWithd(id))
             {

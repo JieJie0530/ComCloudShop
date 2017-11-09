@@ -90,6 +90,9 @@
                         <th>昵称</th>
                         <th>手机</th>
                         <th>等级</th>
+                        <th>发展普通会员</th>
+                        <th>发展VIP</th>
+                        <th>发展SVIP</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -97,11 +100,10 @@
                     <tr>
                         <td><img data-bind="attr:{src:item.HeadImgUrl}" width="50" height="50" /></td>
                         <td data-bind="text:item.NickName"></td>
-                        <td data-bind="text:item.City"></td>
-                        <td data-bind="text:item.Gender==1?'男':(item.Gender==2?'女':'其它')"></td>
                         <td data-bind="text:item.Mobile"></td>
-                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'待认证':'VIP')"></td>
+                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':'SVIP')"></td>
                         <td>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenList(item.Mobile)}" class="btnsearch">详情</a>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
                         </td>
                     </tr>
@@ -143,7 +145,38 @@
         </tbody>
     </table>
 </div>
-
+<div id="dialogList" style="display:none;">
+    <div class="result-content">
+        <table class="result-tab" width="100%">
+            <thead>
+                <tr>
+                    <th>头像</th>
+                    <th>昵称</th>
+                    <th>手机</th>
+                    <th>等级</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:{data:arrayList, as:'item'}">
+                <tr>
+                    <td><img data-bind="attr:{src:item.HeadImgUrl}" width="50" height="50" /></td>
+                    <td data-bind="text:item.NickName"></td>
+                    <td data-bind="text:item.Mobile"></td>
+                    <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':'SVIP')"></td>
+                    <td>
+                        <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="list-page">
+            共<span data-bind="text:total"></span>条
+            <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+            <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+            <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+        </div>
+    </div>
+</div>
 <div style="display: none" id="dialog">
     <table class="insert-tab" width="100%">
         <tbody>
@@ -399,7 +432,7 @@
             };
 
             m.btnUpdate = function () {
-               
+
                 var parm = {
                     //单条model信息
                     NickName: m.NickName(),
@@ -425,9 +458,30 @@
                     }
                 })
             }
+            m.OpenList = function (Phone) {
+                var url = "@Url.Content("~/user/list1?page=")" + page + "&nickName=" + m.search_nickName() + "&mobile=" + m.search_mobile() + "&openid=" + m.search_openid() + "&isvip=" + $("#search_sel").val();
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total(data.total);
+                        m.page_total(Math.ceil(data.total / m.size));
+                        m.page_current(page);
+                        m.array(data.result);
+                    }else {
+                        alert("Get Data Error");
+                    }
+
+                });
+
+                $("#dialogList").dialog({ width: "900px" });
+            }
             //加载表单数据
             m.loadData = function (page) {
-                var url = "@Url.Content("~/user/list?page=")" + page + "&nickName=" + m.search_nickName() + "&mobile=" + m.search_mobile() + "&openid=" + m.search_openid() + "&isvip=" + $("#search_sel").val();
+                var url = "@Url.Content("~/user/list1?page=")" + page + "&nickName=" + m.search_nickName() + "&mobile=" + m.search_mobile() + "&openid=" + m.search_openid() + "&isvip=" + $("#search_sel").val();
                 $.ajax({
                     method: "get",
                     url: url,
