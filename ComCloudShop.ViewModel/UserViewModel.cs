@@ -14,6 +14,8 @@ namespace ComCloudShop.ViewModel
         public string phone { get; set; }
         public string openid { get; set; }
         public string balance { get; set; }
+
+        public string Rols { get; set; }
         public string follow { get; set; }
         public string Cashbalance { get; set; }
         public decimal integral { get; set; }

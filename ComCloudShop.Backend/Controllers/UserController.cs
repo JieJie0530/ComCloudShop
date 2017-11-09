@@ -21,12 +21,19 @@ namespace ComCloudShop.Backend.Controllers
                 string MemberID = Request["MemberID"];
                 string NickName = Request["NickName"];
                 string Mobile = Request["Mobile"];
-                //string flollw = Request["Follow"];
+                string OrignKey = Request["OrignKey"];
+                string IsVip = Request["IsVip"];
                 string admin = AdminUser;
                 var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
-                string flollw = ms.FirstOrDefault().Phone;
+                string flollw = "";
+                if (admin != "admin")
+                {
+                    flollw = ms.FirstOrDefault().Phone;
+                }
+                if (Request["Follow"] != null) {
+                    flollw = Request["Follow"].ToString();
+                }
 
-                
                 Member m = new Member();
                 if (MemberID != "")
                 {
@@ -35,18 +42,20 @@ namespace ComCloudShop.Backend.Controllers
                     m.NickName = NickName;
                     m.Mobile = Mobile;
                     m.follow = flollw;
+                    m.ISVip = Convert.ToInt32(IsVip);
                     m.ContactAddr = "";
                     m.UserName = "";
                     m.OrignKey = "";
+                    m.QQ = OrignKey;
                 }
                 else
                 {
                     m.NickName = NickName;
                     m.Mobile = Mobile;
                     m.follow = flollw;
-                    m.OpenId = Guid.NewGuid().ToString();
+                    m.OpenId =Guid.NewGuid().ToString();
                     m.fsate = 0;
-                    m.ISVip = 0;
+                    m.ISVip = Convert.ToInt32(IsVip);
                     m.integral = 0;
                     m.TotalIn = 0;
                     m.balance = "0";
@@ -58,6 +67,7 @@ namespace ComCloudShop.Backend.Controllers
                     m.ContactAddr = "";
                     m.UserName = "";
                     m.OrignKey = "";
+                    m.QQ = OrignKey;
                     db.Members.Add(m);
                 }
 
@@ -147,7 +157,36 @@ namespace ComCloudShop.Backend.Controllers
             }
             
         }
-        
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="nickName"></param>
+        /// <param name="mobile"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public JsonResult list2(string nickName, string mobile, string openid, int isvip, string Phone, int page = 1)
+        {
+                string follow = Phone;
+
+                AddList(follow);
+
+                //var list = _service.GetMemberListNew1(page, AppConstant.PageSize, nickName, mobile, openid, isvip, follow);
+                return Json(listAll, JsonRequestBehavior.AllowGet);
+        }
+        MircoShopEntities db = new MircoShopEntities();
+        List<ComCloudShop.Service.Member> list = new List<Member>();
+        List<ComCloudShop.Service.Member> listAll = new List<Member>();
+        private void AddList(string follow) {
+            list = db.Members.Where(d => d.follow == follow).ToList();
+            if (list.Count > 0) {
+                listAll.AddRange(list);
+                foreach (var item in list)
+                {
+                    AddList(item.Mobile);
+                }
+            }
+        }
+
         public ContentResult WithdOk(int id) {
             if (_service.UpdateWithd(id))
             {

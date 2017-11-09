@@ -45,6 +45,7 @@
                         <tr>
                             <td colspan="4" style="text-align :center">
                                 <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value="  查  询  " />
+                                <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnAdd" value=" 添 加 " />
                             </td>
                         </tr>
                     </tbody>
@@ -71,7 +72,7 @@
                         <td data-bind="text:item.City"></td>
                         <td data-bind="text:item.Gender==1?'男':(item.Gender==2?'女':'其它')"></td>
                         <td data-bind="text:item.Mobile"></td>
-                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'待认证':'VIP')"></td>
+                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':'SVIP')"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
                         </td>
@@ -119,7 +120,41 @@
         </tbody>
     </table>
 </div>
+<div style="display: none" id="dialogAdd">
+    <table class="insert-tab" width="100%">
+        <tbody>
+            <tr>
+                <th><i class="require-red"></i>真实姓名：</th>
+                <td><input class="common-text required" size="30" name="NickName" data-bind="value:NickName" type="text" /></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>会员级别：</th>
+                <td>
+                    <select class="common-text required" id="IsVip" name="sel_type">
+                        <option value="0">普通</option>
+                        <option value="1">VIP</option>
+                        <option value="2">SVIP</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>手机号：</th>
+                <td><input class="common-text required" size="30" name="Mobile" data-bind="value:Mobile" type="text" /></td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>密码：</th>
+                <td><input class="common-text required" size="30" name="OrignKey" data-bind="value:OrignKey" type="text" /></td>
+            </tr>
 
+
+            <tr>
+                <td colspan="2" style="text-align :center">
+                    <input type="button" class="btn btn-primary btn6 mr10" data-bind="click:btnUpdate" value=" 保 存 " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div style="display: none" id="dialog">
     <table class="insert-tab" width="100%">
         <tbody>
@@ -216,6 +251,7 @@
             m.sel_type = ko.observable("");
             m.jifen = ko.observable("");
             //详情
+            m.ProductId = ko.observable("");
             m.MemberId=ko.observable("");
             m.OpenId =ko.observable("");
             m.Birth =ko.observable("");
@@ -233,7 +269,7 @@
             m.Province = ko.observable("");
             m.QQ = ko.observable("");
             m.UserName = ko.observable("");
-
+            m.Follow = ko.observable("");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
@@ -313,6 +349,46 @@
                 }
                 
             };
+            m.btnAdd = function () {
+                m.ProductId("");
+                m.MemberId("");
+                m.NickName("");
+                m.Mobile("");
+                m.ContactAddr("");
+                m.UserName("");
+                m.Follow("");
+                m.MemberId("");
+                m.OrignKey("");
+                $("#dialogAdd").dialog({ width: "900px" });
+            }
+
+            m.btnUpdate = function () {
+                var parm = {
+                    //单条model信息
+                    NickName: m.NickName(),
+                    Mobile: m.Mobile(),
+                    OrignKey: m.OrignKey(),
+                    Follow: "400-8780-155",
+                    IsVip: $("#IsVip").val(),
+                    P1: "",
+                    MemberID: ""
+                }
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Content("~/User/Add")',
+                    data: parm,
+                    success: function (data) {
+                        if (data) {
+                            alert('保存成功');
+                            $("#dialogAdd").dialog('close');
+                            m.loadData(1);
+
+                        } else {
+                            alert('保存失败');
+                        }
+                    }
+                })
+            }
 
             //查看
             m.OpenDialog = function (id) {

@@ -9,7 +9,7 @@ namespace ComCloudShop.Utility
     public static class AppConstant
     {
         public static readonly string admin = "AdminUser";
-
+        public static readonly string Oauth = "Oauth";
         public static readonly string weixinuser = "WeixinOauthUser";
 
         public static readonly string weixinAdminuser = "WeixinAdminOauthUser";

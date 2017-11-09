@@ -13,7 +13,7 @@
         <div class="playvideo">
             <div class="zy_media">
                 <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
-                    <source src="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P1)"  type="video/mp4">
+                    <source src="/product/@(Model.P1)"  type="video/mp4">
                 </video>
             </div>
             <div id="modelView">&nbsp;</div>

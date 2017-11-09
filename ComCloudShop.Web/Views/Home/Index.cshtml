@@ -102,15 +102,15 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
 
-            @foreach (var d in Model.batch)
-            {
-                if (d.Useful == "lunbo")
+            @{
+                foreach (var d in Model.batch)
                 {
-                    <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                    if (d.Useful == "lunbo")
+                    {
+                        <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                    }
                 }
-
             }
-
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -145,7 +145,7 @@
 
                         <a href="#"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>
                     }
-            }
+                }
             }
         </div>
     </div>
@@ -167,14 +167,14 @@
                             <li onclick="window.location.href = '/Product/Detail?pid=@item.ProductId'">
                                 <div class="image">
                                     <span class="vip">vip免费</span>
-                                    <img src="http://localhost:10787/@( item.P3)" alt="@item.P3">
+                                    <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.P3)" alt="@item.P3">
                                 </div>
                                 <div class="text">
                                     <div class="text_content">
-                                        @item.SPDM
+                                        @item.SPMC
                                     </div>
                                     <div class="text_other">
-                                        <div class="play">播放次数：920</div>
+                                        <div class="play">播放次数：0</div>
                                         <div class="price">￥@item.Sale</div>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                         }
                     }
                 }
-                
+
             </ul>
         </div>
     </div>
@@ -200,11 +200,11 @@
                 {
                     foreach (BrandViewModel item in modelB.result as List<BrandViewModel>)
                     {
-                       <a href="@item.Brand"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
+                        <a href="@item.Brand"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.Brand"></a>
                     }
                 }
             }
-            
+
         </div>
     </div>
     <!----------------linkUrl结束------------------>

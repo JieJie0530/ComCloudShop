@@ -13,10 +13,13 @@ using ComCloudShop.Service;
 using System.Text;
 using System.Data.Entity;
 using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
+using Senparc.Weixin.MP.AdvancedAPIs;
+using Senparc.Weixin.MP.Containers;
+using Senparc.Weixin.MP;
 
 namespace ComCloudShop.Web.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : BaseController,System.Web.SessionState.IRequiresSessionState
     {
 
         // GET: Business
@@ -72,6 +75,8 @@ namespace ComCloudShop.Web.Controllers
                 return Content(ex.ToString());
             }
         }
+        
+
         // GET: Business
         [HttpGet]
         public ActionResult Login()
@@ -82,45 +87,55 @@ namespace ComCloudShop.Web.Controllers
         [HttpPost]
         public JsonResult Logins()
         {
-            string username = Request["UserName"];
-            string Pwd = Request["Pwd"];
-            var result = new ResultViewModel<string>();
-            var list = db.Members.Where(d => d.Mobile == username && d.QQ == Pwd);
-            if (list.Count() > 0)
+            try
             {
-                ComCloudShop.Service.Member models = list.FirstOrDefault();
+                string username = Request["UserName"];
+                string Pwd = Request["Pwd"];
+                var result = new ResultViewModel<string>();
+                var list = db.Members.Where(d => d.Mobile == username && d.QQ == Pwd);
+                if (list.Count() > 0)
+                {
+                    ComCloudShop.Service.Member models = list.FirstOrDefault();
 
-                var model = this.Session["Oauth"] as OAuthUserInfo;
-                models.OpenId = model.openid;
-                models.HeadImgUrl = model.headimgurl;
-                models.NickName = model.nickname;
+                    var model = Oauth;
+                    models.OpenId = model.openid;
+                    models.HeadImgUrl = model.headimgurl;
+                    models.NickName = model.nickname;
 
-                db.Entry<ComCloudShop.Service.Member>(models).State = EntityState.Modified;
-                db.SaveChanges();
+                    db.Entry<ComCloudShop.Service.Member>(models).State = EntityState.Modified;
+                    db.SaveChanges();
 
-                WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
-                modeluser.Id = models.MemberId;
-                modeluser.nickname = models.NickName;
-                modeluser.headimgurl = models.HeadImgUrl;
-                modeluser.openid = models.OpenId;
-                modeluser.Phone = models.Mobile;
-                modeluser.province = models.Province;
-                modeluser.city = models.City;
-                modeluser.country = models.Country;
-                modeluser.sex = models.Gender;
+                    WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
+                    modeluser.Id = models.MemberId;
+                    modeluser.nickname = models.NickName;
+                    modeluser.headimgurl = models.HeadImgUrl;
+                    modeluser.openid = models.OpenId;
+                    modeluser.Phone = models.Mobile;
+                    modeluser.province = models.Province;
+                    modeluser.city = models.City;
+                    modeluser.country = models.Country;
+                    modeluser.sex = models.Gender;
 
-                Session[AppConstant.weixinuser] = modeluser;
+                    Session[AppConstant.weixinuser] = modeluser;
 
-                result.result = "登录成功";
-                result.error = 0;
-                result.msg = "登录成功";
+                    result.result = "登录成功";
+                    result.error = 0;
+                    result.msg = "登录成功";
+                }
+                else
+                {
+                    result.error = 1;
+                    result.msg = "用户名密码错误";
+                }
+                return Json(result);
             }
-            else
+            catch (Exception ex)
             {
+                var result = new ResultViewModel<string>();
                 result.error = 1;
-                result.msg = "用户名密码错误";
+                result.msg = "用户名密码错误"+ex.ToString();
+                return Json(result);
             }
-            return Json(result);
         }
         UserService _service = new UserService();
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -389,6 +404,17 @@ namespace ComCloudShop.Web.Controllers
                 model.openid = UserInfo.openid;
                 model.phone = m.Mobile;
                 model.balance = m.balance;
+                if (m.ISVip == 0) {
+                    model.Rols = "普通会员";
+                }
+                else if(m.ISVip == 1)
+                {
+                    model.Rols = "VIP";
+                }
+                else if (m.ISVip == 2)
+                {
+                    model.Rols = "SVIP";
+                }
                 model.follow = m.follow;
                 model.Cashbalance = m.Cashbalance;
                 model.TotalIn = Convert.ToDecimal(m.TotalIn);

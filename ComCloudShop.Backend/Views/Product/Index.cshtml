@@ -205,11 +205,7 @@
                     <td width="38%" style="display:none;">
                         <input class="common-text required" size="30" name="Discount" data-bind="value:Discount" type="text" />
                     </td>*@
-                @*<th width="12%"><i class="require-red"></i>是否预售：</th>
-                    <td width="38%">
-                        <input type="radio" name="SPGG" value="0" data-bind="checked:SPGG" />否
-                        <input type="radio" name="SPGG" value="1" data-bind="checked:SPGG" />是
-                    </td>*@
+                
                 <th width="12%"><i class="require-red"></i>备 注：</th>
                 <td width="38%">
                     <input class="common-text required" size="30" name="Describle" data-bind="value:Describle" type="text" />
@@ -220,6 +216,13 @@
                                                         optionsValue:function(item){return item.dm;},
                                                         optionsText:function(item){return item.mc;},
                                                         value:CategoryId,optionsCaption:'--请选择--'" name="CategoryId"></select>
+                </td>
+            </tr>
+            <tr>
+                <th width="12%"><i class="require-red"></i>是否推荐：</th>
+                <td width="38%" colspan="3">
+                    <input type="radio" name="SPGG" value="0" data-bind="checked:SPGG" />否
+                    <input type="radio" name="SPGG" value="1" data-bind="checked:SPGG" />是
                 </td>
             </tr>
             <tr style="display:none;">
@@ -244,7 +247,6 @@
                     <td width="38%">
                         <span>http://mm.hofaf.com/Product/Detail/?pid=</span><span data-bind="text:ProductId"></span>
 
-
                     </td>*@
             </tr>
             <tr>
@@ -262,17 +264,10 @@
                 </td>
             </tr>
             <tr>
-                <th><i class="require-red"></i>上传课程视频：</th>
+                <th><i class="require-red"></i>上传课程地址：</th>
                 <td colspan="3">
-                    <input type="button" id="btn_show" value="上传视频" />
-                    <br />
-                    <form id="form_upload" style="padding:20px; display:none;" action="UploadImg"
-                          method="post" enctype="multipart/form-data">
-                        <input name="upImg" style="width:350px;height:25px;" type="file" />
-                        <input type="submit" value="上传" />
-                    </form>
-                    <img alt="" style="display:none;" width="250" height="80" id="resultP1" src="" />
-                    <input type="hidden" id="picP1" name="picP1" data-bind="value:P1" />
+                    <input type="text" id="picP1" name="picP1" data-bind="value:P1" />
+                    eg:/product/视频名.mpg
                 </td>
             </tr>
             <tr>
@@ -615,7 +610,7 @@
             //更新产品
             m.btnUpdate = function () {
 
-                m.P1($('input[name="picP1"]').val());
+                m.P1();
                 m.P2($("input[name='picP2']").val());
                 m.P3($("input[name='picP3']").val());
 

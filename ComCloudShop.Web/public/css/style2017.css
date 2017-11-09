@@ -45,7 +45,7 @@ auto; overflow:hidden; border-bottom:1px solid #f0f1f5;}
 .Recommend_course ul li .text .text_other .price {-webkit-box-flex: 1; -webkit-flex: 1;  flex: 1; margin-right:10px;text-align:right; color:#ff9901;}
 .linkUrl{ margin-bottom:0px;}
 .LinkUrl_Friend{ clear:both; padding:10px;display: -webkit-box;display: -webkit-flex;display: flex; width:auto; height:auto; overflow:hidden;}
-.LinkUrl_Friend a{margin-right:10px; width:20%; height:auto; height:30px; overflow:hidden;box-sizing: border-box;}
+.LinkUrl_Friend a{margin-right:10px; width:20%; height:auto; height:50px; overflow:hidden;box-sizing: border-box;}
 .LinkUrl_Friend a:nth-child(5n){ margin-right:0px;}
 .LinkUrl_Friend a img{ display:block; width:100%; height:auto; overflow:hidden;}
 

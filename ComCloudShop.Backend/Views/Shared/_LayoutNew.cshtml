@@ -105,11 +105,11 @@
     <script type="text/javascript">
     $(function () {
         $("#out").on("click", function () {
-            $.ajax({
+             $.ajax({
                 type: "post",
-                url: "@Url.Content("~/ZZAdmin/AccountOut/")",
+                url: "@Url.Content("~/Account/Logout")",
                 success: function (data) {
-                    location = "@Url.Content("~/Account/AdminLogin/")";
+                    location = "@Url.Content("~/Account/Login/")";
                     }
                 })
             })

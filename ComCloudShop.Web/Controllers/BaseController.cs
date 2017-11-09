@@ -16,7 +16,7 @@ using ComCloudShop.Service;
 
 namespace ComCloudShop.Web.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController : Controller, System.Web.SessionState.IRequiresSessionState
     {
         protected void AddUserAuth(WeixinOauthUserInfo user)
         {
@@ -47,6 +47,18 @@ namespace ComCloudShop.Web.Controllers
             }
         }
 
+        protected WeixinOauthUserInfo Oauth
+        {
+            get
+            {
+                if (this.Session[AppConstant.Oauth] != null)
+                {
+                   return HttpContext.Session[AppConstant.Oauth] as WeixinOauthUserInfo;
+                }
+                return null;
+            }
+        }
+
         protected ActionResult Error()
         {
             return RedirectToAction("Index", "Error");
@@ -54,60 +66,37 @@ namespace ComCloudShop.Web.Controllers
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            base.OnActionExecuting(filterContext);
+
             string query = Request.Url.Query.ToString();
-            logger.Debug("Request.Url=" + Request.Url);
+            string str = "false";
+            if (Oauth == null) { str = "true"; }
+
+
+            logger.Debug("Request.Url=" + Request.Url + "str=" + str);
             if (!IsLogin)
             {
                 if (filterContext.ActionDescriptor.ActionName == "Login" || filterContext.ActionDescriptor.ActionName == "Reg" || filterContext.ActionDescriptor.ActionName == "Regs" || filterContext.ActionDescriptor.ActionName == "Logins")
                 {
-                  
+                    var data = WeiXinWebAuthorize();
+                    base.OnActionExecuting(filterContext);
                 }
                 else
                 {
-                    //filterContext.HttpContext.Response.Redirect("/Authorize/Index/"+query+"");
-
-                    #region 本地测试
-                    //本地测试
-                    //var user = new WeixinOauthUserInfo();
-                    //user.openid = "oVketxEVM7Rg0M5Zi05ppRFHNsHc";
-                    //user.nickname = "杰杰";
-                    //user.Id = 3672;
-                    //this.Session[AppConstant.weixinuser] = user;
-                    #endregion
-                    //#region 上线部署
-                    //上线
                     var data = WeiXinWebAuthorize();
-                    logger.Debug("data.error=" + data.error);
-                    if (data.error == 0)
-                    {
-                        //return RedirectToAction("Index", "User");
+                    if (data.error == 0) {
+                        base.OnActionExecuting(filterContext);
                     }
                     else
                     {
-                        filterContext.HttpContext.Response.Redirect("/User/Login/" + query + "");
-                        //return RedirectToAction("", "");
+                        filterContext.HttpContext.Response.Redirect("/User/Login/");
                     }
-
-                    //#endregion
-
                 }
-
             }
-          
-          
-          
-            //ShareViewModel model = new ShareViewModel();
-            //model.timestamp = WeixinOauthHelper.GenerateTimeStamp();
-            //model.nonceStr = WeixinOauthHelper.GenerateNonceStr();
-            //string url = "http://" + Request.Url.Host + Request.Url.LocalPath + query.Replace("#", "");//不能要
-            //string str = "jsapi_ticket=" + WeixinOauthHelper.GetJsapiTicket() + "&noncestr=" + model.nonceStr + "&timestamp=" + model.timestamp + "&url=" + url;
-            //model.signature = FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
-            //model.Url = url;
-            //model.MemberID = UserInfo.Id.ToString();
-            //ViewData["ShareViewModel"] = model;
+            else
+            {
+                base.OnActionExecuting(filterContext);
+            }
 
-            
         }
 
         MircoShopEntities db = new MircoShopEntities();
@@ -118,83 +107,83 @@ namespace ComCloudShop.Web.Controllers
         public ResultViewModel<OAuthAccessTokenResult> WeiXinWebAuthorize()
         {
             var result = new ResultViewModel<OAuthAccessTokenResult>();
-
-            var appId = WeiXinConst.AppId;
-            var appSecret = WeiXinConst.AppSecret;
-            string code = Request["code"];
-            string state = Request["state"];
-            if (string.IsNullOrEmpty(state))
-            {
-                //string url = "http://m.fingerlink.cn/fg/authorize/";
-                string url = Request.Url.ToString();
-                logger.Info("url " + url);
-                string UrlBase = OAuthApi.GetAuthorizeUrl(appId, url, "kevin", OAuthScope.snsapi_userinfo);
-                Response.Redirect(UrlBase);
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(code))
+           
+                var appId = WeiXinConst.AppId;
+                var appSecret = WeiXinConst.AppSecret;
+                string code = Request["code"];
+                string state = Request["state"];
+                if (string.IsNullOrEmpty(state))
                 {
-                    result.error = 1;
-                    result.msg = "您拒绝了授权！";
+                    //string url = "http://m.fingerlink.cn/fg/authorize/";
+                    string url = Request.Url.ToString();
+                    logger.Info("url " + url);
+                    string UrlBase = OAuthApi.GetAuthorizeUrl(appId, url, "kevin", OAuthScope.snsapi_userinfo);
+                    Response.Redirect(UrlBase);
                 }
                 else
                 {
-                    if (state != "kevin")
+                    if (string.IsNullOrEmpty(code))
                     {
-                        //这里的state其实是会暴露给客户端的，验证能力很弱，这里只是演示一下
-                        //实际上可以存任何想传递的数据，比如用户ID，并且需要结合例如下面的Session["OAuthAccessToken"]进行验证
-                        result.error = 2;
-                        result.msg = "验证失败！请从正规途径进入！";
+                        result.error = 1;
+                        result.msg = "您拒绝了授权！";
                     }
                     else
                     {
-                        if (this.Session[AppConstant.weixinuser] == null)
+                        if (state != "kevin")
                         {
-                            //通过，用code换取access_token
-                            var data = OAuthApi.GetAccessToken(appId, appSecret, code);
-                            string token = AccessTokenContainer.TryGetAccessToken(WeiXinConst.AppId, WeiXinConst.AppSecret, false);//如果没
-                            logger.Debug("access_token=" + data.access_token);
-                            logger.Debug("token1=" + token);
-                            var data_user = OAuthApi.GetUserInfo(data.access_token, data.openid);
-                            logger.Debug("data_user=" + data_user.openid + "," + data_user.nickname);
-                            var model = new WeixinOauthUserInfo();
-                            model.openid = data.openid;
-                            model.nickname = data_user.nickname;
-                            model.headimgurl = data_user.headimgurl;
-
-                            var models = db.Members.Where(d => d.OpenId == data_user.openid).FirstOrDefault();
-                            if (models == null)
+                            //这里的state其实是会暴露给客户端的，验证能力很弱，这里只是演示一下
+                            //实际上可以存任何想传递的数据，比如用户ID，并且需要结合例如下面的Session["OAuthAccessToken"]进行验证
+                            result.error = 2;
+                            result.msg = "验证失败！请从正规途径进入！";
+                        }
+                        else
+                        {
+                            if (this.Session[AppConstant.weixinuser] == null)
                             {
-                                this.Session["Oauth"] = data_user;
-                                result.error = 1;
-                            }
-                            else
-                            {
+                                //通过，用code换取access_token
+                                var data = OAuthApi.GetAccessToken(appId, appSecret, code);
+                                string token = AccessTokenContainer.TryGetAccessToken(WeiXinConst.AppId, WeiXinConst.AppSecret, false);//如果没
+                                //logger.Debug("access_token=" + data.access_token);
+                               // logger.Debug("token1=" + token);
+                                var data_user = OAuthApi.GetUserInfo(data.access_token, data.openid);
+                                logger.Debug("data_user=" + data_user.openid + "," + data_user.nickname);
+                                var model = new WeixinOauthUserInfo();
+                                model.openid = data.openid;
+                                model.nickname = data_user.nickname;
+                                model.headimgurl = data_user.headimgurl;
 
-                                models.NickName = data_user.nickname;
-                                models.HeadImgUrl = data_user.headimgurl;
-                                db.SaveChanges();
+                                var models = db.Members.Where(d => d.OpenId == data_user.openid).FirstOrDefault();
+                                if (models == null)
+                                {
+                                    Session[AppConstant.Oauth] = model;
+                                    result.error = 1;
+                                }
+                                else
+                                {
 
-                               WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
-                                modeluser.Id = models.MemberId;
-                                modeluser.nickname = data_user.nickname;
-                                modeluser.headimgurl = data_user.headimgurl;
-                                modeluser.openid = models.OpenId;
-                                modeluser.Phone = models.Mobile;
-                                modeluser.province = models.Province;
-                                modeluser.city = models.City;
-                                modeluser.country = models.Country;
-                                modeluser.sex = models.Gender;
-                                Session[AppConstant.weixinuser] = modeluser;
+                                    models.NickName = data_user.nickname;
+                                    models.HeadImgUrl = data_user.headimgurl;
+                                    db.SaveChanges();
 
-                               
+                                    WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
+                                    modeluser.Id = models.MemberId;
+                                    modeluser.nickname = data_user.nickname;
+                                    modeluser.headimgurl = data_user.headimgurl;
+                                    modeluser.openid = models.OpenId;
+                                    modeluser.Phone = models.Mobile;
+                                    modeluser.province = models.Province;
+                                    modeluser.city = models.City;
+                                    modeluser.country = models.Country;
+                                    modeluser.sex = models.Gender;
+                                    Session[AppConstant.weixinuser] = modeluser;
 
-                                result.error = 0;
-                                result.msg = "获取授权成功！";
+
+
+                                    result.error = 0;
+                                    result.msg = "获取授权成功！";
+                                }
                             }
                         }
-                    }
                 }
             }
             return result;

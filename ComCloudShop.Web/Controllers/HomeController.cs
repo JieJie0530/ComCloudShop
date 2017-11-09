@@ -40,13 +40,14 @@ namespace ComCloudShop.Web.Controllers
                 ViewBag.Cate = bllcate.GetCategoryList(1, 1, 10000000);
 
                 ProductService bllps = new ProductService();
-                ViewBag.Product = bllps.GetProductList(1, 10);
+                ViewBag.Product = bllps.GetProductList1(1, 10);
 
                 //ViewBag.CateList = db.MangerCates.OrderByDescending(d => d.Sort).ToList();
                 return View(data);
             }
             catch(Exception e)
             {
+                
                 return null;
             }
         }
