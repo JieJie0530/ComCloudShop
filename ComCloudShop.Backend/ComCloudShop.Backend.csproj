@@ -1562,6 +1562,7 @@
     <Content Include="Views\Cate\Index.cshtml" />
     <Content Include="Views\Manger\Withd.cshtml" />
     <Content Include="Views\Order\RList.cshtml" />
+    <Content Include="Views\User\Index1.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

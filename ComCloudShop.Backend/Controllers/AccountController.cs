@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ComCloudShop.Utility;
 using System.Text;
+using ComCloudShop.Service;
 
 namespace ComCloudShop.Backend.Controllers
 {
@@ -38,7 +39,7 @@ namespace ComCloudShop.Backend.Controllers
 
             return View();
         }
-
+        MircoShopEntities db = new MircoShopEntities();
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string pwd)
@@ -50,7 +51,17 @@ namespace ComCloudShop.Backend.Controllers
             }
             else
             {
-                Response.Write("<script>alert('账号或者密码错误，请重新输入');</script>");
+
+                var list = db.Mangers.Where(d => d.UserName == username && d.Pwd == pwd);
+                if (list.Count() > 0)
+                {
+                    AddUserAuth(username);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    Response.Write("<script>alert('账号或者密码错误，请重新输入');</script>");
+                }
             }
             return View();
         }

@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@using ComCloudShop.Utility;
+<!doctype html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -42,44 +43,60 @@
             </div>
             <div class="sidebar-content">
                 <ul class="sidebar-list">
-                    <li>
-                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>系统设置</a>
-                        <ul class="sub-menu" style="display:block">
-                            <li><a href="~/Brand/index"><i class="icon-font">&#xe005;</i>友情连接</a></li>
-                            <li><a href="~/Category/index?status=1"><i class="icon-font">&#xe005;</i>课程模块</a></li>
-                            <li><a href="~/Product/"><i class="icon-font">&#xe005;</i>产品信息</a></li>
-                            <li style="display:none;"><a href="~/Rule/"><i class="icon-font">&#xe005;</i>满减信息</a></li>
-                            <li style="display:none;"><a href="~/Sale/"><i class="icon-font">&#xe005;</i>最新推荐</a></li>
-                            <li style="display:none;"><a href="~/System/index?type=index"><i class="icon-font">&#xe005;</i>广告位</a></li>
-                            <li><a href="~/System/index?type=lunbo"><i class="icon-font">&#xe005;</i>轮播图</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>订单管理</a>
-                        <ul class="sub-menu" style="display:block">
-                            <li><a href="~/Order/"><i class="icon-font">&#xe005;</i>产品订单</a></li>
-                            <li style="display:none;"><a href="~/Order/index1"><i class="icon-font">&#xe005;</i>预售订单</a></li>
-                            <li style="display:none;"><a href="~/Order/RList"><i class="icon-font">&#xe005;</i>退货申请</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>用户管理</a>
-                        <ul class="sub-menu" style="display:block">
-                            <li><a href="~/User/"><i class="icon-font">&#xe005;</i>用户信息</a></li>
-                            <li><a href="~/User/Withd"><i class="icon-font">&#xe005;</i>提现申请</a></li>
-                            <li><a href="~/Coupon/" style="display:none;"><i class="icon-font">&#xe005;</i>优惠券信息</a></li>
-                            <li><a href="~/Address/" style="display:none;"><i class="icon-font">&#xe005;</i>地址信息</a></li>
-                            <li><a href="~/SetSup/" style="display:none;"><i class="icon-font">&#xe005;</i>积分信息</a></li>
-                        </ul>
-                    </li>
-                    <li style="display:none;">
-                        <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>加盟商管理</a>
-                        <ul class="sub-menu" style="display:block">
-                            <li><a href="~/Manger/"><i class="icon-font">&#xe005;</i>加盟商管理</a></li>
-                            <li style="display:none;"><a href="~/Cate/index"><i class="icon-font">&#xe005;</i>商家类别</a></li>
-                            <li style="display:none;"><a href="~/Manger/Withd"><i class="icon-font">&#xe005;</i>商家提现</a></li>
-                        </ul>
-                    </li>
+                    @{
+                        if (Session[AppConstant.admin].ToString() == "admin")
+                        {
+
+                            <li>
+                                <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>系统设置</a>
+                                <ul class="sub-menu" style="display:block">
+                                    <li><a href="~/Brand/index"><i class="icon-font">&#xe005;</i>友情连接</a></li>
+                                    <li><a href="~/Category/index?status=1"><i class="icon-font">&#xe005;</i>课程模块</a></li>
+                                    <li><a href="~/Product/"><i class="icon-font">&#xe005;</i>产品信息</a></li>
+                                    <li style="display:none;"><a href="~/Rule/"><i class="icon-font">&#xe005;</i>满减信息</a></li>
+                                    <li style="display:none;"><a href="~/Sale/"><i class="icon-font">&#xe005;</i>最新推荐</a></li>
+                                    <li style="display:none;"><a href="~/System/index?type=index"><i class="icon-font">&#xe005;</i>广告位</a></li>
+                                    <li><a href="~/System/index?type=lunbo"><i class="icon-font">&#xe005;</i>轮播图</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>订单管理</a>
+                                <ul class="sub-menu" style="display:block">
+                                    <li><a href="~/Order/"><i class="icon-font">&#xe005;</i>产品订单</a></li>
+                                    <li style="display:none;"><a href="~/Order/index1"><i class="icon-font">&#xe005;</i>预售订单</a></li>
+                                    <li style="display:none;"><a href="~/Order/RList"><i class="icon-font">&#xe005;</i>退货申请</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>用户管理</a>
+                                <ul class="sub-menu" style="display:block">
+                                    <li><a href="~/User/"><i class="icon-font">&#xe005;</i>用户信息</a></li>
+                                    <li><a href="~/User/Withd"><i class="icon-font">&#xe005;</i>提现申请</a></li>
+                                    <li><a href="~/Coupon/" style="display:none;"><i class="icon-font">&#xe005;</i>优惠券信息</a></li>
+                                    <li><a href="~/Address/" style="display:none;"><i class="icon-font">&#xe005;</i>地址信息</a></li>
+                                    <li><a href="~/SetSup/" style="display:none;"><i class="icon-font">&#xe005;</i>积分信息</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>加盟商管理</a>
+                                <ul class="sub-menu" style="display:block">
+                                    <li><a href="~/Manger/"><i class="icon-font">&#xe005;</i>加盟商管理</a></li>
+                                    <li style="display:none;"><a href="~/Cate/index"><i class="icon-font">&#xe005;</i>商家类别</a></li>
+                                    <li style="display:none;"><a href="~/Manger/Withd"><i class="icon-font">&#xe005;</i>商家提现</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="#" class="lntitle"><i class="icon-font">&#xe003;</i>用户管理</a>
+                                <ul class="sub-menu" style="display:block">
+                                    <li><a href="~/User/Index1"><i class="icon-font">&#xe005;</i>用户信息</a></li>
+                                </ul>
+                            </li>
+                        }
+                    }
+
                 </ul>
             </div>
         </div>

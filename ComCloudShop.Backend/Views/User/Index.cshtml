@@ -74,8 +74,6 @@
                         <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'待认证':'VIP')"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
-                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.DialogShow(item.MemberId)}" class="btnsearch">积分增减</a>
-                            <a href="javascript:void(0);"  data-bind="click:function(data,event){$parent.RenZheng(item.MemberId)},text:item.IsVip==1?'认证通过':''" class="btnsearch">认证通过</a>
                         </td>
                     </tr>
                 </tbody>

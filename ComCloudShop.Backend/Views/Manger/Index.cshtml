@@ -85,9 +85,7 @@
                         <th>商家名称</th>
                         <th>联系人</th>
                         <th>联系手机</th>
-                        <th>商家分类</th>
-                        <th>是否推荐</th>
-                        <th>结算比例</th>
+                        <th>上限个数</th>
                         <th width="200">操作</th>
                     </tr>
                 </thead>
@@ -98,8 +96,6 @@
                         <td data-bind="text:item.ShopName"></td>
                         <td data-bind="text:item.Contacts"></td>
                         <td data-bind="text:item.Phone"></td>
-                        <td data-bind="text:item.Category"></td>
-                        <td data-bind="text:item.IsRecommend?'是':'否'"></td>
                         <td data-bind="text:item.Proportion"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}">修改</a>
@@ -155,7 +151,7 @@
                     <input class="common-text required" size="40" name="Pwd" data-bind="value:ShopAddress" type="text" />
                 </td>
             </tr>
-            <tr>
+            <tr style="display:none;">
                 <th><i class="require-red"></i>商家分类：</th>
                 <td>
                     <input class="common-text required" style="display:none;" size="40" name="Pwd" data-bind="value:Category" type="text" />
@@ -163,27 +159,27 @@
                 </td>
             </tr>
             <tr>
-                <th><i class="require-red"></i>结算比例：</th>
+                <th><i class="require-red"></i>添加会员上限：</th>
                 <td>
                     <input class="common-text required" size="40" name="Proportion" data-bind="value:Proportion" type="text" />
                 </td>
             </tr>
             
-            <tr>
+            <tr style="display:none;">
                 <th><i class="require-red"></i>主营项目：</th>
                 <td>
                     <input class="common-text required" size="40" name="Business" data-bind="value:Business" type="text" />
                 </td>
             </tr>
 
-            <tr>
+            <tr style="display:none;">
                 <th><i class="require-red"></i>简单介绍：</th>
                 <td>
                     <input class="common-text required" size="40" name="Introduce" data-bind="value:Introduce" type="text" />
                 </td>
             </tr>
 
-            <tr>
+            <tr >
                 <th><i class="require-red"></i>联系人：</th>
                 <td>
                     <input class="common-text required" size="40" name="Contacts" data-bind="value:Contacts" type="text" />
@@ -196,7 +192,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="display:none;">
                 <th><i class="require-red"></i>店面图片：</th>
                 <td>
                     <input type="button" id="btn_show" value="上传图片" />
@@ -211,7 +207,7 @@
                 </td>
             </tr>
 
-            <tr>
+            <tr style="display:none;">
                 <th><i class="require-red"></i>营业执照：</th>
                 <td>
                     <input type="button" id="btn_show1" value="上传图片" />
