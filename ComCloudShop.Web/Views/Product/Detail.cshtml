@@ -9,11 +9,12 @@
 <script src="~/public/js/zy.media.min.js"></script>
 <div class="wrapper">
     <!-- Slider main container -->
+    <div id="moban"></div>
     <div>
         <div class="playvideo">
             <div class="zy_media">
                 <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
-                    <source src="/product/@(Model.P1)"  type="video/mp4">
+                    <source src="@(Model.P1)" type="video/mp4">
                 </video>
             </div>
             <div id="modelView">&nbsp;</div>
@@ -54,7 +55,7 @@
         </li>
     </ul>
     <dl class="pdtDes">
-        <dt><h2 class="hover" vel="0">产品详情</h2><h2 vel="1">评论列表</h2></dt>
+        <dt><h2 class="hover" style="width:100%;" vel="0">产品详情</h2></dt>
         <dd class="prodetial">
             <div>
                 品种：
@@ -66,7 +67,7 @@
                         </span>
                 </div>*@
             <div style="display:none;">重量：<span>@(Model.Weight)g</span></div>
-            
+
         </dd>
         @{
             if (Model.Detail != null)
@@ -86,49 +87,43 @@
             </div>
 
         }
-        <dd class="proComm" style="padding:0; padding-bottom:20px; ">
-            <ul>
-                @{
-                    var commentlist = ViewData["CommentList"] as List<ComCloudShop.ViewModel.OrderCommentViewModel>;
-                    if (commentlist != null)
-                    {
-                        foreach (var data in commentlist)
-                        {
-                            <li class="radius5 lispl">
-                                <div class="tit radius5"> <span>@data.UserName</span> <span class="titdate">@data.AddTime</span></div>
-                                <p>评分：@data.ProductScore 分</p>
-                                <p>评论：@data.Contents</p>
-                            </li>
-                        }
-                    }
-                }
-            </ul>
-        </dd>
+
     </dl>
 </div>
 <style type="text/css">
     .list li {
-    background: #FFF;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-}
+        background: #FFF;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    #moban {
+        width: 100%;
+        background-color: #000;
+        position: fixed;
+        z-index: 999999;
+        opacity: 0.3;
+    }
+
     .list li .tit {
-    height: 2.2rem;
-    line-height: 2.2rem;
-    background: #f8f8f8;
-    padding: 0 0.5rem;
-    text-align: right;
-    color: #999;
-}
-    .list li .tit span {
-    float: left;
-    color: #333;
-}
+        height: 2.2rem;
+        line-height: 2.2rem;
+        background: #f8f8f8;
+        padding: 0 0.5rem;
+        text-align: right;
+        color: #999;
+    }
+
+        .list li .tit span {
+            float: left;
+            color: #333;
+        }
+
     .list li p {
-    line-height: 1.5rem;
-    display: block;
-    padding: 0 0.5rem;
-}
+        line-height: 1.5rem;
+        display: block;
+        padding: 0 0.5rem;
+    }
 </style>
 <!--   公用-->
 <div class="mainNav mainNav2">
@@ -139,10 +134,25 @@
     </ul>
 </div>
 <script>
-//document.documentElement.style.overflow='hidden';
-document.body.style.overflow='hidden';
-zymedia('video',{autoplay: true});
-var screenheight = window.screen.height/2;
+    //document.documentElement.style.overflow='hidden';
+    var Quanxian = '@Model.Weight';
+    var Rols = '@ViewBag.Rols';
+    Quanxian=1;
+    if (Rols == 2) {
+
+    }
+    else if (Rols == 1 && Quanxian==2) {
+        $("#moban").show();
+    }
+    else if (Rols == 0 && Quanxian > 0) {
+        $("#moban").show();
+    }
+
+        document.body.style.overflow='hidden';
+        zymedia('video',{autoplay: true});
+       
+        var screenheight = window.screen.height / 2;
+
 var videoheight = $(".zy_media").height()/2;
 var padding_top = screenheight-videoheight;
 $(".playvideo").css({"top":padding_top});
@@ -151,8 +161,8 @@ $(".playvideo").css({"top":padding_top});
 <!--   轮播图-->
 <script type="text/javascript">
     $(function () {
-        $(".proComm").css("display", "none");
-        $(".prodetial").css("display", "block");
+        //$(".proComm").css("display", "none");
+        //$(".prodetial").css("display", "block");
 
         var hlist = $(".pdtDes dt h2");
         hlist.click(function () {
@@ -171,10 +181,14 @@ $(".playvideo").css({"top":padding_top});
 
         var imglist = $(".xqimg img");
         imglist.each(function () {
-            $(this).attr("src", "/admin/" + $(this).attr("src"));
+            var src = $(this).attr("src");
+            if (src.indexOf("http")< 0) {
+                $(this).attr("src", "/admin/" + $(this).attr("src"));
+            }
+
         })
 
-      
+
         $.ajax({
             type: 'get',
             url: '@Url.Content("~/Cart/GetCartNumber")',

@@ -32,8 +32,23 @@ namespace ComCloudShop.Web.Controllers
             try
             {
                 var data = _service.GetProductGroupSaleAll();
-               
-                
+
+                if (this.Session[AppConstant.weixinuser] == null)
+                {
+                    ViewBag.Rols = "0";
+                }
+                else {
+                    WeixinOauthUserInfo user = this.Session[AppConstant.weixinuser] as WeixinOauthUserInfo;
+                    Member m = db.Members.Where(d => d.MemberId == user.Id).FirstOrDefault();
+                    if (m.ISVip == 0)
+                    {
+                        ViewBag.Rols = "0";
+                    }
+                    else {
+                        ViewBag.Rols = "1";
+                    }
+                }
+
                 BrandService bll = new BrandService();
                 ViewBag.BrandList = bll.GetBrandList(1, 1, 10000000);
                 CategoryService bllcate = new CategoryService();

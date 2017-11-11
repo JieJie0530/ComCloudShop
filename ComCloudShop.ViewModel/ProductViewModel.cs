@@ -14,6 +14,7 @@ namespace ComCloudShop.ViewModel
     /// </summary>
     public class AdminProductListViewModel
     {
+        public int Weight { get; set; }
         /// <summary>
         /// ID
         /// </summary>

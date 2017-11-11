@@ -6,13 +6,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Configuration;
 using ComCloudShop.ViewModel;
+using ComCloudShop.WeixinOauth;
+using ComCloudShop.Service;
 
 namespace ComCloudShop.Web.Controllers
 {
     public class ProductController : BaseController
     {
         private readonly ProductService _service = new ProductService();
-
+     
         public ActionResult Index(string search="")
         {
             ViewBag.Search = search;
@@ -20,6 +22,10 @@ namespace ComCloudShop.Web.Controllers
             ViewBag.brand = 0;
             if (Request["type"] != null) {
                 ViewBag.type = Request["type"].ToString();
+                var _cservice = new CategoryService();
+                int Types = Convert.ToInt32(Request["type"]);
+                var data = _cservice.Get(Types);
+                ViewBag.CateName = data.CategoryName;
             }
             if (Request["brand"] != null)
             {
@@ -27,7 +33,7 @@ namespace ComCloudShop.Web.Controllers
             }
             return View();
         }
-
+        MircoShopEntities db = new MircoShopEntities();
         public ActionResult Index1(string search = "")
         {
             ViewBag.Search = search;
@@ -50,6 +56,11 @@ namespace ComCloudShop.Web.Controllers
         /// <returns></returns>
         public ActionResult Detail(int pid)
         {
+
+            Member m = db.Members.Where(d => d.MemberId == UserInfo.Id).FirstOrDefault();
+            
+            ViewBag.Rols = m.ISVip;
+               
             var data = _service.GetDetailById(pid);
             OrderService _serviceorder = new OrderService();
             var CommentList = _serviceorder.GetCommentList(pid);
@@ -87,7 +98,35 @@ namespace ComCloudShop.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="search"></param>
+        /// <param name="type"></param>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult GetProductList10(int type = 0)
+        {
+            var result = new ResultViewModel<IEnumerable<ProductListViewModel>>();
+            try
+            {
+                var data = _service.GetProductList10(type);
+                result.error = 0;
+                result.msg = "success";
+                result.result = new List<ProductListViewModel>();
+                result.result = data;
+            }
+            catch (Exception ex)
+            {
+                result.error = 2;
+                result.msg = ex.Message;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         /// <summary>
         /// 
         /// </summary>

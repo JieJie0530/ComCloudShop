@@ -386,7 +386,8 @@ namespace ComCloudShop.Layer
                                     SPMC = a.SPMC,
                                     Sale = a.Sale,
                                     Discount = a.Discount,
-                                    IsShow = a.IsShow
+                                    IsShow = a.IsShow,
+                                    Weight=(int)a.Weight
                                 }).Skip((page - 1) * size).Take(size).ToList();
 
                     result.total = (from a in db.Products
@@ -968,6 +969,61 @@ namespace ComCloudShop.Layer
                                     Discount = a.Discount,
                                     SaleNum = d.total
                                 }).ToList();
+                    return data;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取产品页列表，晒选，排序
+        /// </summary>
+        /// <param name="page">当前页</param>
+        /// <param name="size">条数</param>
+        /// <param name="search">查询</param>
+        /// <param name="type">类别</param>
+        /// <param name="begin">使用月龄开始时间</param>
+        /// <param name="end">使用月龄截止时间</param>
+        /// <returns></returns>
+        public IEnumerable<ProductListViewModel> GetProductList10(int type)
+        {
+            try
+            {
+                using (var db = new MircoShopEntities())
+                {
+                    var data = (from a in db.Products
+                                join
+                                    b in db.ProductImgs on a.ProductId equals b.ProductId
+                                join
+                                    c in
+                                    (from x in db.OrderProductDetails
+                                     group x by x.ProductId into y
+                                     select new
+                                     {
+                                         ProductId = y.Key,
+                                         total = y.Sum(z => z.BuyNum)
+                                     }) on a.ProductId equals c.ProductId into temp
+                                from d in temp.DefaultIfEmpty()
+                                join
+                                    e in db.CategoryRelations on a.ProductId equals e.ProductId
+                                join
+                                    f in db.Categories on e.CategoryId equals f.CategoryId
+                                where (type > 0 ? e.CategoryId == type : 1 == 1)
+                                select new ProductListViewModel
+                                {
+                                    ProductId = a.ProductId,
+                                    SPMC = a.SPMC,
+                                    Pic = b.P3,
+                                    Describle = a.Describle,
+                                    BeginUseAge = a.BeginUseAge,
+                                    Sale = a.Sale,
+                                    Discount = a.Discount,
+                                    SaleNum = d.total
+                                }).OrderBy(x => x.Sale).ToList();
                     return data;
                 }
             }

@@ -25,19 +25,20 @@
             <ul id="plist">
                 @foreach (var data in Model)
                 {
-                    <li title="@data.CartId" vel="@data.SPGG" class="prolist" >
+                    <li title="@data.CartId" class="prolist" >
                         <div class="productInfo cartList">
                             <a href="~/Product/Detail?pid=@data.ProductId"><h2>@data.SPMC<i class="icon-more"></i></h2></a>
                             <p>@data.Describle</p>
-                            <div class="number">
+                            <input type="hidden" value="@data.ProductNum" class="cartNum">
+                            <div class="number" style="display:none;">
                                 <b class="reduce"></b>
-                                <input type="text" value="@data.ProductNum" class="cartNum">
+                                
                                 <b class="add"></b>
                             </div>
                             <p class="fontR">￥<span class="spprice">@data.Sale</span></p>
                         </div>
                         <div class="productImg" style="background:#fff">
-                            <img src="@(WebConfigurationManager.AppSettings["imgurl"] + data.P1)" alt="">
+                            <img src="@(WebConfigurationManager.AppSettings["imgurl"] + data.P3)" alt="">
                         </div>
                         <!--选中-->
                         <div class="check-Box">
@@ -53,7 +54,7 @@
                     <a href="javascript:void(0)">&emsp;</a>
                 </div>
                 <ul class="payInfo">
-                    <li>满&emsp;减：<span>￥-<n id="mj">0.00</n></span></li>
+                    <li style="display:none;">满&emsp;减：<span>￥-<n id="mj">0.00</n></span></li>
                     <li>共&emsp;计：<span class="fontR">￥ <n id="ypay">0.00</n></span></li>
                 </ul>
                 @*<div class="payable">应 付：<span class="fontR">￥<n id="ypay">0.00</n></span></div>*@
@@ -81,13 +82,7 @@
     $.ajaxSetup({ async: false });
     $(function () {
 
-        var prolists = $(".prolist");//全部的商品
-        prolists.each(function () {
-            if ($(this).attr("vel") == "1") {
-                $(this).addClass("yushou");
-            }
-        })
-
+     
         var btn = document.getElementById("allPdt");
         //var items = document.getElementsByName("chose");
         var items = $("input:[name='chose']");

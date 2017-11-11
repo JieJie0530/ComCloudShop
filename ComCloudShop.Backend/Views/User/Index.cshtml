@@ -130,11 +130,10 @@
             <tr>
                 <th><i class="require-red"></i>会员级别：</th>
                 <td>
-                    <select class="common-text required" id="IsVip" name="sel_type">
-                        <option value="0">普通</option>
-                        <option value="1">VIP</option>
-                        <option value="2">SVIP</option>
-                    </select>
+                    <select data-bind="options:listVip,
+                                                        optionsValue:'id',
+                                                        optionsText:'Name',
+                                                        value:IsVip,optionsCaption:'--请选择--'" name="IsVip"></select>
                 </td>
             </tr>
             <tr>
@@ -232,7 +231,9 @@
             this.dm = dm;
             this.mc = mc;
         }
-
+        var countries = [{ Name: '普通', id: '0' },
+                             { Name: 'VIP', id: '1' },
+                             { Name: 'SVIP', id: '2' }];
         var model = function () {
 
             var m = this;
@@ -243,7 +244,7 @@
             m.total = ko.observable(0);
             m.page_current = ko.observable(0);
             m.page_total = ko.observable(0);
-
+            m.listVip = ko.observableArray(countries);
             //search
             m.search_nickName = ko.observable("");
             m.search_mobile = ko.observable("");
@@ -270,6 +271,7 @@
             m.QQ = ko.observable("");
             m.UserName = ko.observable("");
             m.Follow = ko.observable("");
+            m.IsVip = ko.observable("");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
@@ -369,7 +371,7 @@
                     Mobile: m.Mobile(),
                     OrignKey: m.OrignKey(),
                     Follow: "400-8780-155",
-                    IsVip: $("#IsVip").val(),
+                    IsVip: m.IsVip(),
                     P1: "",
                     MemberID: ""
                 }
@@ -419,7 +421,7 @@
                             m.Province(data.result.Province);
                             m.QQ(data.result.QQ);
                             m.UserName(data.result.UserName);
-
+                            m.IsVip(data.result.ISVip);
                         } else {
                             alert('系统错误！');
                         }

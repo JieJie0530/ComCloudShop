@@ -118,6 +118,7 @@
                         <th>课程代码</th>
                         <th>课程名称</th>
                         <th>课程价格</th>
+                        <th>权限</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -126,6 +127,7 @@
                         <td data-bind="text:item.SPDM"></td>
                         <td data-bind="text:item.SPMC"></td>
                         <td data-bind="text:item.Sale"></td>
+                        <td data-bind="text:item.Weight==0?'普通会员':(item.Weight==1?'VIP':'SVIP')"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.ProductID)}">基本信息</a>
                             @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItem(item.ProductID)}">商品属性</a>*@
@@ -220,16 +222,20 @@
             </tr>
             <tr>
                 <th width="12%"><i class="require-red"></i>是否推荐：</th>
-                <td width="38%" colspan="3">
+                <td width="38%">
                     <input type="radio" name="SPGG" value="0" data-bind="checked:SPGG" />否
                     <input type="radio" name="SPGG" value="1" data-bind="checked:SPGG" />是
                 </td>
+                <th width="12%"><i class="require-red"></i>级别权限：</th>
+                <td width="38%">
+                    <select data-bind="options:listVip,
+                                                        optionsValue:'id',
+                                                        optionsText:'Name',
+                                                        value:Weight,optionsCaption:'--请选择--'" name="Weight"></select>
+                </td>
             </tr>
             <tr style="display:none;">
-                <th width="12%"><i class="require-red"></i>重量：</th>
-                <td width="38%">
-                    <input class="common-text required" size="30" name="Weight" data-bind="value:Weight" type="text" />
-                </td>
+                
                 <th width="12%"><i class="require-red"></i>品牌：</th>
                 <td width="38%">
                     <input style=" display:none; " class="common-text required" size="10" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
@@ -389,7 +395,7 @@
 </div>
 
 <script type="text/javascript">
-
+    
     $(function () {
 
         //select model
@@ -401,6 +407,9 @@
             this.dm = dm;
             this.mc = mc;
         }
+        var countries = [{ Name: '普通', id: '0' },
+                         { Name: 'VIP', id: '1' },
+                         { Name: 'SVIP', id: '2' }];
         var model = function () {
 
             var m = this;
@@ -421,6 +430,7 @@
 
             m.listCategory = ko.observableArray();
             m.listBrand = ko.observableArray();
+            m.listVip = ko.observableArray(countries);
 
             //详情
             m.ProductId = ko.observable(0);

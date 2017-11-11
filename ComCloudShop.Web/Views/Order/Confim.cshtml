@@ -12,10 +12,10 @@
             </dt>
             @foreach (var data in Model.list)
             {
-                <dd title="@data.CartId" class="prolist" vel="@data.SPGG">
+                <dd title="@data.CartId" class="prolist">
                     <div class="productInfo">
                         <a href="javascript:void(0);" ><h2>@(data.SPMC)</h2></a>
-                        <span class="fontR">￥@( Convert.ToDecimal(data.Sale * data.Discount).ToString("0.00"))</span>
+                        <span class="fontR">￥@(Convert.ToDecimal(data.Sale).ToString("0.00"))</span>
                         <div class="pdtnumber">@(data.ProductNum)</div>
                     </div>
                     <div class="productImg" style="background:#fff;">
@@ -29,9 +29,9 @@
     <div class="totalInfo">
         <ul>
             <li><span>商品价格：</span><label class="fontR">￥<span class="spprice">@(Model.list.Sum(x => x.Sale * x.Discount * x.ProductNum).ToString("0.00"))</span></label></li>
-            <li style="display:none;"><span>运&emsp;&emsp;费： </span><label>￥<span class="kdprice">0</span></label></li>
-            <li style="display:none;"><span>满&emsp;&emsp;减： </span><label>-￥@(Model.rule.Discount)</label></li>
-            <li style="display:none;"><span>优&emsp;&emsp;惠： </span><label><a href="~/Coupon?c=order" title="@Model.coupon.CouponId" id="coupon">-￥@(string.Format("{0:N}", Model.coupon.Amount))<i class="icon-more"></i></a></label></li>
+            <li style="display:none;"><span>运&emsp;&emsp;费：</span><label>￥<span class="kdprice">0</span></label></li>
+            <li style="display:none;"><span>满&emsp;&emsp;减：</span><label>-￥@(Model.rule.Discount)</label></li>
+            <li style="display:none;"><span>优&emsp;&emsp;惠：</span><label><a href="~/Coupon?c=order" title="@Model.coupon.CouponId" id="coupon">-￥@(string.Format("{0:N}", Model.coupon.Amount))<i class="icon-more"></i></a></label></li>
             <li style="display:none;"><span>现有积分： </span><label class="xyjf">0</label></li>
             <li style="display:none;"><span>使用积分： </span><label><input type="text" id="txt_Use" placeholder="请手动输入积分" style="text-align:left; width:130px; border:1px solid red; "></label></li>
             <li style="display:none;"><span>积分优惠： </span><label class="yhmoney">0</label></li>

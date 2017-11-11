@@ -101,16 +101,25 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-
             @{
+                int i = 0;
+                string rols = ViewBag.Rols;
                 foreach (var d in Model.batch)
                 {
+                    i++;
                     if (d.Useful == "lunbo")
                     {
-                        <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                        if (rols == "0" && (i == 1 || i == 2 || i == 4))
+                        {
+                            <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                        }
+                        else if (rols == "1" && (i == 2 || i == 3 || i == 4))
+                        {
+                            <div class="swiper-slide"><a href="@(d.url)"><img src="@(WebConfigurationManager.AppSettings["imgurl"] + d.pic)" alt=""></a></div>
+                            }
+                        }
                     }
                 }
-            }
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
@@ -141,9 +150,9 @@
                 {
                     foreach (CategoryViewModel item in model.result as List<CategoryViewModel>)
                     {
-                        @*<a href="/Product/Index?brand=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a> href="/Product/Index?brand=@item.CategoryId"*@
+                        @*<a > <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a> href="/Product/Index?brand=@item.CategoryId"*@
 
-                        <a href="#"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>
+                        <a href="/Product/Index?type=@item.CategoryId"> <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.BrandPic)" alt="@item.CategoryName"></a>
                     }
                 }
             }
