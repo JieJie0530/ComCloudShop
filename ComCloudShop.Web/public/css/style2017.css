@@ -13,17 +13,16 @@ ul,li,a,span,img,i,input,h1{ margin:0px; padding:0px; list-style:none; text-deco
 .banner{ width:auto; height:auto; overflow:hidden;}
 .banner img{ display:block; width:100%; height:auto; overflow:hidden;}
 
-.column{clear:both; width:auto; height:auto; overflow:hidden; background:#fff; margin-bottom:10px;}
+.column{clear:both; width:auto; height:auto; overflow:hidden; background:#fff;}
 .column ul{display: -webkit-box;display: -webkit-flex;display: flex; width:auto; height:auto; overflow:hidden;}
 .column ul li{-webkit-box-flex: 1; -webkit-flex: 1;  flex: 1; padding:24px 0px;text-align:center;}
 .column ul li a img{ display:inline-block; width:53.5px; height:53.5px; margin-bottom:20px;}
 .column ul li a p{ color:#000; font-size:14px; }
 
-.classify,.Recommend,.linkUrl{clear:both; width:auto; height:auto; overflow:hidden; background:#fff; margin-bottom:10px; padding:20px 0px;}
+.classify,.Recommend,.linkUrl{clear:both; width:auto; height:auto; overflow:hidden; background:#fff; padding:20px 0px;}
 .title {clear:both; width:auto; height:auto; overflow:hidden; text-align:center;}
 .title .ch{ font-weight:normal; font-size:20px; color:#000; margin-bottom:8px;}
 .title .en{ font-size:12px; color:#8f8c8c;}
-
 
 .classify_course{clear:both; width:auto; height:auto; overflow:hidden; padding:10px;}
 .classify_course a{ display:block; width:48%; height:auto; overflow:hidden; float:left; margin-right:10px;box-sizing: border-box; margin-bottom:12px;height:100px;
@@ -40,7 +39,7 @@ auto; overflow:hidden; border-bottom:1px solid #f0f1f5;}
 .Recommend_course ul li .text{-webkit-box-flex: 1; -webkit-flex: 1;  flex: 1; }
 .Recommend_course ul li .text .text_content{ font-size:16px; color:#000; line-height:24px; height:48px; overflow:hidden; margin-bottom:2px;}
 
-.Recommend_course ul li .text .text_other{ clear:both;display: -webkit-box;display: -webkit-flex;display: flex; font-size:16px; color:#000;line-height:24px; }
+.Recommend_course ul li .text .text_other{ clear:both;display: -webkit-box;display: -webkit-flex;display: flex; font-size:12px; color:#000;line-height:24px; }
 .Recommend_course ul li .text .text_other .play{-webkit-box-flex: 2; -webkit-flex: 2;  flex: 2; margin-right:10px; }
 .Recommend_course ul li .text .text_other .price {-webkit-box-flex: 1; -webkit-flex: 1;  flex: 1; margin-right:10px;text-align:right; color:#ff9901;}
 .linkUrl{ margin-bottom:0px;}

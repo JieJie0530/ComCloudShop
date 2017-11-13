@@ -989,7 +989,7 @@ namespace ComCloudShop.Layer
         /// <param name="begin">使用月龄开始时间</param>
         /// <param name="end">使用月龄截止时间</param>
         /// <returns></returns>
-        public IEnumerable<ProductListViewModel> GetProductList10(int type)
+        public IEnumerable<ProductListViewModel> GetProductList10(int type,int page)
         {
             try
             {
@@ -1023,7 +1023,7 @@ namespace ComCloudShop.Layer
                                     Sale = a.Sale,
                                     Discount = a.Discount,
                                     SaleNum = d.total
-                                }).OrderBy(x => x.Sale).ToList();
+                                }).OrderBy(x => x.Sale).OrderBy(x => x.Sale).Skip((page - 1) * 10).Take(10).ToList();
                     return data;
                 }
             }

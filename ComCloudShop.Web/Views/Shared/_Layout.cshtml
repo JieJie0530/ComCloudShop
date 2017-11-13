@@ -19,20 +19,20 @@
     <script type="text/javascript" src="~/public/js/zepto.min.js"></script>
     <script type="text/javascript" src="~/public/js/index.js"></script>
     <script type="text/javascript" src="~/Scripts/jweixin-1.0.0.js"></script>
+    <link href="~/public/css/style2017.css" rel="stylesheet" />
 </head>
 <body>
     @RenderBody()
 
-    @*<div style="width:100%; height:50px; clear:both;"></div>*@
-    <!--公用-->
-    @*<div class="mainNav">
+    <div style="width:100%; height:80px; clear:both;"></div>
+    <!----------------foot开始------------------>
+    <div class="foot">
         <ul>
-            <li><a href="~/Home/">首页<i class="nav01"></i></a></li>
-            <li><a href="~/Product/">商品<i class="nav02"></i></a></li>
-            <li><a href="~/Cart/">购物车<i class="nav03"></i></a></li>
-            <li><a href="~/User/">分享中心<i class="nav04"></i></a></li>
+            <li><a href="/Home/index"><img src="~/public/images/foot_10.jpg" /><p>首页</p></a></li>
+            <li><a href="/User/index"><img src="~/public/images/foot_07.png" /><p>我的</p></a></li>
         </ul>
-    </div>*@
+    </div>
+    <!----------------foot结束------------------>
     <script type="text/javascript">
         $(function () {
             var controller = '@ViewContext.RouteData.Values["controller"]';

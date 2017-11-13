@@ -31,7 +31,11 @@ namespace ComCloudShop.Backend.Controllers
                     flollw = ms.FirstOrDefault().Phone;
                 }
                 if (Request["Follow"] != null) {
-                    flollw = Request["Follow"].ToString();
+                    if (Request["Follow"].ToString() != "")
+                    {
+                        flollw = Request["Follow"].ToString();
+                    }
+                    
                 }
 
                 Member m = new Member();

@@ -14,12 +14,22 @@
     <script type="text/javascript" src="~/public/js/swiper.min.js"></script>
     <script type="text/javascript" src="~/Scripts/jweixin-1.0.0.js"></script>
     <script type="text/javascript" src="~/Scripts/jweixin-1.0.0.js"></script>
+    <link href="~/public/css/style2017.css" rel="stylesheet" />
     @RenderSection("HeadScript", required: false)
 </head>
 <body>
     
     <div>
         @RenderBody()
+        <div style="width:100%; height:80px; clear:both;"></div>
+        <!----------------foot开始------------------>
+        <div class="foot" style="position:fixed;bottom:0;">
+            <ul>
+                <li class="on"><a href="/Home/index"><img src="~/public/images/foot_10.jpg" /><p>首页</p></a></li>
+                <li><a href="/User/index"><img src="~/public/images/foot_07.png" /><p>我的</p></a></li>
+            </ul>
+        </div>
+        <!----------------foot结束------------------>
     </div>
 
     @*<script type="text/javascript">

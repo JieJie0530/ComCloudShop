@@ -131,9 +131,10 @@
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.ProductID)}">基本信息</a>
                             @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialogItem(item.ProductID)}">商品属性</a>*@
-                            <a href="javascript:void(0);" data-bind="click:function(data,event){location.href ='@Url.Content("~/product/EditShowPic/")'+'?sysno=' + item.ProductID}">图文详情</a>
+                            @*<a href="javascript:void(0);" data-bind="click:function(data,event){location.href ='@Url.Content("~/product/EditShowPic/")'+'?sysno=' + item.ProductID}">图文详情</a>*@
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.Location(item.ProductID)}">图文详情</a>
                             @*<a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenComment(item.ProductID)}">批量评论</a>*@
-                            <a class="btn btn-primary" href="javascript:void(0);" data-bind="click:function(data,event){$parent.ProductShow(item.ProductID,item.IsShow)},text:item.IsShow?'下架':'发布'"></a>
+                            @*<a class="btn btn-primary" href="javascript:void(0);" data-bind="click:function(data,event){$parent.ProductShow(item.ProductID,item.IsShow)},text:item.IsShow?'下架':'发布'"></a>*@
 
                         </td>
                     </tr>
@@ -454,7 +455,7 @@
 
             //上一页
             m.page_pre = function () {
-                var page = (m.page_current() - 1);
+                var page = (parseInt(m.page_current()) - 1);
                 if (page > 0) {
                     m.loadData(page);
                 }
@@ -462,7 +463,7 @@
 
             //下一页
             m.page_next = function () {
-                var page = (m.page_current() + 1);
+                var page = ( parseInt(m.page_current()) + 1);
                 var total_page = m.page_total();
                 if (page <= total_page) {
                     m.loadData(page);
@@ -478,6 +479,10 @@
                     $('#form_Upload').submit();
                 }
 
+            }
+            m.Location = function (ProductId) {
+                var page=m.page_current();
+                window.location.href = "/product/EditShowPic/?sysno=" + ProductId + "&Page=" + page;
             }
             //批量评论
             m.OpenComment = function (ProductId) {
@@ -838,8 +843,11 @@
         };
 
         //初始化数据
+
+        var page = '@ViewBag.Page';
+
         var obj = new model();
-        obj.loadData(1);
+        obj.loadData(page);
         obj.loadCategorySelect();
         obj.loadBrandSelect();
         ko.applyBindings(obj);

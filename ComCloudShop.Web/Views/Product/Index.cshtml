@@ -23,8 +23,10 @@
         var type = "@ViewBag.type";
 
         var parm = {
-            type: type
+            type: type,
+            page:1
         };
+        
         getPageList = function () {
             $.ajax({
                 type: 'get',
@@ -36,7 +38,11 @@
                         $.each(data.result, function (i, item) {
                             html += "<li onclick=\"window.location.href = '/Product/Detail?pid=" + item.ProductId + "'\"><div class=\"image\"><span class=\"vip\">vip免费</span><img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\"></div><div class=\"text\"><div class=\"text_content\">" + item.SPMC + "</div><div class=\"text_other\"><div class=\"play\">播放次数：0</div><div class=\"price\">￥" + item.Sale + "</div></div></div></li>";
                         });
-                        $(".Recommend_course ul").html(html)
+                        if ($(".Recommend_course ul").html()=="") {
+                            $('.Recommend_course ul').html(html);
+                        } else {
+                            $('.Recommend_course ul').append(html);
+                        }
                     } else {
                         alert('系统错误~请稍后再试~谢谢');
                     }
@@ -44,5 +50,15 @@
             });
         }
         getPageList();
+
+        $(window).scroll(function () {
+            var scrollTop = $(this).scrollTop() + 150;
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop + windowHeight >= scrollHeight) {
+                parm.page++;
+                getPageList();
+            }
+        });
     });
-    </script>
+</script>

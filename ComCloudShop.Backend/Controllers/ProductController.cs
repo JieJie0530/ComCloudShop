@@ -20,6 +20,12 @@ namespace ComCloudShop.Backend.Controllers
             //ViewData["page"] = _service.GetProductPageCount(dm, mc, AppConstant.PageSize);
             //ViewData["spdm"] = dm;
             //ViewData["spmc"] = mc;
+            int page = 1;
+            if (Request["Page"] != null) {
+                page = Convert.ToInt32(Request["Page"]);
+            }
+            
+            ViewBag.Page = page;
             return View();
         }
 
@@ -420,10 +426,11 @@ namespace ComCloudShop.Backend.Controllers
         [HttpPost]
         public ActionResult EditShowPic(string Contents,string Proid)
         {
-
+            
             ProductUpModel model = _service.Get(Convert.ToInt32(Proid));
             model.Contents = Contents;
             _service.Update1(model);
+          
             return  Content("ok");
         }
 
@@ -431,7 +438,8 @@ namespace ComCloudShop.Backend.Controllers
         public ActionResult EditShowPic(string sysno)
         {
             ProductUpModel model = _service.Get(Convert.ToInt32(sysno));
-
+            int page = Convert.ToInt32(Request["Page"]);
+            ViewBag.Page = page;
             return View(model);
         }
 

@@ -43,13 +43,14 @@
     var content = '@Model.Contents';
     $("#editor").html(content)
     var id = '@Model.ProductId';
+    var Page = '@ViewBag.Page';
     function SubImg() {
         var content = editor.getContent();
         console.log(content);
-        $.post("/Product/EditShowPic", "Contents=" + content + "&Proid=" + id, function (obj) {
+        $.post("/Product/EditShowPic", "Contents=" + content + "&Proid=" + id , function (obj) {
             if (obj == "ok") {
                 alert("编辑成功");
-                window.location.href = '/Product/Index';
+                window.location.href = '/Product/Index/?Page=' + Page;
             }
         }, "text");
     }

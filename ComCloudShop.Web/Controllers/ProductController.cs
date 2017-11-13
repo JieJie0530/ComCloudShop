@@ -114,7 +114,8 @@ namespace ComCloudShop.Web.Controllers
             var result = new ResultViewModel<IEnumerable<ProductListViewModel>>();
             try
             {
-                var data = _service.GetProductList10(type);
+                int page = Convert.ToInt32(Request["page"]);
+                var data = _service.GetProductList10(type, page);
                 result.error = 0;
                 result.msg = "success";
                 result.result = new List<ProductListViewModel>();
