@@ -9,9 +9,13 @@
 <script src="~/public/js/zy.media.min.js"></script>
 <div class="wrapper">
     <!-- Slider main container -->
-    <div id="moban"></div>
+
     <div>
-        <div class="playvideo">
+        <div class="playvideo" style='position:relative;'>
+            <div id="moban" style='position:absolute;left:0;top:0;'>
+
+            </div>
+            <input type="button" value="点击购买VIP" class="green-int pmsg" id="Btn_Adds" onclick='ToHref()'>
             <div class="zy_media">
                 <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
                     <source src="@(Model.P1)" type="video/mp4">
@@ -105,6 +109,26 @@
         opacity: 0.3;
     }
 
+    .pmsg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 9999999999;
+        margin-left: -50px;
+        margin-top: -50px;
+    }
+
+    .green-int {
+        background: rgb(255,163,0);
+        color: #fff;
+        height: auto;
+        padding: 8px 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
     .list li .tit {
         height: 2.2rem;
         line-height: 2.2rem;
@@ -136,26 +160,48 @@
 <script>
     //document.documentElement.style.overflow='hidden';
     var Quanxian = '@Model.Weight';
+    Quanxian=parseInt(Quanxian);
     var Rols = '@ViewBag.Rols';
-    Quanxian=1;
+
     if (Rols == 2 || Rols==3) {
 
     }
     else if (Rols == 1 && Quanxian==2) {
-        $("#moban").show();
+        $("#moban").css("display", "block");
+        if (Quanxian == 2) {
+            $(".pmsg").val("请推荐给5个朋友，即可观看全部视频!");
+        }
     }
     else if (Rols == 0 && Quanxian > 0) {
-        $("#moban").show();
+        $("#moban").css("display", "block");
+        if (Quanxian == 2) {
+            $(".pmsg").val("请推荐给5个朋友，即可观看全部视频!");
+        }
     }
 
         document.body.style.overflow='hidden';
         zymedia('video',{autoplay: true});
-       
+
         var screenheight = window.screen.height / 2;
 
 var videoheight = $(".zy_media").height()/2;
 var padding_top = screenheight-videoheight;
-$(".playvideo").css({"top":padding_top});
+
+$("#moban").height($(".playvideo").height());
+
+
+function ToHref() {
+    var Quanxian = '@Model.Weight';
+    Quanxian = parseInt(Quanxian);
+    if (Quanxian == 2) {
+        
+        alert("请推荐给5个朋友，即可观看全部视频!");
+    }
+    else {
+        window.location.href = "/User/AddVip"
+    }
+   
+}
 </script>
 
 <!--   轮播图-->

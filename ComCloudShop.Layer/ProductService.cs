@@ -368,7 +368,7 @@ namespace ComCloudShop.Layer
         /// <param name="page"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public ResultViewModel<IEnumerable<AdminProductListViewModel>> GetProductSearchListNew(string spgg,string spdm, string spmc, int page = 1, int size = 10)
+        public ResultViewModel<IEnumerable<AdminProductListViewModel>> GetProductSearchListNew(string spgg,string spdm, string spmc, int CategoryId1,  int page = 1, int size = 10)
         {
             var result = new ResultViewModel<IEnumerable<AdminProductListViewModel>>();
             try
@@ -376,9 +376,12 @@ namespace ComCloudShop.Layer
                 using (var db = new MircoShopEntities())
                 {
                     result.result = (from a in db.Products
-                                where (string.IsNullOrEmpty(spdm) ? 1 == 1 : a.SPDM.Contains(spdm)) &&
-                                (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) 
-                                orderby a.ProductId descending
+                                     join
+                                    e in db.CategoryRelations on a.ProductId equals e.ProductId
+                                     where (string.IsNullOrEmpty(spdm) ? 1 == 1 : a.SPDM.Contains(spdm)) &&
+                                (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) &&
+                                (CategoryId1 > 0 ? e.CategoryId == CategoryId1 : 1 == 1)
+                                     orderby a.ProductId descending
                                 select new AdminProductListViewModel
                                 {
                                     ProductID = a.ProductId,
@@ -391,8 +394,11 @@ namespace ComCloudShop.Layer
                                 }).Skip((page - 1) * size).Take(size).ToList();
 
                     result.total = (from a in db.Products
+                                    join
+                                    e in db.CategoryRelations on a.ProductId equals e.ProductId
                                     where ( string.IsNullOrEmpty(spdm) ? 1 == 1 : a.SPDM.Contains(spdm)) &&
-                                    (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc))
+                                    (string.IsNullOrEmpty(spmc) ? 1 == 1 : a.SPMC.Contains(spmc)) &&
+                                (CategoryId1 > 0 ? e.CategoryId == CategoryId1 : 1 == 1)
                                     orderby a.ProductId descending
                                     select new AdminProductListViewModel
                                     {

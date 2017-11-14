@@ -92,9 +92,9 @@ namespace ComCloudShop.WeixinOauth
                 //亮度，红色，绿色，蓝色
                 SolidBrush solidBrush = new SolidBrush(Color.Red);
                 //水印
-                g.DrawString(waterText, font, solidBrush, 248, 340);
-                g.DrawImage(image1, 225, 780, 190, 190);
-                g.DrawImage(imghead, 43, 330, 98, 98);
+                g.DrawString(waterText, font, solidBrush, 232, 910); //名字
+                g.DrawImage(image1, 208,590, 250, 250); //
+                g.DrawImage(imghead, 32, 910, 100,100); //头像
                 string newfilename = "Hewm_" + m.MemberId + ".jpg";//二维码图片路径
                 string address = HttpContext.Current.Server.MapPath("~/ewmPic/" + newfilename);
                 image.Save(address);

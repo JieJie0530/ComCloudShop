@@ -21,7 +21,16 @@ namespace ComCloudShop.Web.Controllers
 {
     public class UserController : BaseController,System.Web.SessionState.IRequiresSessionState
     {
+        public ActionResult Exit()
+        {
+            Member m = user.GetMemberByOpenID(UserInfo.openid);
+            m.OpenId = Guid.NewGuid().ToString();
+            user.UpdateMember(m);
 
+            Session[AppConstant.weixinuser] = null;
+            
+            return Content("ok");
+        }
         // GET: Business
         [HttpGet]
         public ActionResult Reg()
@@ -60,6 +69,14 @@ namespace ComCloudShop.Web.Controllers
                     member.TotalIn = 0;
                     member.Email = "zj";
                     if (_mservice.Add(member)) {
+
+                        List<Member> listm = user.GetMemberFollow(TJPhone);
+                        if (listm.Count > 5) {
+                            Member m = user.GetMemberByPhone(TJPhone);
+                            m.ISVip = 2;
+                            user.UpdateMember(m);
+                        }
+
                         return Content("ok");
                     }
                     else
@@ -202,33 +219,33 @@ namespace ComCloudShop.Web.Controllers
         //    return Content(model.SetBL);
         //}
 
-        public void AddCommission1(int memberID)
+        public void AddCommission1(string Phone)
         {
-            List<Member> list = user.GetMemberFollow(memberID);
+            List<Member> list = user.GetMemberFollow(Phone);
             if (list.Count>0)
             {
                 list1 = list;
                 foreach (Member item in list)
                 {
-                    AddCommission2(item.MemberId);
+                    AddCommission2(item.Mobile);
                 }
             }
         }
-        public void AddCommission2(int memberID)
+        public void AddCommission2(string Phone)
         {
-            List<Member> list = user.GetMemberFollow(memberID);
+            List<Member> list = user.GetMemberFollow(Phone);
             if (list.Count > 0)
             {
                 list2.AddRange(list);
                 foreach (Member item in list)
                 {
-                    AddCommission3(item.MemberId);
+                    AddCommission3(item.Mobile);
                 }
             }
         }
-        public void AddCommission3(int memberID)
+        public void AddCommission3(string Phone)
         {
-            List<Member> list = user.GetMemberFollow(memberID);
+            List<Member> list = user.GetMemberFollow(Phone);
             if (list.Count > 0)
             {
                 list3.AddRange(list);
@@ -243,7 +260,7 @@ namespace ComCloudShop.Web.Controllers
         public ActionResult LineMember() {
             
             Member m = user.GetMemberByOpenID(UserInfo.openid);
-            AddCommission1(Convert.ToInt32(m.MemberId));
+            AddCommission1(m.Mobile);
             string type = Request["type"];
             if (type== "1") {
                 ViewData["list"] = list1;
@@ -427,7 +444,7 @@ namespace ComCloudShop.Web.Controllers
                 
 
                 model.number = _oservice.GetSaveMoney(UserInfo.Id);
-                AddCommission1(Convert.ToInt32(m.MemberId));
+                AddCommission1(m.Mobile);
                 j = 0;
                 ViewData["list1"] = list1;
                 ViewData["list2"] = list2;
@@ -491,13 +508,10 @@ namespace ComCloudShop.Web.Controllers
                 int memberID = Convert.ToInt32(UserInfo.Id);
                 var user = _user.GetMemberBID(memberID);
                 user.TotalIn = (user.TotalIn + 100);
-                //user.Cashbalance = (Convert.ToDecimal(user.Cashbalance) + 3000).ToString();//增加可提现额度3000
                 _user.UpdateMember(user);
-                //WeixinOauthHelper.TuiSong(user.OpenId, "恭喜您增加了1000的购物积分！");
                 //如果它有上级
                 if (user.follow != "")
                 {
-                    j = 0;
                     AddCommission(user.follow);
                 }
                 return Content("ok");
@@ -507,7 +521,7 @@ namespace ComCloudShop.Web.Controllers
         ComCloudShop.Layer.UserService _user = new UserService();
         public void AddCommission(string Phone)
         {
-            j++;//每次一次加一级
+         
             qjuser = _user.GetMemberByPhone(Phone);
             if (qjuser != null)
             {

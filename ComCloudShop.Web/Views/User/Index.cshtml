@@ -11,7 +11,7 @@
         <div class="accountImg"><img src="@Model.url" alt=""></div>
         <h2>微信账号 @Model.username   @Model.Rols</h2>
         <p>可提现:@Model.balance</p>
-    <a href="~/User/Edit" class="enter"></a>
+        <a style="position:absolute;right:10px; top:25px;" onclick="TXExit()" >退出</a>
 </div>
 <div class="accountNav">
     <ul>
@@ -63,7 +63,22 @@
 
         })
     })
-
+    function TXExit() {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Content("~/User/Exit")',
+            data: "",
+            success: function (data) {
+                if (data == "ok") {
+                    alert("退出成功!");
+                    window.location.href = "/User/Login";
+                }
+                else {
+                    alert("申请失败!")
+                }
+            }
+        })
+    }
 
 </script>
 

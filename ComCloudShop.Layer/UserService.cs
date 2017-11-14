@@ -93,6 +93,8 @@ namespace ComCloudShop.Layer
                 using (var db = new MircoShopEntities())
                 {
                     var m = db.Members.FirstOrDefault(x => x.MemberId == model.MemberId);
+                    m.OpenId = model.OpenId;
+                    m.ISVip = model.ISVip;
                     m.TotalIn = model.TotalIn;
                     m.fsate = model.fsate;
                     m.follow = model.follow;
@@ -110,9 +112,11 @@ namespace ComCloudShop.Layer
                 return false;
             }
         }
-        public List<Member> GetMemberFollow(int memberID)
+
+       
+        public List<Member> GetMemberFollow(string Phone)
         {
-            List<Member> list = db.Members.Where(x => x.follow == memberID.ToString() && x.fsate == 2).ToList();
+            List<Member> list = db.Members.Where(x => x.follow == Phone).ToList();
             return list;
         }
         public Member GetMemberBID(int memberID)

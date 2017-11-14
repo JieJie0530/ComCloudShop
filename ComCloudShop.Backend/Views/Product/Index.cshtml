@@ -99,10 +99,16 @@
                             <td width="15%">
                                 <input class="common-text required" size="20" name="search_spmc" data-bind="value: search_spmc" type="text" />
                             </td>
-                            
+                            <th width="5%">模块</th>
+                            <td width="15%">
+                                <select data-bind="options:listCategory1,
+                                                        optionsValue:function(item){return item.dm;},
+                                                        optionsText:function(item){return item.mc;},
+                                                        value:CategoryId1,optionsCaption:'--请选择--'" name="CategoryId1"></select>
+                            </td>
                         </tr>
                         <tr>
-                            <td colspan="6" style="text-align :center">
+                            <td colspan="8" style="text-align :center">
                                 <input type="button" class="btn btn-primary btn6 mr10" name="btnsearch" data-bind="click:btnSearch" value=" 查 询 " />
                                 <input type="button" class="btn btn-primary btn6 mr10" name="btnAdd" data-bind="click:btnAdd" value=" 添加产品 " />
                             </td>
@@ -429,6 +435,8 @@
             m.search_spdm = ko.observable("");
             m.search_spmc = ko.observable("");
 
+
+            m.listCategory1 = ko.observableArray();
             m.listCategory = ko.observableArray();
             m.listBrand = ko.observableArray();
             m.listVip = ko.observableArray(countries);
@@ -443,6 +451,7 @@
             m.BeginUseAge = ko.observable("");
             m.EndUseAge = ko.observable("");
             m.CategoryId = ko.observable("");
+            m.CategoryId1 = ko.observable("0");
             m.P1 = ko.observable("");
             m.P2 = ko.observable("");
             m.P3 = ko.observable("");
@@ -666,7 +675,7 @@
 
             //加载表单数据
             m.loadData = function (page) {
-                var url = "@Url.Content("~/product/list?page=")" + page + "&dm=" + m.search_spdm() + "&mc=" + m.search_spmc()+"&spgg="+$("#spgg").val();
+                var url = "@Url.Content("~/product/list?page=")" + page + "&dm=" + m.search_spdm() + "&mc=" + m.search_spmc() + "&spgg=" + $("#spgg").val() + "&CategoryId1=" + m.CategoryId1();
                 $.ajax({
                     method: "get",
                     url: url,
@@ -689,6 +698,7 @@
                         if (data.error == 100) {
                             $.each(data.result, function (i, item) {
                                 m.listCategory.push(new select_model(item.dm, item.mc));
+                                m.listCategory1.push(new select_model(item.dm, item.mc));
                             });
                         } else {
                             alert('获取品种列表错误！');
@@ -847,9 +857,9 @@
         var page = '@ViewBag.Page';
 
         var obj = new model();
-        obj.loadData(page);
         obj.loadCategorySelect();
         obj.loadBrandSelect();
+        obj.loadData(page);
         ko.applyBindings(obj);
 
     });

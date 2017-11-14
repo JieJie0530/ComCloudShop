@@ -28,7 +28,7 @@ namespace ComCloudShop.Backend.Controllers
             ViewBag.Page = page;
             return View();
         }
-
+        
         /// <summary>
         /// 获取产品列表
         /// </summary>
@@ -36,10 +36,19 @@ namespace ComCloudShop.Backend.Controllers
         /// <param name="mc">商品名称</param>
         /// <param name="page">当前页</param>
         /// <returns></returns>
-        public JsonResult List(string dm, string mc, int page = 1)
+        public JsonResult List(string dm, string mc,string CategoryId1, int page = 1)
         {
             string spgg = Request["spgg"].ToString();
-            var query = _service.GetProductSearchListNew(spgg, dm, mc, page, AppConstant.PageSize);
+            int Cate = 0;
+            try
+            {
+                Cate = Convert.ToInt32(CategoryId1);
+            }
+            catch (Exception)
+            {
+                Cate = 0;
+            }
+            var query = _service.GetProductSearchListNew(spgg, dm, mc,Convert.ToInt32(Cate), page, AppConstant.PageSize);
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
