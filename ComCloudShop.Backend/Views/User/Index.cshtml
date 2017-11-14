@@ -72,7 +72,7 @@
                         <td data-bind="text:item.City"></td>
                         <td data-bind="text:item.Gender==1?'男':(item.Gender==2?'女':'其它')"></td>
                         <td data-bind="text:item.Mobile"></td>
-                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':'SVIP')"></td>
+                        <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':(item.IsVip==2?'SVIP':'DVIP'))"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
                         </td>
@@ -233,7 +233,8 @@
         }
         var countries = [{ Name: '普通', id: '0' },
                              { Name: 'VIP', id: '1' },
-                             { Name: 'SVIP', id: '2' }];
+                             { Name: 'SVIP', id: '2' },
+        { Name: 'DVIP', id: '3' }];
         var model = function () {
 
             var m = this;

@@ -435,8 +435,9 @@ namespace ComCloudShop.Web.Controllers
                 var location = HttpContext.Request.Url.ToString();
                 var ordernum = DateTime.Now.ToString("yyyyMMddhhmmssfff");//订单ID
                 //10000000
-                var pay = Pay(ordernum, "10000000", location, "", hostip);
-                    if (pay != null)
+                var pay = Pay(ordernum, "1", location, "", hostip);
+                //var pay = Pay(ordernum, "10000000", location, "", hostip);
+                if (pay != null)
                     {
                         result = pay;
                     }

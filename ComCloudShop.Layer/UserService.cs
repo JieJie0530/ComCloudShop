@@ -120,7 +120,11 @@ namespace ComCloudShop.Layer
             Member data = db.Members.FirstOrDefault(x => x.MemberId == memberID);
             return data;
         }
-
+        public Member GetMemberByPhone(string Phone)
+        {
+            Member data = db.Members.FirstOrDefault(x => x.Mobile == Phone);
+            return data;
+        }
         public Member GetMemberByOpenID(string openid) {
             Member data = db.Members.FirstOrDefault(x => x.OpenId == openid);
             return data;
@@ -203,9 +207,9 @@ namespace ComCloudShop.Layer
                 using (var db = new MircoShopEntities())
                 {
                     var model = db.Members.FirstOrDefault(x => x.MemberId == id);
-                    model.ISVip = 2;
-                    model.integral += 100000; //增加1000购物积分
-                    model.Cashbalance = (Convert.ToDecimal(model.Cashbalance)+ 1000000).ToString();//增加3000体现额度
+                    model.ISVip = 1;
+                    //model.integral += 100000; //增加1000购物积分
+                    //model.Cashbalance = (Convert.ToDecimal(model.Cashbalance)+ 1000000).ToString();//增加3000体现额度
                     db.SaveChanges();
                     return true;
                 }

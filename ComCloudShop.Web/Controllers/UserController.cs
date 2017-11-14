@@ -404,16 +404,20 @@ namespace ComCloudShop.Web.Controllers
                 model.openid = UserInfo.openid;
                 model.phone = m.Mobile;
                 model.balance = m.balance;
-                if (m.ISVip == 0) {
+                if (m.ISVip == 0)
+                {
                     model.Rols = "普通会员";
                 }
-                else if(m.ISVip == 1)
+                else if (m.ISVip == 1)
                 {
                     model.Rols = "VIP";
                 }
                 else if (m.ISVip == 2)
                 {
                     model.Rols = "SVIP";
+                }
+                else if (m.ISVip == 3) {
+                    model.Rols = "DVip";
                 }
                 model.follow = m.follow;
                 model.Cashbalance = m.Cashbalance;
@@ -483,11 +487,56 @@ namespace ComCloudShop.Web.Controllers
         [HttpPost]
         public ContentResult UpdateVip() {
             if (_service.UpdateVip(UserInfo.Id)) {
+             
+                int memberID = Convert.ToInt32(UserInfo.Id);
+                var user = _user.GetMemberBID(memberID);
+                user.TotalIn = (user.TotalIn + 100);
+                //user.Cashbalance = (Convert.ToDecimal(user.Cashbalance) + 3000).ToString();//增加可提现额度3000
+                _user.UpdateMember(user);
+                //WeixinOauthHelper.TuiSong(user.OpenId, "恭喜您增加了1000的购物积分！");
+                //如果它有上级
+                if (user.follow != "")
+                {
+                    j = 0;
+                    AddCommission(user.follow);
+                }
                 return Content("ok");
             }
             return Content("err");
         }
+        ComCloudShop.Layer.UserService _user = new UserService();
+        public void AddCommission(string Phone)
+        {
+            j++;//每次一次加一级
+            qjuser = _user.GetMemberByPhone(Phone);
+            if (qjuser != null)
+            {
+                decimal money = 100;
+                if (money > 0)
+                {
+                    qjuser.TotalIn = (qjuser.TotalIn + 100);
+                    
+                   qjuser.TotalIn = qjuser.TotalIn + 50;
+                   
+                    //WeixinOauthHelper.TuiSong(qjuser.OpenId, "恭喜您获取了" + money + "元分享金！");
+                    _user.UpdateMember(qjuser);
 
+                    //if (qjuser.follow != "")
+                    //{
+                    //    AddCommission(Convert.ToInt32(qjuser.follow));
+                    //}
+                    //else
+                    //{
+                    //    return;
+                    //}
+                }
+                else
+                {
+                    return;
+                }
+            }
+            return;
+        }
         /// <summary>
         /// 提交个人信息
         /// </summary>
