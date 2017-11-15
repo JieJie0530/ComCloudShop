@@ -527,7 +527,43 @@ namespace ComCloudShop.Web.Controllers
         OrderProductViewModel _opv = new OrderProductViewModel();
 
 
-       
+
+        int i = 0;
+        Member qjuser = null;
+        CommissionService _com = new CommissionService();
+        /// <summary>
+        /// 添加佣金记录 0普通 1VIP 2SVIP 3代理商 4加盟商
+        /// </summary>
+        /// <param name="Phone"></param>
+        public void AddCommission(string Phone,string OrderID,decimal Price)
+        {
+            qjuser = _user.GetMemberByPhone(Phone);
+            if (qjuser != null)
+            {
+
+                if ((qjuser.ISVip == 0 || qjuser.ISVip == 1) && i == 0)//如果上级是普通会员 获得50%
+                {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price / 2);
+                }
+                else if (qjuser.ISVip == 4) //如果上级是加盟商
+                {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price / 10);
+                }
+                else if (qjuser.ISVip == 3 && i == 0)
+                {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price);
+                }
+                i++;
+                AddCommission(qjuser.follow,OrderID,Price);
+            }
+            return;
+        }
 
         /// <summary>
         /// 支付完成
@@ -544,6 +580,10 @@ namespace ComCloudShop.Web.Controllers
                    
                     var orderdetail = _service.GetOrderDetail(pay[0]);
                     if (orderdetail != null) {
+
+                        Member m = _user.GetMemberBID(orderdetail.MemberId);
+
+                        AddCommission(m.follow, orderdetail.OrderNum, orderdetail.PayableAmount);
                         if (orderdetail.Stutas == 1) {//如果已经支付
                           
                         }

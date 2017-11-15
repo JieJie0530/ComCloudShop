@@ -21,6 +21,30 @@ namespace ComCloudShop.Web.Controllers
 {
     public class UserController : BaseController,System.Web.SessionState.IRequiresSessionState
     {
+
+        public ActionResult Leave()
+        {
+            return View();
+        }
+
+        public ActionResult Sumbit() {
+            string txt_TrueName = Request["txt_TrueName"].ToString();
+            string txt_Phone = Request["txt_Phone"].ToString();
+            string txt_Weixin = Request["txt_Weixin"].ToString();
+            string Contents = Request["Contents"].ToString();
+
+            ComCloudShop.Service.Leave model = new Service.Leave();
+            model.TrueName = txt_TrueName;
+            model.Phone = txt_Phone;
+            model.Weixin = txt_Weixin;
+            model.AddTime = DateTime.Now;
+            model.Contents = Contents;
+            db.Leaves.Add(model);
+            db.SaveChanges();
+            return Content("ok");
+
+        }
+
         public ActionResult Exit()
         {
             Member m = user.GetMemberByOpenID(UserInfo.openid);
@@ -496,6 +520,7 @@ namespace ComCloudShop.Web.Controllers
                 return Error();
             }
         }
+        CommissionService _com = new CommissionService();
         /// <summary>
         /// 更新VIP信息
         /// </summary>
@@ -518,15 +543,38 @@ namespace ComCloudShop.Web.Controllers
             }
             return Content("err");
         }
-
+        
+        int i = 0;
         ComCloudShop.Layer.UserService _user = new UserService();
+        /// <summary>
+        /// 添加佣金记录 0普通 1VIP 2SVIP 3代理商 4加盟商
+        /// </summary>
+        /// <param name="Phone"></param>
         public void AddCommission(string Phone)
         {
             qjuser = _user.GetMemberByPhone(Phone);
             if (qjuser != null)
             {
-               qjuser.TotalIn = qjuser.TotalIn + 50;
-               _user.UpdateMember(qjuser);
+
+                if ((qjuser.ISVip == 0 || qjuser.ISVip==1) && i == 0)//如果上级是普通会员 获得50%
+                {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 50);
+                }
+                else if (qjuser.ISVip == 4) //如果上级是加盟商
+                {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 10);
+                }
+                else if (qjuser.ISVip == 3 && i==0) {
+                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    _user.UpdateMember(qjuser);
+                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 100);
+                }
+                i++;
+                AddCommission(qjuser.follow);
             }
             return;
         }

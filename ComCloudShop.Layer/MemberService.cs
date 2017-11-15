@@ -217,8 +217,34 @@ namespace ComCloudShop.Layer
                 return db.Database.SqlQuery<MemberViewModel>(strSql.ToString());
             }
         }
+        
+        public ResultViewModel<IEnumerable<ComCloudShop.Service.Leave>> GetLeave(int page, int size)
+        {
+            var result = new ResultViewModel<IEnumerable<ComCloudShop.Service.Leave>>();
+            try
+            {
+                using (var db = new MircoShopEntities())
+                {
+                    result.result = (from a in db.Leaves
+                                     orderby a.AddTime select a
+                                     ).Skip((page - 1) * size).Take(size).ToList();
 
+                    result.total = (from a in db.Leaves
+                                    orderby a.AddTime
+                                    select a
+                                    ).Count();
 
+                    result.error = (int)ErrorEnum.OK;
+                    result.msg = "success";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.error = (int)ErrorEnum.Error;
+                result.msg = ex.Message;
+            }
+            return result;
+        }
         /// <summary>
         /// 获取用户申请列表
         /// </summary>

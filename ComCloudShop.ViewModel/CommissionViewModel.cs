@@ -15,4 +15,17 @@ namespace ComCloudShop.ViewModel
         public DateTime AddTime { get; set; }
         public string Remark { get; set; }
     }
+
+    public class CommissionViewModelDetia
+    {
+        public int ID { get; set; }
+        public Nullable<int> MemberID { get; set; }
+
+        public string NikeName { get; set; }
+
+        public string OrderID { get; set; }
+        public decimal Price { get; set; }
+        public DateTime AddTime { get; set; }
+        public string Remark { get; set; }
+    }
 }

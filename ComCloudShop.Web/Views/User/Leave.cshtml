@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>代理商申请</title>
+    <link href="~/public/css/style.css" rel="stylesheet" />
+    <script src="~/public/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="page_all">
+        <div class="page m3">
+            <div class="mainbox">
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">姓名</div>
+                        <div class="inp"><input type="text" id="txt_TrueName" placeholder="输入姓名"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">手机号</div>
+                        <div class="inp"><input type="text" id="txt_Phone" placeholder="确认手机号"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">微信</div>
+                        <div class="inp"><input type="text" id="txt_Weixin" placeholder="确认微信"></div>
+                    </div>
+                </div>
+                <div class="ui-line25"></div>
+                <div class="textbox">
+                    <textarea id="Contents" placeholder="请输入你要反馈的内容"></textarea>
+                </div>
+                <div class="ui-line25"></div>
+
+                <div id="QD" onclick="Sumbit()" class="ui-btn b-black"><a>确定提交</a></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $(function () {
+
+        })
+
+        function Sumbit() {
+
+            var txt_TrueName = $("#txt_TrueName").val();
+            var txt_Phone = $("#txt_Phone").val();
+            var txt_Weixin = $("#txt_Weixin").val();
+            var Contents = $("#Contents").val();
+            var parm = {
+                txt_TrueName: txt_TrueName,
+                txt_Phone: txt_Phone,
+                txt_Weixin: txt_Weixin,
+                Contents: Contents
+            }
+            $.ajax({
+                type: 'post',
+                async: false,
+                data: parm,
+                url: '@Url.Content("~/User/Sumbit")',
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("申请成功");
+                    }
+                    else if (data == 0) {
+                        alert("申请失败");
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+</html>

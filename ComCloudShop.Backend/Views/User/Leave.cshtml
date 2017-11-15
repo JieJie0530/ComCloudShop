@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutNew.cshtml";
+}
+
+<div class="main-wrap">
+    <div class="crumb-wrap">
+        <div class="crumb-list">
+            <i class="icon-font"></i>
+            <a href="~/">后台管理</a>
+            <span class="crumb-step">&gt;</span>
+            <span class="crumb-name">用户信息</span>
+        </div>
+    </div>
+    <div class="result-wrap">
+       
+        <div class="result-content">
+            <table class="result-tab" width="100%">
+                <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>微信</th>
+                        <th>内容</th>
+                        <th>时间</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:{data:array, as:'item'}">
+                    <tr>
+                        <td data-bind="text:item.TrueName"></td>
+                        <td data-bind="text:item.Phone"></td>
+                        <td data-bind="text:item.Weixin"></td>
+                        <td data-bind="text:item.Contents"></td>
+                        <td data-bind="text:getLocalTimeLong(item.AddTime)"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="list-page">
+                共<span data-bind="text:total"></span>条
+                <span data-bind="text:page_current"></span>/<span data-bind="text:page_total"></span>页
+                <a href="javascript:void(0);" data-bind="click:page_pre">上一页</a>
+                <a href="javascript:void(0);" data-bind="click:page_next">下一页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+
+        //select model
+        var select_model = function (dm, mc) {
+            this.dm = dm;
+            this.mc = mc;
+        }
+
+        var model = function () {
+
+            var m = this;
+            m.size = 10;
+
+            //分页
+            m.array = ko.observable();
+            m.total = ko.observable(0);
+            m.page_current = ko.observable(0);
+            m.page_total = ko.observable(0);
+
+            //search
+            //m.search_nickName = ko.observable("");
+            //m.search_mobile = ko.observable("");
+            //m.search_openid = ko.observable("");
+
+
+            //详情
+            //m.TrueName = ko.observable("");
+            //m.Phone = ko.observable("");
+            //m.Weixin = ko.observable("");
+            //m.Contents = ko.observable("");
+            //m.ContactAddr=ko.observable("");
+            //m.Country =ko.observable("");
+            //m.District=ko.observable("");
+            //m.Email=ko.observable("");
+            //m.Gender=ko.observable("");
+            //m.HeadImgUrl=ko.observable("");
+            //m.LastLoginDate = ko.observable("");
+            //m.Mobile = ko.observable("");
+            //m.NickName = ko.observable("");
+            //m.OrignKey = ko.observable("");
+            //m.Province = ko.observable("");
+            //m.QQ = ko.observable("");
+            //m.UserName = ko.observable("");
+
+            //btn查询
+            m.btnSearch = function () {
+                m.loadData(1);
+            };
+
+            //上一页
+            m.page_pre = function () {
+                var page = (m.page_current() - 1);
+                if (page > 0) {
+                    m.loadData(page);
+                }
+            };
+
+            //下一页
+            m.page_next = function () {
+                var page = (m.page_current() + 1);
+                var total_page = m.page_total();
+                if (page <= total_page) {
+                    m.loadData(page);
+                }
+            };
+
+
+            //加载表单数据
+            m.loadData = function (page) {
+                var url = "@Url.Content("~/user/listleave?page=")" + page ;
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.error == 100) {
+                        m.total(data.total);
+                        m.page_total(Math.ceil(data.total / m.size));
+                        m.page_current(page);
+                        m.array(data.result);
+                    } else {
+                        alert("Get Data Error");
+                    }
+
+                });
+            };
+        };
+
+        //初始化数据
+        var obj = new model();
+        obj.loadData(1);
+        ko.applyBindings(obj);
+
+    });
+
+</script>

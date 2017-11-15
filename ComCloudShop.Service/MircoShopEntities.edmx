@@ -161,6 +161,17 @@
           <Property Name="State" Type="int" />
           <Property Name="AddTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrueName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weixin" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contents" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Manger">
           <Key>
             <PropertyRef Name="ID" />
@@ -493,6 +504,7 @@
           <EntitySet Name="GroupSaleRelation" EntityType="Self.GroupSaleRelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeImage" EntityType="Self.HomeImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IntList" EntityType="Self.IntList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manger" EntityType="Self.Manger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MangerCate" EntityType="Self.MangerCate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MeIntegral" EntityType="Self.MeIntegral" Schema="dbo" store:Type="Tables" />
@@ -672,6 +684,7 @@
           <EntitySet Name="IntLists" EntityType="MircoShopModel.IntList" />
           <EntitySet Name="MangerCates" EntityType="MircoShopModel.MangerCate" />
           <EntitySet Name="Commissions" EntityType="MircoShopModel.Commission" />
+          <EntitySet Name="Leaves" EntityType="MircoShopModel.Leave" />
         </EntityContainer>
         <EntityType Name="HomeImage">
           <Key>
@@ -1028,6 +1041,17 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrueName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="Weixin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1539,6 +1563,18 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaves">
+            <EntityTypeMapping TypeName="MircoShopModel.Leave">
+              <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="Weixin" ColumnName="Weixin" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="TrueName" ColumnName="TrueName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -12,6 +12,11 @@ namespace ComCloudShop.Backend.Controllers
 {
     public class UserController : BaseController
     {
+
+        public ActionResult Leave() {
+            return View();
+        }
+
         protected MemberService _service = new MemberService();
         //新增或更新会员
         public ActionResult Add()
@@ -125,10 +130,15 @@ namespace ComCloudShop.Backend.Controllers
         /// <returns></returns>
         public JsonResult listWithd(string nickName, int State, int page = 1)
         {
-
             var list = _service.GetMemberWithdrawalsListNew(page, AppConstant.PageSize, nickName, State);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult listleave(int page = 1)
+        {
+            var list = _service.GetLeave(page, AppConstant.PageSize);
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        
         /// <summary>
         /// 获取用户列表
         /// </summary>
@@ -141,6 +151,28 @@ namespace ComCloudShop.Backend.Controllers
             var list = _service.GetMemberListNew(page, AppConstant.PageSize, nickName, mobile, openid, isvip);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+        ComCloudShop.Layer.CommissionService _com = new CommissionService();
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="nickName"></param>
+        /// <param name="mobile"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public JsonResult list3(string mobile, int page = 1)
+        {
+            using (var db = new MircoShopEntities())
+            {
+             
+                var ms = db.Members.Where(d => d.Mobile == mobile).ToList();
+                int follow = ms.FirstOrDefault().MemberId;
+
+                var list = _com.GetCommissionsList(follow, page, 10);
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         /// <summary>
         /// 获取用户列表
         /// </summary>

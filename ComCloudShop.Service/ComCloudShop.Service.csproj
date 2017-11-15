@@ -86,6 +86,9 @@
     <Compile Include="IntList.cs">
       <DependentUpon>MircoShopEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Leave.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Manger.cs">
       <DependentUpon>MircoShopEntities.tt</DependentUpon>
     </Compile>

@@ -86,6 +86,7 @@
                         <th>联系人</th>
                         <th>联系手机</th>
                         <th>上限个数</th>
+                        <th>奖学金</th>
                         <th width="200">操作</th>
                     </tr>
                 </thead>
@@ -97,6 +98,8 @@
                         <td data-bind="text:item.Contacts"></td>
                         <td data-bind="text:item.Phone"></td>
                         <td data-bind="text:item.Proportion"></td>
+                        <td><a href="javascript:void(0);" data-bind="text:'0',click:function(data,event){$parent.LookCom(data)}">修改</a></td>
+                        
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}">修改</a>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OkTuiKuan(item.ID)},text:State==0?'审核通过':''"></a>
@@ -115,7 +118,30 @@
 
     </div>
 </div>
-
+<div id="dialogList" style="display:none;">
+    <div class="result-content">
+        <table class="result-tab" width="100%">
+            <thead>
+                <tr>
+                    <th>昵称</th>
+                    <th>金额</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:{data:arrayList, as:'item'}">
+                <tr>
+                    <td data-bind="text:item.NickName"></td>
+                    <td data-bind="text:item.Mobile"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="list-page">
+            共<span data-bind="text:total1"></span>条
+            <span data-bind="text:page_current1"></span>/<span data-bind="text:page_total1"></span>页
+            <a href="javascript:void(0);" data-bind="click:page_pre1">上一页</a>
+            <a href="javascript:void(0);" data-bind="click:page_next1">下一页</a>
+        </div>
+    </div>
+</div>
 <div style="display: none" id="dialog">
     <table class="insert-tab" width="100%">
         <tbody>
@@ -282,6 +308,7 @@
             m.size = 10;
 
             //分页
+            m.arrayList = ko.observable();
             m.array = ko.observable();
             m.total = ko.observable(0);
             m.page_current = ko.observable(0);
@@ -362,6 +389,21 @@
                         }
                     }
                 })
+            }
+            m.LookCom = function (data) {
+                var url = "@Url.Content("~/user/list3?page=1")&mobile=" + data.Phone;
+                $.ajax({
+                    method: "get",
+                    url: url,
+                    async: false,
+                    dataType: 'json'
+                }).done(function (data) {
+                  
+                    m.arrayList(data);
+                   
+
+                });
+                $("#dialogList").dialog({ width: "600px" });
             }
             //查看
             m.OpenDialog = function (type, data) {

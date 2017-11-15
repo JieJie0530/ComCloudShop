@@ -156,6 +156,17 @@
     <Property Name="State" Type="int" />
     <Property Name="AddTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TrueName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Weixin" Type="nvarchar" MaxLength="50" />
+    <Property Name="Contents" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="Manger">
     <Key>
       <PropertyRef Name="ID" />
@@ -488,6 +499,7 @@
     <EntitySet Name="GroupSaleRelation" EntityType="Self.GroupSaleRelation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomeImage" EntityType="Self.HomeImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IntList" EntityType="Self.IntList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Manger" EntityType="Self.Manger" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MangerCate" EntityType="Self.MangerCate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MeIntegral" EntityType="Self.MeIntegral" Schema="dbo" store:Type="Tables" />
