@@ -37,6 +37,7 @@
         <EntityTypeShape EntityType="MircoShopModel.GiftList" Width="1.5" PointX="7.375" PointY="16.75" />
         <EntityTypeShape EntityType="MircoShopModel.IntList" Width="1.5" PointX="17.375" PointY="0.75" />
         <EntityTypeShape EntityType="MircoShopModel.MangerCate" Width="1.5" PointX="17.375" PointY="3.75" />
+        <EntityTypeShape EntityType="MircoShopModel.Commission" Width="1.5" PointX="17.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

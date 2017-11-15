@@ -152,6 +152,7 @@
     <EntitySet Name="GiftLists" EntityType="MircoShopModel.GiftList" />
     <EntitySet Name="IntLists" EntityType="MircoShopModel.IntList" />
     <EntitySet Name="MangerCates" EntityType="MircoShopModel.MangerCate" />
+    <EntitySet Name="Commissions" EntityType="MircoShopModel.Commission" />
   </EntityContainer>
   <EntityType Name="HomeImage">
     <Key>
@@ -497,5 +498,16 @@
     <Property Name="BrandPic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="AddTime" Type="DateTime" Precision="3" />
     <Property Name="Sort" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Commission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberID" Type="Int32" />
+    <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AddTime" Type="DateTime" Precision="3" />
+    <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

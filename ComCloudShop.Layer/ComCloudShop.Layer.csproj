@@ -55,6 +55,7 @@
     <Compile Include="BrandService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="CateService.cs" />
+    <Compile Include="CommissionService.cs" />
     <Compile Include="CouponService.cs" />
     <Compile Include="DeliveryAddressService.cs" />
     <Compile Include="MeIntegralService.cs" />

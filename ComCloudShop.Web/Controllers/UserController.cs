@@ -518,39 +518,19 @@ namespace ComCloudShop.Web.Controllers
             }
             return Content("err");
         }
+
         ComCloudShop.Layer.UserService _user = new UserService();
         public void AddCommission(string Phone)
         {
-         
             qjuser = _user.GetMemberByPhone(Phone);
             if (qjuser != null)
             {
-                decimal money = 100;
-                if (money > 0)
-                {
-                    qjuser.TotalIn = (qjuser.TotalIn + 100);
-                    
-                   qjuser.TotalIn = qjuser.TotalIn + 50;
-                   
-                    //WeixinOauthHelper.TuiSong(qjuser.OpenId, "恭喜您获取了" + money + "元分享金！");
-                    _user.UpdateMember(qjuser);
-
-                    //if (qjuser.follow != "")
-                    //{
-                    //    AddCommission(Convert.ToInt32(qjuser.follow));
-                    //}
-                    //else
-                    //{
-                    //    return;
-                    //}
-                }
-                else
-                {
-                    return;
-                }
+               qjuser.TotalIn = qjuser.TotalIn + 50;
+               _user.UpdateMember(qjuser);
             }
             return;
         }
+
         /// <summary>
         /// 提交个人信息
         /// </summary>

@@ -44,6 +44,7 @@
     <Compile Include="BrandViewModel.cs" />
     <Compile Include="CategoryViewModel.cs" />
     <Compile Include="CateViewModel.cs" />
+    <Compile Include="CommissionViewModel.cs" />
     <Compile Include="CouponViewModel.cs" />
     <Compile Include="DeliveryAddressViewModel.cs" />
     <Compile Include="GiftViewModel.cs" />

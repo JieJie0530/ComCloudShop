@@ -59,6 +59,9 @@
     <Compile Include="CategoryRelation.cs">
       <DependentUpon>MircoShopEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Commission.cs">
+      <DependentUpon>MircoShopEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Coupon.cs">
       <DependentUpon>MircoShopEntities.tt</DependentUpon>
     </Compile>

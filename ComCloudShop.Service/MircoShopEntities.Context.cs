@@ -57,5 +57,6 @@ namespace ComCloudShop.Service
         public virtual DbSet<GiftList> GiftLists { get; set; }
         public virtual DbSet<IntList> IntLists { get; set; }
         public virtual DbSet<MangerCate> MangerCates { get; set; }
+        public virtual DbSet<Commission> Commissions { get; set; }
     }
 }

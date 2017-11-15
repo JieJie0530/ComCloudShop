@@ -32,6 +32,17 @@
     <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Commission">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MemberID" Type="int" />
+    <Property Name="OrderID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AddTime" Type="datetime" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="Coupon">
     <Key>
       <PropertyRef Name="CouponId" />
@@ -468,6 +479,7 @@
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CategoryRelation" EntityType="Self.CategoryRelation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commission" EntityType="Self.Commission" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DeliveryAddress" EntityType="Self.DeliveryAddress" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErpOrder" EntityType="Self.ErpOrder" Schema="dbo" store:Type="Tables" />
