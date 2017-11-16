@@ -15,9 +15,9 @@
     <div class="item">
         <h2><b class="warning">*</b>可提现金额:<b class="balance">@Model.balance</b></h2>
     </div>
-    <div class="item">
+    @*<div class="item">
         <h2><b class="warning">*</b>可提现额度:<b class="Cashbalance">@Model.Cashbalance</b></h2>
-    </div>
+    </div>*@
     <div class="item">
         <h2><b class="warning">*</b>提现方式</h2>
         <select class="w5" name="" id="selType">
@@ -84,17 +84,41 @@
     function addService() {
         var txt = $("#go").val();
         if (txt == "提交申请") {
+            var IsVip = '@Model.ISVip';
             var MemberID = '@Model.MemberId';
             var Type = $("#selType").val();
             var Number = $("#txtNumber").val();
             var Price = $("#txtPrice").val();
             var Remack = $("#txtRemack").val();
             var balance = $(".balance").text();
-            var Cashbalance = $(".Cashbalance").text();
             var TrueName = $("#TrueName").val();
             var Bank = $("#Bank").val();
             var Phone = $("#Phone").val();
-            if (TrueName == "") {
+            if (isNaN(Price)) {
+                alert("申请金额格式错误！");
+                return false;
+            }
+            else if (parseFloat(Price) < 200 && IsVip == 0) {
+                alert("申请金额必须大于200！");
+                return false;
+            }
+            else if (parseFloat(Price) < 300 && IsVip == 1) {
+                alert("申请金额必须大于300！");
+                return false;
+            }
+            else if (parseFloat(Price) < 300 && IsVip == 2) {
+                alert("申请金额必须大于300！");
+                return false;
+            }
+            else if (parseFloat(Price) < 1000 && IsVip == 3) {
+                alert("申请金额必须大于1000！");
+                return false;
+            }
+            else if (parseFloat(Price) < 300 && IsVip == 4) {
+                alert("申请金额必须大于300！");
+                return false;
+            }
+            else if (TrueName == "") {
                 alert("请填写真实姓名！");
                 return false;
             }
@@ -104,18 +128,6 @@
             }
             else if (Phone == "") {
                 alert("手机号码格式错误！");
-                return false;
-            }
-            else if (isNaN(Price)) {
-                alert("申请金额格式错误！");
-                return false;
-            }
-            else if (parseFloat(Price) > parseFloat(balance)) {
-                alert("申请金额不能大于可提现金额！");
-                return false;
-            }
-            else if (parseFloat(Price) > parseFloat(Cashbalance)) {
-                alert("提现额度不足！");
                 return false;
             }
             else if (Number == "") {
@@ -135,7 +147,7 @@
                     TrueName: TrueName,
                     Bank: Bank,
                     Phone: Phone,
-                    Types:0
+                    Types: 0
                 }
 
                 $.ajax({

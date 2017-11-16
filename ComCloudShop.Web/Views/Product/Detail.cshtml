@@ -107,10 +107,12 @@
         position: fixed;
         z-index: 999999;
         opacity: 0.3;
+        display:none;
     }
 
     .pmsg {
         position: absolute;
+        display:none;
         left: 50%;
         top: 50%;
         z-index: 9999999999;
@@ -168,12 +170,14 @@
     }
     else if (Rols == 1 && Quanxian==2) {
         $("#moban").css("display", "block");
+        $(".pmsg").css("display", "block");
         if (Quanxian == 2) {
             $(".pmsg").val("请推荐给5个朋友，即可观看全部视频!");
         }
     }
     else if (Rols == 0 && Quanxian > 0) {
         $("#moban").css("display", "block");
+        $(".pmsg").css("display", "block");
         if (Quanxian == 2) {
             $(".pmsg").val("请推荐给5个朋友，即可观看全部视频!");
         }

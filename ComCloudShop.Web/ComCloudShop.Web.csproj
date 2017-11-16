@@ -225,6 +225,8 @@
     <Content Include="public\images\img-06.jpg" />
     <Content Include="public\images\img-07.png" />
     <Content Include="public\images\img-08.png" />
+    <Content Include="public\images\kefu.png" />
+    <Content Include="public\images\keifu.png" />
     <Content Include="public\images\load.gif" />
     <Content Include="public\images\logo.png" />
     <Content Include="public\images\logo2.png" />

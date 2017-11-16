@@ -10,7 +10,7 @@
     <div class="headaccount">
         <div class="accountImg"><img src="@Model.url" alt=""></div>
         <h2>微信账号 @Model.username   @Model.Rols</h2>
-        <p>可提现:@Model.balance</p>
+        <p style="font-size:18px;">奖学金:@Model.balance</p>
         <a style="position:absolute;right:10px; top:25px;" onclick="TXExit()" >退出</a>
 </div>
 <div class="accountNav">
@@ -34,7 +34,7 @@
                 <li><a href="~/User/LineMember?type=2">二级分享员（@((ViewData["list2"] as List<Member>).Count)）</a></li>
             </ul>
         </li>
-        <li><a href="~/User/Withd">我要提现<i class="enter"></i></a></li>
+        <li><a href="~/User/Withd">我要提现(提现到银行卡)<i class="enter"></i></a></li>
         <li style="display:none;"><a href="~/User/MyGifList">我的赠品<i class="enter"></i></a></li>
         <li style="display:none;"><a href="~/Address/List?c=address">收货地址管理<i class="enter"></i></a></li>
     </ul>
@@ -49,13 +49,8 @@
             $(this).find('ul').slideToggle()
         })
         $("#erweima").click(function () {
-            var Cashbalance = '@Model.Cashbalance';
-            if (parseFloat(Cashbalance) > 0) {
                 window.location.href = "RenderImg";
-            }
-            else {
-                alert("必须成为分享一员才可以分享二维码！");
-            }
+           
         })
         $("#livip").click(function () {
 
