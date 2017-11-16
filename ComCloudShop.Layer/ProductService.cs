@@ -786,7 +786,7 @@ namespace ComCloudShop.Layer
             {
                 StringBuilder strSql = new StringBuilder();
                 var pageindex = size * (page - 1);
-                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount,a.SPGG from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.SPGG=1 and a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  ORDER BY a.ProductId ", size, pageindex);
+                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount,a.SPGG,a.IsShow from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.IsShow=1 and a.SPGG=1 and a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  ORDER BY a.ProductId ", size, pageindex);
                 return db.Database.SqlQuery<ProductViewModel>(strSql.ToString()).ToList();
             }
         }
