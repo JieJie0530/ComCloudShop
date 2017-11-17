@@ -130,7 +130,7 @@
     <!----------------column开始------------------>
     <div class="column">
         <ul>
-            <li><a href="/User/Login"><img src="~/public/images/coloumns_03.jpg" /><p>登录注册</p></a></li>
+            <li><a href="/User/Index"><img src="~/public/images/coloumns_03.jpg" /><p>登录注册</p></a></li>
             <li><a href="/User/Leave"><img src="~/public/images/coloumns_05.jpg" /><p>代理商申请</p></a></li>
             <li><a href="/User/AddVip"><img src="~/public/images/coloumns_07.jpg" /><p>VIP服务</p></a></li>
             <li><a href=""><img src="~/public/images/coloumns_09.png" /><p>奖学金</p></a></li>
@@ -175,7 +175,19 @@
                         {
                             <li onclick="window.location.href = '/Product/Detail?pid=@item.ProductId'">
                                 <div class="image">
-                                    <span class="vip">vip免费</span>
+                                  
+                                    @if (Convert.ToInt32(item.Weight) == 0)
+                                    {
+                                        <span class="vip">免费</span>
+                                    }
+                                    else if (Convert.ToInt32(item.Weight) == 1)
+                                    {
+                                        <span class="vip">vip免费</span>
+                                    }
+                                    else if (Convert.ToInt32(item.Weight) == 2)
+                                    {
+                                        <span class="vip">svip免费</span>
+                                    }
                                     <img src="@(WebConfigurationManager.AppSettings["imgurl"] + item.P3)" alt="@item.P3">
                                 </div>
                                 <div class="text">

@@ -10,7 +10,7 @@
     <div class="headaccount">
         <div class="accountImg"><img src="@Model.url" alt=""></div>
         <h2>微信账号 @Model.username   @Model.Rols</h2>
-        <p style="font-size:18px;">奖学金:@Model.balance</p>
+        <p style="font-size:18px;">奖学金:@Model.TotalIn</p>
         <a style="position:absolute;right:10px; top:25px;" onclick="TXExit()" >退出</a>
 </div>
 <div class="accountNav">
@@ -28,7 +28,7 @@
         <li id="livip"><a>升级VIP<i class="enter"></i></a></li>
         <li id="erweima"><a>分享二维码<i class="enter"></i></a></li>
         <li class="tab_per">
-            <a>我的线下分享员<i class="enter"></i></a>
+            <a>我的同学<i class="enter"></i></a>
             <ul style=" display:none; ">
                 <li><a href="~/User/LineMember?type=1">一级分享员（@((ViewData["list1"] as List<Member>).Count)）</a></li>
                 <li><a href="~/User/LineMember?type=2">二级分享员（@((ViewData["list2"] as List<Member>).Count)）</a></li>

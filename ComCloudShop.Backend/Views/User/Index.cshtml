@@ -58,8 +58,7 @@
                     <tr>
                         <th>头像</th>
                         <th>昵称</th>
-                        <th>省份</th>
-                        <th>性别</th>
+                        <th>佣金</th>
                         <th>手机</th>
                         <th>等级</th>
                         <th>操作</th>
@@ -69,8 +68,7 @@
                     <tr>
                         <td><img data-bind="attr:{src:item.HeadImgUrl}" width="50" height="50" /></td>
                         <td data-bind="text:item.NickName"></td>
-                        <td data-bind="text:item.City"></td>
-                        <td data-bind="text:item.Gender==1?'男':(item.Gender==2?'女':'其它')"></td>
+                        <td data-bind="text:item.TotalIn"></td>
                         <td data-bind="text:item.Mobile"></td>
                         <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':(item.IsVip==2?'SVIP':'DVIP'))"></td>
                         <td>
@@ -141,6 +139,10 @@
                 <td><input class="common-text required" size="30" name="Mobile" data-bind="value:Mobile" type="text" /></td>
             </tr>
             <tr>
+                <th><i class="require-red"></i>推荐人：</th>
+                <td><input class="common-text required" size="30" name="Follow" data-bind="value:Follow" type="text" /></td>
+            </tr>
+            <tr>
                 <th><i class="require-red"></i>密码：</th>
                 <td><input class="common-text required" size="30" name="OrignKey" data-bind="value:OrignKey" type="text" /></td>
             </tr>
@@ -163,60 +165,19 @@
                     <input type="hidden" name="MemberId" data-bind="value:MemberId" />
                     <img data-bind="attr:{src:HeadImgUrl}" width="120" />
                 </td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>openid：</th>
-                <td data-bind="text:OpenId">
-                </td>
-            </tr>
+            </tr>   
             <tr>
                 <th><i class="require-red"></i>昵称：</th>
                 <td data-bind="text:NickName">
                 </td>
             </tr>
             <tr>
-                <th><i class="require-red"></i>性别：</th>
-                <td data-bind="text:Gender==1?'男':(Gender==2?'女':'其它')"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>省份：</th>
-                <td data-bind="text:Province"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>城市：</th>
-                <td data-bind="text:City"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>县级市：</th>
-                <td data-bind="text:District"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>地址：</th>
-                <td data-bind="text:ContactAddr"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>真实姓名：</th>
-                <td data-bind="text:UserName"></td>
-            </tr>
-            <tr>
                 <th><i class="require-red"></i>手机号：</th>
                 <td data-bind="text:Mobile"></td>
             </tr>
             <tr>
-                <th><i class="require-red"></i>Email：</th>
-                <td data-bind="text:Email"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>QQ：</th>
+                <th><i class="require-red"></i>密码：</th>
                 <td data-bind="text:QQ"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>出生日期：</th>
-                <td data-bind="text:Birth"></td>
-            </tr>
-            <tr>
-                <th><i class="require-red"></i>最后登陆时间：</th>
-                <td data-bind="text:LastLoginDate"></td>
             </tr>
         </tbody>
     </table>
@@ -371,23 +332,24 @@
                     NickName: m.NickName(),
                     Mobile: m.Mobile(),
                     OrignKey: m.OrignKey(),
-                    Follow: "400-8780-155",
+                    Follow: m.Follow(),
                     IsVip: m.IsVip(),
                     P1: "",
                     MemberID: ""
                 }
+                
                 $.ajax({
                     type: 'post',
                     url: '@Url.Content("~/User/Add")',
                     data: parm,
                     success: function (data) {
-                        if (data) {
+                        if (data=="ok") {
                             alert('保存成功');
                             $("#dialogAdd").dialog('close');
                             m.loadData(1);
 
                         } else {
-                            alert('保存失败');
+                            alert(data);
                         }
                     }
                 })

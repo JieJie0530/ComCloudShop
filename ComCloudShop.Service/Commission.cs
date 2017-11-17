@@ -15,7 +15,7 @@ namespace ComCloudShop.Service
     public partial class Commission
     {
         public int ID { get; set; }
-        public Nullable<int> MemberID { get; set; }
+        public string Phone { get; set; }
         public string OrderID { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }

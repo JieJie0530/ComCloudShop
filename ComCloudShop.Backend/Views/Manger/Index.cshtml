@@ -313,7 +313,9 @@
             m.total = ko.observable(0);
             m.page_current = ko.observable(0);
             m.page_total = ko.observable(0);
-
+            m.total1 = ko.observable(0);
+            m.page_current1 = ko.observable(0);
+            m.page_total1 = ko.observable(0);
             //search
 
             //详情
@@ -398,10 +400,7 @@
                     async: false,
                     dataType: 'json'
                 }).done(function (data) {
-                  
                     m.arrayList(data);
-                   
-
                 });
                 $("#dialogList").dialog({ width: "600px" });
             }

@@ -64,50 +64,72 @@ namespace ComCloudShop.Web.Controllers
         [HttpPost]
         public ActionResult Regs()
         {
+
             try
             {
                 MemberViewModel member = new MemberViewModel();
-               
+
                 string Phone = Request["Phone"];
                 string Pwd = Request["Pwd"];
                 string TJPhone = Request["TJPhone"];
+                string vel1 = Request["vel1"];
                 var list = db.Members.Where(d => d.Mobile == Phone);
+                var listt = db.Members.Where(d => d.Mobile == TJPhone);
                 if (list.Count() > 0)
                 {
-                    return Content("该登录名已存在!");
+                    return Content("该手机号已存在!");
+                }
+                else if (listt.Count() <= 0)
+                {
+                    return Content("推荐人手机号错误!");
                 }
                 else
                 {
-                    var _mservice = new MemberService();
-                    member.Mobile = Phone;
-                    member.UserName = "";
-                    member.QQ = Pwd;
-                    member.OpenId = "";
-                    member.NickName = "";
-                    member.HeadImgUrl = "";
-                    member.follow = "";//上级 
-                    member.ISVip = 0;
-                    member.Cashbalance = "0";
-                    member.balance = "0";
-                    member.integral = 0;
-                    member.TotalIn = 0;
-                    member.Email = "zj";
-                    if (_mservice.Add(member)) {
-
-                        List<Member> listm = user.GetMemberFollow(TJPhone);
-                        if (listm.Count > 5) {
-                            Member m = user.GetMemberByPhone(TJPhone);
-                            m.ISVip = 2;
-                            user.UpdateMember(m);
-                        }
-
-                        return Content("ok");
+                    if (Session["mobile_code"] == null)
+                    {
+                        return Content("验证码错误！");
                     }
                     else
                     {
-                        return Content("申请报错");
+                        string code = Session["mobile_code"].ToString();
+                        if (code == vel1)
+                        {
+                            var _mservice = new MemberService();
+                            member.Mobile = Phone;
+                            member.UserName = "";
+                            member.QQ = Pwd;
+                            member.OpenId = Guid.NewGuid().ToString();
+                            member.NickName = "";
+                            member.HeadImgUrl = "";
+                            member.follow = TJPhone;//上级 
+                            member.ISVip = 0;
+                            member.Cashbalance = "0";
+                            member.balance = "0";
+                            member.integral = 0;
+                            member.TotalIn = 0;
+                            member.Email = "zj";
+                            if (_mservice.Add(member))
+                            {
+                                List<Member> listm = user.GetMemberFollow(TJPhone);
+                                if (listm.Count >= 5)
+                                {
+                                    Member m = user.GetMemberByPhone(TJPhone);
+                                    m.ISVip = 2;
+                                    user.UpdateMember(m);
+                                }
+                                return Content("ok");
+                            }
+                            else
+                            {
+                                return Content("申请报错");
+                            }
+                        }
+                        else
+                        {
+                            return Content("验证码错误！");
+                        }
                     }
-                  
+
                 }
             }
             catch (Exception ex)
@@ -558,23 +580,32 @@ namespace ComCloudShop.Web.Controllers
 
                 if ((qjuser.ISVip == 0 || qjuser.ISVip==1) && i == 0)//如果上级是普通会员 获得50%
                 {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + 5;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 50);
+                    _com.AddOrUpdate(qjuser.Mobile, "", "购买VIP佣金分成", 5);
                 }
                 else if (qjuser.ISVip == 4) //如果上级是加盟商
                 {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + 1;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 10);
+                    _com.AddOrUpdate(qjuser.Mobile, "", "购买VIP佣金分成", 1);
                 }
                 else if (qjuser.ISVip == 3 && i==0) {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + 10;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, "", "购买VIP佣金分成", 100);
+                    _com.AddOrUpdate(qjuser.Mobile, "", "购买VIP佣金分成", 10);
                 }
                 i++;
                 AddCommission(qjuser.follow);
+            }
+            else
+            {
+                List<Manger> listma = db.Mangers.Where(d => d.Phone == Phone).ToList();
+                if (listma.Count > 0)
+                {
+                    Manger model = listma[0];
+                    _com.AddOrUpdate(model.Phone, "", "购买VIP佣金分成", 10);
+                }
             }
             return;
         }

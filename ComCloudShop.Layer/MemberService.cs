@@ -466,7 +466,8 @@ namespace ComCloudShop.Layer
                                          Province = a.Province,
                                          City = a.City,
                                          Mobile = a.Mobile,
-                                         IsVip=(int)a.ISVip
+                                         IsVip=(int)a.ISVip,
+                                         TotalIn=(decimal)a.TotalIn
                                      }).Skip((page - 1) * size).Take(size).ToList();
 
                     result.total = (from a in db.Members

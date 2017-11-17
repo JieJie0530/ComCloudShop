@@ -11,70 +11,7 @@
     <title>注册</title>
     <link href="~/public/css/style.css" rel="stylesheet" />
     <script src="~/public/js/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#Fwxy").click(function () {
-                $("#FW").addClass("lshow");
-            });
-            $('#FW').on('click', function (event) {
-                if ($(event.target).is('#ClossFW')) {
-                    event.preventDefault();
-                    $(this).removeClass('lshow');
-                }
-            });
-        });
-
-        function addService() {
-            var txt = $("#go").text();
-            if (txt == "注册") {
-
-
-                var Phone = $("#Phone").val();//手机号
-                var Pwd = $("#Pwd").val();
-                var TJPhone = $("#TJPhone").val();//推荐人手机号
-                var vel1 = $("#vel1").val();//验证码
-                if (Phone == "") {
-                    alert("请填写手机号!");
-                }
-                else if (vel1 == "") {
-                    alert("请填写验证码!");
-                }
-                else if (Pwd == "") {
-                    alert("请填写密码!");
-                }
-                else {
-                    $("#go").val("提交中");
-                    var parm = {
-
-                        Phone: Phone,
-                        Pwd: Pwd,
-                        TJPhone: TJPhone,
-                        vel1: vel1
-                    }
-
-                    $.ajax({
-                        type: 'post',
-                        url: '@Url.Content("~/User/Regs")',
-                        data: parm,
-                        success: function (data) {
-                            if (data == "ok") {
-                                alert("注册成功!");
-
-                            }
-                            else {
-                                alert(data)
-                            }
-                        }
-                    })
-                }
-            }
-            else {
-                alert("提交中！")
-            }
-
-        }
-
-    </script>
+    
 
 </head>
 <body>
@@ -86,7 +23,7 @@
             <div class="inputbox">
                 <div class="ui-inputbox">
                     <div class="bf">+86</div>
-                    <div class="txt-btn"><a href="#">发送验证码</a></div>
+                    <div class="txt-btn"><a onclick="get_mobile_code()" isdj="1" id="zphone">发送验证码</a></div>
                     <div class="input-mini"><input type="text" id="Phone" placeholder="输入手机号码"></div>
                 </div>
                 <div class="ui-inputbox"><input type="text" id="vel1" placeholder="请输入短信验证码"></div>
@@ -96,9 +33,10 @@
                     <p class="s2"><a href="#">已有账号？立即登陆</a></p>
                 </div>
             </div>
-            <div class="ui-btn b-black"><a href="#" id="go" onclick="addService()">注册</a></div>
+            @*<input type="button" id="btn_reg" value="注册" />*@
+    <div class="ui-btn b-black"><a id="btn_reg" >注册</a></div>
             <div class="login-link">
-                <p class="s1">点击代表同意<span id="Fwxy">《开间服务协议》</span></p>
+                <p class="s1"><span id="Fwxy">《服务协议》</span></p>
             </div>
         </div>
         <div id="FW" class="pop-box page pop1">
@@ -120,5 +58,126 @@
         </div>
 
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#Fwxy").click(function () {
+                $("#FW").addClass("lshow");
+            });
+            $('#FW').on('click', function (event) {
+                if ($(event.target).is('#ClossFW')) {
+                    event.preventDefault();
+                    $(this).removeClass('lshow');
+                }
+            });
+
+            $("#btn_reg").click(function () {
+
+                    var Phone = $("#Phone").val();//手机号
+                    var Pwd = $("#Pwd").val();
+                    var TJPhone = $("#TJPhone").val();//推荐人手机号
+                    var vel1 = $("#vel1").val();//验证码
+
+                    if (Phone == "") {
+                        alert("请填写手机号!");
+                    }
+                    else if (vel1 == "") {
+                        alert("请填写验证码!");
+                    }
+                    else if (Pwd == "") {
+                        alert("请填写密码!");
+                    }
+                    else if (TJPhone == "") {
+                        alert("请填写推荐人手机号!");
+                    }
+                    else {
+                        var parm = {
+                            Phone: Phone,
+                            Pwd: Pwd,
+                            TJPhone: TJPhone,
+                            vel1: vel1
+                        }
+                       $.ajax({
+                           type: 'post',
+                           async: false,
+                            url: '@Url.Content("~/User/Regs")',
+                            data: parm,
+                            success: function (data) {
+                                alert(data)
+                                if (data == "ok") {
+                                    alert("注册成功!");
+                                    window.location.href = "/User/Login";
+                                }
+                                else {
+                                    alert(data)
+                                }
+                            }
+                        })
+                    }
+               
+            })
+        });
+        var iTime = 59;
+        var Account;
+        function RemainTime() {
+            document.getElementById('zphone').disabled = true;
+            var iSecond, sSecond = "", sTime = "";
+            if (iTime >= 0) {
+                iSecond = parseInt(iTime % 60);
+                iMinute = parseInt(iTime / 60)
+                if (iSecond >= 0) {
+                    if (iMinute > 0) {
+                        sSecond = iMinute + "分" + iSecond + "秒";
+                    } else {
+                        sSecond = iSecond + "秒";
+                    }
+                }
+                sTime = sSecond;
+                if (iTime == 0) {
+                    clearTimeout(Account);
+                    sTime = '获取手机验证码';
+                    iTime = 59;
+                    $("#zphone").attr("isdj", "1");
+                    document.getElementById('zphone').disabled = false;
+                } else {
+                    Account = setTimeout("RemainTime()", 1000);
+                    iTime = iTime - 1;
+                }
+            } else {
+                sTime = '没有倒计时';
+            }
+            $('#zphone').text(sTime);
+        }
+
+        function get_mobile_code() {
+            var dj = $("#zphone").attr("isdj");
+            if (dj == "1") {
+                $("#zphone").attr("isdj", "0");
+                var phone = $("#Phone").val();
+
+                var partten = /^1[3,8,7,5,8]\d{9}$/;
+                if (phone == "") {
+                    alert("请输入手机号！");
+                    $("#zphone").attr("isdj", "1");
+                }
+                else if (!partten.test(phone)) {
+                    alert("请输入正确格式手机号码！");
+                    $("#zphone").attr("isdj", "1");
+                }
+                else {
+                    $.post('@Url.Content("~/Home/SendMsm")', { mobile: phone}, function (msg) {
+                       
+                        if (msg == "ok") {
+                            RemainTime();
+                        }
+                        else {
+                            alert("失败");
+                        }
+                    });
+                }
+            }
+
+        };
+    </script>
 </body>
 </html>

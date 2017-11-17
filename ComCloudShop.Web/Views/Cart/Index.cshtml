@@ -182,7 +182,7 @@
 
         //购物车加减
         $(".add").click(function () {
-            var t = $(this).parent().find('input[type="text"]');
+            var t = $(this).parent().find('input[type="hidden"]');
             var number = parseInt(t.val()) + 1;
             var cid = $(this).parents('li').attr('title');
             updateNum(cid, number);
@@ -199,7 +199,7 @@
             }
         });
         $(".reduce").click(function () {
-            var t = $(this).parent().find('input[type="text"]');
+            var t = $(this).parent().find('input[type="hidden"]');
             var number = parseInt(t.val()) - 1;
             if (number < 1) {
                 return;
@@ -234,7 +234,7 @@
 
         getPrice = function (obj) {
             var arr = new Array();
-            var num = parseInt($(obj).parents('li').find('.number input').val());
+            var num =1;
             var price =  parseFloat($(obj).parents('li').find('.spprice').text());
             arr[0] = num * price;
             arr[1] = num;
@@ -367,13 +367,6 @@
                             var b = true;
                             $.each($(":checked").parents('.prolist'), function (i, item) {
                                 cid[i] = parseInt(item['title']);
-                                if (spgg == "") {
-                                    spgg = parseInt($(item).attr("vel"));
-                                }
-                                else if (spgg != parseInt($(item).attr("vel"))) {
-                                    alert("预售商品不能与现售商品一起购买，请分开购买！");
-                                    b = false;
-                                }
                             });
                             if (b) {
                                 var l = cid.length;
@@ -412,13 +405,7 @@
                 $.each($(":checked").parents('.prolist'), function (i, item) {
                     
                     cid[i] = parseInt(item['title']);
-                    if (spgg == "") {
-                        spgg = parseInt($(item).attr("vel"));
-                    }
-                    else if (spgg != parseInt($(item).attr("vel"))) {
-                        alert("预售商品不能与现售商品一起购买，请分开购买！");
-                        b = false;
-                    }
+                   
                 });
                 if (b) {
                     var parm = {

@@ -552,7 +552,7 @@ namespace ComCloudShop.Layer
                 m.PayNum = PayNum;
                 m.Payway = "微信支付";
                 m.PayDate = DateTime.Now;
-                m.Stutas = 1;
+                m.Stutas = 2;
                 try
                 {
                     if (db.SaveChanges() > 0) {
@@ -1097,7 +1097,7 @@ namespace ComCloudShop.Layer
                                                                 y in db.Products on x.ProductId equals y.ProductId join
                                                                 z in db.ProductImgs on y.ProductId equals z.ProductId
                                                                 where x.OrderNum ==orderNum
-                                                                select new {x.ProductId,x.OrderNum,x.BuyNum,x.BuySale,x.RealSale,y.SPMC,y.Describle,z.P1};
+                                                                select new {x.ProductId,x.OrderNum,x.BuyNum,x.BuySale,x.RealSale,y.SPMC,y.Describle,z.P3};
 
                     OrderProductViewModel model; 
                     foreach (var d in data)
@@ -1109,7 +1109,7 @@ namespace ComCloudShop.Layer
                         model.BuySale = d.BuySale;
                         model.RealSale = d.RealSale;
                         model.Describle = d.Describle;
-                        model.Pic = d.P1;
+                        model.Pic = d.P3;
 
                         var list1= db.OrderReturns.Where(x => x.OrderNum == orderNum && x.ProductID == model.ProductId).ToList();
                         if (list1.Count > 0)

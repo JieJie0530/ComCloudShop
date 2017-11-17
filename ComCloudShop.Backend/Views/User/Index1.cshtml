@@ -165,7 +165,7 @@
                     <td><img data-bind="attr:{src:item.HeadImgUrl}" width="50" height="50" /></td>
                     <td data-bind="text:item.NickName"></td>
                     <td data-bind="text:item.Mobile"></td>
-                    <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':'SVIP')"></td>
+                    <td data-bind="text:item.ISVip==0?'普通会员':(item.ISVip==1?'VIP':(item.ISVip==2?'SVIP':'DVIP'))"></td>
                     <td>
                         <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
                     </td>
@@ -453,7 +453,7 @@
                 }
                 $.ajax({
                     type: 'post',
-                    url: '@Url.Content("~/User/Add")',
+                    url: '@Url.Content("~/User/Add1")',
                     data: parm,
                     success: function (data) {
                         if (data) {

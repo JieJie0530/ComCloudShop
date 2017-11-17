@@ -42,6 +42,18 @@ namespace ComCloudShop.Web.Controllers
                 if (this.Session[AppConstant.weixinuser] == null)
                 {
                     return false;
+                    //WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
+                    //modeluser.Id = 3681;
+                    //modeluser.nickname = "胡锐杰";
+                    //modeluser.headimgurl = "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erG7kFdtvhcXVWMFPCn6uC7PC4SK4caWIytThNEbtCKicwnb6B9OPtTJ170bYNpfYDVqakRFMeSPQw/0";
+                    //modeluser.openid = "o5S56sw6JkhUtbJCiSYO_I7316Fs";
+                    //modeluser.Phone = "18307285886";
+                    //modeluser.province = "";
+                    //modeluser.city = "";
+                    //modeluser.country = "";
+                    //modeluser.sex = 0;
+                    //Session[AppConstant.weixinuser] = modeluser;
+                    //return true;
                 }
                 return true;
             }
@@ -77,7 +89,10 @@ namespace ComCloudShop.Web.Controllers
             {
                 if (filterContext.ActionDescriptor.ActionName == "Login" || filterContext.ActionDescriptor.ActionName == "Reg" || filterContext.ActionDescriptor.ActionName == "Regs" || filterContext.ActionDescriptor.ActionName == "Logins")
                 {
-                    var data = WeiXinWebAuthorize();
+                    if (filterContext.ActionDescriptor.ActionName!= "Regs" && filterContext.ActionDescriptor.ActionName!= "Logins") {
+                        var data = WeiXinWebAuthorize();
+                    }
+                    
                     base.OnActionExecuting(filterContext);
                 }
                 else

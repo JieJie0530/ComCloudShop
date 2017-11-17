@@ -19,26 +19,26 @@ namespace ComCloudShop.Layer
         /// <param name="page">当前页</param>
         /// <param name="size">条数</param>
         /// <returns></returns>
-        public ResultViewModel<IEnumerable<CommissionViewModelDetia>> GetCommissionsList(int MemberID, int page, int size)
+        public ResultViewModel<IEnumerable<CommissionViewModelDetia>> GetCommissionsList(string Phone, int page, int size)
         {
             var result = new ResultViewModel<IEnumerable<CommissionViewModelDetia>>();
             try
             {
                 result.result = (from a in db.Commissions
-                                 join p in db.Members on a.MemberID equals p.MemberId
-                                 orderby a.AddTime
+                                 orderby a.AddTime where a.Phone==Phone
                                  select new CommissionViewModelDetia
                                  {
                                      ID = a.ID,
                                      OrderID = a.OrderID,
                                      Remark = a.Remark,
-                                     NikeName=p.NickName,
                                      AddTime = (DateTime)a.AddTime,
-                                     MemberID = (int)a.MemberID
+                                     Phone=a.Phone,
+                                     Price=(decimal)a.Price
                                  }).Skip((page - 1) * size).Take(size).ToList();
 
                 result.total = (from a in db.Commissions
                                 orderby a.AddTime
+                                where a.Phone == Phone
                                 select new CommissionViewModelDetia
                                 {
                                     ID = a.ID
@@ -60,7 +60,7 @@ namespace ComCloudShop.Layer
         /// </summary>
         /// <param name="data">参数</param>
         /// <returns></returns>
-        public ResultViewModel<bool> AddOrUpdate(int MemberID,string OrderID, string Remark,decimal Price)
+        public ResultViewModel<bool> AddOrUpdate(string Phone,string OrderID, string Remark,decimal Price)
         {
             var result = new ResultViewModel<bool>();
             try
@@ -68,7 +68,7 @@ namespace ComCloudShop.Layer
                 using (var db = new MircoShopEntities())
                 {
                     var model = new Commission();
-                        model.MemberID = MemberID;
+                        model.Phone = Phone;
                         model.OrderID = OrderID;
                         model.AddTime = DateTime.Now;
                         model.Remark = Remark;

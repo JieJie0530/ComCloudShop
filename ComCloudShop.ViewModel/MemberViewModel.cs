@@ -89,6 +89,7 @@ namespace ComCloudShop.ViewModel
 
     public class AdminMemberListViewModel
     {
+        public decimal TotalIn { get; set; }
         public int MemberId { get; set; }
         public string OpenId { get; set; }
         public string NickName { get; set; }

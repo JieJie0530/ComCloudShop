@@ -173,7 +173,7 @@
                 url = "@Url.Content("~/Order/Detail")" + "?ordernum=" + id;
                 var url1="@Url.Content("~/Order/ReturnOrder")" + "?ordernum=" + id;
                 view = "查 看";
-                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a> <a onclick=\"TH('"+id+"')\" class=\"lookBtn1\">申请退货</a>";
+                return "<a href=\"" + url + "\" class=\"lookBtn\">" + view + "</a> ";
             }
 
             return "";

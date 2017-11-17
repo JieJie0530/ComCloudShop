@@ -252,14 +252,8 @@ namespace ComCloudShop.Web.Controllers
                     data.Remark = remark;
                     data.KuaiDi = "";
                     data.Carriage = decimal.Parse(Request["Carriage"]);
-                    data.SPGG= Request["spgg"].ToString();
-                    if (Request["Jifen"] == "")
-                    {
-                        data.Jifen = "0";
-                    }
-                    else {
-                        data.Jifen = Request["Jifen"].ToString();
-                    }
+                    data.SPGG= "0";
+                    data.Jifen = "0";
                     var order = _service.AddOrder(data);
                     if (order != null && !string.IsNullOrEmpty(order.OrderNum))
                     {
@@ -435,7 +429,7 @@ namespace ComCloudShop.Web.Controllers
                 var location = HttpContext.Request.Url.ToString();
                 var ordernum = DateTime.Now.ToString("yyyyMMddhhmmssfff");//订单ID
                 //10000000
-                var pay = Pay(ordernum, "1", location, "", hostip);
+                var pay = Pay(ordernum, "1000", location, "", hostip);
                 //var pay = Pay(ordernum, "10000000", location, "", hostip);
                 if (pay != null)
                     {
@@ -527,7 +521,7 @@ namespace ComCloudShop.Web.Controllers
         OrderProductViewModel _opv = new OrderProductViewModel();
 
 
-
+        
         int i = 0;
         Member qjuser = null;
         CommissionService _com = new CommissionService();
@@ -543,28 +537,35 @@ namespace ComCloudShop.Web.Controllers
 
                 if ((qjuser.ISVip == 0 || qjuser.ISVip == 1) && i == 0)//如果上级是普通会员 获得50%
                 {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + Price / 2;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price / 2);
+                    _com.AddOrUpdate(qjuser.Mobile, OrderID, "购买课程佣金分成", Price / 2);
                 }
                 else if (qjuser.ISVip == 4) //如果上级是加盟商
                 {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + Price / 10;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price / 10);
+                    _com.AddOrUpdate(qjuser.Mobile, OrderID, "购买课程佣金分成", Price / 10);
                 }
                 else if (qjuser.ISVip == 3 && i == 0)
                 {
-                    qjuser.TotalIn = qjuser.TotalIn + 50;
+                    qjuser.TotalIn = qjuser.TotalIn + Price;
                     _user.UpdateMember(qjuser);
-                    _com.AddOrUpdate(qjuser.MemberId, OrderID, "购买VIP佣金分成", Price);
+                    _com.AddOrUpdate(qjuser.Mobile, OrderID, "购买课程佣金分成", Price);
                 }
                 i++;
-                AddCommission(qjuser.follow,OrderID,Price);
+                AddCommission(qjuser.follow, OrderID, Price);
+            }
+            else {
+                List<Manger> listma = db.Mangers.Where(d => d.Phone == Phone).ToList();
+                if (listma.Count > 0) {
+                    Manger model = listma[0];
+                    _com.AddOrUpdate(model.Phone, OrderID, "购买课程佣金分成", Price / 10);
+                }
             }
             return;
         }
-
+        MircoShopEntities db = new MircoShopEntities();
         /// <summary>
         /// 支付完成
         /// </summary>

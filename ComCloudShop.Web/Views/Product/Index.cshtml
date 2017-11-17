@@ -18,6 +18,20 @@
 </div>
 <script type="text/javascript" src="~/public/js/jquery.min.js"></script>
 <script type="text/javascript">
+
+    function GetState(state) {
+        if (state == 0) {
+            return "<span class=\"vip\">免费</span>";
+        }
+        else if (state == 1) {
+            return "<span class=\"vip\">vip免费</span>";
+        }
+        else if (state == 2) {
+            return "<span class=\"vip\">svip免费</span>";
+        }
+        return "<span class=\"vip\">免费</span>";
+    }
+
     //产品筛选排序
     $(function () {
         var type = "@ViewBag.type";
@@ -27,6 +41,8 @@
             page:1
         };
         
+
+
         getPageList = function () {
             $.ajax({
                 type: 'get',
@@ -36,7 +52,7 @@
                     if (data.error == 0) {
                         var html = "";
                         $.each(data.result, function (i, item) {
-                            html += "<li onclick=\"window.location.href = '/Product/Detail?pid=" + item.ProductId + "'\"><div class=\"image\"><span class=\"vip\">vip免费</span><img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\"></div><div class=\"text\"><div class=\"text_content\">" + item.SPMC + "</div><div class=\"text_other\"><div class=\"play\">播放次数：0</div><div class=\"price\">￥" + item.Sale + "</div></div></div></li>";
+                            html += "<li onclick=\"window.location.href = '/Product/Detail?pid=" + item.ProductId + "'\"><div class=\"image\">" + GetState(item.Weight) + "<img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\"></div><div class=\"text\"><div class=\"text_content\">" + item.SPMC + "</div><div class=\"text_other\"><div class=\"play\">播放次数：0</div><div class=\"price\">￥" + item.Sale + "</div></div></div></li>";
                         });
                         if ($(".Recommend_course ul").html()=="") {
                             $('.Recommend_course ul').html(html);
@@ -49,6 +65,8 @@
                 }
             });
         }
+
+        
         getPageList();
 
         $(window).scroll(function () {

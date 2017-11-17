@@ -13,6 +13,15 @@ namespace ComCloudShop.Backend.Controllers
 {
     public class MangerController : BaseController
     {
+
+
+        public ActionResult ListYJ() {
+            string admin = AdminUser;
+            var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
+            ViewBag.Phone = ms.FirstOrDefault().Phone;
+            return View();
+        }
+
         //
         // GET: /Manger/
 

@@ -32,31 +32,31 @@ namespace ComCloudShop.Web.Controllers
                     if (res.Element("xml").Element("result_code").Value == "SUCCESS")
                     {
 
-                        string trade_no = res.Element("xml").Element("transaction_id").Value;
-                        string ordecode = res.Element("xml").Element("out_trade_no").Value;
-                        logger.Info("100  OrderNum " + trade_no);
-                        ComCloudShop.Layer.RechargeService bll = new RechargeService();
-                        ComCloudShop.Service.Recharge model = bll.GetRechargeByMemberOrderID(ordecode);
-                        if (model != null && model.State==0)
-                        {
-                            bll.UpdateWithd(ordecode);
-                            int memberID = Convert.ToInt32(model.MemberID);
-                            var user = _user.GetMemberBID(memberID);
-                            user.integral += 1000; //如果是会员卡。。增加1000元购物积分
-                            if (user.fsate == 1)
-                            {
-                                user.fsate = 2;
-                            }
-                            user.Cashbalance = (Convert.ToDecimal(user.Cashbalance) + 3000).ToString();//增加可提现额度3000
-                            _user.UpdateMember(user);
-                            WeixinOauthHelper.TuiSong(user.OpenId, "恭喜您增加了1000的购物积分！");
-                            //如果它有上级
-                            if (user.follow != "")
-                            {
-                                j = 0;
-                                AddCommission(Convert.ToInt32(user.follow));
-                            }
-                        }
+                        //string trade_no = res.Element("xml").Element("transaction_id").Value;
+                        //string ordecode = res.Element("xml").Element("out_trade_no").Value;
+                        //logger.Info("100  OrderNum " + trade_no);
+                        //ComCloudShop.Layer.RechargeService bll = new RechargeService();
+                        //ComCloudShop.Service.Recharge model = bll.GetRechargeByMemberOrderID(ordecode);
+                        //if (model != null && model.State==0)
+                        //{
+                        //    bll.UpdateWithd(ordecode);
+                        //    int memberID = Convert.ToInt32(model.MemberID);
+                        //    var user = _user.GetMemberBID(memberID);
+                        //    user.integral += 1000; //如果是会员卡。。增加1000元购物积分
+                        //    if (user.fsate == 1)
+                        //    {
+                        //        user.fsate = 2;
+                        //    }
+                        //    user.Cashbalance = (Convert.ToDecimal(user.Cashbalance) + 3000).ToString();//增加可提现额度3000
+                        //    _user.UpdateMember(user);
+                        //    WeixinOauthHelper.TuiSong(user.OpenId, "恭喜您增加了1000的购物积分！");
+                        //    //如果它有上级
+                        //    if (user.follow != "")
+                        //    {
+                        //        j = 0;
+                        //        AddCommission(Convert.ToInt32(user.follow));
+                        //    }
+                        //}
                     }
                 }
             }

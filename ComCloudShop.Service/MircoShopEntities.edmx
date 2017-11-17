@@ -42,7 +42,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MemberID" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="OrderID" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AddTime" Type="datetime" />
@@ -683,8 +683,8 @@
           <EntitySet Name="GiftLists" EntityType="MircoShopModel.GiftList" />
           <EntitySet Name="IntLists" EntityType="MircoShopModel.IntList" />
           <EntitySet Name="MangerCates" EntityType="MircoShopModel.MangerCate" />
-          <EntitySet Name="Commissions" EntityType="MircoShopModel.Commission" />
           <EntitySet Name="Leaves" EntityType="MircoShopModel.Leave" />
+          <EntitySet Name="Commissions" EntityType="MircoShopModel.Commission" />
         </EntityContainer>
         <EntityType Name="HomeImage">
           <Key>
@@ -1031,17 +1031,6 @@
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="Sort" Type="Int32" />
         </EntityType>
-        <EntityType Name="Commission">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MemberID" Type="Int32" />
-          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="AddTime" Type="DateTime" Precision="3" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Leave">
           <Key>
             <PropertyRef Name="ID" />
@@ -1052,6 +1041,17 @@
           <Property Name="Contents" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="Weixin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Commission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1555,18 +1555,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Commissions">
-            <EntityTypeMapping TypeName="MircoShopModel.Commission">
-              <MappingFragment StoreEntitySet="Commission">
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Leaves">
             <EntityTypeMapping TypeName="MircoShopModel.Leave">
               <MappingFragment StoreEntitySet="Leave">
@@ -1575,6 +1563,18 @@
                 <ScalarProperty Name="Contents" ColumnName="Contents" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commissions">
+            <EntityTypeMapping TypeName="MircoShopModel.Commission">
+              <MappingFragment StoreEntitySet="Commission">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

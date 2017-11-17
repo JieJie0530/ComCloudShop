@@ -9,7 +9,7 @@ namespace ComCloudShop.ViewModel
     public class CommissionViewModel
     {
         public int ID { get; set; }
-        public Nullable<int> MemberID { get; set; }
+        public string Phone { get; set; }
         public string OrderID { get; set; }
         public decimal Price { get; set; }
         public DateTime AddTime { get; set; }
@@ -19,7 +19,7 @@ namespace ComCloudShop.ViewModel
     public class CommissionViewModelDetia
     {
         public int ID { get; set; }
-        public Nullable<int> MemberID { get; set; }
+        public string Phone { get; set; }
 
         public string NikeName { get; set; }
 

@@ -171,7 +171,7 @@ namespace ComCloudShop.Layer
         public IEnumerable<CartListForOrderViewModel> getPageList(int[] cid)
         {
             var strSql = new StringBuilder();
-            strSql.Append(" select img.P1 as Pic,  a.CartId,a.ProductId,a.ProductNum,d.SPMC,d.SPGG,d.Sale,d.Discount  from Cart as a  ");
+            strSql.Append(" select img.P3 as Pic,  a.CartId,a.ProductId,a.ProductNum,d.SPMC,d.SPGG,d.Sale,d.Discount  from Cart as a  ");
             strSql.Append(" JOIN Product as d ON d.ProductId = a.ProductId ");
             strSql.Append(" LEFT JOIN ProductImg as img on img.ProductId = a.ProductId");
             strSql.AppendFormat(" where a.CartId in ({0})",string.Join(",", cid));

@@ -17,6 +17,68 @@ namespace ComCloudShop.Backend.Controllers
             return View();
         }
 
+
+
+        public ActionResult Add1()
+        {
+            using (var db = new MircoShopEntities())
+            {
+                string MemberID = Request["MemberID"];
+                string NickName = Request["NickName"];
+                string Mobile = Request["Mobile"];
+                string OrignKey = Request["OrignKey"];
+                string IsVip = Request["IsVip"];
+                string admin = AdminUser;
+                var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
+                string flollw = "";
+               
+                if (admin != "admin")
+                {
+                    flollw = ms.FirstOrDefault().Phone;
+                }
+                    Member m = new Member();
+                    if (MemberID != "")
+                    {
+                        int MemberIDint = Convert.ToInt32(MemberID);
+                        m = db.Members.Where(d => d.MemberId == MemberIDint).FirstOrDefault();
+                        m.NickName = NickName;
+                        m.Mobile = Mobile;
+                        m.follow = flollw;
+                        m.ISVip = Convert.ToInt32(IsVip);
+                        m.ContactAddr = "";
+                        m.UserName = "";
+                        m.OrignKey = "";
+                        m.QQ = OrignKey;
+                    }
+                    else
+                    {
+                        m.NickName = NickName;
+                        m.Mobile = Mobile;
+                        m.follow = flollw;
+                        m.OpenId = Guid.NewGuid().ToString();
+                        m.fsate = 0;
+                        m.ISVip = Convert.ToInt32(IsVip);
+                        m.integral = 0;
+                        m.TotalIn = 0;
+                        m.balance = "0";
+                        m.Cashbalance = "0";
+                        m.HeadImgUrl = "";
+                        m.CreateDate = DateTime.Now;
+                        m.LastLoginDate = 0;
+                        m.Gender = 0;
+                        m.ContactAddr = "";
+                        m.UserName = "";
+                        m.OrignKey = "";
+                        m.QQ = OrignKey;
+                        db.Members.Add(m);
+                    }
+
+                    db.SaveChanges();
+               
+            }
+            return Content("ok");
+
+        }
         protected MemberService _service = new MemberService();
         //新增或更新会员
         public ActionResult Add()
@@ -31,56 +93,63 @@ namespace ComCloudShop.Backend.Controllers
                 string admin = AdminUser;
                 var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
                 string flollw = "";
-                if (admin != "admin")
+                if (Request["Follow"] != null)
                 {
-                    flollw = ms.FirstOrDefault().Phone;
-                }
-                if (Request["Follow"] != null) {
                     if (Request["Follow"].ToString() != "")
                     {
                         flollw = Request["Follow"].ToString();
                     }
-                    
                 }
-
-                Member m = new Member();
-                if (MemberID != "")
+                if (admin != "admin")
                 {
-                    int MemberIDint = Convert.ToInt32(MemberID);
-                    m = db.Members.Where(d => d.MemberId == MemberIDint).FirstOrDefault();
-                    m.NickName = NickName;
-                    m.Mobile = Mobile;
-                    m.follow = flollw;
-                    m.ISVip = Convert.ToInt32(IsVip);
-                    m.ContactAddr = "";
-                    m.UserName = "";
-                    m.OrignKey = "";
-                    m.QQ = OrignKey;
+                    flollw = ms.FirstOrDefault().Phone;
+                }
+               
+                if (db.Members.Where(d => d.Mobile == flollw).Count() <= 0 && IsVip!="3")
+                {
+                    return Content("上级不存在！");
                 }
                 else
                 {
-                    m.NickName = NickName;
-                    m.Mobile = Mobile;
-                    m.follow = flollw;
-                    m.OpenId =Guid.NewGuid().ToString();
-                    m.fsate = 0;
-                    m.ISVip = Convert.ToInt32(IsVip);
-                    m.integral = 0;
-                    m.TotalIn = 0;
-                    m.balance = "0";
-                    m.Cashbalance = "0";
-                    m.HeadImgUrl = "";
-                    m.CreateDate = DateTime.Now;
-                    m.LastLoginDate = 0;
-                    m.Gender = 0;
-                    m.ContactAddr = "";
-                    m.UserName = "";
-                    m.OrignKey = "";
-                    m.QQ = OrignKey;
-                    db.Members.Add(m);
-                }
+                    Member m = new Member();
+                    if (MemberID != "")
+                    {
+                        int MemberIDint = Convert.ToInt32(MemberID);
+                        m = db.Members.Where(d => d.MemberId == MemberIDint).FirstOrDefault();
+                        m.NickName = NickName;
+                        m.Mobile = Mobile;
+                        m.follow = flollw;
+                        m.ISVip = Convert.ToInt32(IsVip);
+                        m.ContactAddr = "";
+                        m.UserName = "";
+                        m.OrignKey = "";
+                        m.QQ = OrignKey;
+                    }
+                    else
+                    {
+                        m.NickName = NickName;
+                        m.Mobile = Mobile;
+                        m.follow = flollw;
+                        m.OpenId = Guid.NewGuid().ToString();
+                        m.fsate = 0;
+                        m.ISVip = Convert.ToInt32(IsVip);
+                        m.integral = 0;
+                        m.TotalIn = 0;
+                        m.balance = "0";
+                        m.Cashbalance = "0";
+                        m.HeadImgUrl = "";
+                        m.CreateDate = DateTime.Now;
+                        m.LastLoginDate = 0;
+                        m.Gender = 0;
+                        m.ContactAddr = "";
+                        m.UserName = "";
+                        m.OrignKey = "";
+                        m.QQ = OrignKey;
+                        db.Members.Add(m);
+                    }
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
             }
             return Content("ok");
 
@@ -152,6 +221,7 @@ namespace ComCloudShop.Backend.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         ComCloudShop.Layer.CommissionService _com = new CommissionService();
+        
         /// <summary>
         /// 获取用户列表
         /// </summary>
@@ -163,14 +233,13 @@ namespace ComCloudShop.Backend.Controllers
         {
             using (var db = new MircoShopEntities())
             {
-             
-                var ms = db.Members.Where(d => d.Mobile == mobile).ToList();
-                int follow = ms.FirstOrDefault().MemberId;
 
-                var list = _com.GetCommissionsList(follow, page, 10);
+                //var ms = db.Members.Where(d => d.Mobile == mobile).ToList();
+                //int follow = ms.FirstOrDefault().MemberId;
+
+                var list = _com.GetCommissionsList(mobile, page, 10);
                 return Json(list, JsonRequestBehavior.AllowGet);
             }
-
         }
 
         /// <summary>
@@ -203,9 +272,7 @@ namespace ComCloudShop.Backend.Controllers
         public JsonResult list2(string nickName, string mobile, string openid, int isvip, string Phone, int page = 1)
         {
                 string follow = Phone;
-
                 AddList(follow);
-
                 //var list = _service.GetMemberListNew1(page, AppConstant.PageSize, nickName, mobile, openid, isvip, follow);
                 return Json(listAll, JsonRequestBehavior.AllowGet);
         }
