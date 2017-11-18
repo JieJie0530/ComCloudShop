@@ -459,6 +459,7 @@ namespace ComCloudShop.ViewModel
         public string Pic { get; set; }
         public string Describle { get; set; }
         public int BeginUseAge { get; set; }
+        public int EndUseAge { get; set; }
         public decimal Sale { get; set; }
         public decimal Discount { get; set; }
 

@@ -55,6 +55,67 @@ namespace ComCloudShop.Web.Controllers
             
             return Content("ok");
         }
+
+
+        
+        [HttpGet]
+        public ActionResult Find()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Finds()
+        {
+
+            try
+            {
+                MemberViewModel member = new MemberViewModel();
+
+                string Phone = Request["Phone"];
+                string Pwd = Request["Pwd"];
+                string Pwd1 = Request["Pwd1"];
+                string vel1 = Request["vel1"];
+                var list = db.Members.Where(d => d.Mobile == Phone);
+                if (list.Count() <= 0)
+                {
+                    return Content("该手机号不存在!");
+                }
+                else
+                {
+                    if (Session["mobile_code"] == null)
+                    {
+                        return Content("验证码错误！");
+                    }
+                    else
+                    {
+                        string code = Session["mobile_code"].ToString();
+                        if (code == vel1)
+                        {
+                            Member m = _service.GetMemberByPhone(Phone);
+                            m.QQ = Pwd;
+                            if (user.UpdateMember(m))
+                            {
+                                return Content("ok");
+                            }
+                            else
+                            {
+                                return Content("找回密码错误！");
+                            }
+                        }
+                        else
+                        {
+                            return Content("验证码错误！");
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return Content(ex.ToString());
+            }
+        }
         // GET: Business
         [HttpGet]
         public ActionResult Reg()
@@ -554,8 +615,6 @@ namespace ComCloudShop.Web.Controllers
              
                 int memberID = Convert.ToInt32(UserInfo.Id);
                 var user = _user.GetMemberBID(memberID);
-                user.TotalIn = (user.TotalIn + 100);
-                _user.UpdateMember(user);
                 //如果它有上级
                 if (user.follow != "")
                 {

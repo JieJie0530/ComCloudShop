@@ -16,7 +16,7 @@
             <div id="moban" style='position:absolute;left:0;top:0;'>
 
             </div>
-            <input type="button" value="点击购买VIP" class="green-int pmsg" id="Btn_Adds" onclick='ToHref()'>
+            <input type="button" value="点击下方购买此视频，或升级vip观看所有视频课程" class="green-int pmsg" id="Btn_Adds" onclick='ToHref()'>
             <div class="zy_media">
                 <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
                     <source src="@(Model.P1)" type="video/mp4">
@@ -116,6 +116,7 @@
         display:none;
         left: 50%;
         top: 50%;
+        width:200px;
         z-index: 9999999999;
         margin-left: -50px;
         margin-top: -50px;

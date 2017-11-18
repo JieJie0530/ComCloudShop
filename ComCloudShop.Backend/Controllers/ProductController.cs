@@ -272,6 +272,7 @@ namespace ComCloudShop.Backend.Controllers
                 return Content("参数错误");
             }
             ViewData["Name"] = model.SPMC;
+            
             return View(new ProductDetailViewModel());
         }
 

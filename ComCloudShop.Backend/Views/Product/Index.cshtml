@@ -245,8 +245,7 @@
                 
                 <th width="12%"><i class="require-red"></i>品牌：</th>
                 <td width="38%">
-                    <input style=" display:none; " class="common-text required" size="10" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
-
+                   
                     <select data-bind="options:listBrand,
                                                         optionsValue:function(item){return item.dm;},
                                                         optionsText:function(item){return item.mc;},
@@ -264,7 +263,7 @@
             </tr>
             <tr>
                 <th><i class="require-red"></i>视频封面：</th>
-                <td colspan="3">
+                <td>
                     <input type="button" id="btn_show3" value="上传图片" />
                     <br />
                     <form id="form_upload3" style="padding:20px; display:none;" action="UploadImg1"
@@ -274,6 +273,10 @@
                     </form>
                     <img alt="" style="display:none;" width="250" height="80" id="resultP3" src="" />
                     <input type="hidden" id="picP3" name="picP3" data-bind="value:P3" />
+                </td>
+                <th width="12%" ><i class="require-red"></i>排序：</th>
+                <td width="38%" >
+                    <input class="common-text required" size="30" name="EndUseAge" data-bind="value:EndUseAge" type="text" />
                 </td>
             </tr>
             <tr>

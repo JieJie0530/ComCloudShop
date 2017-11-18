@@ -87,9 +87,9 @@ namespace ComCloudShop.Web.Controllers
             logger.Debug("Request.Url=" + Request.Url + "str=" + str);
             if (!IsLogin)
             {
-                if (filterContext.ActionDescriptor.ActionName == "Login" || filterContext.ActionDescriptor.ActionName == "Reg" || filterContext.ActionDescriptor.ActionName == "Regs" || filterContext.ActionDescriptor.ActionName == "Logins")
+                if (filterContext.ActionDescriptor.ActionName == "Login" || filterContext.ActionDescriptor.ActionName == "Reg" || filterContext.ActionDescriptor.ActionName == "Regs" || filterContext.ActionDescriptor.ActionName == "Logins" || filterContext.ActionDescriptor.ActionName == "Finds" || filterContext.ActionDescriptor.ActionName == "Find")
                 {
-                    if (filterContext.ActionDescriptor.ActionName!= "Regs" && filterContext.ActionDescriptor.ActionName!= "Logins") {
+                    if (filterContext.ActionDescriptor.ActionName!= "Regs" && filterContext.ActionDescriptor.ActionName!= "Logins" && filterContext.ActionDescriptor.ActionName != "Finds") {
                         var data = WeiXinWebAuthorize();
                     }
                     

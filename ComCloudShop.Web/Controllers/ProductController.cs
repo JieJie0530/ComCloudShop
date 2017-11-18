@@ -58,9 +58,14 @@ namespace ComCloudShop.Web.Controllers
         {
 
             Member m = db.Members.Where(d => d.MemberId == UserInfo.Id).FirstOrDefault();
-            
             ViewBag.Rols = m.ISVip;
-               
+            OrderService bll = new OrderService();
+            bool b = bll.GetOrderListPage(pid, m.MemberId);
+            if (b) {
+                ViewBag.Rols = 3;
+            }
+
+
             var data = _service.GetDetailById(pid);
             OrderService _serviceorder = new OrderService();
             var CommentList = _serviceorder.GetCommentList(pid);
@@ -115,7 +120,13 @@ namespace ComCloudShop.Web.Controllers
             try
             {
                 int page = Convert.ToInt32(Request["page"]);
-                var data = _service.GetProductList10(type, page);
+
+                int weight = 2;
+                Member m = db.Members.Where(d => d.MemberId == UserInfo.Id).FirstOrDefault();
+                if (m.ISVip == 0) {
+                    weight = 1;
+                }
+                var data = _service.GetProductList10(type, page, weight);
                 result.error = 0;
                 result.msg = "success";
                 result.result = new List<ProductListViewModel>();

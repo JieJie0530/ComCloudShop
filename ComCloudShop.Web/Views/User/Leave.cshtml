@@ -52,26 +52,40 @@
             var txt_Phone = $("#txt_Phone").val();
             var txt_Weixin = $("#txt_Weixin").val();
             var Contents = $("#Contents").val();
-            var parm = {
-                txt_TrueName: txt_TrueName,
-                txt_Phone: txt_Phone,
-                txt_Weixin: txt_Weixin,
-                Contents: Contents
+            if (txt_TrueName == "") {
+                alert("请输入姓名！");
             }
-            $.ajax({
-                type: 'post',
-                async: false,
-                data: parm,
-                url: '@Url.Content("~/User/Sumbit")',
-                success: function (data) {
-                    if (data == "ok") {
-                        alert("申请成功");
-                    }
-                    else if (data == 0) {
-                        alert("申请失败");
-                    }
+            else if (txt_Phone == "") {
+                alert("请输入手机号！");
+            }
+            else if (txt_Weixin == "") {
+                alert("请输入微信！");
+            }
+            else if (Contents == "") {
+                alert("请输入详细内容！");
+            }
+            else {
+                var parm = {
+                    txt_TrueName: txt_TrueName,
+                    txt_Phone: txt_Phone,
+                    txt_Weixin: txt_Weixin,
+                    Contents: Contents
                 }
-            })
+                $.ajax({
+                    type: 'post',
+                    async: false,
+                    data: parm,
+                    url: '@Url.Content("~/User/Sumbit")',
+                    success: function (data) {
+                        if (data == "ok") {
+                            alert("申请成功");
+                        }
+                        else if (data == 0) {
+                            alert("申请失败");
+                        }
+                    }
+                })
+            }
         }
     </script>
 </body>

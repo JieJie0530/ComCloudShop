@@ -32,7 +32,7 @@ namespace ComCloudShop.Backend.Controllers
                 var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
                 string flollw = "";
                
-                if (admin != "admin")
+                if (admin != "xinzhitong")
                 {
                     flollw = ms.FirstOrDefault().Phone;
                 }
@@ -100,7 +100,7 @@ namespace ComCloudShop.Backend.Controllers
                         flollw = Request["Follow"].ToString();
                     }
                 }
-                if (admin != "admin")
+                if (admin != "xinzhitong")
                 {
                     flollw = ms.FirstOrDefault().Phone;
                 }

@@ -995,7 +995,7 @@ namespace ComCloudShop.Layer
         /// <param name="begin">使用月龄开始时间</param>
         /// <param name="end">使用月龄截止时间</param>
         /// <returns></returns>
-        public IEnumerable<ProductListViewModel> GetProductList10(int type,int page)
+        public IEnumerable<ProductListViewModel> GetProductList10(int type,int page,int weight)
         {
             try
             {
@@ -1018,7 +1018,7 @@ namespace ComCloudShop.Layer
                                     e in db.CategoryRelations on a.ProductId equals e.ProductId
                                 join
                                     f in db.Categories on e.CategoryId equals f.CategoryId
-                                where (type > 0 ? e.CategoryId == type : 1 == 1)
+                                where (type > 0 ? e.CategoryId == type : 1 == 1) && a.Weight<=weight
                                 select new ProductListViewModel
                                 {
                                     ProductId = a.ProductId,
@@ -1026,11 +1026,12 @@ namespace ComCloudShop.Layer
                                     Pic = b.P3,
                                     Describle = a.Describle,
                                     BeginUseAge = a.BeginUseAge,
+                                    EndUseAge=a.EndUseAge,
                                     Sale = a.Sale,
                                     Discount = a.Discount,
                                     SaleNum = d.total,
                                     Weight=(int)a.Weight
-                                }).OrderBy(x => x.Sale).OrderBy(x => x.Sale).Skip((page - 1) * 10).Take(10).ToList();
+                                }).OrderBy(x => x.Weight).OrderBy(x => x.EndUseAge).Skip((page - 1) * 10).Take(10).ToList();
                     return data;
                 }
             }

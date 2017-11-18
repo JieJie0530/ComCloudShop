@@ -52,7 +52,7 @@
                     if (data.error == 0) {
                         var html = "";
                         $.each(data.result, function (i, item) {
-                            html += "<li onclick=\"window.location.href = '/Product/Detail?pid=" + item.ProductId + "'\"><div class=\"image\">" + GetState(item.Weight) + "<img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\"></div><div class=\"text\"><div class=\"text_content\">" + item.SPMC + "</div><div class=\"text_other\"><div class=\"play\">播放次数：0</div><div class=\"price\">￥" + item.Sale + "</div></div></div></li>";
+                            html += "<li onclick=\"window.location.href = '/Product/Detail?pid=" + item.ProductId + "'\"><div class=\"image\">" + GetState(item.Weight) + "<img src=\"" + "@(WebConfigurationManager.AppSettings["imgurl"])" + item.Pic + "\" alt=\"\"></div><div class=\"text\"><div class=\"text_content\">" + item.SPMC + "</div><div class=\"text_other\"><div class=\"play\">播放次数：1000+</div><div class=\"price\">￥" + item.Sale + "</div></div></div></li>";
                         });
                         if ($(".Recommend_course ul").html()=="") {
                             $('.Recommend_course ul').html(html);

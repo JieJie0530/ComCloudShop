@@ -44,7 +44,7 @@ namespace ComCloudShop.Backend.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string username, string pwd)
         {
-            if (username == "admin" && EncryptHelper.MD5(pwd, 32) == "c4ca4238a0b923820dcc509a6f75849b")
+            if (username == "xinzhitong" && pwd == "wang2017")
             {
                 AddUserAuth(username);
                 return RedirectToAction("Index", "Home");

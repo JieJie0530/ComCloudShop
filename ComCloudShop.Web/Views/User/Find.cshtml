@@ -8,53 +8,51 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>注册</title>
+    <title>找回密码</title>
     <link href="~/public/css/style.css" rel="stylesheet" />
     <script src="~/public/js/jquery.min.js"></script>
-    
-
 </head>
 <body>
     <div class="page_all">
-        <div class="page m2">
-            <div class="logob">
-               
-            </div>
-            <div class="inputbox">
-                <div class="ui-inputbox">
-                    <div class="bf">+86</div>
-                    <div class="txt-btn"><a onclick="get_mobile_code()" isdj="1" id="zphone">发送验证码</a></div>
-                    <div class="input-mini"><input type="text" id="Phone" placeholder="输入手机号码"></div>
+        <div class="page m3">
+            <div class="mainbox">
+                <div class="ui-line25"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">手机号</div>
+                        <div class="inp"><input type="text" id="Phone" placeholder="输入手机号"></div>
+                        <div class="btn"><a onclick="get_mobile_code()" isdj="1" id="zphone">获取验证码</a></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">验证码</div>
+                        <div class="inp"><input type="text" id="vel1" placeholder="输入短信验证码"></div>
+                    </div>
                 </div>
-                <div class="ui-inputbox"><input type="text" id="vel1" placeholder="请输入短信验证码"></div>
-                <div class="ui-inputbox"><input type="password" id="Pwd" placeholder="请输入密码"></div>
-                <div class="ui-inputbox"><input type="text"  id="TJPhone" placeholder="请输入推荐人手机号"></div>
-                <div class="login-link">
-                    <p class="s2"><a href="#">已有账号？立即登陆</a></p>
+                <div class="ui-line25"></div>
+                <div class="ui-itembox">
+                    <div class="ui-item">
+                        <div class="tit">新密码</div>
+                        <div class="inp"><input type="password"  id="Pwd" placeholder="输入密码"></div>
+                    </div>
+                    <div class="ui-item">
+                        <div class="tit">确认密码</div>
+                        <div class="inp"><input type="password"  id="Pwd1" placeholder="确认密码"></div>
+                    </div>
                 </div>
+                <div class="ui-line25"></div>
+
+                <div id="QD" class="ui-btn b-black"><a id="btn_reg">找回密码</a></div>
             </div>
-            @*<input type="button" id="btn_reg" value="注册" />*@
-            <div class="ui-btn b-black"><a id="btn_reg" >注册</a></div>
         </div>
     </div>
-
     <script type="text/javascript">
         $(function () {
-            $("#Fwxy").click(function () {
-                $("#FW").addClass("lshow");
-            });
-            $('#FW').on('click', function (event) {
-                if ($(event.target).is('#ClossFW')) {
-                    event.preventDefault();
-                    $(this).removeClass('lshow');
-                }
-            });
-
+            
             $("#btn_reg").click(function () {
 
                     var Phone = $("#Phone").val();//手机号
                     var Pwd = $("#Pwd").val();
-                    var TJPhone = $("#TJPhone").val();//推荐人手机号
+                    var Pwd1 = $("#Pwd1").val();//推荐人手机号
                     var vel1 = $("#vel1").val();//验证码
 
                     if (Phone == "") {
@@ -66,25 +64,24 @@
                     else if (Pwd == "") {
                         alert("请填写密码!");
                     }
-                    else if (TJPhone == "") {
-                        alert("请填写推荐人手机号!");
+                    else if (Pwd1 != Pwd) {
+                        alert("两次输入密码不一样!");
                     }
                     else {
                         var parm = {
                             Phone: Phone,
                             Pwd: Pwd,
-                            TJPhone: TJPhone,
+                            Pwd1: Pwd1,
                             vel1: vel1
                         }
                        $.ajax({
                            type: 'post',
                            async: false,
-                            url: '@Url.Content("~/User/Regs")',
+                            url: '@Url.Content("~/User/Finds")',
                             data: parm,
                             success: function (data) {
-                              
                                 if (data == "ok") {
-                                    alert("注册成功!");
+                                    alert("成功找回密码!");
                                     window.location.href = "/User/Login";
                                 }
                                 else {
@@ -93,7 +90,7 @@
                             }
                         })
                     }
-               
+
             })
         });
         var iTime = 59;
@@ -145,7 +142,7 @@
                 }
                 else {
                     $.post('@Url.Content("~/Home/SendMsm")', { mobile: phone}, function (msg) {
-                       
+
                         if (msg == "ok") {
                             RemainTime();
                         }

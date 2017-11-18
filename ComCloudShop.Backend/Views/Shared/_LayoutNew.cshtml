@@ -44,7 +44,7 @@
             <div class="sidebar-content">
                 <ul class="sidebar-list">
                     @{
-                        if (Session[AppConstant.admin].ToString() == "admin")
+                        if (Session[AppConstant.admin].ToString() == "xinzhitong")
                         {
 
                             <li>
@@ -52,7 +52,7 @@
                                 <ul class="sub-menu" style="display:block">
                                     <li><a href="~/Brand/index"><i class="icon-font">&#xe005;</i>友情连接</a></li>
                                     <li><a href="~/Category/index?status=1"><i class="icon-font">&#xe005;</i>课程模块</a></li>
-                                    <li><a href="~/Product/"><i class="icon-font">&#xe005;</i>产品信息</a></li>
+                                    <li><a href="~/Product/"><i class="icon-font">&#xe005;</i>课程信息</a></li>
                                     <li style="display:none;"><a href="~/Rule/"><i class="icon-font">&#xe005;</i>满减信息</a></li>
                                     <li style="display:none;"><a href="~/Sale/"><i class="icon-font">&#xe005;</i>最新推荐</a></li>
                                     <li style="display:none;"><a href="~/System/index?type=index"><i class="icon-font">&#xe005;</i>广告位</a></li>

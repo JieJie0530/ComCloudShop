@@ -84,45 +84,5 @@ namespace ComCloudShop.Web.Controllers
             xmlString.Append("</xml>");
             return xmlString.ToString();
         }
-
-        int j = 0;
-        UserService _user = new UserService();
-        Service.Member qjuser = null;
-        public void AddCommission(int memberID)
-        {
-            j++;//每次一次加一级
-            qjuser = _user.GetMemberBID(memberID);
-            if (qjuser != null)
-            {
-                decimal money = 100;
-                if (money > 0)
-                {
-                    qjuser.TotalIn = (qjuser.TotalIn +100);
-                    qjuser.balance = Convert.ToDecimal((Convert.ToDecimal(qjuser.balance) + (3 - j) * 100)).ToString();
-                    if (qjuser.ISVip == 2)
-                    {//如果是VIP就多加88元
-                        money += 88;
-                        qjuser.TotalIn = qjuser.TotalIn + 88;
-                        qjuser.balance = (Convert.ToDecimal(qjuser.balance) + Convert.ToDecimal(88)).ToString();
-                    }
-                    WeixinOauthHelper.TuiSong(qjuser.OpenId, "恭喜您获取了" + money + "元分享金！");
-                    _user.UpdateMember(qjuser);
-
-                    if (qjuser.follow != "")
-                    {
-                        AddCommission(Convert.ToInt32(qjuser.follow));
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    return;
-                }
-            }
-            return;
-        }
     }
 }

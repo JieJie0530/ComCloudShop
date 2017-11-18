@@ -952,6 +952,55 @@ namespace ComCloudShop.Layer
         /// <param name="page">当前页</param>
         /// <param name="size">条数</param>
         /// <returns></returns>
+        public bool GetOrderListPage(int pid,int MemberID)
+        {
+            var list = new List<OrderListViewModel>();
+            try
+            {
+                using (var db = new MircoShopEntities())
+                {
+
+                    var data = (from a in db.OrderDetails
+                                join
+                                   c in db.OrderProductDetails on a.OrderNum equals c.OrderNum into temp
+                                from tt in temp.DefaultIfEmpty()
+                                where a.MemberId==MemberID && tt.ProductId==pid 
+                                select new
+                                {
+                                    a.OrderId,
+                                    a.OrderNum,
+                                    a.Stutas,
+                                    CreatTime = a.Createdate,
+                                    TotalPrice = a.PayableAmount,
+                                    a.Carriage,
+                                    a.DiscountAmount,
+                                    Addressee = "",
+                                    KD = a.LogisticsType,
+                                    Jifen = a.Jifen,
+                                    MemberID = a.MemberId,
+                                    Address = ""
+                                });
+                    if (data.Count() > 0) {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+            return false;
+        }
+
+
+        /// <summary>
+        /// 获取订单列表
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="status">订单状态</param>
+        /// <param name="page">当前页</param>
+        /// <param name="size">条数</param>
+        /// <returns></returns>
         public IEnumerable<OrderListViewModel> GetOrderListPage(int uid, int status, int page = 1, int size = 20)
         {
             var list = new List<OrderListViewModel>();
