@@ -1031,7 +1031,7 @@ namespace ComCloudShop.Layer
                                     Discount = a.Discount,
                                     SaleNum = d.total,
                                     Weight=(int)a.Weight
-                                }).OrderBy(x => x.Weight).OrderBy(x => x.EndUseAge).Skip((page - 1) * 10).Take(10).ToList();
+                                }).OrderBy(x => x.Weight).OrderBy(x => x.EndUseAge).OrderByDescending(d=>d.ProductId).Skip((page - 1) * 10).Take(10).ToList();
                     return data;
                 }
             }

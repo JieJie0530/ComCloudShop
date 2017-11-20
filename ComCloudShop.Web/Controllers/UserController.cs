@@ -326,38 +326,33 @@ namespace ComCloudShop.Web.Controllers
         //    return Content(model.SetBL);
         //}
 
+            /// <summary>
+            /// 他的下级
+            /// </summary>
+            /// <param name="Phone"></param>
         public void AddCommission1(string Phone)
         {
             List<Member> list = user.GetMemberFollow(Phone);
             if (list.Count>0)
             {
                 list1 = list;
-                foreach (Member item in list)
-                {
-                    AddCommission2(item.Mobile);
-                }
             }
         }
+        /// <summary>
+        /// 他的上级
+        /// </summary>
+        /// <param name="Phone"></param>
         public void AddCommission2(string Phone)
         {
-            List<Member> list = user.GetMemberFollow(Phone);
-            if (list.Count > 0)
+            List<Member> list = new List<Member>();
+            Member model = user.GetMemberByPhone(Phone);
+            if (model!=null)
             {
+                list.Add(model);
                 list2.AddRange(list);
-                foreach (Member item in list)
-                {
-                    AddCommission3(item.Mobile);
-                }
             }
         }
-        public void AddCommission3(string Phone)
-        {
-            List<Member> list = user.GetMemberFollow(Phone);
-            if (list.Count > 0)
-            {
-                list3.AddRange(list);
-            }
-        }
+       
         int j = 0;
         Member qjuser = null;
         UserService user = new UserService();
@@ -370,14 +365,11 @@ namespace ComCloudShop.Web.Controllers
             AddCommission1(m.Mobile);
             string type = Request["type"];
             if (type== "1") {
-                ViewData["list"] = list1;
+                ViewData["list"] = list2;
             }
             else if (type == "2")
             {
-                ViewData["list"] = list2;
-            }else if (type == "3")
-            {
-                ViewData["list"] = list3;
+                ViewData["list"] = list1;
             }
 
             return View(m);
@@ -553,8 +545,8 @@ namespace ComCloudShop.Web.Controllers
                 model.number = _oservice.GetSaveMoney(UserInfo.Id);
                 AddCommission1(m.Mobile);
                 j = 0;
-                ViewData["list1"] = list1;
-                ViewData["list2"] = list2;
+                ViewData["list1"] = list2;
+                ViewData["list2"] = list1;
                 ViewData["list3"] = list3;
                 return View(model);
             }

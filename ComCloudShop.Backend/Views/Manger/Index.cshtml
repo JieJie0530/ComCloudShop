@@ -99,7 +99,6 @@
                         <td data-bind="text:item.Phone"></td>
                         <td data-bind="text:item.Proportion"></td>
                         <td><a href="javascript:void(0);" data-bind="text:'0',click:function(data,event){$parent.LookCom(data)}">修改</a></td>
-                        
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(1,data)}">修改</a>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OkTuiKuan(item.ID)},text:State==0?'审核通过':''"></a>
@@ -339,13 +338,17 @@
             m.btnSearch = function () {
                 m.loadData(1);
             };
+            m.page_pre1 = function () {
+                
+            };
 
+            //下一页
+            m.page_next1 = function () {
+                
+            };
             //上一页
             m.page_pre = function () {
-                var page = (m.page_current() - 1);
-                if (page > 0) {
-                    m.loadData(page);
-                }
+                
             };
 
             //下一页
@@ -392,6 +395,8 @@
                     }
                 })
             }
+
+
             m.LookCom = function (data) {
                 var url = "@Url.Content("~/user/list3?page=1")&mobile=" + data.Phone;
                 $.ajax({
@@ -415,20 +420,7 @@
                     m.ShopName(data.ShopName);
                     m.ShopAddress(data.ShopAddress);
                     m.Proportion(data.Proportion);
-                    //m.Category(data.Category);
-                    chks.each(function () {
-                        if (Category != "") {
-                            if (Category.indexOf($(this).attr("vel")) >= 0) {
-                                $(this).attr("checked", true);
-                            }
-                            else {
-                                $(this).attr("checked", false);
-                            }
-                        }
-                        else {
-                            $(this).attr("checked", false);
-                        }
-                    })
+                    m.Category(data.Category);
                     m.IsRecommend("" + data.IsRecommend + "");
 
                     m.Contacts(data.Contacts);
@@ -486,26 +478,8 @@
                 
                 m.license($('input[name="license"]').val());
                 m.Storefront($("input[name='Storefront']").val());
-                var chks = $(".chks:checked");
-                if (chks.length <= 0) {
-                    alert("请选择分类");
-                    return false;
-                }
-                else {
-                    var Category = "";
-                    chks.each(function () {
-                        if (Category == "") {
-                            Category += $(this).attr("vel");
-                        }
-                        else {
-                            Category += ","+$(this).attr("vel");
-                        }
-                    })
-                    searchByStationName(m.ShopAddress());
-                    if (lat == "" || lng == "") {
-                        alert("地址获取失败！请填写正确准确地址！");
-                    }
-                    else {
+               
+                 
                         var parm = {
                             //单条model信息
                             ID: m.ID(),
@@ -513,7 +487,7 @@
                             Pwd: m.Pwd(),
                             ShopName: m.ShopName(),
                             ShopAddress: m.ShopAddress(),
-                            Category: Category,
+                            Category: "",
                             IsRecommend: m.IsRecommend(),
                             Proportion: m.Proportion(),
                             Contacts: m.Contacts(),
@@ -540,9 +514,6 @@
                                 }
                             }
                         })
-                    }
-                    
-                }
             }
             //加载表单数据
             m.loadData = function (page) {

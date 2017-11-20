@@ -7,7 +7,7 @@
 <div class="wrapper">
     <img src="~/public/images/svip.jpg" style="width:100%;" />
     <div class="payBtn">
-        <a href="javascript:void(0);" class="paybtn">立即支付</a>
+        <a href="javascript:void(0);" class="paybtn paya">立即支付</a>
     </div>
 </div>
 <script type="text/javascript">
@@ -21,6 +21,10 @@
     };
     $(function () {
 
+        var IsVip = '@Model.ISVip';
+        if (IsVip >= 1) {
+            $(".payBtn").remove();
+        }
        
         $('.paybtn').on('click', function () {
 

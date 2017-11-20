@@ -27,7 +27,7 @@
                     <div class="input-mini"><input type="text" id="Phone" placeholder="输入手机号码"></div>
                 </div>
                 <div class="ui-inputbox"><input type="text" id="vel1" placeholder="请输入短信验证码"></div>
-                <div class="ui-inputbox"><input type="password" id="Pwd" placeholder="请输入密码"></div>
+                <div class="ui-inputbox"><input type="password" id="Pwd" placeholder="请输入不低于6位密码"></div>
                 <div class="ui-inputbox"><input type="text"  id="TJPhone" placeholder="请输入推荐人手机号"></div>
                 <div class="login-link">
                     <p class="s2"><a href="#">已有账号？立即登陆</a></p>
@@ -39,6 +39,14 @@
     </div>
 
     <script type="text/javascript">
+        window.alert = function (name) {
+            var iframe = document.createElement("IFRAME");
+            iframe.style.display = "none";
+            iframe.setAttribute("src", 'data:text/plain,');
+            document.documentElement.appendChild(iframe);
+            window.frames[0].window.alert(name);
+            iframe.parentNode.removeChild(iframe);
+        }
         $(function () {
             $("#Fwxy").click(function () {
                 $("#FW").addClass("lshow");
@@ -66,6 +74,9 @@
                     else if (Pwd == "") {
                         alert("请填写密码!");
                     }
+                    else if (Pwd.length < 6) {
+                        alert("密码不能低于6位!");
+                    }
                     else if (TJPhone == "") {
                         alert("请填写推荐人手机号!");
                     }
@@ -76,13 +87,13 @@
                             TJPhone: TJPhone,
                             vel1: vel1
                         }
-                       $.ajax({
-                           type: 'post',
-                           async: false,
+                        $.ajax({
+                            type: 'post',
+                            async: false,
                             url: '@Url.Content("~/User/Regs")',
                             data: parm,
                             success: function (data) {
-                              
+
                                 if (data == "ok") {
                                     alert("注册成功!");
                                     window.location.href = "/User/Login";
