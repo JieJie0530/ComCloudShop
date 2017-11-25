@@ -28,6 +28,7 @@ namespace ComCloudShop.Backend.Controllers
                 string Mobile = Request["Mobile"];
                 string OrignKey = Request["OrignKey"];
                 string IsVip = Request["IsVip"];
+                string Vel = Request["Vel"];
                 string admin = AdminUser;
                 var ms = db.Mangers.Where(d => d.UserName == admin).ToList();
                 string flollw = "";
@@ -36,44 +37,61 @@ namespace ComCloudShop.Backend.Controllers
                 {
                     flollw = ms.FirstOrDefault().Phone;
                 }
-                    Member m = new Member();
-                    if (MemberID != "")
+
+                if (Session["mobile_code"] == null)
+                {
+                    return Content("验证码错误！");
+                }
+                else
+                {
+                    string code = Session["mobile_code"].ToString();
+                    if (code == Vel)
                     {
-                        int MemberIDint = Convert.ToInt32(MemberID);
-                        m = db.Members.Where(d => d.MemberId == MemberIDint).FirstOrDefault();
-                        m.NickName = NickName;
-                        m.Mobile = Mobile;
-                        m.follow = flollw;
-                        m.ISVip = Convert.ToInt32(IsVip);
-                        m.ContactAddr = "";
-                        m.UserName = "";
-                        m.OrignKey = "";
-                        m.QQ = OrignKey;
+
+                        Member m = new Member();
+                        if (MemberID != "")
+                        {
+                            int MemberIDint = Convert.ToInt32(MemberID);
+                            m = db.Members.Where(d => d.MemberId == MemberIDint).FirstOrDefault();
+                            m.NickName = NickName;
+                            m.Mobile = Mobile;
+                            m.follow = flollw;
+                            m.ISVip = Convert.ToInt32(IsVip);
+                            m.ContactAddr = "";
+                            m.UserName = "";
+                            m.OrignKey = "";
+                            m.QQ = OrignKey;
+                        }
+                        else
+                        {
+                            m.NickName = NickName;
+                            m.Mobile = Mobile;
+                            m.follow = flollw;
+                            m.OpenId = Guid.NewGuid().ToString();
+                            m.fsate = 0;
+                            m.ISVip = Convert.ToInt32(IsVip);
+                            m.integral = 0;
+                            m.TotalIn = 0;
+                            m.balance = "0";
+                            m.Cashbalance = "0";
+                            m.HeadImgUrl = "";
+                            m.CreateDate = DateTime.Now;
+                            m.LastLoginDate = 0;
+                            m.Gender = 0;
+                            m.ContactAddr = "";
+                            m.UserName = "";
+                            m.OrignKey = "";
+                            m.QQ = OrignKey;
+                            db.Members.Add(m);
+                        }
+
+                        db.SaveChanges();
                     }
                     else
                     {
-                        m.NickName = NickName;
-                        m.Mobile = Mobile;
-                        m.follow = flollw;
-                        m.OpenId = Guid.NewGuid().ToString();
-                        m.fsate = 0;
-                        m.ISVip = Convert.ToInt32(IsVip);
-                        m.integral = 0;
-                        m.TotalIn = 0;
-                        m.balance = "0";
-                        m.Cashbalance = "0";
-                        m.HeadImgUrl = "";
-                        m.CreateDate = DateTime.Now;
-                        m.LastLoginDate = 0;
-                        m.Gender = 0;
-                        m.ContactAddr = "";
-                        m.UserName = "";
-                        m.OrignKey = "";
-                        m.QQ = OrignKey;
-                        db.Members.Add(m);
+                       return Content("验证码错误！");
                     }
-
-                    db.SaveChanges();
+                }
                
             }
             return Content("ok");
@@ -104,10 +122,13 @@ namespace ComCloudShop.Backend.Controllers
                 {
                     flollw = ms.FirstOrDefault().Phone;
                 }
-               
-                if (db.Members.Where(d => d.Mobile == flollw).Count() <= 0 && IsVip!="3")
+
+                if (db.Members.Where(d => d.Mobile == flollw).Count() <= 0 && IsVip != "3")
                 {
                     return Content("上级不存在！");
+                }
+                else if (db.Members.Where(d => d.Mobile == Mobile).Count() > 0) {
+                    return Content("手机号已注册！");
                 }
                 else
                 {

@@ -5,10 +5,26 @@
 }
 @model ComCloudShop.Service.Member
 <div class="wrapper">
-    <img src="~/public/images/svip.jpg" style="width:100%;" />
-    <div class="payBtn">
-        <a href="javascript:void(0);" class="paybtn paya">立即支付</a>
-    </div>
+    <h3 style="text-align:center;">
+        当前已注册会员数(00000@{
+            @(DateTime.Now.Year - 1 + DateTime.Now.Month + DateTime.Now.Day * 5)
+        })
+    </h3>
+    @{
+        if (Model.ISVip >= 1)
+        {
+            <img src="~/public/images/TVIP.jpg" style="width:100%;" />
+        }
+        else
+        {
+            <img src="~/public/images/svip.jpg" class="paybtn" style="width:100%;" />
+            <div class="payBtn" style="margin-top:-60px;">
+                <a href="javascript:void(0);" class="paybtn paya">立即支付</a>
+            </div>
+        }
+    }
+
+    
 </div>
 <script type="text/javascript">
     var wxdata = {
@@ -25,7 +41,7 @@
         if (IsVip >= 1) {
             $(".payBtn").remove();
         }
-       
+
         $('.paybtn').on('click', function () {
 
             var txt = $(".paybtn").text();
@@ -54,7 +70,7 @@
                 alert("正在支付中，请耐心等待！");
             }
         });
-        
+
     })
 
     function callpay() {
@@ -91,7 +107,8 @@
                              window.location.href = "/User/Index"
                          }
                      }
-                 });             }
+                 });
+             }
              else if (res.err_msg == "get_brand_wcpay_request:cancel") {
                  alert("开通VIP失败！");
                  window.location.href = "/User/Index"
@@ -101,7 +118,7 @@
                  window.location.href = "/User/Index"
              }
 
-             
+
          });
     }
 </script>

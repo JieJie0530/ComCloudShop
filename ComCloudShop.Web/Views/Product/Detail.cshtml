@@ -16,7 +16,9 @@
             <div id="moban" style='position:absolute;left:0;top:0;'>
 
             </div>
-            <input type="button" value="点击下方购买此视频，或升级vip观看所有视频课程" class="green-int pmsg" id="Btn_Adds" onclick='ToHref()'>
+            <p class="phid">
+                <input type="button" value="点击下方购买此视频，或升级vip观看所有视频课程" class="green-int pmsg" id="Btn_Adds" onclick='ToHref()'>
+            </p>
             <div class="zy_media">
                 <video poster="@(WebConfigurationManager.AppSettings["imgurl"] + Model.P3)" data-config='{"mediaTitle": "@Model.SPMC"}'>
                     <source src="@(Model.P1)" type="video/mp4">
@@ -60,9 +62,9 @@
         </li>
     </ul>
     <dl class="pdtDes">
-        <dt><h2 class="hover" style="width:100%;" vel="0">产品详情</h2></dt>
-        <dd class="prodetial">
-            <div>
+        <dt><h2 class="hover" style="width:100%;" vel="0">课程详情</h2></dt>
+        <dd class="prodetial" style="border:none;">
+            <div style="display:none;">
                 品种：
                 <span>@(Model.Category.FirstOrDefault(x => x.CategoryType == "种类").CategoryName)</span>
             </div>
@@ -87,7 +89,7 @@
                     }
                 }
             }
-            <div class="xqimg prodetial">
+            <div class="xqimg prodetial" style="padding:0 5px; border:none;">
                 @(new HtmlString(Model.Contents))
             </div>
 
@@ -110,16 +112,18 @@
         opacity: 0.3;
         display:none;
     }
-
+    .phid{
+         position: absolute;
+         top: 40%;
+         left:0;
+         text-align:center;
+         width:100%;
+         height:40px;
+         z-index: 9999999999;
+    }
     .pmsg {
-        position: absolute;
         display:none;
-        left: 50%;
-        top: 50%;
-        width:200px;
-        z-index: 9999999999;
-        margin-left: -50px;
-        margin-top: -50px;
+        margin:0 auto;
     }
 
     .green-int {
@@ -152,13 +156,31 @@
         display: block;
         padding: 0 0.5rem;
     }
+    .mainNav2 .AddVip {
+  display: inline-block;
+  width: 75px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  padding: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin: 10px 0;
+}
+    .mainNav2 .AddVip {
+  background:rgb(255,163,0);
+}
 </style>
 <!--   公用-->
 <div class="mainNav mainNav2">
     <ul>
-        <li style="width:33.3%"><a href="~/Home/">首页<i class="nav01"></i></a></li>
-        <li style="width:33.3%"><a href="javascript:;" class="buyNow">立即购买</a></li>
-        <li style="width:33.3%"><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
+        <li style="width:25%"><a href="~/Home/">首页<i class="nav01"></i></a></li>
+        <li style="width:25%"><a href="javascript:;" class="buyNow">单次购买</a></li>
+        <li style="width:25%"><a href="javascript:;" class="AddVip">升级会员</a></li>
+        <li style="width:25%"><a href="~/Cart/">购物车<i class="nav03"><b class="cartN"></b></i></a></li>
     </ul>
 </div>
 <script>
@@ -214,6 +236,14 @@ function ToHref() {
 
 <!--   轮播图-->
 <script type="text/javascript">
+    window.alert = function (name) {
+        var iframe = document.createElement("IFRAME");
+        iframe.style.display = "none";
+        iframe.setAttribute("src", 'data:text/plain,');
+        document.documentElement.appendChild(iframe);
+        window.frames[0].window.alert(name);
+        iframe.parentNode.removeChild(iframe);
+    }
     $(function () {
         //$(".proComm").css("display", "none");
         //$(".prodetial").css("display", "block");
@@ -281,7 +311,11 @@ function ToHref() {
                 }
             });
         });
+        $(".AddVip").on('click', function () {
 
+            window.location.href = '/User/AddVip';
+
+        });
         //立即购买
         $('.buyNow').on('click', function () {
             var Rols = '@ViewBag.Rols';
@@ -301,7 +335,7 @@ function ToHref() {
                 });
             }
             else {
-                alert("只有普通会员才能购买！");
+                alert("您已经是VIP会员啦！");
             }
         });
 

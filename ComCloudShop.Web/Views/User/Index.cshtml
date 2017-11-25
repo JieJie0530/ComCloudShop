@@ -34,10 +34,12 @@
                 <li><a href="~/User/LineMember?type=2">二级分享员（@((ViewData["list2"] as List<Member>).Count)）</a></li>
             </ul>
         </li>
+        <li><a href="http://mp.weixin.qq.com/s?__biz=MzAxMTEyOTA2MQ==&mid=501894667&idx=1&sn=f178135089215a6ff7a82c29f76f234f&chksm=035b3781342cbe97ce2b437a1e0e120fd6e9458ba7c37907f32b01430650796f9b0a82dd2b58#rd">奖学金机制<i class="enter"></i></a></li>
         <li><a href="~/User/Withd">我要提现(提现到银行卡)<i class="enter"></i></a></li>
         <li style="display:none;"><a href="~/User/MyGifList">我的赠品<i class="enter"></i></a></li>
         <li style="display:none;"><a href="~/Address/List?c=address">收货地址管理<i class="enter"></i></a></li>
     </ul>
+    <img onclick='window.location.href = "RenderImg"'src="~/public/images/1511511765.JPG" />
 </div>
 <div class="accountSave" style="display:none;">
     <span>共收益了<label>@Model.TotalIn</label>元</span>
@@ -50,7 +52,9 @@
         })
         $("#erweima").click(function () {
                 window.location.href = "RenderImg";
-           
+        })
+        $(".erweima").click(function () {
+            
         })
         $("#livip").click(function () {
 

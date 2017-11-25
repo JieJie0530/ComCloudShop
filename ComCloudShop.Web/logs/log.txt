@@ -104,3 +104,16 @@
 [2017-11-17 00:53:41,841]  713 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/User/Loginsstr=true
 [2017-11-17 00:53:44,668]  718 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/User/Loginsstr=true
 [2017-11-17 00:53:52,289]  720 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/User/Loginsstr=true
+[2017-11-23 20:30:14,072]  6 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/Index?type=54str=true
+[2017-11-23 20:30:15,734]  8 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=1str=true
+[2017-11-23 20:30:34,003]  6 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/Index?type=54str=true
+[2017-11-23 20:30:34,229]  8 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=1str=true
+[2017-11-23 20:31:27,477]  7 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/Index?type=54str=true
+[2017-11-23 20:31:33,431]  10 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=1str=true
+[2017-11-23 20:32:56,329]  11 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/Index?type=54str=true
+[2017-11-23 20:33:00,476]  6 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=1str=true
+[2017-11-23 20:33:01,831]  8 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=2str=true
+[2017-11-23 20:33:02,349]  13 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=3str=true
+[2017-11-23 20:33:07,812]  6 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=4str=true
+[2017-11-23 20:33:08,351]  9 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=5str=true
+[2017-11-23 20:33:08,866]  13 -- DEBUG -- ComCloudShop.Web.Controllers.BaseController [OnActionExecuting] -- Request.Url=http://localhost:4607/Product/GetProductList10?type=54&page=6str=true

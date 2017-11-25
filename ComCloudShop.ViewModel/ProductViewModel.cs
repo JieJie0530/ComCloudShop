@@ -465,6 +465,8 @@ namespace ComCloudShop.ViewModel
 
         public int Weight { get; set; }
 
+        public decimal Weigths { get; set; }
+
         public Nullable<int> SaleNum { get; set; }
     }
 

@@ -17,7 +17,8 @@
                         <dl>
                             <dt><img src="@item.HeadImgUrl" border="0"></dt>
                             <div>
-                                <h3>&nbsp;会&nbsp;员&nbsp;名：@item.NickName</h3>
+                                <h3>会&nbsp;员&nbsp;&nbsp;名：@item.NickName</h3>
+                                <h3>类&nbsp;&nbsp;&nbsp;&nbsp;型：@(item.ISVip==0?"普通会员":"VIP")</h3>
                                 <h3>加入时间：@item.CreateDate</h3>
                             </div>
                         </dl>
@@ -47,8 +48,8 @@
     padding-right: 2.2em;
 }
     .content a dl dt {
-    width: 6.6em;
-    height: 6.0em;
+    width: 5.0em;
+    height: 5.0em;
     margin-right: 0.6em;
     float: left;
     background: #eee;
@@ -61,8 +62,8 @@
     .content a dl div h3 {
     color: #333;
     width: 96%;
-    height: 2em;
-    line-height: 2em;
+    height: 1.8em;
+    line-height: 1.8em;
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;

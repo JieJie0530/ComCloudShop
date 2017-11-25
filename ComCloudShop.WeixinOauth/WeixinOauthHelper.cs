@@ -80,7 +80,7 @@ namespace ComCloudShop.WeixinOauth
             try
             {
                 Image image = Image.FromFile(ImagePath);
-                Image image1 = Image.FromFile(WaterImg);
+                //Image image1 = Image.FromFile(WaterImg);
                 Image imghead = Image.FromFile(head);
                 Graphics g = Graphics.FromImage(image);
                 //水印内容
@@ -93,7 +93,7 @@ namespace ComCloudShop.WeixinOauth
                 SolidBrush solidBrush = new SolidBrush(Color.Red);
                 //水印
                 g.DrawString(waterText, font, solidBrush, 232, 910); //名字
-                g.DrawImage(image1, 208,590, 250, 250); //
+                //g.DrawImage(image1, 208,590, 250, 250); //
                 g.DrawImage(imghead, 32, 910, 100,100); //头像
                 string newfilename = "Hewm_" + m.MemberId + ".jpg";//二维码图片路径
                 string address = HttpContext.Current.Server.MapPath("~/ewmPic/" + newfilename);

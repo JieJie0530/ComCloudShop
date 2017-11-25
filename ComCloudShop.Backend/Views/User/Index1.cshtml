@@ -132,7 +132,18 @@
             </tr>
             <tr>
                 <th><i class="require-red"></i>手机号：</th>
-                <td><input class="common-text required" size="30" name="Mobile" data-bind="value:Mobile" type="text" /></td>
+                <td>
+
+                    <input class="common-text required" size="30" name="Mobile" data-bind="value:Mobile" type="text" />
+                    <a href="javascript:void(0);" data-bind="click:SendMsm" class="btnsearch">发送验证码</a>
+                </td>
+            </tr>
+            <tr>
+                <th><i class="require-red"></i>验证码：</th>
+                <td>
+
+                    <input class="common-text required" size="30" name="Vel" data-bind="value:Vel" type="text" />
+                </td>
             </tr>
             <tr>
                 <th><i class="require-red"></i>密码：</th>
@@ -231,7 +242,7 @@
             m.page_total1 = ko.observable(0);
             //分页
             m.array = ko.observable();
-           
+
             m.total = ko.observable(0);
             m.page_current = ko.observable(0);
             m.page_total = ko.observable(0);
@@ -263,10 +274,24 @@
             m.QQ = ko.observable("");
             m.UserName = ko.observable("");
             m.Follow = ko.observable("");
+            m.Vel = ko.observable("");
             //btn查询
             m.btnSearch = function () {
                 m.loadData(1);
             };
+
+
+            m.SendMsm = function () {
+                var phone = m.Mobile();
+                $.post('@Url.Content("~/Home/SendMsm")', { mobile: phone}, function (msg) {
+                        if (msg == "ok") {
+                            alert("发送成功！");
+                        }
+                        else {
+                            alert("失败");
+                        }
+                    });
+            }
 
             m.JieSuan = function (MID) {
                 if (confirm("是否结算佣金？")) {
@@ -449,21 +474,22 @@
                     IsVip:1,
                     Follow: "",
                     P1: "",
-                    MemberID: ""
+                    MemberID: "",
+                    Vel:m.Vel()
                 }
                 $.ajax({
                     type: 'post',
                     url: '@Url.Content("~/User/Add1")',
                     data: parm,
                     success: function (data) {
-                        if (data) {
+                        if (data=="ok") {
                             alert('保存成功');
                             $("#dialogAdd").dialog('close');
                             m.loadBrandSelect();
                             m.loadData(1);
 
                         } else {
-                            alert('保存失败');
+                            alert(data);
                         }
                     }
                 })
@@ -476,9 +502,9 @@
                     async: false,
                     dataType: 'json'
                 }).done(function (data) {
-                  
+
                         m.arrayList(data);
-                   
+
 
                 });
 

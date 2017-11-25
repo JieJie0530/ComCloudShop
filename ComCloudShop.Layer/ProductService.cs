@@ -786,7 +786,7 @@ namespace ComCloudShop.Layer
             {
                 StringBuilder strSql = new StringBuilder();
                 var pageindex = size * (page - 1);
-                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount,a.SPGG,a.IsShow from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.IsShow=1 and a.SPGG=1 and a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  ORDER BY a.ProductId ", size, pageindex);
+                strSql.AppendFormat(" select top {0} img.P1,img.P2,img.P3, a.Weight, a.BeginUseAge,a.EndUseAge,a.SubTitle,a.Describle,  a.ProductId,a.ProductGuid,a.Title,a.SPDM,a.SPMC,a.BZSJ,a.Sale,a.Discount,a.SPGG,a.IsShow from Product as a  LEFT JOIN ProductImg as img on img.ProductId = a.ProductId where a.IsShow=1 and a.SPGG=1 and a.ProductId NOT IN (SELECT TOP {1} b.ProductId FROM Product as b where  b.Statuts=1  ORDER BY b.ProductId)  order by a.Weight,a.EndUseAge desc,a.ProductId desc", size, pageindex);
                 return db.Database.SqlQuery<ProductViewModel>(strSql.ToString()).ToList();
             }
         }
@@ -1017,7 +1017,7 @@ namespace ComCloudShop.Layer
                                 join
                                     e in db.CategoryRelations on a.ProductId equals e.ProductId
                                 join
-                                    f in db.Categories on e.CategoryId equals f.CategoryId
+                                    f in db.Categories on e.CategoryId equals f.CategoryId 
                                 where (type > 0 ? e.CategoryId == type : 1 == 1) && a.Weight<=weight
                                 select new ProductListViewModel
                                 {
@@ -1031,7 +1031,7 @@ namespace ComCloudShop.Layer
                                     Discount = a.Discount,
                                     SaleNum = d.total,
                                     Weight=(int)a.Weight
-                                }).OrderBy(x => x.Weight).OrderBy(x => x.EndUseAge).OrderByDescending(d=>d.ProductId).Skip((page - 1) * 10).Take(10).ToList();
+                                }).OrderBy(x => x.Weight).ThenByDescending(x => x.EndUseAge).ThenByDescending(d=>d.ProductId).Skip((page - 1) * 10).Take(10).ToList();
                     return data;
                 }
             }

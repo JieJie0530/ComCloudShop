@@ -504,6 +504,9 @@ namespace ComCloudShop.Web.Controllers
         public ActionResult AddVip() {
             UserService user = new UserService();
             Member m = user.GetMemberByOpenID(UserInfo.openid);
+            if (m.ISVip >= 1) {
+                Response.Redirect("/User/Index");
+            }
             return View(m);
         }
 

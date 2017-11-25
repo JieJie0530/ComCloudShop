@@ -37,7 +37,6 @@ namespace ComCloudShop.Web.Controllers
             SendSmsRequest request = new SendSmsRequest();
             try
             {
-
                 int mobile_code = rad.Next(1000, 10000);
                 Session["mobile_code"] = mobile_code.ToString();
                 request.PhoneNumbers = Phone;
@@ -48,15 +47,14 @@ namespace ComCloudShop.Web.Controllers
                 //请求失败这里会抛ClientException异常
                 SendSmsResponse sendSmsResponse = acsClient.GetAcsResponse(request);
                 System.Console.WriteLine(sendSmsResponse.Message);
-
             }
             catch (ServerException e)
             {
-                return Content("err");
+                return Content("err"+e.ToString());
             }
             catch (ClientException e)
             {
-                return Content("err");
+                return Content("err" + e.ToString());
             }
             return Content("ok");
         }

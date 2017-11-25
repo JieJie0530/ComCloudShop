@@ -43,7 +43,7 @@ namespace ComCloudShop.Web.Controllers
                 {
                     return false;
                     //WeixinOauthUserInfo modeluser = new WeixinOauthUserInfo();
-                    //modeluser.Id = 3681;
+                    //modeluser.Id = 3722;
                     //modeluser.nickname = "胡锐杰";
                     //modeluser.headimgurl = "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erG7kFdtvhcXVWMFPCn6uC7PC4SK4caWIytThNEbtCKicwnb6B9OPtTJ170bYNpfYDVqakRFMeSPQw/0";
                     //modeluser.openid = "o5S56sw6JkhUtbJCiSYO_I7316Fs";

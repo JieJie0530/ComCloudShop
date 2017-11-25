@@ -156,7 +156,6 @@
                 }
                 else {
                     $.post('@Url.Content("~/Home/SendMsm")', { mobile: phone}, function (msg) {
-                       
                         if (msg == "ok") {
                             RemainTime();
                         }
