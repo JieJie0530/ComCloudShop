@@ -127,7 +127,7 @@ namespace ComCloudShop.Backend.Controllers
                 {
                     return Content("上级不存在！");
                 }
-                else if (db.Members.Where(d => d.Mobile == Mobile).Count() > 0) {
+                else if (db.Members.Where(d => d.Mobile == Mobile).Count() > 0 && MemberID=="") {
                     return Content("手机号已注册！");
                 }
                 else
@@ -319,6 +319,17 @@ namespace ComCloudShop.Backend.Controllers
             return Content("err");
         }
 
+
+        
+         public ContentResult DEL(int id)
+        {
+
+            if (_service.Del(id))
+            {
+                return Content("ok");
+            }
+            return Content("err");
+        }
         public ContentResult RenZhen(int id) {
 
             if (_service.UpdateVips(id)) {

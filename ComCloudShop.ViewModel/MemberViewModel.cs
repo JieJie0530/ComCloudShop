@@ -121,6 +121,8 @@ namespace ComCloudShop.ViewModel
         public string QQ { get; set; }
         public string Birth { get; set; }
         public string District { get; set; }
+        public string Flow { get; set; }  
+        public int ISVip { get; set; }
     }
 
 

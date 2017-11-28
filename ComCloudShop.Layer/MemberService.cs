@@ -96,6 +96,28 @@ namespace ComCloudShop.Layer
             }
         }
 
+        public bool Del(int MemberId)
+        {
+            using (var db = new MircoShopEntities())
+            {
+                var m = db.Members.FirstOrDefault(x => x.MemberId == MemberId);
+                if (m != null)
+                {
+                    try
+                    {
+                        db.Members.Remove(m);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        }
+
         public bool UpdateVips(int MemberId)
         {
             using (var db = new MircoShopEntities())
@@ -523,7 +545,9 @@ namespace ComCloudShop.Layer
                                          OrignKey = a.OrignKey,
                                          Province = a.Province,
                                          QQ = a.QQ,
-                                         UserName = a.UserName
+                                         UserName = a.UserName,
+                                         ISVip= (int)a.ISVip,
+                                         Flow=a.follow
                                      }).FirstOrDefault();
                     result.error = (int)ErrorEnum.OK;
                     result.msg = "success";

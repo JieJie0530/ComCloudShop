@@ -138,6 +138,6 @@ E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramewo
 E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\EntityFramework.SqlServer.xml
 E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\zh-Hans\EntityFramework.resources.dll
 E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
-E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.csprojResolveAssemblyReference.cache
 E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.dll
 E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.pdb
+E:\项目\课程分销\ComCloudShop\ComCloudShop.Service\obj\Debug\ComCloudShop.Service.csprojResolveAssemblyReference.cache

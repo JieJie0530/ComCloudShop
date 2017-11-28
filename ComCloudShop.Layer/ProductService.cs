@@ -1018,7 +1018,7 @@ namespace ComCloudShop.Layer
                                     e in db.CategoryRelations on a.ProductId equals e.ProductId
                                 join
                                     f in db.Categories on e.CategoryId equals f.CategoryId 
-                                where (type > 0 ? e.CategoryId == type : 1 == 1) && a.Weight<=weight
+                                where (type > 0 ? e.CategoryId == type : 1 == 1)
                                 select new ProductListViewModel
                                 {
                                     ProductId = a.ProductId,
@@ -1031,7 +1031,7 @@ namespace ComCloudShop.Layer
                                     Discount = a.Discount,
                                     SaleNum = d.total,
                                     Weight=(int)a.Weight
-                                }).OrderBy(x => x.Weight).ThenByDescending(x => x.EndUseAge).ThenByDescending(d=>d.ProductId).Skip((page - 1) * 10).Take(10).ToList();
+                                }).OrderByDescending(x => x.EndUseAge).ThenByDescending(d=>d.ProductId).Skip((page - 1) * 10).Take(10).ToList();
                     return data;
                 }
             }

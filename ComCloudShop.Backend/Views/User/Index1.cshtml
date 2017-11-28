@@ -402,14 +402,15 @@
                 if (id > 0) {
                     $.ajax({
                         method: "get",
-                        url: '@Url.Content("~/User/RenZhen")',
+                        url: '@Url.Content("~/User/DEL")',
                         data: 'id=' + id,
                         async: false,
                         dataType: 'text'
                     }).done(function (data) {
                         if (data == "ok") {
-                            alert("审核通过!");
-                            window.location.reload();
+                            alert("删除成功!");
+                            m.loadBrandSelect();
+                            m.loadData(1);
                         }
                     });
                 }

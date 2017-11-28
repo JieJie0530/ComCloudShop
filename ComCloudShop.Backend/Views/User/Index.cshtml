@@ -73,6 +73,7 @@
                         <td data-bind="text:item.IsVip==0?'普通会员':(item.IsVip==1?'VIP':(item.IsVip==2?'SVIP':'DVIP'))"></td>
                         <td>
                             <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.OpenDialog(item.MemberId)}" class="btnsearch">详情</a>
+                            <a href="javascript:void(0);" data-bind="click:function(data,event){$parent.RenZheng(item.MemberId)}" class="btnsearch">删除</a>
                         </td>
                     </tr>
                 </tbody>
@@ -300,14 +301,14 @@
                 if (id > 0) {
                     $.ajax({
                         method: "get",
-                        url: '@Url.Content("~/User/RenZhen")',
+                        url: '@Url.Content("~/User/DEL")',
                         data: 'id=' + id,
                         async: false,
                         dataType: 'text'
                     }).done(function (data) {
                         if (data == "ok") {
-                            alert("审核通过!");
-                            window.location.reload();
+                            alert("删除成功!");
+                            m.loadData(1);
                         }
                     });
                 }
@@ -335,7 +336,7 @@
                     Follow: m.Follow(),
                     IsVip: m.IsVip(),
                     P1: "",
-                    MemberID: ""
+                    MemberID:m.MemberId()
                 }
                 
                 $.ajax({
@@ -380,9 +381,10 @@
                             m.LastLoginDate(data.result.LastLoginDate);
                             m.Mobile(data.result.Mobile);
                             m.NickName(data.result.NickName);
-                            m.OrignKey(data.result.OrignKey);
+                            m.OrignKey(data.result.QQ);
                             m.Province(data.result.Province);
-                            m.QQ(data.result.QQ);
+                            //m.QQ(data.result.QQ);
+                            m.Follow(data.result.Flow);
                             m.UserName(data.result.UserName);
                             m.IsVip(data.result.ISVip);
                         } else {
@@ -390,7 +392,7 @@
                         }
                     });
                 }
-                $("#dialog").dialog({ width: "900px" });
+                $("#dialogAdd").dialog({ width: "900px" });
             };
 
             //关闭
